@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "lib/smush.js",
   "name": "@nofrills/smush",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "build": "tsc --project . --outdir lib",
     "start": "node lib/smush",
@@ -13,13 +13,16 @@
     "prepublish": "npm run build"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.5",
     "@types/chai": "^4.0.0",
     "@types/lodash": "^4.14.66",
+    "@types/node": "^7.0.31",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
     "typescript": "^2.3.4"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "lodash": "^4.17.4"
   }
 }

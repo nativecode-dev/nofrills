@@ -73,5 +73,30 @@ describe('smush', () => {
         expect(smush.toObject()).to.deep.equal(merged)
       })
     })
+
+    describe('should load .json files', () => {
+      it('loads contents', (done) => {
+        smush.json('config', './tests/test.simple.base.json')
+          .then(smush => smush.toObject().config)
+          .then(config => {
+            const expected = require('./test.simple.base.json')
+            expect(config).to.deep.equal(expected)
+            done()
+          })
+          .catch(error => done(error))
+      })
+
+      it('loads multiple content files', (done) => {
+        smush.json('config', './tests/test.simple.base.json')
+          .then(smush => smush.json('config', './tests/test.simple.derived.json'))
+          .then(smush => smush.toObject().config)
+          .then(config => {
+            const expected = require('./test.simple.merged.json')
+            expect(config).to.deep.equal(expected)
+            done()
+          })
+          .catch(error => done(error))
+      })
+    })
   })
 })

@@ -1,10 +1,24 @@
 import { merge } from 'lodash'
+import * as Promise from 'bluebird'
+import * as fs from 'fs'
 
 export class Smush {
   private configurations: any = {}
+  private reader = Promise.promisify(fs.readFile)
+  private writer = Promise.promisify(fs.writeFile)
 
   clear(key: string): void {
     delete this.configurations[key]
+  }
+
+  json(key: string, filename: string): Promise<Smush> {
+    const self = this
+    const config = this.get(key)
+
+    return this.reader(filename)
+      .then((buffer: Buffer) => JSON.parse(buffer.toString()))
+      .then((object: any) => self.set(key, object))
+      .then(() => self)
   }
 
   get(key: string): any {
