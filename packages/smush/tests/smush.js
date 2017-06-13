@@ -113,6 +113,7 @@ describe('smush', () => {
 
         it('transforms properties', (done) => {
           const transformer = (object) => {
+            object.id = 'transformed'
             object.schema.name = 'transformed'
             return object
           }
@@ -120,6 +121,7 @@ describe('smush', () => {
           smush.json('config', './tests/test.simple.merged.json', transformer)
             .then(smush => smush.toObject().config)
             .then(config => {
+              expect(config.id).to.equal('transformed')
               expect(config.schema.name).to.equal('transformed')
               done()
             })

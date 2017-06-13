@@ -11,26 +11,30 @@ export class Smush {
     delete this.configurations[key]
   }
 
-  json(key: string, filename: string, transform?: ((object: any) => any)): Promise<Smush> {
-    const self = this
-    const config = this.get(key)
+  json(key: string, filename: string, transform?: (object: any) => any): Promise<Smush> {
+    return this.schema<any>(key, filename, transform ? transform : object => object)
+  }
+
+  schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
+    const self: Smush = this
+    const config: any = this.get(key)
 
     return this.reader(filename)
       .then((buffer: Buffer) => JSON.parse(buffer.toString()))
-      .then((object: any) => transform ? transform(object) : object)
-      .then((object: any) => self.set(key, object))
-      .then((object: any) => console.info(`[json@${key}]`, filename, object))
+      .then((object: T) => transform ? transform(object) : object)
+      .then((object: T) => self.set<T>(key, object))
+      .then((object: T) => console.info(`[json@${key}]`, filename, object))
       .then(() => self)
   }
 
-  get(key: string): any {
-    return this.config(key)
+  get<T>(key: string): T {
+    return this.config<T>(key)
   }
 
-  set(key: string, ...values: any[]): any {
-    const config = this.get(key)
-    const merged = merge({}, config, ...values)
-    return this.config(key, merged)
+  set<T>(key: string, ...values: T[]): T {
+    const config: any = this.get(key)
+    const merged: any = merge({}, config, ...values)
+    return this.config<T>(key, merged)
   }
 
   toObject(key?: string): any {
@@ -42,21 +46,19 @@ export class Smush {
     return key ? this.config(key) : exported
   }
 
-  private config(key: string, value?: any): any {
+  private config<T>(key: string, value?: T): T {
     const parts: string[] = key.split('.')
 
-    if (parts.length === 1) {
-      return (this.configurations[key] = value || {})
+    if (parts.length === 1 && value) {
+      return (this.configurations[key] = value)
     }
 
     return this.path(parts)
   }
 
   private path(parts: string[]): any {
-    let current = this.configurations
+    let current: any = this.configurations
     parts.forEach(part => current = current[part] || {})
     return current
   }
 }
-
-export default () => new Smush()
