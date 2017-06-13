@@ -1,0 +1,25 @@
+{
+  "author": "Mike Pham <support@nativecode.com> (https://www.mikepham.com)",
+  "description": "",
+  "license": "MIT",
+  "main": "lib/smush.js",
+  "name": "@nofrills/smush",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "tsc --project . --outdir lib",
+    "start": "node lib/smush",
+    "test": "mocha tests/",
+    "pretest": "npm run build",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/lodash": "^4.14.66",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}

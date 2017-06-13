@@ -1,0 +1,14 @@
+.vscode/
+node_modules/
+src/
+tests/
+
+*.tgz
+.editorconfig
+.jsbeautifyrc
+.npmignore
+.npmrc
+.nvmrc
+.travis.yml
+npm-debug.log
+tsconfig.json
