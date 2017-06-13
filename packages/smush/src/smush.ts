@@ -18,6 +18,7 @@ export class Smush {
     return this.reader(filename)
       .then((buffer: Buffer) => JSON.parse(buffer.toString()))
       .then((object: any) => self.set(key, object))
+      .then((object: any) => console.info(`loading file: '${filename}'`, object))
       .then(() => self)
   }
 
@@ -31,13 +32,13 @@ export class Smush {
     return this.config(key, merged)
   }
 
-  toObject(): any {
+  toObject(key?: string): any {
     let exported: any = {}
 
     Object.keys(this.configurations)
       .forEach(key => exported[key] = this.configurations[key])
 
-    return exported
+    return key ? this.config(key) : exported
   }
 
   private config(key: string, value?: any): any {

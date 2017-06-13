@@ -49,53 +49,66 @@ describe('smush', () => {
         }
       }
 
+      const expected = {
+        id: 'sourceB',
+        A: {
+          name: 'A',
+        },
+        B: {
+          name: 'B',
+        },
+        numbers: [2, 3, 4, 5, 6, ],
+        payload: {
+          key: 'sourceB.payload',
+        }
+      }
+
       it('merges deeply nested properties', () => {
         const merged = smush.set(KEY, sourceA, sourceB)
-
-        expect(merged.A).to.not.be.undefined
-        expect(merged.A.name).to.equal('A')
-
-        expect(merged.B).to.not.be.undefined
-        expect(merged.B.name).to.equal('B')
-
-        expect(merged.numbers).to.deep.equal([2, 3, 4, 5, 6])
-        expect(merged.payload.key).to.equal('sourceB.payload')
+        const sut = smush.toObject()[KEY]
+        expect(sut).to.deep.equal(expected)
       })
-    })
 
-    describe('should allow using dotted-paths', () => {
-      it('setting and getting value', () => {
-        const merged = smush.set(PATH, {
-          id: 'dotted-path'
+      it('exports by specific key', () => {
+        const merged = smush.set(KEY, sourceA, sourceB)
+        const sut = smush.toObject(`${KEY}.payload.key`)
+        expect(sut).to.equal('sourceB.payload')
+      })
+
+      describe('should allow using dotted-paths', () => {
+        it('setting and getting value', () => {
+          const merged = smush.set(PATH, {
+            id: 'dotted-path'
+          })
+
+          expect(smush.get(PATH)).to.deep.equal(merged)
+          expect(smush.toObject()).to.deep.equal(merged)
+        })
+      })
+
+      describe('should load .json files', () => {
+        it('loads contents', (done) => {
+          smush.json('config', './tests/test.simple.base.json')
+            .then(smush => smush.toObject().config)
+            .then(config => {
+              const expected = require('./test.simple.base.json')
+              expect(config).to.deep.equal(expected)
+              done()
+            })
+            .catch(done)
         })
 
-        expect(smush.get(PATH)).to.deep.equal(merged)
-        expect(smush.toObject()).to.deep.equal(merged)
-      })
-    })
-
-    describe('should load .json files', () => {
-      it('loads contents', (done) => {
-        smush.json('config', './tests/test.simple.base.json')
-          .then(smush => smush.toObject().config)
-          .then(config => {
-            const expected = require('./test.simple.base.json')
-            expect(config).to.deep.equal(expected)
-            done()
-          })
-          .catch(error => done(error))
-      })
-
-      it('loads multiple content files', (done) => {
-        smush.json('config', './tests/test.simple.base.json')
-          .then(smush => smush.json('config', './tests/test.simple.derived.json'))
-          .then(smush => smush.toObject().config)
-          .then(config => {
-            const expected = require('./test.simple.merged.json')
-            expect(config).to.deep.equal(expected)
-            done()
-          })
-          .catch(error => done(error))
+        it('loads multiple content files', (done) => {
+          smush.json('config', './tests/test.simple.base.json')
+            .then(smush => smush.json('config', './tests/test.simple.derived.json'))
+            .then(smush => smush.toObject().config)
+            .then(config => {
+              const expected = require('./test.simple.merged.json')
+              expect(config).to.deep.equal(expected)
+              done()
+            })
+            .catch(done)
+        })
       })
     })
   })
