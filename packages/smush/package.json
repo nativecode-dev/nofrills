@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "lib/smush.js",
   "name": "@nofrills/smush",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "build": "tsc --project . --outdir lib",
     "start": "node lib/smush",

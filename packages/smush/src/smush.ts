@@ -11,14 +11,15 @@ export class Smush {
     delete this.configurations[key]
   }
 
-  json(key: string, filename: string): Promise<Smush> {
+  json(key: string, filename: string, transform?: ((object: any) => any)): Promise<Smush> {
     const self = this
     const config = this.get(key)
 
     return this.reader(filename)
       .then((buffer: Buffer) => JSON.parse(buffer.toString()))
+      .then((object: any) => transform ? transform(object) : object)
       .then((object: any) => self.set(key, object))
-      .then((object: any) => console.info(`loading file: '${filename}'`, object))
+      .then((object: any) => console.info(`[json@${key}]`, filename, object))
       .then(() => self)
   }
 

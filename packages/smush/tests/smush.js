@@ -14,6 +14,7 @@ describe('smush', () => {
       const sourceA = {
         id: 'sourceA',
       }
+
       const sourceB = {
         id: 'sourceB',
       }
@@ -87,7 +88,7 @@ describe('smush', () => {
       })
 
       describe('should load .json files', () => {
-        it('loads contents', (done) => {
+        it('contents', (done) => {
           smush.json('config', './tests/test.simple.base.json')
             .then(smush => smush.toObject().config)
             .then(config => {
@@ -98,13 +99,28 @@ describe('smush', () => {
             .catch(done)
         })
 
-        it('loads multiple content files', (done) => {
+        it('multiple instances', (done) => {
           smush.json('config', './tests/test.simple.base.json')
             .then(smush => smush.json('config', './tests/test.simple.derived.json'))
             .then(smush => smush.toObject().config)
             .then(config => {
               const expected = require('./test.simple.merged.json')
               expect(config).to.deep.equal(expected)
+              done()
+            })
+            .catch(done)
+        })
+
+        it('transforms properties', (done) => {
+          const transformer = (object) => {
+            object.schema.name = 'transformed'
+            return object
+          }
+
+          smush.json('config', './tests/test.simple.merged.json', transformer)
+            .then(smush => smush.toObject().config)
+            .then(config => {
+              expect(config.schema.name).to.equal('transformed')
               done()
             })
             .catch(done)
