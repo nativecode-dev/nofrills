@@ -72,6 +72,14 @@ describe('smush', () => {
 
       it('exports by specific key', () => {
         const merged = smush.set(KEY, sourceA, sourceB)
+        const sut = smush.toObject(`${KEY}.payload`)
+        expect(sut).to.deep.equal({
+          key: 'sourceB.payload'
+        })
+      })
+
+      it('exports by specific value', () => {
+        const merged = smush.set(KEY, sourceA, sourceB)
         const sut = smush.toObject(`${KEY}.payload.key`)
         expect(sut).to.equal('sourceB.payload')
       })

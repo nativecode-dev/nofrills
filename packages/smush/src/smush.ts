@@ -45,7 +45,7 @@ export class Smush {
     Object.keys(this.configurations)
       .forEach(key => exported[key] = this.configurations[key])
 
-    return key ? this.config(key) : exported
+    return key ? this.config<any>(key) : exported
   }
 
   private config<T>(key: string, value?: T): T {
