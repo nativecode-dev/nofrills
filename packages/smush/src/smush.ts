@@ -1,9 +1,11 @@
 import { merge } from 'lodash'
+import * as debug from 'debug'
 import * as Promise from 'bluebird'
 import * as fs from 'fs'
 
 export class Smush {
   private configurations: any = {}
+  private debug: debug.IDebugger = debug('Smush')
   private reader = Promise.promisify(fs.readFile)
   private writer = Promise.promisify(fs.writeFile)
 
@@ -23,7 +25,7 @@ export class Smush {
       .then((buffer: Buffer) => JSON.parse(buffer.toString()))
       .then((object: T) => transform ? transform(object) : object)
       .then((object: T) => self.set<T>(key, object))
-      .then((object: T) => console.info(`[json@${key}]`, filename, object))
+      .then((object: T) => self.debug(object))
       .then(() => self)
   }
 
