@@ -1,11 +1,11 @@
 {
-  "author": "Mike Pham <support@nativecode.com> (https://www.mikepham.com)",
+  "author": "support@nativecode.com",
   "description": "",
   "license": "MIT",
   "main": "lib/smush.js",
   "name": "@nofrills/smush",
   "types": "lib/smush.d.ts",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "scripts": {
     "build": "tsc --project . --outdir lib",
     "start": "node lib/smush",
