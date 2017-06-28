@@ -1,13 +1,14 @@
 {
   "author": "support@nativecode.com",
-  "description": "",
+  "description": "Smushes things together.",
   "license": "MIT",
-  "main": "lib/smush.js",
+  "main": "./lib/smush.js",
   "name": "@nofrills/smush",
-  "types": [
-    "lib/smush.d.ts"
-  ],
-  "version": "0.2.1",
+  "repository": {
+    "url": "https://github.com/nativecode-dev/smush"
+  },
+  "types": "./lib/smush.d.ts",
+  "version": "0.2.2",
   "scripts": {
     "build": "tsc --project . --outdir lib",
     "start": "node lib/smush",
@@ -26,7 +27,7 @@
     "typescript": "^2.3.4"
   },
   "dependencies": {
-    "@nofrills/vcr": "^1.0.1",
+    "@nofrills/vcr": "^1.1.0",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "shortid": "^2.2.8"
