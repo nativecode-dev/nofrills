@@ -1,13 +1,16 @@
 import { merge } from 'lodash'
 
-import * as debug from 'debug'
 import * as fs from 'fs'
+import * as shortid from 'shortid'
+import * as vcr from '@nofrills/vcr'
 import * as Promise from 'bluebird'
 
 export class Smush {
-  private root: any = {}
-  private debug: debug.IDebugger = debug('nofrills:smush')
+  private readonly identifier: string = shortid.generate()
+
+  private log: vcr.VCR = new vcr.VCR(`nativecode:smush:[${this.identifier}]`).use(vcr.Debug)
   private reader = Promise.promisify(fs.readFile)
+  private root: any = {}
   private writer = Promise.promisify(fs.writeFile)
 
   clear(key: string): void {
@@ -56,7 +59,7 @@ export class Smush {
     return Promise.resolve(object)
       .tap((object: T) => transform ? transform(object) : object)
       .tap((object: T) => this.set<T>(key, object))
-      .tap((object: T) => this.debug(object))
+      .tap((object: T) => this.log.info(object))
   }
 
   private config<T>(key: string, value?: T): T {
