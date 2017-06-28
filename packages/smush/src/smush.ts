@@ -5,15 +5,30 @@ import * as shortid from 'shortid'
 import * as vcr from '@nofrills/vcr'
 import * as Promise from 'bluebird'
 
+export class SmushError extends Error {
+  private readonly error: Error
+
+  constructor(error: Error, message?: string) {
+    super(message || error.message)
+    this.error = error
+  }
+}
+
 export class Smush {
   private readonly identifier: string = shortid.generate()
 
-  private log: vcr.VCR = new vcr.VCR(`nativecode:smush:[${this.identifier}]`).use(vcr.Debug)
+  private log: vcr.VCR
   private reader = Promise.promisify(fs.readFile)
   private root: any = {}
   private writer = Promise.promisify(fs.writeFile)
 
+  constructor() {
+    this.log = new vcr.VCR(`nativecode:smush:[${this.identifier}]`)
+      .use(vcr.Debug)
+  }
+
   clear(key: string): void {
+    this.log.debug('clear', key)
     delete this.root[key]
   }
 
@@ -24,6 +39,7 @@ export class Smush {
 
   string(key: string, value: string, transform?: (object: any) => any): Promise<Smush> {
     return this.transform<any>(key, JSON.parse(value), transform ? transform : object => object)
+      .catch(error => { throw new SmushError(error) })
       .then(() => this)
   }
 
@@ -33,6 +49,7 @@ export class Smush {
     return this.reader(filename)
       .then((buffer: Buffer) => JSON.parse(buffer.toString('utf-8')))
       .then((object: T) => this.transform<T>(key, object, transform))
+      .catch(error => { throw new SmushError(error) })
       .then(() => this)
   }
 

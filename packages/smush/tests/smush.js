@@ -1,10 +1,20 @@
 const expect = require('chai').expect
-const Smush = require('../lib/smush').Smush
+const smush = require('../lib/smush')
 
 describe('smush', () => {
-  let smush
+  let $S
 
-  beforeEach(() => smush = new Smush())
+  beforeEach(() => $S = new smush.Smush())
+
+  describe('when smushing', () => {
+    const KEY = 'smushi'
+    const PATH = 'smush'
+
+    it('should throw SmushError when file not found.', (done) => {
+      $S.json(KEY, 'fake.file.json')
+        .catch(error => done())
+    })
+  })
 
   describe('when merging two configurations', () => {
     const KEY = 'config'
@@ -20,12 +30,12 @@ describe('smush', () => {
       }
 
       it('uses last-in property setting', () => {
-        const merged = smush.set(KEY, sourceA, sourceB)
+        const merged = $S.set(KEY, sourceA, sourceB)
         expect(merged).to.not.deep.equal(sourceA)
       })
 
       it('does override existing value', () => {
-        const merged = smush.set(KEY, sourceA, sourceB)
+        const merged = $S.set(KEY, sourceA, sourceB)
         expect(merged).to.deep.equal(sourceB)
       })
     })
@@ -65,39 +75,39 @@ describe('smush', () => {
       }
 
       it('merges deeply nested properties', () => {
-        const merged = smush.set(KEY, sourceA, sourceB)
-        const sut = smush.toObject()[KEY]
+        const merged = $S.set(KEY, sourceA, sourceB)
+        const sut = $S.toObject()[KEY]
         expect(sut).to.deep.equal(expected)
       })
 
       it('exports by specific key', () => {
-        const merged = smush.set(KEY, sourceA, sourceB)
-        const sut = smush.toObject(`${KEY}.payload`)
+        const merged = $S.set(KEY, sourceA, sourceB)
+        const sut = $S.toObject(`${KEY}.payload`)
         expect(sut).to.deep.equal({
           key: 'sourceB.payload'
         })
       })
 
       it('exports by specific value', () => {
-        const merged = smush.set(KEY, sourceA, sourceB)
-        const sut = smush.toObject(`${KEY}.payload.key`)
+        const merged = $S.set(KEY, sourceA, sourceB)
+        const sut = $S.toObject(`${KEY}.payload.key`)
         expect(sut).to.equal('sourceB.payload')
       })
 
       describe('should allow using dotted-paths', () => {
         it('setting and getting value', () => {
-          const merged = smush.set(PATH, {
+          const merged = $S.set(PATH, {
             id: 'dotted-path'
           })
 
-          expect(smush.get(PATH)).to.deep.equal(merged)
-          expect(smush.toObject()).to.deep.equal(merged)
+          expect($S.get(PATH)).to.deep.equal(merged)
+          expect($S.toObject()).to.deep.equal(merged)
         })
       })
 
       describe('should load .json files', () => {
         it('contents', (done) => {
-          smush.json('config', './tests/test.simple.base.json')
+          $S.json('config', './tests/test.simple.base.json')
             .then(smush => smush.toObject().config)
             .then(config => {
               const expected = require('./test.simple.base.json')
@@ -108,7 +118,7 @@ describe('smush', () => {
         })
 
         it('multiple instances', (done) => {
-          smush.json('config', './tests/test.simple.base.json')
+          $S.json('config', './tests/test.simple.base.json')
             .then(smush => smush.json('config', './tests/test.simple.derived.json'))
             .then(smush => smush.toObject().config)
             .then(config => {
@@ -126,7 +136,7 @@ describe('smush', () => {
             return object
           }
 
-          smush.json('config', './tests/test.simple.merged.json', transformer)
+          $S.json('config', './tests/test.simple.merged.json', transformer)
             .then(smush => smush.toObject().config)
             .then(config => {
               expect(config.id).to.equal('transformed')
