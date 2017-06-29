@@ -4,6 +4,7 @@ src/
 tests/
 
 .gitignore
+.travis.yml
 tsconfig.json
 
 *.tgz
