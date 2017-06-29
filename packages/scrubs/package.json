@@ -1,0 +1,34 @@
+{
+  "author": "support@nativecode.com",
+  "description": "Scrubs an object of all sensitive data.",
+  "license": "MIT",
+  "main": "./lib/scrubs.js",
+  "name": "@nofrills/scrubs",
+  "repository": {
+    "url": "https://github.com/nativecode-dev/scrubs"
+  },
+  "type": "./lib/scrubs.d.ts",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "tsc --project .",
+    "prebuild": "rm -rf lib",
+    "postbuild": "npm run lint",
+    "lint": "tslint src",
+    "test": "mocha tests",
+    "pretest": "npm run build",
+    "start": "node lib/scrubs.js",
+    "prestart": "npm run build"
+  },
+  "dependencies": {
+    "@nofrills/vcr": "^1.1.0",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.67",
+    "@types/node": "^8.0.2",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  }
+}
