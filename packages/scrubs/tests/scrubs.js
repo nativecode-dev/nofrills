@@ -13,13 +13,11 @@ const root = {
 describe('when scrubbing an object', () => {
   describe('that has protected properties', () => {
     it('should replace property with secured option', () => {
-      const sut = new scrubs.Scrubs(root.user).clean()
+      const sut = scrubs.scrub([root.user])[0]
       expect(sut.email).to.equal(root.user.email)
       expect(sut.password).to.equal('<secured>')
     })
   })
 
-  describe('that has protected values', () => {
-
-  })
+  describe('that has protected values', () => {})
 })

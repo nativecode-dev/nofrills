@@ -122,3 +122,13 @@ export class Scrubs {
     }
   }
 }
+
+export const scrub = (dirties: any[], options?: Options): any[] => {
+  const scrubbed: any[] = []
+  for (let index = 0; index < dirties.length; index++) {
+    const dirty = dirties[index]
+    const scrubber = new Scrubs(dirty, options)
+    scrubbed.push(scrubber.clean())
+  }
+  return scrubbed
+}

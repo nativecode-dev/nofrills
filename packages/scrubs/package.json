@@ -8,7 +8,7 @@
     "url": "https://github.com/nativecode-dev/scrubs"
   },
   "type": "./lib/scrubs.d.ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "build": "tsc --project .",
     "prebuild": "rm -rf lib",
