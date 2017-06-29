@@ -19,7 +19,7 @@ export interface Context {
 }
 
 export interface Scrubber {
-  (key: string, context: Context): Object
+  (key: string, context: Context): any
 }
 
 export interface Options {
@@ -42,10 +42,10 @@ const defaults: Options = {
 export class Scrubs {
   private readonly changes: Change[]
   private readonly log: vcr.VCR
-  private readonly object: Object
+  private readonly object: any
   private readonly options: Options
 
-  constructor(object: Object, options?: Options) {
+  constructor(object: any, options?: Options) {
     this.changes = []
     this.log = new vcr.VCR('nativecode:scrubs').use(vcr.Debug)
     this.object = object
@@ -54,7 +54,7 @@ export class Scrubs {
     this.enumerate({ current: object, path: [] })
   }
 
-  public clean(): Object {
+  public clean(): any {
     const clone: any = this.clone()
 
     if (this.changes.length) {
@@ -67,7 +67,7 @@ export class Scrubs {
     return clone
   }
 
-  public clone(): Object {
+  public clone(): any {
     return merge({}, this.object)
   }
 
@@ -109,7 +109,7 @@ export class Scrubs {
       })
   }
 
-  private set(clone: Object, change: Change): void {
+  private set(clone: any, change: Change): void {
     let current: any = clone
     for (let index: number = 0; index < change.path.length; index++) {
       const name: string = change.path[index]
