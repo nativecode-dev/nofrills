@@ -8,3 +8,5 @@ tsconfig.json
 
 *.tgz
 *.log
+
+lib/**/*.map
