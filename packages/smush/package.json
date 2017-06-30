@@ -8,14 +8,7 @@
     "url": "https://github.com/nativecode-dev/smush"
   },
   "types": "./lib/smush.d.ts",
-  "version": "0.2.2",
-  "scripts": {
-    "build": "tsc --project . --outdir lib",
-    "start": "node lib/smush",
-    "test": "mocha tests/",
-    "pretest": "npm run build",
-    "prepublish": "npm run build"
-  },
+  "version": "0.3.0",
   "devDependencies": {
     "@types/bluebird": "^3.5.5",
     "@types/chai": "^4.0.0",
@@ -24,12 +17,23 @@
     "@types/shortid": "0.0.29",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
+    "rimraf": "^2.6.1",
     "typescript": "^2.3.4"
   },
   "dependencies": {
-    "@nofrills/vcr": "^1.1.0",
+    "@nofrills/vcr": "^1.5.0",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "shortid": "^2.2.8"
+  },
+  "scripts": {
+    "build": "tsc --project . --outdir lib",
+    "prebuild": "rimraf lib/",
+    "postbuild": "npm run lint",
+    "lint": "tslint src/",
+    "start": "node lib/smush",
+    "prestart": "npm run build",
+    "test": "mocha tests/",
+    "pretest": "npm run build"
   }
 }
