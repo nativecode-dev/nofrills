@@ -123,10 +123,13 @@ export class Scrubs {
   }
 }
 
-export const scrub = (dirties: any[], options?: Options): any[] => {
+export const scrub = (dirties: any[] | string, options?: Options): any[] | string => {
+  if (typeof dirties === 'string') {
+    return dirties
+  }
+
   const scrubbed: any[] = []
-  for (let index = 0; index < dirties.length; index++) {
-    const dirty = dirties[index]
+  for (const dirty of dirties) {
     const scrubber = new Scrubs(dirty, options)
     scrubbed.push(scrubber.clean())
   }

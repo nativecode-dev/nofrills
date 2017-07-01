@@ -17,6 +17,11 @@ describe('when scrubbing an object', () => {
       expect(sut.email).to.equal(root.user.email)
       expect(sut.password).to.equal('<secured>')
     })
+
+    it('should echo string', () => {
+      const sut = scrubs.scrub('test')
+      expect(sut).to.equal('test')
+    })
   })
 
   describe('that has protected values', () => {})
