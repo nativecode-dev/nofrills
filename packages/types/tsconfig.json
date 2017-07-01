@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "diagnostics": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "lib",
+    "pretty": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5",
+    "typeRoots": [
+      "src/declarations/"
+    ]
+  }
+}
