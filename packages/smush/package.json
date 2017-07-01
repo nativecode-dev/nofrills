@@ -8,7 +8,7 @@
   "types": "./lib/smush.d.ts",
   "version": "0.3.1",
   "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-smush#issues"
+    "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
   "dependencies": {
     "@nofrills/vcr": "^1.5.0",
