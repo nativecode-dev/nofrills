@@ -1,23 +1,14 @@
 {
   "author": "support@nativecode.com",
   "description": "Scrubs an object of all sensitive data.",
+  "homepage": "https://github.com/nativecode-dev/nofrills-scrubs#readme",
   "license": "MIT",
   "main": "./lib/scrubs.js",
   "name": "@nofrills/scrubs",
-  "repository": {
-    "url": "https://github.com/nativecode-dev/scrubs"
-  },
   "types": "./lib/scrubs.d.ts",
   "version": "0.4.0",
-  "scripts": {
-    "build": "tsc --project .",
-    "prebuild": "rimraf lib/",
-    "postbuild": "npm run lint",
-    "lint": "tslint src/",
-    "start": "node lib/scrubs.js",
-    "prestart": "npm run build",
-    "test": "mocha tests/",
-    "pretest": "npm run build"
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills-scrubs#issues"
   },
   "dependencies": {
     "@nofrills/vcr": "^1.1.0",
@@ -31,5 +22,19 @@
     "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills-scrubs"
+  },
+  "scripts": {
+    "build": "tsc --project .",
+    "prebuild": "rimraf lib/",
+    "postbuild": "npm run lint",
+    "lint": "tslint src/",
+    "start": "node lib/scrubs.js",
+    "prestart": "npm run build",
+    "test": "mocha tests/",
+    "pretest": "npm run build"
   }
 }
