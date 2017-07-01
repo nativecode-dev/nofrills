@@ -1,0 +1,37 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {
+    "max-line-length": [
+      160
+    ]
+  },
+  "rules": {
+    "class-name": true,
+    "interface-name": [
+      "always-prefix"
+    ],
+    "eofline": true,
+    "max-line-length": [
+      160
+    ],
+    "new-parens": true,
+    "no-var-keyword": true,
+    "no-unused-expression": true,
+    "only-arrow-functions": [
+      true
+    ],
+    "quotemark": [
+      "single"
+    ],
+    "semicolon": [
+      "never"
+    ],
+    "trailing-comma": [
+      true
+    ]
+  },
+  "rulesDirectory": []
+}

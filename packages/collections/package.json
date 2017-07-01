@@ -1,0 +1,37 @@
+{
+  "author": "support@nativecode.com",
+  "description": "Set of useful collection types.",
+  "homepage": "https://github.com/nativecode-dev/nofrills-collections#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "@nofrills/collections",
+  "version": "0.0.1",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.6",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.4.3",
+    "typescript": "^2.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nativecode-dev/nofrills-collections.git"
+  },
+  "scripts": {
+    "build": "tsc --project .",
+    "prebuild": "rimraf lib/",
+    "postbuild": "npm run lint",
+    "lint": "tslint src/",
+    "start": "node lib/",
+    "prestart": "npm run build",
+    "test": "mocha tests/",
+    "pretest": "npm run build"
+  }
+}
