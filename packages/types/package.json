@@ -11,9 +11,7 @@
     "url": "https://github.com/nativecode-dev/nofrills-types/issues"
   },
   "dependencies": {
-    "@nofrills/vcr": "^1.6.0",
-    "validator": "^7.2.0",
-    "zipcodes-regex": "^1.0.1"
+    "validator": "^7.2.0"
   },
   "devDependencies": {
     "@types/node": "^8.0.7",
