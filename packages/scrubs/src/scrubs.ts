@@ -2,6 +2,8 @@ import { merge } from 'lodash'
 
 import * as vcr from '@nofrills/vcr'
 
+const logger: vcr.VCR = new vcr.VCR('nativecode:scrubs').use(vcr.Debug)
+
 export enum Scope {
   None,
   Scrubbed,
@@ -18,9 +20,7 @@ export interface Context {
   path: string[]
 }
 
-export interface Scrubber {
-  (key: string, context: Context): any
-}
+export type Scrubber = (key: string, context: Context) => any
 
 export interface Options {
   secured: {
@@ -47,7 +47,7 @@ export class Scrubs {
 
   constructor(object: any, options?: Options) {
     this.changes = []
-    this.log = new vcr.VCR('nativecode:scrubs').use(vcr.Debug)
+    this.log = logger.extend('Scrubs')
     this.object = object
     this.options = merge({}, options || {}, defaults)
 
@@ -58,8 +58,7 @@ export class Scrubs {
     const clone: any = this.clone()
 
     if (this.changes.length) {
-      for (let index: number = 0; index < this.changes.length; index++) {
-        const change: Change = this.changes[index]
+      for (const change of this.changes) {
         this.set(clone, change)
       }
     }
@@ -94,7 +93,7 @@ export class Scrubs {
               })
             } else {
               let transformed: string = current
-              regexes.forEach(regex => transformed = transformed.replace(regex, '$1<secured>$2'))
+              regexes.forEach((regex) => (transformed = transformed.replace(regex, '$1<secured>$2')))
               this.changes.push({
                 original: current,
                 path,
@@ -123,15 +122,42 @@ export class Scrubs {
   }
 }
 
-export const scrub = (dirties: any[] | string, options?: Options): any[] | string => {
-  if (typeof dirties === 'string') {
-    return dirties
-  }
+const helpers = {
+  array: (dirties: any[], options?: Options): any[] => {
+    const scrubbed: any[] = []
+    for (const dirty of dirties) {
+      const scrubber = new Scrubs(dirty, options)
+      scrubbed.push(scrubber.clean())
+    }
+    return scrubbed
+  },
 
-  const scrubbed: any[] = []
-  for (const dirty of dirties) {
-    const scrubber = new Scrubs(dirty, options)
-    scrubbed.push(scrubber.clean())
+  object: (value: object, options?: Options): object => {
+    const scrubber: Scrubs = new Scrubs(value, options)
+    return scrubber.clean()
+  },
+
+  str: (value: string, options?: Options): string => {
+    return value
+  },
+}
+
+export const scrub = (value: any, options?: Options): any => {
+  switch (typeof value) {
+    case 'string':
+      return helpers.str(value, options)
+
+    case 'boolean':
+    case 'function':
+    case 'number':
+    case 'symbol':
+    case 'undefined':
+      return value
+
+    default:
+      if (value instanceof Date) {
+        return value
+      }
+      return helpers.object(value, options)
   }
-  return scrubbed
 }
