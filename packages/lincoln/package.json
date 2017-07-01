@@ -8,7 +8,7 @@
   "types": "./lib/lincoln.d.ts",
   "version": "1.6.0",
   "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-lincoln#issues"
+    "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
   "dependencies": {
     "debug": "^2.6.8",
