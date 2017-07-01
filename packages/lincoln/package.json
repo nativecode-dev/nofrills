@@ -1,11 +1,15 @@
 {
   "author": "support@nativecode.com",
   "description": "Provides a slim abstraction for logging.",
+  "homepage": "https://github.com/nativecode-dev/nofrills-lincoln#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
   "types": "./lib/lincoln.d.ts",
   "version": "1.6.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills-lincoln#issues"
+  },
   "dependencies": {
     "debug": "^2.6.8",
     "lodash": "^4.17.4",
@@ -26,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nativecode-dev/lincoln"
+    "url": "https://github.com/nativecode-dev/nofrills-lincoln"
   },
   "scripts": {
     "build": "tsc --project .",
