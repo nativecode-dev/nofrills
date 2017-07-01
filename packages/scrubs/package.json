@@ -11,13 +11,13 @@
   "version": "0.4.0",
   "scripts": {
     "build": "tsc --project .",
-    "prebuild": "rm -rf lib",
+    "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
-    "lint": "tslint src",
-    "test": "mocha tests",
-    "pretest": "npm run build",
+    "lint": "tslint src/",
     "start": "node lib/scrubs.js",
-    "prestart": "npm run build"
+    "prestart": "npm run build",
+    "test": "mocha tests/",
+    "pretest": "npm run build"
   },
   "dependencies": {
     "@nofrills/vcr": "^1.1.0",
@@ -28,6 +28,7 @@
     "@types/node": "^8.0.2",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
+    "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
   }
