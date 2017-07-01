@@ -9,6 +9,8 @@ export class Registry<T> {
   }
 
   public resolve(key: string): T | undefined {
-    return this.map.get(key)
+    if (this.map.has(key)) {
+      return this.map.get(key)
+    }
   }
 }
