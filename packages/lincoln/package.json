@@ -1,0 +1,39 @@
+{
+  "author": "support@nativecode.com",
+  "description": "Provides a slim abstraction for logging.",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/lincoln",
+  "types": "./lib/lincoln.d.ts",
+  "version": "1.6.0",
+  "dependencies": {
+    "debug": "^2.6.8",
+    "lodash": "^4.17.4",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/debug": "0.0.29",
+    "@types/lodash": "^4.14.68",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.2",
+    "@types/uuid": "^3.0.0",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/lincoln"
+  },
+  "scripts": {
+    "build": "tsc --project .",
+    "prebuild": "rimraf lib/",
+    "postbuild": "npm run lint",
+    "lint": "tslint src/",
+    "test": "mocha tests/",
+    "pretest": "npm run build"
+  }
+}
