@@ -1,14 +1,15 @@
 {
   "author": "support@nativecode.com",
   "description": "Smushes things together.",
+  "homepage": "https://github.com/nativecode-dev/nofrills-smush#readme",
   "license": "MIT",
   "main": "./lib/smush.js",
   "name": "@nofrills/smush",
-  "repository": {
-    "url": "https://github.com/nativecode-dev/smush"
-  },
   "types": "./lib/smush.d.ts",
   "version": "0.3.1",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills-smush#issues"
+  },
   "dependencies": {
     "@nofrills/vcr": "^1.5.0",
     "bluebird": "^3.5.0",
@@ -26,6 +27,10 @@
     "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills-smush"
   },
   "scripts": {
     "build": "tsc --project . --outdir lib",
