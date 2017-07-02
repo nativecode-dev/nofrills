@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
   "types": "./lib/index.d.ts",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
@@ -38,6 +38,7 @@
     "postbuild": "npm run lint",
     "lint": "tslint src/",
     "test": "mocha tests/",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "prepublish": "npm run test"
   }
 }
