@@ -6,13 +6,14 @@
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
   "types": "./lib/index.d.ts",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
   "dependencies": {
     "debug": "^2.6.8",
     "lodash": "^4.17.4",
+    "nyc": "^11.0.3",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
@@ -37,7 +38,7 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "test": "mocha tests/",
+    "test": "nyc mocha tests/",
     "pretest": "npm run build",
     "prepublish": "npm run test"
   }

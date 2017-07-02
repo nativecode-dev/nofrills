@@ -2,24 +2,16 @@ describe('when using Lincoln', () => {
   const expect = require('chai').expect
   const merge = require('lodash').merge
 
-  const Console = require('../lib').Console
-  const Debug = require('../lib').Debug
+  const context = require('./context')
+  const extension = context.EXTENSION
+  const namespace = context.NAMESPACE
+  const message = context.MESSAGE
+
   const Lincoln = require('../lib').Lincoln
 
   describe('to log messages', () => {
-    const extension = 'extension'
-    const namespace = 'nativecode:lincoln:test'
-    const message = 'TEST'
-
-    const Options = (interceptor) => {
-      return {
-        interceptors: [Debug, interceptor],
-        namespace: namespace
-      }
-    }
-
     it('should create log object', (done) => {
-      const options = Options((log) => {
+      const options = context.options((log) => {
         expect(log.namespace).to.equal(namespace)
         expect(log.parameters[0]).to.equal(message)
         expect(log.tag).to.equal(`${namespace}:debug`)
@@ -30,7 +22,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should act as emitter', (done) => {
-      const options = Options((log) => log)
+      const options = context.options((log) => log)
       const sut = new Lincoln(options)
       sut.on('log', (log) => {
         expect(log.namespace).to.equal(namespace)
@@ -42,7 +34,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should extend instance', (done) => {
-      const options = Options((log) => {
+      const options = context.options((log) => {
         expect(log.namespace).to.equal(`${namespace}:${extension}`)
         expect(log.parameters[0]).to.equal(message)
         expect(log.tag).to.equal(`${namespace}:${extension}:debug`)
@@ -52,6 +44,59 @@ describe('when using Lincoln', () => {
       const sut = logger.extend(extension)
       expect(logger.id).not.equal(sut.id)
       sut.debug(message)
+    })
+  })
+
+  describe('to log different types of messages', () => {
+    it('should call debug', (done) => {
+      const options = context.options((log) => {
+        expect(log.tag).to.equal(`${namespace}:debug`)
+        done()
+      })
+      const sut = new Lincoln(options)
+      sut.debug(message)
+    })
+
+    it('should call error', (done) => {
+      const options = context.options((log) => {
+        expect(log.tag).to.equal(`${namespace}:error`)
+        done()
+      })
+      const sut = new Lincoln(options)
+      sut.error(message)
+    })
+
+    it('should call info', (done) => {
+      const options = context.options((log) => {
+        expect(log.tag).to.equal(`${namespace}:info`)
+        done()
+      })
+      const sut = new Lincoln(options)
+      sut.info(message)
+    })
+
+    it('should call warn', (done) => {
+      const options = context.options((log) => {
+        expect(log.tag).to.equal(`${namespace}:warn`)
+        done()
+      })
+      const sut = new Lincoln(options)
+      sut.warn(message)
+    })
+  })
+
+  describe('to filter messages', () => {
+    const filter = (log) => log.tag.indexOf('debug') >= 0
+    it('should filter message', () => {
+      let calls = 0
+      const options = context.options((log) => {
+        calls++
+        expect(calls).to.equal(1)
+      })
+      options.filters = [filter]
+      const sut = new Lincoln(options)
+      sut.debug(message)
+      sut.warn(message)
     })
   })
 })

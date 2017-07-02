@@ -85,11 +85,16 @@ export class Lincoln extends events.EventEmitter {
       timestamp: Date.now(),
     }
 
+    const reducer = (previous: boolean, current: boolean) => previous || current
+
     if (this.options.filters) {
-      const map = this.options.filters.map((filter: Filter) => filter(log))
-      const filtered = map.reduce((previous: boolean, current: boolean) => {
-        return previous && current
-      }, false)
+      let filtered: boolean = false
+
+      if (this.options.filters.length) {
+        const map = this.options.filters.map((filter: Filter) => filter(log))
+
+        filtered = map.reduce(reducer, false)
+      }
 
       if (filtered === false) {
         if (this.options.interceptors) {
