@@ -6,12 +6,12 @@
   "main": "./lib/scrubs.js",
   "name": "@nofrills/scrubs",
   "types": "./lib/scrubs.d.ts",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-scrubs/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.2.0",
+    "@nofrills/lincoln": "^0.3.2",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
