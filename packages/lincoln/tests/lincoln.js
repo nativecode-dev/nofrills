@@ -8,7 +8,7 @@ describe('when using Lincoln', () => {
 
   describe('to log messages', () => {
     const extension = 'extension'
-    const namespace = 'lincoln:test'
+    const namespace = 'nativecode:lincoln:test'
     const message = 'TEST'
 
     const Options = (interceptor) => {
