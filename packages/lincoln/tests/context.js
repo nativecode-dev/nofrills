@@ -10,7 +10,7 @@ module.exports = {
   MESSAGE,
   options: (interceptor) => {
     return {
-      interceptors: [lincoln.Console, lincoln.Debug, interceptor],
+      interceptors: [lincoln.Debug, interceptor],
       namespace: NAMESPACE
     }
   }

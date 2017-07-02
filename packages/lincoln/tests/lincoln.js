@@ -45,6 +45,17 @@ describe('when using Lincoln', () => {
       expect(logger.id).not.equal(sut.id)
       sut.debug(message)
     })
+
+    it('should log object', (done) => {
+      const options = context.options((log) => {
+        expect(log.parameters[0].message).to.equal(message)
+        done()
+      })
+      const sut = new Lincoln(options)
+      sut.debug({
+        message
+      })
+    })
   })
 
   describe('to log different types of messages', () => {
