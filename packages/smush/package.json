@@ -3,15 +3,16 @@
   "description": "Smushes things together.",
   "homepage": "https://github.com/nativecode-dev/nofrills-smush#readme",
   "license": "MIT",
-  "main": "./lib/smush.js",
+  "main": "./lib/index.js",
   "name": "@nofrills/smush",
-  "types": "./lib/smush.d.ts",
-  "version": "0.3.1",
+  "types": "./lib/index.d.ts",
+  "version": "0.4.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
   "dependencies": {
-    "@nofrills/vcr": "^1.5.0",
+    "@nofrills/lincoln": "^0.2.3",
+    "@nofrills/scrubs": "^0.4.1",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "shortid": "^2.2.8"
