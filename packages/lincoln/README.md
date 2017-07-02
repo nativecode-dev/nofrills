@@ -106,5 +106,5 @@ const logger = new logging.Lincoln({
 logger.debug({
   password: 'SuperSecret',
 })
-// -> should return { password: "<secret>" }
+// -> should return { password: "<secured>" }
 ```
