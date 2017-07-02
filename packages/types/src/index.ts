@@ -29,7 +29,6 @@ Registry.register({
 Registry.register({
   properties: {
     max: 254,
-    nullable: true,
   },
   type: 'email',
   typebase: 'string',

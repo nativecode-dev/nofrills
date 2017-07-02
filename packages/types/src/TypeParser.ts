@@ -6,15 +6,29 @@ import { Type, TypeProperties } from './Type'
 import { Registry } from './TypeRegistry'
 
 export class TypeParser {
-  public static convert(typestr: string): Type {
+  public static deserialize(typestr: string): Type {
     return TypeParser.parse(typestr)
+  }
+
+  public static serialize(type: Type): string {
+    if (type.properties) {
+      const keys: string[] = Object.keys(type.properties)
+      const props = type.properties
+      const properties: string[] = keys.map<string>((key: string): string => {
+        const value: any = props[key]
+        return `${key}=${value}`
+      })
+      return `${type.type}:${properties.join(',')}`
+    }
+    return type.type
   }
 
   private static parse(typestr: string): Type {
     const parts: string[] = typestr.split(':')
     const type: Type = Registry.resolve(parts[0])
     if (parts.length === 2) {
-      type.properties = merge({}, type.properties, TypeParser.properties(type, parts[1]))
+      const properties = TypeParser.properties(type, parts[1])
+      return merge({}, type, { properties })
     }
     return type
   }
