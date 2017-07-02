@@ -11,9 +11,13 @@
     "url": "https://github.com/nativecode-dev/nofrills-types/issues"
   },
   "dependencies": {
-    "validator": "^7.2.0"
+    "@nofrills/collections": "0.0.2",
+    "lodash": "^4.17.4",
+    "validator": "^7.2.0",
+    "zipcodes-regex": "^1.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.68",
     "@types/node": "^8.0.7",
     "@types/validator": "^6.2.0",
     "chai": "^4.0.2",
