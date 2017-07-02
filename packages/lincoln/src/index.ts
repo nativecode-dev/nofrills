@@ -1,2 +1,8 @@
 export * from './Lincoln'
-export { Console, Debug } from './Interceptors'
+
+import * as interceptors from './Interceptors'
+
+export const Interceptors: any = {
+  Console: interceptors.Console,
+  Debug: interceptors.Debug,
+}
