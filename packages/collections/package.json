@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/collections",
   "types": "./lib/index.d.ts",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
   },
@@ -34,6 +34,7 @@
     "prestart": "npm run build",
     "test": "mocha tests/",
     "pretest": "npm run build",
-    "prepublish": "npm run test"
+    "prepublish": "npm run test",
+    "push": "npm publish --access public"
   }
 }
