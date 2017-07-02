@@ -1,2 +1,2 @@
 export * from './Lincoln'
-export * from './Interceptors'
+export { Console, Debug } from './Interceptors'
