@@ -13,7 +13,9 @@ npm install --save @nofrills/lincoln
 ```
 
 # Quick Start
+
 ### Javascript
+
 ```javascript
 const logging = require('@nofrills/lincoln')
 const logger = new logging.Lincoln('myapp')
@@ -21,6 +23,7 @@ logger.debug('Hello, cruel Javascript world!')
 ```
 
 ### Typescript
+
 ```typescript
 import { Lincoln } from '@nofrills/lincoln'
 const logger = new Lincoln('myapp')
