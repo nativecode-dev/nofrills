@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
   "types": "./lib/index.d.ts",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
@@ -41,6 +41,7 @@
     "start": "node lib/smush",
     "prestart": "npm run build",
     "test": "mocha tests/",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "prepublish": "npm run test"
   }
 }
