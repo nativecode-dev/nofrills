@@ -6,12 +6,12 @@
   "main": "./lib/index.js",
   "name": "@nofrills/types",
   "types": "./lib/index.d.ts",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-types/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "0.0.3",
+    "@nofrills/collections": "^0.1.0",
     "lodash": "^4.17.4",
     "validator": "^7.2.0",
     "zipcodes-regex": "^1.0.1"
