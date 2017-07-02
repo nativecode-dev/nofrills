@@ -2,6 +2,7 @@ import * as events from 'events'
 import * as uuid from 'uuid'
 
 import { merge } from 'lodash'
+import { Debug } from './Interceptors'
 
 export interface Log {
   readonly id: string
@@ -44,10 +45,20 @@ export class Lincoln extends events.EventEmitter {
 
   private readonly options: Options
 
-  constructor(options?: Options) {
+  constructor(options?: Options | string) {
     super()
     this.id = uuid.v4()
+    if (options && typeof options === 'string') {
+      options = {
+        interceptors: [Debug],
+        namespace: options
+      }
+    }
     this.options = merge({}, defaults, options)
+  }
+
+  public get namespace(): string {
+    return this.options.namespace
   }
 
   public debug(...parameters: any[]): void {

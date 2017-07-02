@@ -21,6 +21,12 @@ describe('when using Lincoln', () => {
       sut.debug(message)
     })
 
+    it('should create log object with no options', () => {
+      const sut = new Lincoln(namespace)
+      expect(sut).to.be.instanceOf(Lincoln)
+      expect(sut.namespace).to.equal(namespace)
+    })
+
     it('should act as emitter', (done) => {
       const options = context.options((log) => log)
       const sut = new Lincoln(options)
