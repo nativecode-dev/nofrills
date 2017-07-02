@@ -18,7 +18,7 @@ export interface Options {
   filters?: Filter[]
   interceptors?: Interceptor[]
   namespace: string
-  separator: string
+  separator?: string
 }
 
 const defaults: Options = {
