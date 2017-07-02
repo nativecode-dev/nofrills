@@ -4,6 +4,7 @@
 [![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-lincoln.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-lincoln)
 [![David](https://img.shields.io/david/nativecode-dev/nofrills-lincoln.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/lincoln)
 [![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-lincoln.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/lincoln)
+[![Coverage Status](https://coveralls.io/repos/nativecode-dev/nofrills-lincoln/badge.svg?branch=master)](https://coveralls.io/r/nativecode-dev/nofrills-lincoln?branch=master)
 
 # Install
 

@@ -24,6 +24,7 @@
     "@types/node": "^8.0.2",
     "@types/uuid": "^3.0.0",
     "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
     "rimraf": "^2.6.1",
@@ -41,6 +42,8 @@
     "lint": "tslint src/",
     "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
-    "prepublish": "npm run test"
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "prepublish": "npm run test",
+    "push": "npm publish --access public"
   }
 }
