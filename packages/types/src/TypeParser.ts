@@ -10,10 +10,14 @@ export class TypeParser {
     return TypeParser.parse(typestr)
   }
 
-  public static serialize(type: Type): string {
+  public static serialize(type: Type, full: boolean = false): string {
+    const ignored: string[] = ['default']
     if (type.properties) {
       const keys: string[] = Object.keys(type.properties)
       const props = type.properties
+      if (props.default && full === false) {
+        return `${type.type}:${props[props.default]}`
+      }
       const properties: string[] = keys.map<string>((key: string): string => {
         const value: any = props[key]
         return `${key}=${value}`
@@ -39,8 +43,12 @@ export class TypeParser {
     for (const setter of setters) {
       const parts: string[] = setter.split('=')
       const name = parts[0]
-      const value = TypeParser.typed(parts[1])
-      props[name] = value
+      if (parts.length === 1 && type.properties && type.properties.default) {
+        props[type.properties.default] = TypeParser.typed(parts[0])
+      } else {
+        const value = TypeParser.typed(parts[1])
+        props[name] = value
+      }
     }
     return props as TypeProperties
   }

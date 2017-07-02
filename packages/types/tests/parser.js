@@ -16,13 +16,19 @@ describe('when using type parser', () => {
       expect(typedef.properties.max).to.equal(128)
       expect(typedef.properties.min).to.equal(32)
     })
+
+    it('should resolve type with default property override', () => {
+      const typedef = parser.deserialize('email:128')
+      expect(typedef.type).to.equal('email')
+      expect(typedef.properties.max).to.equal(128)
+    })
   })
 
   describe('serializing type strings', () => {
     it('should serialize email type', () => {
       const typedef = types.Registry.resolve('email')
       const serialized = parser.serialize(typedef)
-      expect(serialized).to.equal('email:max=254')
+      expect(serialized).to.equal('email:254')
     })
   })
 })

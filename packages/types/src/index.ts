@@ -28,6 +28,7 @@ Registry.register({
 
 Registry.register({
   properties: {
+    default: 'max',
     max: 254,
   },
   type: 'email',

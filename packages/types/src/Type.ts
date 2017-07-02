@@ -7,6 +7,7 @@ export interface Type {
 
 export interface TypeProperties {
   [key: string]: any
+  default?: string
   max?: number
   min?: number
   nullable?: boolean
