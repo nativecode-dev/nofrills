@@ -46,6 +46,9 @@ export class TypeParser {
   }
 
   private static typed(value: string): any {
+    if (validator.isBoolean(value)) {
+      return Boolean(value)
+    }
     if (validator.isNumeric(value)) {
       return Number(value)
     }
