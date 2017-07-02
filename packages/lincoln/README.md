@@ -88,7 +88,7 @@ const options = {
 ```
 
 # Integrations
-You can integrate various plugins or functions to mutate the log message. For instance, you can use the `@nofrills/scrubs` package to remove sensitive data before being logged.
+You can integrate various plugins or functions to mutate the log message. For instance, you can use the [`@nofrills/scrubs`](https://www.npmjs.com/package/@nofrills/scrubs) package to remove sensitive data before being logged.
 
 ```javascript
 const logging = require('@nofrills/lincoln')
