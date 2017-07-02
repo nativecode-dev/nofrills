@@ -10,6 +10,9 @@
     "sourceMap": true,
     "strict": true,
     "pretty": true,
-    "target": "es5"
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@nofrills/lincoln/lib"
+    ]
   }
 }

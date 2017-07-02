@@ -1,8 +1,13 @@
 import { merge } from 'lodash'
 
-import * as vcr from '@nofrills/vcr'
+import * as logging from '@nofrills/lincoln'
 
-const logger: vcr.VCR = new vcr.VCR('nativecode:scrubs').use(vcr.Debug)
+const logOptions: logging.Options = {
+  interceptors: [logging.Debug],
+  namespace: 'nativecode:scrubs'
+}
+
+const logger: logging.Lincoln = new logging.Lincoln(logOptions)
 
 export enum Scope {
   None,
@@ -41,7 +46,7 @@ const defaults: Options = {
 
 export class Scrubs {
   private readonly changes: Change[]
-  private readonly log: vcr.VCR
+  private readonly log: logging.Lincoln
   private readonly object: any
   private readonly options: Options
 
@@ -62,11 +67,12 @@ export class Scrubs {
         this.set(clone, change)
       }
     }
-
+    this.log.debug('clean', clone)
     return clone
   }
 
   public clone(): any {
+    this.log.debug('clone', this.object)
     return merge({}, this.object)
   }
 
