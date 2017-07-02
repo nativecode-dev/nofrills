@@ -13,7 +13,7 @@ describe('when using Lincoln', () => {
 
     const Options = (interceptor) => {
       return {
-        interceptors: [Console, Debug, interceptor],
+        interceptors: [Debug, interceptor],
         namespace: namespace
       }
     }

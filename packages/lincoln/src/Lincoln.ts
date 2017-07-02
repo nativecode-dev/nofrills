@@ -18,12 +18,14 @@ export interface Options {
   filters?: Filter[]
   interceptors?: Interceptor[]
   namespace: string
+  separator: string
 }
 
 const defaults: Options = {
   filters: [],
   interceptors: [],
   namespace: 'app',
+  separator: ':'
 }
 
 const types: { [key: string]: string } = {
@@ -48,18 +50,18 @@ export class Lincoln extends events.EventEmitter {
     this.options = merge({}, defaults, options)
   }
 
-  public extend(tag: string): Lincoln {
-    return new Lincoln(merge({}, this.options, {
-      namespace: `${this.options.namespace}:${tag}`
-    }))
-  }
-
   public debug(...parameters: any[]): void {
     this.write(types.debug, parameters)
   }
 
   public error(...parameters: any[]): void {
     this.write(types.error, parameters)
+  }
+
+  public extend(tag: string): Lincoln {
+    return new Lincoln(merge({}, this.options, {
+      namespace: this.tag(tag),
+    }))
   }
 
   public info(...parameters: any[]): void {
@@ -70,13 +72,17 @@ export class Lincoln extends events.EventEmitter {
     this.write(types.warn, parameters)
   }
 
+  private tag(tag: string): string {
+    return `${this.options.namespace}${this.options.separator}${tag}`
+  }
+
   private write(tag: string, parameters: any[]): void {
     const log: Log = {
       id: uuid.v4(),
-      tag: `${this.options.namespace}:${tag}`,
-      timestamp: Date.now(),
       namespace: this.options.namespace,
       parameters: parameters || [],
+      tag: this.tag(tag),
+      timestamp: Date.now(),
     }
 
     if (this.options.filters) {
