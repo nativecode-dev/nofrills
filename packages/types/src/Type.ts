@@ -10,7 +10,7 @@ export interface TypeProperties {
   max?: number
   min?: number
   nullable?: boolean
-  regex?: RegExp
+  regex?: string
 }
 
 export type TypeValidator = (value: any, ...args: any[]) => boolean
