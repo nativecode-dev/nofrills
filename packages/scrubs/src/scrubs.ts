@@ -2,12 +2,7 @@ import { merge } from 'lodash'
 
 import * as logging from '@nofrills/lincoln'
 
-const logOptions: logging.Options = {
-  interceptors: [logging.Debug],
-  namespace: 'nativecode:scrubs'
-}
-
-const logger: logging.Lincoln = new logging.Lincoln(logOptions)
+const logger: logging.Lincoln = new logging.Lincoln('nativecode:scrubs')
 
 export enum Scope {
   None,
