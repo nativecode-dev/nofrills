@@ -1,14 +1,16 @@
+.nyc_output/
 .vscode/
+coverage/
 node_modules/
 src/
 tests/
 
-*.tgz
-.editorconfig
-.jsbeautifyrc
-.npmignore
-.npmrc
-.nvmrc
+.nycrc
 .travis.yml
-npm-debug.log
+tslint.json
 tsconfig.json
+
+lib/**/*.map
+
+*.log
+*.tgz

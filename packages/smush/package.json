@@ -6,13 +6,13 @@
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
   "types": "./lib/index.d.ts",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.3.2",
-    "@nofrills/scrubs": "^0.4.5",
+    "@nofrills/lincoln": "^0.4.2",
+    "@nofrills/scrubs": "^0.4.7",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "shortid": "^2.2.8"
@@ -24,7 +24,9 @@
     "@types/node": "^7.0.31",
     "@types/shortid": "0.0.29",
     "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
@@ -40,9 +42,10 @@
     "lint": "tslint src/",
     "start": "node lib/smush",
     "prestart": "npm run build",
-    "test": "mocha tests/",
+    "test": "nyc mocha tests/",
     "pretest": "npm run build",
     "prepublish": "npm run test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public"
   }
 }
