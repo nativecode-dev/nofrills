@@ -1,5 +1,5 @@
 export class Registry<T> {
-  private readonly map: Map<string, T> = new Map<string, T>()
+  protected readonly map: Map<string, T> = new Map<string, T>()
 
   public register(key: string, value: T): Registry<T> {
     if (this.map.has(key) === false) {
