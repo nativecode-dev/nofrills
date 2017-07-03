@@ -43,12 +43,10 @@ NOTE: From here on, we'll use Javascript in examples.
 # Options
 You can also use an options object to inject some customizations and extensions.
 
-```typescript
-export interface Options {
-  secured: {
-    properties: string[]
-    values: RegExp[]
-  }
+```javascript
+{
+  properties: ['apikey', 'api_key', 'password'],
+  text: '<secured>'
 }
 ```
 
@@ -58,13 +56,38 @@ Once you've created your options, you can pass it to the `Scrubs` class.
 const Scrubs = require('@nofrills/scrubs').Scrubs
 const scrubber = new Scrubs({
   secured: {
-    properties: ['apikey', 'api_key', 'password']
+    properties: ['apikey', 'api_key', 'password'],
+    text: '<password>'
   }
+scrubber.scrub({ password: "password123" })
+// -> will replace password with "<password>"
 })
 ```
 
 ### Properties
 Properties are an array of strings representing the properties on an object that require securing. By default, `apikey`, `api_key`, and `password` are secured.
 
-### Values
-Values are an array of regular expressions that return two capture groups, namely the text surrounding the string to be secured.
+# Extensibility
+You can extend how `scrubs` works by registering custom handlers to scrub a provided value.
+
+In Typescript parlance, we define a callback via the `Scrubber<T>` type.
+
+```typescript
+type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
+```
+
+Simple create your handler and register it before scrubbing, like so:
+
+## Javascript
+
+```javascript
+const R = require('@nofrills/scrubs').Registry
+
+const Handler = (value, options, scrubs) => {
+  // TODO: Something super fantastic that scrubs
+  // the value of sensitive data.
+  return value
+}
+
+R.register('string', Handler)
+```
