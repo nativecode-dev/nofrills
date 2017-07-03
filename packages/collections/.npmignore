@@ -1,10 +1,15 @@
+.nyc_output/
 .vscode/
+coverage/
 node_modules/
 src/
 tests/
+
+.nycrc
+.travis.yml
+tslint.json
 tsconfig.json
 
-.travis.yml
 lib/**/*.map
 
 *.log

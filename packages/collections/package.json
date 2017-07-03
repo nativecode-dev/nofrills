@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/collections",
   "types": "./lib/index.d.ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
   },
@@ -16,7 +16,9 @@
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.6",
     "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.4.1"
@@ -32,9 +34,10 @@
     "lint": "tslint src/",
     "start": "node lib/",
     "prestart": "npm run build",
-    "test": "mocha tests/",
+    "test": "nyc mocha tests/",
     "pretest": "npm run build",
     "prepublish": "npm run test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public"
   }
 }
