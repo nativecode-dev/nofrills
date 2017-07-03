@@ -11,7 +11,7 @@
     "url": "https://github.com/nativecode-dev/nofrills-scrubs/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.6.0",
+    "@nofrills/lincoln": "^0.6.2",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
