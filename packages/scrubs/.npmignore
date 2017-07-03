@@ -5,11 +5,12 @@ node_modules/
 src/
 tests/
 
-.gitignore
+.nycrc
 .travis.yml
+tslint.json
 tsconfig.json
 
-*.tgz
-*.log
-
 lib/**/*.map
+
+*.log
+*.tgz
