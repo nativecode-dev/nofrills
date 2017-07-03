@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
   "types": "./lib/index.d.ts",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
@@ -42,8 +42,8 @@
     "lint": "tslint src/",
     "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
-    "prepublishOnly": "npm run test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "push": "npm publish --access public"
+    "push": "npm publish --access public",
+    "prepush": "npm run test"
   }
 }
