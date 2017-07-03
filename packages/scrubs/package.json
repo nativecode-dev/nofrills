@@ -19,7 +19,9 @@
     "@types/node": "^8.0.2",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
+    "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
@@ -35,7 +37,7 @@
     "lint": "tslint src/",
     "start": "node lib/scrubs.js",
     "prestart": "npm run build",
-    "test": "mocha tests/",
+    "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
     "prepublish": "npm run test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
