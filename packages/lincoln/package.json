@@ -42,7 +42,7 @@
     "lint": "tslint src/",
     "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "prepublish": "npm run test",
     "push": "npm publish --access public"
   }
