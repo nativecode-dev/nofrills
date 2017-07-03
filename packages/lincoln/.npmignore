@@ -4,10 +4,12 @@ coverage/
 node_modules/
 src/
 tests/
-tsconfig.json
 
 .nycrc
 .travis.yml
+tslint.json
+tsconfig.json
+
 lib/**/*.map
 
 *.log
