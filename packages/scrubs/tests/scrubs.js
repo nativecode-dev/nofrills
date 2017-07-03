@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const scrubs = require('../lib/scrubs')
+const scrubs = require('../lib')
 
 const root = {
   apikey: '<SECRET>',

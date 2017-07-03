@@ -10,7 +10,7 @@
     "sourceMap": true,
     "strict": true,
     "pretty": true,
-    "target": "es5",
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@nofrills/lincoln/lib"
     ]
