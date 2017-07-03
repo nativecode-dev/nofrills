@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
   "types": "./lib/index.d.ts",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
@@ -36,14 +36,13 @@
     "url": "https://github.com/nativecode-dev/nofrills-lincoln"
   },
   "scripts": {
-    "build": "tsc --project .",
+    "build": "tsc --project tsconfig.json",
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
     "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "prepublish": "npm run test",
     "push": "npm publish --access public"
   }
 }
