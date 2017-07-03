@@ -6,6 +6,7 @@ src/
 tests/
 tsconfig.json
 
+.nycrc
 .travis.yml
 lib/**/*.map
 
