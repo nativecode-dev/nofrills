@@ -16,4 +16,11 @@ describe('when using Registry', () => {
     const registry = new Registry()
     expect(registry.resolve(KEY)).to.be.undefined
   })
+
+  it('should not register second handler', () => {
+    const registry = new Registry()
+    registry.register(KEY, VALUE)
+    registry.register(KEY, 'test')
+    expect(registry.resolve(KEY)).to.equal(VALUE)
+  })
 })
