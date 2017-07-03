@@ -27,15 +27,3 @@ npm install --save @nofrills/smush
 ```
 
 NOTE: From here on, we'll use Javascript in examples.
-
-# Options
-You can also use an options object to inject some customizations and extensions.
-
-```typescript
-export interface Options {
-  secured: {
-    properties: string[]
-    values: RegExp[]
-  }
-}
-```
