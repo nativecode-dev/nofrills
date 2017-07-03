@@ -11,10 +11,12 @@
     "url": "https://github.com/nativecode-dev/nofrills-scrubs/issues"
   },
   "dependencies": {
+    "@nofrills/collections": "^0.6.1",
     "@nofrills/lincoln": "^0.6.2",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "@nofrills/lincoln": "^0.6.2",
     "@types/lodash": "^4.14.67",
     "@types/node": "^8.0.2",
     "chai": "^4.0.2",
