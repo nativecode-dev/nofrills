@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/scrubs",
   "types": "./lib/index.d.ts",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-scrubs/issues"
   },
@@ -39,8 +39,8 @@
     "prestart": "npm run build",
     "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
-    "prepublish": "npm run test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "push": "npm publish --access public"
+    "push": "npm publish --access public",
+    "prepush": "npm run test"
   }
 }
