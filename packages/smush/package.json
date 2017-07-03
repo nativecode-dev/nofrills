@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
   "types": "./lib/index.d.ts",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
@@ -44,8 +44,8 @@
     "prestart": "npm run build",
     "test": "nyc mocha tests/",
     "pretest": "npm run build",
-    "prepublish": "npm run test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "push": "npm publish --access public"
+    "push": "npm publish --access public",
+    "prepush": "npm run test"
   }
 }
