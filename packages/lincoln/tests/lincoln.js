@@ -12,9 +12,8 @@ describe('when using Lincoln', () => {
   describe('to log messages', () => {
     it('should create log object', (done) => {
       const options = context.options((log) => {
-        expect(log.namespace).to.equal(namespace)
+        expect(log.namespace).to.equal(`${namespace}:debug`)
         expect(log.parameters[0]).to.equal(message)
-        expect(log.tag).to.equal(`${namespace}:debug`)
         done()
       })
       const sut = new Lincoln(options)
@@ -31,9 +30,8 @@ describe('when using Lincoln', () => {
       const options = context.options((log) => log)
       const sut = new Lincoln(options)
       sut.on('log', (log) => {
-        expect(log.namespace).to.equal(namespace)
+        expect(log.namespace).to.equal(`${namespace}:debug`)
         expect(log.parameters[0]).to.equal(message)
-        expect(log.tag).to.equal(`${namespace}:debug`)
         done()
       })
       sut.debug(message)
@@ -41,9 +39,8 @@ describe('when using Lincoln', () => {
 
     it('should extend instance', (done) => {
       const options = context.options((log) => {
-        expect(log.namespace).to.equal(`${namespace}:${extension}`)
+        expect(log.namespace).to.equal(`${namespace}:${extension}:debug`)
         expect(log.parameters[0]).to.equal(message)
-        expect(log.tag).to.equal(`${namespace}:${extension}:debug`)
         done()
       })
       const logger = new Lincoln(options)
@@ -76,7 +73,7 @@ describe('when using Lincoln', () => {
   describe('to log different types of messages', () => {
     it('should call debug', (done) => {
       const options = context.options((log) => {
-        expect(log.tag).to.equal(`${namespace}:debug`)
+        expect(log.namespace).to.equal(`${namespace}:debug`)
         done()
       })
       const sut = new Lincoln(options)
@@ -85,7 +82,7 @@ describe('when using Lincoln', () => {
 
     it('should call error', (done) => {
       const options = context.options((log) => {
-        expect(log.tag).to.equal(`${namespace}:error`)
+        expect(log.namespace).to.equal(`${namespace}:error`)
         done()
       })
       const sut = new Lincoln(options)
@@ -94,7 +91,7 @@ describe('when using Lincoln', () => {
 
     it('should call info', (done) => {
       const options = context.options((log) => {
-        expect(log.tag).to.equal(`${namespace}:info`)
+        expect(log.namespace).to.equal(`${namespace}:info`)
         done()
       })
       const sut = new Lincoln(options)
@@ -103,7 +100,7 @@ describe('when using Lincoln', () => {
 
     it('should call warn', (done) => {
       const options = context.options((log) => {
-        expect(log.tag).to.equal(`${namespace}:warn`)
+        expect(log.namespace).to.equal(`${namespace}:warn`)
         done()
       })
       const sut = new Lincoln(options)
@@ -112,7 +109,7 @@ describe('when using Lincoln', () => {
   })
 
   describe('to filter messages', () => {
-    const filter = (log) => log.tag.indexOf('debug') >= 0
+    const filter = (log) => log.namespace.indexOf('debug') >= 0
     it('should filter message', () => {
       let calls = 0
       const options = context.options((log) => {

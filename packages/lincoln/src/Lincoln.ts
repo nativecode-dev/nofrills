@@ -77,9 +77,8 @@ export class Lincoln extends events.EventEmitter {
   private write(tag: string, parameters: any[]): void {
     const log: Log = {
       id: uuid.generate(),
-      namespace: this.options.namespace,
+      namespace: this.tag(tag),
       parameters: parameters || [],
-      tag: this.tag(tag),
       timestamp: Date.now(),
     }
 
