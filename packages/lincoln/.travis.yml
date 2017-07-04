@@ -9,7 +9,6 @@ jobs:
   include:
     - stage: npm release
       node_js: '6'
-      script: echo "Deploying to npm ..."
       deploy:
         provider: npm
         email: reginfo@nativecode.com
