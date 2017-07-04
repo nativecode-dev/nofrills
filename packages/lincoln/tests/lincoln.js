@@ -2,7 +2,7 @@ describe('when using Lincoln', () => {
   const expect = require('chai').expect
   const merge = require('lodash').merge
 
-  const context = require('./context')
+  const context = require('./artifacts/context')
   const extension = context.EXTENSION
   const namespace = context.NAMESPACE
   const message = context.MESSAGE
@@ -61,6 +61,15 @@ describe('when using Lincoln', () => {
       sut.debug({
         message
       })
+    })
+
+    it('should log empty parameters', (done) => {
+      const options = context.options((log) => {
+        expect(log.parameters).to.be.empty
+        done()
+      })
+      const sut = new Lincoln(options)
+      sut.debug()
     })
   })
 

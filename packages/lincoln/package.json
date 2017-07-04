@@ -6,15 +6,16 @@
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
   "types": "./lib/index.d.ts",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
   "dependencies": {
+    "@nofrills/collections": "^0.7.0",
     "debug": "^2.6.8",
     "lodash": "^4.17.4",
     "nyc": "^11.0.3",
-    "uuid": "^3.1.0"
+    "uuidjs": "^3.5.3"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
@@ -22,7 +23,7 @@
     "@types/lodash": "^4.14.68",
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.2",
-    "@types/uuid": "^3.0.0",
+    "@types/uuidjs": "^3.3.1",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",

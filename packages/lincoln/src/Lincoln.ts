@@ -1,5 +1,5 @@
 import * as events from 'events'
-import * as uuid from 'uuid'
+import * as uuid from 'uuidjs'
 
 import { merge } from 'lodash'
 import { Debug } from './Interceptors'
@@ -16,10 +16,10 @@ export type Filter = (log: Log) => boolean
 export type Interceptor = (log: Log) => Log
 
 export interface Options {
-  filters?: Filter[]
-  interceptors?: Interceptor[]
+  filters: Filter[]
+  interceptors: Interceptor[]
   namespace: string
-  separator?: string
+  separator: string
 }
 
 const defaults: Options = {
@@ -45,13 +45,13 @@ export class Lincoln extends events.EventEmitter {
 
   private readonly options: Options
 
-  constructor(options?: Options | string) {
+  constructor(options?: Partial<Options> | string) {
     super()
-    this.id = uuid.v4()
+    this.id = uuid.generate()
     if (options && typeof options === 'string') {
       options = {
         interceptors: [Debug],
-        namespace: options
+        namespace: options,
       }
     }
     this.options = merge({}, defaults, options)
@@ -89,7 +89,7 @@ export class Lincoln extends events.EventEmitter {
 
   private write(tag: string, parameters: any[]): void {
     const log: Log = {
-      id: uuid.v4(),
+      id: uuid.generate(),
       namespace: this.options.namespace,
       parameters: parameters || [],
       tag: this.tag(tag),
