@@ -1,6 +1,6 @@
 import * as debug from 'debug'
 
-import { Interceptor, Log } from '../Lincoln'
+import { Interceptor, Log } from '../'
 
 export const Debug: Interceptor = (log: Log): Log => {
   if (log.parameters.length && typeof log.parameters[0] === 'string') {

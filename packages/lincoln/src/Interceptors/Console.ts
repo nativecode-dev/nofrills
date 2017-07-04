@@ -1,4 +1,4 @@
-import { Interceptor, Log } from '../Lincoln'
+import { Interceptor, Log } from '../'
 
 export const Console: Interceptor = (log: Log): Log => {
   const logger = console.log

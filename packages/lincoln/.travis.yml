@@ -19,7 +19,7 @@ jobs:
         provider: npm
         email: reginfo@nativecode.com
         api_key:
-          secure: cTvG4d9H2vJ4FDZhUNRsZh8ViGG3OR8Y1XIKmiUvVgU7SAHidEU8NIv/1owRmwfwQZ5dx0++qNxPOA/OySXCGC46ipaW2AxytTfho+q9DnBTaelD616cFgXvyWDB2oL4l16KZlsRIsYGUGk7byd8ZA2rjLM+ZeHzsv79zj9qW5FPks99Spu2rkKKaaZn0FhaChV2MFIaiTaiT/z+5/lySHFW9g6pfOPt7YDehimgK2PgxccbJlqmRi9I4y9KXSMpwDzn5yjufPk3b3oudvLI/4llZhFkaHyouxupvonqR3c4jgOBZLIi2KYqwmCnl1FKrCpQZi4BFg51Tjt8SsMwSJd7J6aggEh5N9TKoGOpDojRIZSQ+eMoX3WpTDrm5lTnxmWXWOp+8KLeO8v6pwAqBfWjV2JOPtj77vrNMM5dJmzvcc0pdzKTWFSmIO7gBiJIjAfMpVfKqribZzQj0OyMCHVxlgog3ApZfU21z/UWymudjeKACvFclJyB0yODlJY+hlkWmUzKPVeinlQGVQbWJPzgycuqyYxHPgJuDSDtRInZamsHv7jO+XJxD1seY35wC8OFB26cIORvjtx4e7idNUs7jA3sNXCpZlthAFPD+n9Q/3rUbESs4mp9Ecl/rXuxP0TZnb3RIJOdeMh/TGPe54zTWmp0z+dKPbGtbtnRldI=
+          secure: k8UOQ4j/oQRNuiiYqH4DwYyU/lqTE0Rai57QIzlmvQVLdKjXsCejCUVtQS/Lu8kO6VzgyTN7EAL5RXROBACM8HNH2JCBmqWItYrtMITt2N2N9gFOaEpz8Ld4hkoaawghV/Nc79pi+XUsm9zKWkPHNwWpNJABGzDuujyDjCN1BWEQ3QNJI1XxYpZzXH22kC6jA6gjVkthebQB/DH4dUEw+8m8DQhV0KCK6zHXJfIRtKw2wMqaKvMIbeTm1H6dJ+g80ssAjFnf7iYvdu2jS5FI3Olz3q+gknihE3VMKadsDJPH8drDD+3Byv0EvX3T207/0rOQGPsyJaXQbva2X/Alv/ieW4D6mKj4jqmCw00pP61JP1xbGSa/IXmut0LUxSxFrwABrqbNg0wN85bl8/FYVx6AM+pT0ncDBH1Gl403bh0sg7Cwa4JgMycH1Z+sjRPYdooamhFQkdvcwDX2Us+RxDh30ngbS8858sQS8reDkl6nRCRLqYlyLA2KpuNHmaq53R/CeECeCg4XebYrQXP8ppUT4M+RpKMMQt+UTM4n+vYyyD6lv2U6wnpqkeZg3dfgjQyEPCyVXI24oyD8j/bg9U5MOlXI2oNIVkeIaDGe7Q3tpCc1fbHKjD6qNOTaC2G3uytS+EMsg19kXumuwatRN8ZZj7ErMzJGLD2+mQ0bXgM=
         on:
           branch: master
         skip_cleanup: true
