@@ -14,7 +14,7 @@ const QuoteStrings: Interceptor = (log: Log) => {
   return log
 }
 
-const options: Options = {
+const options: Partial<Options> = {
   interceptors: [QuoteStrings, Debug],
   namespace: 'nativecode:smorgasbord'
 }
