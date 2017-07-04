@@ -1,6 +1,5 @@
 describe('when using Lincoln', () => {
   const expect = require('chai').expect
-  const merge = require('lodash').merge
 
   const context = require('./artifacts/context')
   const extension = context.EXTENSION

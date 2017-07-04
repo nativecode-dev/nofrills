@@ -1,8 +1,6 @@
 import * as events from 'events'
 import * as uuid from 'uuidjs'
 
-import { merge } from 'lodash'
-
 import { Dictionary } from '@nofrills/collections'
 import { Debug } from './Interceptors'
 import { Log } from './Log'
@@ -41,7 +39,8 @@ export class Lincoln extends events.EventEmitter {
         namespace: options,
       }
     }
-    this.options = merge({}, defaults, options)
+    const opts: any = options || {}
+    this.options = { ...defaults, ...opts }
   }
 
   public get namespace(): string {
@@ -57,9 +56,10 @@ export class Lincoln extends events.EventEmitter {
   }
 
   public extend(tag: string): Lincoln {
-    return new Lincoln(merge({}, this.options, {
-      namespace: this.tag(tag),
-    }))
+    return new Lincoln({
+      ...this.options,
+      ...{ namespace: this.tag(tag) }
+    })
   }
 
   public info(...parameters: any[]): void {
