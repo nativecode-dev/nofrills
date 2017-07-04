@@ -3,6 +3,9 @@ export const Is: any = {
     return (value instanceof Array)
       && Is.string(value) === false
   },
+  boolean: (value: any): boolean => {
+    return (typeof value === 'boolean')
+  },
   date: (value: any): boolean => {
     return value instanceof Date
   },

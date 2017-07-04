@@ -65,4 +65,26 @@ describe('when using Walk', () => {
       })
     })
   })
+
+  describe('to walk other types', () => {
+    it('should not walk array', () => {
+      expect(Walk(context.array)).to.deep.equal(context.expected.array)
+    })
+    
+    it('should not walk boolean', () => {
+      expect(Walk(context.boolean)).to.equal(context.expected.boolean)
+    })
+
+    it('should not walk number', () => {
+      expect(Walk(context.number)).to.equal(context.expected.number)
+    })
+
+    it('should not walk object', () => {
+      expect(Walk(context.object)).to.deep.equal(context.expected.object)
+    })
+    
+    it('should not walk string', () => {
+      expect(Walk(context.string)).to.equal(context.expected.string)
+    })
+  })
 })
