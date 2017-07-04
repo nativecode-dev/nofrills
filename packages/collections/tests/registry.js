@@ -23,4 +23,29 @@ describe('when using Registry', () => {
     registry.register(KEY, 'test')
     expect(registry.resolve(KEY)).to.equal(VALUE)
   })
+
+  it('should clear registry', () => {
+    const registry = new Registry()
+    registry.register(KEY, VALUE)
+    registry.clear()
+    expect(registry.resolve(KEY)).to.be.undefined
+  })
+
+  it('should unregister known key', () => {
+    const registry = new Registry()
+    registry.register(KEY, VALUE)
+    registry.unregister(KEY)
+    expect(registry.resolve(KEY)).to.be.undefined
+  })
+
+  it('should do nothing when unregistering unknown key', () => {
+    const registry = new Registry()
+    registry.unregister(KEY, VALUE)
+    expect(registry.resolve(KEY)).to.be.undefined
+  })
+
+  it('should resolve nothing when resolving unknown key', () => {
+    const registry = new Registry()
+    expect(registry.resolve(KEY)).to.be.undefined
+  })
 })
