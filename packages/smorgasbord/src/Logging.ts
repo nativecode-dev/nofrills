@@ -1,5 +1,22 @@
 export { Lincoln } from '@nofrills/lincoln'
 
-import { Lincoln } from '@nofrills/lincoln'
+import { Debug, Interceptor, Lincoln, Log, Options } from '@nofrills/lincoln'
 
-export const Logger: Lincoln = new Lincoln('nativecode:smorgasbord')
+const logger = console.log
+
+const QuoteStrings: Interceptor = (log: Log) => {
+  log.parameters = log.parameters.map((parameter: any) => {
+    if (typeof parameter === 'string' && parameter[0] !== '"') {
+      return `"${parameter}"`
+    }
+    return parameter
+  })
+  return log
+}
+
+const options: Options = {
+  interceptors: [QuoteStrings, Debug],
+  namespace: 'nativecode:smorgasbord'
+}
+
+export const Logger: Lincoln = new Lincoln(options)
