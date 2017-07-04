@@ -11,7 +11,7 @@
     "url": "https://github.com/nativecode-dev/nofrills-smorgasbord/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^0.7.0",
+    "@nofrills/collections": "^0.7.3",
     "@nofrills/lincoln": "^0.6.2"
   },
   "devDependencies": {
