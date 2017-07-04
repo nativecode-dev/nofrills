@@ -35,7 +35,7 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "test": "cross-env DEBUG=nativecode:* nyc mocha tests/",
+    "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
