@@ -1,5 +1,5 @@
+import { Is } from './Is'
 import { Lincoln, Logger } from './Logging'
-import { Is } from './Types'
 
 const logger: Lincoln = Logger.extend('walk')
 

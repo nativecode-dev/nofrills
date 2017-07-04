@@ -33,5 +33,15 @@ describe('when using "Is" functions', () => {
       const num = '123'
       expect(Is.number(num)).to.be.false
     })
+
+    it('should validate arrayOf type', () => {
+      const array = [1, 2, 3, 4, 5]
+      expect(Is.arrayOf(array, 'number')).to.be.true
+    })
+
+    it('should validate arrayOf are not expected type', () => {
+      const array = [1, 2, 3, 4, '5']
+      expect(Is.arrayOf(array, 'number')).to.be.false
+    })
   })
 })
