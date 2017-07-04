@@ -91,6 +91,7 @@ const Handler = (value, options, scrubs) => {
 
 R.register('string', Handler)
 ```
+
 # License
 
 Copyright 2017 NativeCode Development <support@nativecode.com>

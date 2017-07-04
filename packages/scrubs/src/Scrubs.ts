@@ -35,9 +35,9 @@ export class Scrubs {
     return this
   }
 
-  public get<T>(type: string): Array<Scrubber<T>> | undefined {
+  public get<T>(type: string): Array<Scrubber<T>> {
     this.options.log.debug('get', type)
-    return this.registry.resolve(type)
+    return this.registry.resolve(type) || []
   }
 
   public register<T>(type: string, scrubber: Scrubber<T>): Scrubs {
