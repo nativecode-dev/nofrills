@@ -1,25 +1,22 @@
 language: node_js
-
 node_js:
-  - node
-  - '6'
-
+- node
+- '6'
 os:
-  - linux
-
+- linux
 after_success: npm run coveralls
-
 jobs:
   include:
+    matrix:
     - stage: npm release
-      node_js: "6"
+      node_js: '6'
       before_deploy: npm run build
       script: echo "Deploying to npm ..."
       deploy:
         provider: npm
         email: reginfo@nativecode.com
         api_key:
-          secure: cTvG4d9H2vJ4FDZhUNRsZh8ViGG3OR8Y1XIKmiUvVgU7SAHidEU8NIv/1owRmwfwQZ5dx0++qNxPOA/OySXCGC46ipaW2AxytTfho+q9DnBTaelD616cFgXvyWDB2oL4l16KZlsRIsYGUGk7byd8ZA2rjLM+ZeHzsv79zj9qW5FPks99Spu2rkKKaaZn0FhaChV2MFIaiTaiT/z+5/lySHFW9g6pfOPt7YDehimgK2PgxccbJlqmRi9I4y9KXSMpwDzn5yjufPk3b3oudvLI/4llZhFkaHyouxupvonqR3c4jgOBZLIi2KYqwmCnl1FKrCpQZi4BFg51Tjt8SsMwSJd7J6aggEh5N9TKoGOpDojRIZSQ+eMoX3WpTDrm5lTnxmWXWOp+8KLeO8v6pwAqBfWjV2JOPtj77vrNMM5dJmzvcc0pdzKTWFSmIO7gBiJIjAfMpVfKqribZzQj0OyMCHVxlgog3ApZfU21z/UWymudjeKACvFclJyB0yODlJY+hlkWmUzKPVeinlQGVQbWJPzgycuqyYxHPgJuDSDtRInZamsHv7jO+XJxD1seY35wC8OFB26cIORvjtx4e7idNUs7jA3sNXCpZlthAFPD+n9Q/3rUbESs4mp9Ecl/rXuxP0TZnb3RIJOdeMh/TGPe54zTWmp0z+dKPbGtbtnRldI=
+          secure: amLr8YoKQDoAS6f1U+hRkDdJm+Y6e9AgrUqACRb2JFUP0HXGaLz/ZcH11BH5D+Xj/7zC8zkEOh+wMkiiGow7wSFOX8PYwbWqMOXmTZ7mEW5Jm55yC8oUw8pVcslyAJpfqufF5/f7jd2R2Az9CrUZO3fTrtaSXz5b6EVHgy/g2Hho09fEBsMKrMOwerUPYrbdEbiuyYD6gl7q78eImv4WFPsbg+ql2CEL4EfZZkY5eno7P0+NwGiHhI1SljMyw2Jn8WirUALA2eckfY+dYIpZd1jnTyPlGoVKGACOTQ/8mnWd4e0B1uZkoY8UWhkiN2N7ddPbsdnw4Nih/i/LtQsS1CZCP5+iddy+G62VnOjngL0u/5rO9EizzLEMf/6xi1gZfkbUaX0o6IO56gb7e0P4YPHhY5gRXDpSZPjmp1yOE0WQ3QYlhyt45xSeOFxXc/w+TphZsEHbJB/FXYsxogPWufa9gHsp1pX4i8JjNegmki9g5Z/FzrK1gkt70GKmiOIZR1f4D8dgsPyzVRVyntzRRMVxcGkAmCcjz5bYtPgRkIISisOb6i64DrLdEKMZ1XWLKfWRPNiQjW8tphXBiq4uX9KkWLrCeJmYKSfpDSpKMEcc2cQqaAM0k9h2SRuMltcCZ2rkHCPoqZPGZ9zNwtCOYHggTklAyxRXb9a0YYpqtTk=
         on:
           branch: master
         skip_cleanup: true
