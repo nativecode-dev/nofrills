@@ -1,4 +1,5 @@
-import { Is } from './Is'
+import { Is } from '@nofrills/types'
+
 import { Lincoln, Logger } from './Logging'
 
 const logger: Lincoln = Logger.extend('walk')

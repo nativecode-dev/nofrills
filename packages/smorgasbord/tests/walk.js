@@ -1,7 +1,8 @@
 const expect = require('chai').expect
 
+const Is = require('@nofrills/types').Is
+
 const Dates = require('../lib').Dates
-const Is = require('../lib').Is
 const Walk = require('../lib').Walk
 const WalkType = require('../lib').WalkType
 
