@@ -60,6 +60,6 @@ export class TypeParser {
     if (validator.isNumeric(value)) {
       return Number(value)
     }
-    return value
+    throw new TypeError(`${value} is not a supported deserialization type.`)
   }
 }

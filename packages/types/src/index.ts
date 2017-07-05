@@ -96,14 +96,13 @@ Registry.register({
 
     if (valid === false && props && props.required) {
       return false
+    } else if (value) {
+      if (props && props.max && value.length > props.max) {
+        return false
+      } else if (props && props.min && value.length < props.min) {
+        return false
+      }
     }
-
-    if (props && props.max && value.length > props.max) {
-      return false
-    } else if (props && props.min && value.length < props.min) {
-      return false
-    }
-
     return valid
   },
 })

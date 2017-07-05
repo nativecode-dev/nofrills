@@ -4,6 +4,10 @@ const types = require('../lib')
 describe('when using type parser', () => {
   const parser = types.TypeParser
 
+  it('should throw error when deserializing unsupported types', () => {
+    expect(() => parser.deserialize('string:required=yes')).to.throw(TypeError)
+  })
+
   describe('parsing type strings', () => {
     it('should resolve type', () => {
       const typedef = parser.deserialize('string')
