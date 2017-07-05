@@ -1,20 +1,21 @@
-import * as collections from '@nofrills/collections'
-
-import { merge } from 'lodash'
+import { Registry as RegistryType } from '@nofrills/collections'
 
 import { Type, TypeProperties } from './Type'
+import { TypeParser } from './TypeParser'
 
-export interface ITypeRegistry {
-  register(type: Type): ITypeRegistry
-  resolve(name: string): Type
-  validate(value: any, type: string): boolean
+const Any: Type = {
+  type: 'any',
+  typebase: 'object',
+  validator: (value: any) => true
 }
 
-class TypeRegistry implements ITypeRegistry {
-  private readonly registry: collections.Registry<Type>
+const BaseTypes: string[] = ['Array', 'Boolean', 'Date', 'Error', 'Number', 'Object', 'String']
+
+export class TypeRegistry {
+  private readonly registry: RegistryType<Type>
 
   constructor() {
-    this.registry = new collections.Registry<Type>()
+    this.registry = new RegistryType<Type>()
   }
 
   public register(type: Type): TypeRegistry {
@@ -27,26 +28,13 @@ class TypeRegistry implements ITypeRegistry {
     if (type) {
       return type
     }
-    throw new TypeError(`Could not find type named '${name}'.`)
+    return Any
   }
 
   public validate(value: any, type: string): boolean {
     const typedef = Registry.resolve(type)
     return typedef.validator(value)
   }
-
-  private properties(typedef: Type): TypeProperties {
-    const basetypes: string[] = ['Array', 'Boolean', 'Date', 'Error', 'Number', 'Object', 'String']
-    const properties: TypeProperties[] = []
-    let current: Type = typedef
-    while (basetypes.indexOf(current.typebase) <= 0) {
-      if (current.properties) {
-        properties.push(current.properties)
-      }
-      current = Registry.resolve(current.typebase)
-    }
-    return merge({}, ...properties)
-  }
 }
 
-export const Registry: ITypeRegistry = new TypeRegistry()
+export const Registry: TypeRegistry = new TypeRegistry()

@@ -1,7 +1,5 @@
 import * as validator from 'validator'
 
-import { merge } from 'lodash'
-
 import { Type, TypeProperties } from './Type'
 import { Registry } from './TypeRegistry'
 
@@ -15,8 +13,10 @@ export class TypeParser {
     if (type.properties) {
       const keys: string[] = Object.keys(type.properties)
       const props = type.properties
-      if (props.default && full === false) {
-        return `${type.type}:${props[props.default]}`
+      if (type.default && full === false) {
+        return `${type.type}:${props[type.default]}`
+      } else if (!type.default && full === false) {
+        return type.type
       }
       const properties: string[] = keys.map<string>((key: string): string => {
         const value: any = props[key]
@@ -31,8 +31,8 @@ export class TypeParser {
     const parts: string[] = typestr.split(':')
     const type: Type = Registry.resolve(parts[0])
     if (parts.length === 2) {
-      const properties = TypeParser.properties(type, parts[1])
-      return merge({}, type, { properties })
+      const properties = { properties: TypeParser.properties(type, parts[1]) }
+      return { ...type, ...properties }
     }
     return type
   }
@@ -43,8 +43,8 @@ export class TypeParser {
     for (const setter of setters) {
       const parts: string[] = setter.split('=')
       const name = parts[0]
-      if (parts.length === 1 && type.properties && type.properties.default) {
-        props[type.properties.default] = TypeParser.typed(parts[0])
+      if (parts.length === 1 && type.default) {
+        props[type.default] = TypeParser.typed(parts[0])
       } else {
         const value = TypeParser.typed(parts[1])
         props[name] = value

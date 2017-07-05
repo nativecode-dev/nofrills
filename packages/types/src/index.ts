@@ -1,3 +1,4 @@
+export * from './Is'
 export * from './Type'
 export * from './TypeParser'
 export * from './TypeRegistry'
@@ -5,36 +6,42 @@ export * from './TypeRegistry'
 import * as validator from 'validator'
 import * as zipcodes from 'zipcodes-regex'
 
+import { Is } from './Is'
 import { Type, TypeProperties } from './Type'
 import { Registry } from './TypeRegistry'
 
+const phone = (): RegExp => {
+  return /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
+}
+
 Registry.register({
+  default: 'max',
   type: 'array',
   typebase: 'Array',
-  validator: (value: any) => value instanceof Array,
+  validator: (value: any) => Is.array(value),
 })
 
 Registry.register({
   type: 'boolean',
   typebase: 'Boolean',
-  validator: (value: any) => typeof value === 'boolean',
+  validator: (value: any) => Is.boolean(value),
 })
 
 Registry.register({
   type: 'date',
   typebase: 'Date',
-  validator: (value: any) => value instanceof Date,
+  validator: (value: any) => Is.date(value),
 })
 
 Registry.register({
+  default: 'max',
   properties: {
-    default: 'max',
     max: 254,
   },
   type: 'email',
   typebase: 'string',
   validator: (value: any) => {
-    if (typeof value === 'string') {
+    if (Is.string(value)) {
       return validator.isEmail(value)
     }
     return false
@@ -44,32 +51,33 @@ Registry.register({
 Registry.register({
   type: 'error',
   typebase: 'Error',
-  validator: (value: any) => value instanceof Error,
+  validator: (value: any) => Is.error(value),
 })
 
 Registry.register({
+  default: 'max',
   type: 'number',
   typebase: 'Number',
-  validator: (value: any) => typeof value === 'number',
+  validator: (value: any) => Is.number(value),
 })
 
 Registry.register({
   type: 'object',
   typebase: 'Object',
-  validator: (value: any) => value instanceof Object,
+  validator: (value: any) => Is.object(value),
 })
 
 Registry.register({
   type: 'phone',
   typebase: 'string',
-  validator: (value: any) => true,
+  validator: (value: any) => phone().test(value),
 })
 
 Registry.register({
   properties: {
     max: 16,
     min: 5,
-    nullable: true,
+    required: true,
   },
   type: 'postalcode',
   typebase: 'string',
@@ -80,21 +88,22 @@ Registry.register({
 })
 
 Registry.register({
+  default: 'max',
   type: 'string',
   typebase: 'String',
   validator: (value: any, props?: TypeProperties) => {
-    const valid: boolean = (typeof value === 'string')
-    if (valid) {
-      if (props && props.max && value.length > props.max) {
-        return false
-      } else if (props && props.min && value.length < props.min) {
-        return false
-      }
+    const valid: boolean = Is.string(value)
+
+    if (valid === false && props && props.required) {
+      return false
     }
 
-    if (props && props.nullable && value === null) {
-      return true
+    if (props && props.max && value.length > props.max) {
+      return false
+    } else if (props && props.min && value.length < props.min) {
+      return false
     }
+
     return valid
   },
 })
@@ -102,5 +111,5 @@ Registry.register({
 Registry.register({
   type: 'timestamp',
   typebase: 'number',
-  validator: (value: any) => typeof value === 'number',
+  validator: (value: any) => Is.number(value),
 })

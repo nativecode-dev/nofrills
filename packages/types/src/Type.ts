@@ -1,4 +1,5 @@
 export interface Type {
+  default?: string
   properties?: TypeProperties,
   type: string
   typebase: string
@@ -7,11 +8,9 @@ export interface Type {
 
 export interface TypeProperties {
   [key: string]: any
-  default?: string
   max?: number
   min?: number
-  nullable?: boolean
-  regex?: string
+  required?: boolean
 }
 
 export type TypeValidator = (value: any, ...args: any[]) => boolean
