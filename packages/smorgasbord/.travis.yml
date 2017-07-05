@@ -1,23 +1,20 @@
 language: node_js
-
 node_js:
   - node
   - '6'
-
 os:
   - linux
-
 after_success: npm run coveralls
-
 jobs:
   include:
-  - stage: npm release
-    node_js: '6'
-    deploy:
-      provider: npm
-      email: reginfo@nativecode.com
-      api_key:
-        secure: ILvTDBCtROAJLnzlzBS795Kg250g6iXYIN1ZEj2tG10D5sR2MBWlfKrZmseYr+NDbhFL3YvouLReZHdZQYbGx45276lzHwgMtcTMLIsBBK2wcJC320KjcdNcCHMtjMgbELVUOZ25B6ckHhWThrRY6Ux4KcytzPxJAez+ZgcHj1CMOtoUYD52+1tZkqHVHyOQRey79bSMPqO9vNijX7kj7oIaMJQW/G3qN76bCfRVVrDywPXNlu4U9ekK4OL/NjFoAtDsVsydNoIGok3iOZ0YT1JGUYdVw0blJMF4+RFASTa9LGTPTMzZYyK/VL7ZbOc80024w+WN0bK0/T19lPk9AwNkzpGPVLnDBVdQ/KA+NcQVsWqyFsev17zE16xHnATHtNp2ApE4DgSTJP6Kz40qNZ4YFuSbtXYCZtlo6a8xxe1zZcqXxbDO8KynTqZG4gJ6j08vJHxuC/lFix3za0zR1AQ46P9ngG9ooeVYa0jFTFFOKfKOMpKr5kYX3xR0VawLnC97NmkcL9e08OABKQz1dlD7QEjjeTaKVnpUjSZ/FOQ7IV+nIT2xiM3D9Mg2ZeWPRFYh9TMX9BX5dFeKtWa/1RRq+WeNUXG1dU09Ka/XrjBmwmWYl3aQEwx6fGQ1JH9az5X6l3FKk1WTA5f2tj7OGf9yH+6pUyY0t6FXohQarg0=
-      on:
-        branch: master
-      skip_cleanup: true
+    - stage: npm release
+      node_js: '6'
+      deploy:
+        provider: npm
+        email: reginfo@nativecode.com
+        api_key:
+          secure: >-
+            ILvTDBCtROAJLnzlzBS795Kg250g6iXYIN1ZEj2tG10D5sR2MBWlfKrZmseYr+NDbhFL3YvouLReZHdZQYbGx45276lzHwgMtcTMLIsBBK2wcJC320KjcdNcCHMtjMgbELVUOZ25B6ckHhWThrRY6Ux4KcytzPxJAez+ZgcHj1CMOtoUYD52+1tZkqHVHyOQRey79bSMPqO9vNijX7kj7oIaMJQW/G3qN76bCfRVVrDywPXNlu4U9ekK4OL/NjFoAtDsVsydNoIGok3iOZ0YT1JGUYdVw0blJMF4+RFASTa9LGTPTMzZYyK/VL7ZbOc80024w+WN0bK0/T19lPk9AwNkzpGPVLnDBVdQ/KA+NcQVsWqyFsev17zE16xHnATHtNp2ApE4DgSTJP6Kz40qNZ4YFuSbtXYCZtlo6a8xxe1zZcqXxbDO8KynTqZG4gJ6j08vJHxuC/lFix3za0zR1AQ46P9ngG9ooeVYa0jFTFFOKfKOMpKr5kYX3xR0VawLnC97NmkcL9e08OABKQz1dlD7QEjjeTaKVnpUjSZ/FOQ7IV+nIT2xiM3D9Mg2ZeWPRFYh9TMX9BX5dFeKtWa/1RRq+WeNUXG1dU09Ka/XrjBmwmWYl3aQEwx6fGQ1JH9az5X6l3FKk1WTA5f2tj7OGf9yH+6pUyY0t6FXohQarg0=
+        'on':
+          branch: master
+        skip_cleanup: true
