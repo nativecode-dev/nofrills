@@ -48,4 +48,18 @@ describe('when using Registry', () => {
     const registry = new Registry()
     expect(registry.resolve(KEY)).to.be.undefined
   })
+
+  it('should return keys as iterable', () => {
+    const registry = new Registry()
+    registry.register('first', 0)
+    registry.register('last', 1)
+    expect(Array.from(registry.keys)).to.deep.equal(['first', 'last'])
+  })
+
+  it('should return values as iterable', () => {
+    const registry = new Registry()
+    registry.register('first', 0)
+    registry.register('last', 1)
+    expect(Array.from(registry.values)).to.deep.equal([0, 1])
+  })
 })

@@ -6,11 +6,13 @@
   "main": "./lib/index.js",
   "name": "@nofrills/collections",
   "types": "./lib/index.d.ts",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "chai-iterator": "^1.1.4"
+  },
   "devDependencies": {
     "@types/chai": "^4.0.1",
     "@types/mocha": "^2.2.41",
