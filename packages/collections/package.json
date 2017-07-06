@@ -1,6 +1,6 @@
 {
   "author": "support@nativecode.com",
-  "description": "Set of useful collection types.",
+  "description": "Set of useful (maybe) collection types.",
   "homepage": "https://github.com/nativecode-dev/nofrills-collections#readme",
   "license": "MIT",
   "main": "./lib/index.js",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nativecode-dev/nofrills-collections.git"
+    "url": "https://github.com/nativecode-dev/nofrills-collections.git"
   },
   "scripts": {
     "build": "tsc --project .",
@@ -34,7 +34,7 @@
     "lint": "tslint src/",
     "start": "node lib/",
     "prestart": "npm run build",
-    "test": "nyc mocha tests/",
+    "test": "nyc mocha --recursive tests/",
     "pretest": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
