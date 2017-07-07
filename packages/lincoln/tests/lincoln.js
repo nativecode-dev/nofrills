@@ -9,6 +9,11 @@ describe('when using Lincoln', () => {
   const Lincoln = require('../lib').Lincoln
 
   describe('to log messages', () => {
+    it('should create Lincoln with no options', () => {
+      const sut = new Lincoln()
+      expect(sut).to.be.instanceOf(Lincoln)
+    })
+
     it('should create log object', (done) => {
       const options = context.options((log) => {
         expect(log.namespace).to.equal(`${namespace}:debug`)

@@ -1,15 +1,15 @@
 import * as events from 'events'
 import * as uuid from 'uuidjs'
 
-import { Dictionary } from '@nofrills/collections'
+import { Dictionary, Registry } from '@nofrills/collections'
+
 import { Log } from './Log'
 import { Options } from './Options'
-import { FilterRegistry, InterceptorRegistry } from './Registrations'
 import { Filter, Interceptor } from './Types'
 
 const defaults: Options = {
-  filters: FilterRegistry,
-  interceptors: InterceptorRegistry,
+  filters: new Registry<Filter>(),
+  interceptors: new Registry<Interceptor>(),
   namespace: 'app',
   separator: ':'
 }
@@ -75,7 +75,7 @@ export class Lincoln extends events.EventEmitter {
     const log: Log = {
       id: uuid.generate(),
       namespace: this.tag(tag),
-      parameters: parameters || [],
+      parameters,
       timestamp: Date.now(),
     }
 
@@ -87,7 +87,7 @@ export class Lincoln extends events.EventEmitter {
     if (filters.length === 0 || filtered === false) {
       const interceptors = Array.from(this.options.interceptors.values)
 
-      const logs = interceptors.map((interceptor: Interceptor) => interceptor ? interceptor(log) : log)
+      const logs: Log[] = interceptors.map((interceptor: Interceptor) => interceptor(log))
       this.emit(Lincoln.events.log, logs[logs.length - 1])
     }
   }
