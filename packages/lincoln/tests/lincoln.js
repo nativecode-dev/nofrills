@@ -108,14 +108,14 @@ describe('when using Lincoln', () => {
   })
 
   describe('to filter messages', () => {
-    const filter = (log) => log.namespace.indexOf('debug') >= 0
+    const filter = (log) => log.namespace.indexOf('debug') < 0
     it('should filter message', () => {
       let calls = 0
       const options = context.options((log) => {
         calls++
         expect(calls).to.equal(1)
       })
-      options.filters = [filter]
+      options.filters.register('test', filter)
       const sut = new Lincoln(options)
       sut.debug(message)
       sut.warn(message)

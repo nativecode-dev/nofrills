@@ -2,14 +2,14 @@ import * as events from 'events'
 import * as uuid from 'uuidjs'
 
 import { Dictionary } from '@nofrills/collections'
-import { Debug } from './Interceptors'
 import { Log } from './Log'
 import { Options } from './Options'
+import { FilterRegistry, InterceptorRegistry } from './Registrations'
 import { Filter, Interceptor } from './Types'
 
 const defaults: Options = {
-  filters: [],
-  interceptors: [],
+  filters: FilterRegistry,
+  interceptors: InterceptorRegistry,
   namespace: 'app',
   separator: ':'
 }
@@ -34,12 +34,9 @@ export class Lincoln extends events.EventEmitter {
     super()
     this.id = uuid.generate()
     if (options && typeof options === 'string') {
-      options = {
-        interceptors: [Debug],
-        namespace: options,
-      }
+      options = { namespace: options }
     }
-    const opts: any = options || {}
+    const opts: any = options || defaults
     this.options = { ...defaults, ...opts }
   }
 
@@ -82,23 +79,16 @@ export class Lincoln extends events.EventEmitter {
       timestamp: Date.now(),
     }
 
-    const reducer = (previous: boolean, current: boolean) => previous || current
+    const logger = console.log
 
-    if (this.options.filters) {
-      let filtered: boolean = false
+    const filters = Array.from(this.options.filters.values)
+    const filtered: boolean = filters.every((filter: Filter) => filter(log))
 
-      if (this.options.filters.length) {
-        const map = this.options.filters.map((filter: Filter) => filter(log))
+    if (filters.length === 0 || filtered === false) {
+      const interceptors = Array.from(this.options.interceptors.values)
 
-        filtered = map.reduce(reducer, false)
-      }
-
-      if (filtered === false) {
-        if (this.options.interceptors) {
-          this.options.interceptors.forEach((interceptor: Interceptor) => interceptor(log))
-        }
-        this.emit(Lincoln.events.log, log)
-      }
+      const logs = interceptors.map((interceptor: Interceptor) => interceptor ? interceptor(log) : log)
+      this.emit(Lincoln.events.log, logs[logs.length - 1])
     }
   }
 }

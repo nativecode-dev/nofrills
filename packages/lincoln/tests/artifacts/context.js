@@ -1,3 +1,5 @@
+const collections = require('@nofrills/collections')
+
 const lincoln = require('../../lib')
 
 const EXTENSION = 'extension'
@@ -9,9 +11,12 @@ module.exports = {
   NAMESPACE,
   MESSAGE,
   options: (interceptor) => {
-    return {
-      interceptors: [lincoln.Debug, interceptor],
+    const options = {
+      filters: new collections.Registry(),
+      interceptors: new collections.Registry(),
       namespace: NAMESPACE
     }
+    options.interceptors.register('test', interceptor)
+    return options
   }
 }
