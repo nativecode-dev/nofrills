@@ -5,7 +5,16 @@ describe('when using debug lincoln interceptor', () => {
   const NAMESPACE = 'nativecode:test'
 
   it('should create instance with default options', () => {
-    const logger = debug.CreateLogger(NAMESPACE)
-    logger.debug('Hello, %s!', 'World')
+    expect(() => {
+      const logger = debug.CreateLogger(NAMESPACE)
+      logger.debug('Hello, %s!', 'World')
+    }).to.not.throw()
+  })
+
+  it('should log parameterless calls', () => {
+    expect(() => {
+      const logger = debug.CreateLogger(NAMESPACE)
+      logger.debug()
+    }).to.not.throw()
   })
 })
