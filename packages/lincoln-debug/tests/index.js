@@ -11,6 +11,16 @@ describe('when using debug lincoln interceptor', () => {
     }).to.not.throw()
   })
 
+  it('should create instance with options', () => {
+    expect(() => {
+      const options = {
+        namespace: NAMESPACE,
+      }
+      const logger = debug.CreateLogger(options)
+      logger.debug('Hello, %s!', 'World')
+    }).to.not.throw()
+  })
+
   it('should log parameterless calls', () => {
     expect(() => {
       const logger = debug.CreateLogger(NAMESPACE)

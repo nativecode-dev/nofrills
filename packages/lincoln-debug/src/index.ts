@@ -1,7 +1,8 @@
+export { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
+
 import * as debug from 'debug'
 
-import { Registry } from '@nofrills/collections'
-import { Filter, Interceptor, Lincoln, Log, Options } from '@nofrills/lincoln'
+import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 
 export const DebugInterceptor: Interceptor = (log: Log): Log => {
   const logger: debug.IDebugger = debug(log.namespace)
@@ -15,8 +16,8 @@ export const DebugInterceptor: Interceptor = (log: Log): Log => {
 
 export const CreateOptions = (namespace: string): Options => {
   const options: Options = {
-    filters: new Registry<Filter>(),
-    interceptors: new Registry<Interceptor>(),
+    filters: new LincolnRegistry<Filter>(),
+    interceptors: new LincolnRegistry<Interceptor>(),
     namespace,
     separator: ':',
   }
@@ -26,6 +27,9 @@ export const CreateOptions = (namespace: string): Options => {
   return options
 }
 
-export const CreateLogger = (namespace: string): Lincoln => {
-  return new Lincoln(CreateOptions(namespace))
+export const CreateLogger = (options: string | Options): Lincoln => {
+  if (typeof options === 'string') {
+    return new Lincoln(CreateOptions(options))
+  }
+  return new Lincoln(options)
 }
