@@ -2,8 +2,19 @@ const expect = require('chai').expect
 const types = require('../lib')
 
 describe('when using types library for validation', () => {
-  const LongEmailString = [].fill('a', 1, 1024).join('')
   const validate = types.Registry.validate
+
+  types.Registry.register({
+    properties: {
+      max: 5,
+      min: 2,
+    },
+    type: 'test',
+    typebase: 'string',
+    validator: (value) => {
+      return types.Registry.resolve('string').validator(value)
+    }
+  })
 
   describe('to validate primitive values', () => {
     it('should validate value is a any', () => {
@@ -122,7 +133,8 @@ describe('when using types library for validation', () => {
     })
 
     it('should validate string value length is invalid', () => {
-      expect(validate(LongEmailString, 'email')).to.be.false
+      expect(validate('a', 'test')).to.be.false
+      expect(validate('aaaaaa', 'test')).to.be.false
     })
   })
 
