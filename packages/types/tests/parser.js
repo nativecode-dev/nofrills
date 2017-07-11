@@ -36,49 +36,49 @@ describe('when using type parser', () => {
 
   describe('serialization', () => {
     it('should serialize boolean type', () => {
-      const typedef = types.Registry.resolve('boolean')
+      const typedef = types.Types.resolve('boolean')
       const serialized = parser.serialize(typedef)
       expect(serialized).to.equal('boolean')
     })
 
     it('should serialize complete boolean type', () => {
-      const typedef = types.Registry.resolve('boolean')
+      const typedef = types.Types.resolve('boolean')
       const serialized = parser.serialize(typedef, true)
       expect(serialized).to.equal('boolean')
     })
 
     it('should serialize email type', () => {
-      const typedef = types.Registry.resolve('email')
+      const typedef = types.Types.resolve('email')
       const serialized = parser.serialize(typedef)
       expect(serialized).to.equal('email:254')
     })
 
     it('should serialize complete email type', () => {
-      const typedef = types.Registry.resolve('email')
+      const typedef = types.Types.resolve('email')
       const serialized = parser.serialize(typedef, true)
       expect(serialized).to.equal('email:max=254')
     })
 
     it('should serialize postalcode type', () => {
-      const typedef = types.Registry.resolve('postalcode')
+      const typedef = types.Types.resolve('postalcode')
       const serialized = parser.serialize(typedef)
       expect(serialized).to.equal('postalcode')
     })
 
     it('should serialize complete postalcode type', () => {
-      const typedef = types.Registry.resolve('postalcode')
+      const typedef = types.Types.resolve('postalcode')
       const serialized = parser.serialize(typedef, true)
       expect(serialized).to.equal('postalcode:max=16,min=5,required=true')
     })
 
     it('should serialize string type', () => {
-      const typedef = types.Registry.resolve('string')
+      const typedef = types.Types.resolve('string')
       const serialized = parser.serialize(typedef)
       expect(serialized).to.equal('string')
     })
 
     it('should serialize complete string type', () => {
-      const typedef = types.Registry.resolve('string')
+      const typedef = types.Types.resolve('string')
       const serialized = parser.serialize(typedef, true)
       expect(serialized).to.equal('string')
     })

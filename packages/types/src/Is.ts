@@ -1,6 +1,8 @@
-export type IsType = (value: any) => boolean
+export interface IsType {
+  [name: string]: (value: any, type?: string) => boolean
+}
 
-export const Is: { [key: string]: any } = {
+export const Is: IsType = {
   any: (value: any): boolean => true,
   array: (value: any): boolean => {
     return (value instanceof Array)
@@ -19,6 +21,9 @@ export const Is: { [key: string]: any } = {
   },
   error: (value: any): boolean => {
     return value instanceof Error
+  },
+  function: (value: any): boolean => {
+    return value instanceof Function
   },
   number: (value: any): boolean => {
     return typeof value === 'number'

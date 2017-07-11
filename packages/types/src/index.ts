@@ -1,39 +1,39 @@
 export * from './Is'
 export * from './Type'
 export * from './TypeParser'
-export * from './TypeRegistry'
+export * from './Types'
 
 import * as validator from 'validator'
 import * as zipcodes from 'zipcodes-regex'
 
 import { Is } from './Is'
-import { Type, TypeProperties } from './Type'
-import { Registry } from './TypeRegistry'
+import { Types } from './Type'
+import { Type, TypeProperties } from './Types'
 
 const phone = (): RegExp => {
   return /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
 }
 
-Registry.register({
+Types.register({
   default: 'max',
   type: 'array',
   typebase: 'Array',
   validator: (value: any) => Is.array(value),
 })
 
-Registry.register({
+Types.register({
   type: 'boolean',
   typebase: 'Boolean',
   validator: (value: any) => Is.boolean(value),
 })
 
-Registry.register({
+Types.register({
   type: 'date',
   typebase: 'Date',
   validator: (value: any) => Is.date(value),
 })
 
-Registry.register({
+Types.register({
   default: 'max',
   properties: {
     max: 254,
@@ -48,32 +48,32 @@ Registry.register({
   },
 })
 
-Registry.register({
+Types.register({
   type: 'error',
   typebase: 'Error',
   validator: (value: any) => Is.error(value),
 })
 
-Registry.register({
+Types.register({
   default: 'max',
   type: 'number',
   typebase: 'Number',
   validator: (value: any) => Is.number(value),
 })
 
-Registry.register({
+Types.register({
   type: 'object',
   typebase: 'Object',
   validator: (value: any) => Is.object(value),
 })
 
-Registry.register({
+Types.register({
   type: 'phone',
   typebase: 'string',
   validator: (value: any) => phone().test(value),
 })
 
-Registry.register({
+Types.register({
   properties: {
     max: 16,
     min: 5,
@@ -91,7 +91,7 @@ Registry.register({
   },
 })
 
-Registry.register({
+Types.register({
   default: 'max',
   type: 'string',
   typebase: 'String',
@@ -111,7 +111,7 @@ Registry.register({
   },
 })
 
-Registry.register({
+Types.register({
   type: 'timestamp',
   typebase: 'number',
   validator: (value: any) => Is.number(value),

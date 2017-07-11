@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/types",
   "types": "./lib/index.d.ts",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-types/issues"
   },
@@ -39,6 +39,7 @@
     "pretest": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
-    "prepush": "npm run test"
+    "prepush": "npm run test",
+    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
   }
 }

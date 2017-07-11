@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const types = require('../lib')
 
 describe('when using types library for validation', () => {
-  const validate = types.Registry.validate
+  const validate = types.Types.validate
   const testtype = {
     properties: {
       max: 5,
@@ -12,10 +12,10 @@ describe('when using types library for validation', () => {
     type: 'test',
     typebase: 'string',
     validator: (value) => {
-      return types.Registry.resolve('string').validator(value, testtype.properties)
+      return types.Types.resolve('string').validator(value, testtype.properties)
     }
   }
-  types.Registry.register(testtype)
+  types.Types.register(testtype)
 
   describe('to validate primitive values', () => {
     it('should validate value is a any', () => {

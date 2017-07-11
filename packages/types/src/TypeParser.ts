@@ -1,7 +1,7 @@
 import * as validator from 'validator'
 
-import { Type, TypeProperties } from './Type'
-import { Registry } from './TypeRegistry'
+import { Types } from './Type'
+import { Type, TypeProperties } from './Types'
 
 export class TypeParser {
   public static deserialize(typestr: string): Type {
@@ -29,7 +29,7 @@ export class TypeParser {
 
   private static parse(typestr: string): Type {
     const parts: string[] = typestr.split(':')
-    const type: Type = Registry.resolve(parts[0])
+    const type: Type = Types.resolve(parts[0])
     if (parts.length === 2) {
       const properties = { properties: TypeParser.properties(type, parts[1]) }
       return { ...type, ...properties }
