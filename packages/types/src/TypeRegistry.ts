@@ -33,7 +33,7 @@ export class TypeRegistry {
 
   public validate(value: any, type: string): boolean {
     const typedef = Registry.resolve(type)
-    return typedef.validator(value)
+    return typedef.validator(value, typedef.properties)
   }
 }
 

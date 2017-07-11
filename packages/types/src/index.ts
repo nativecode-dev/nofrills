@@ -81,9 +81,13 @@ Registry.register({
   },
   type: 'postalcode',
   typebase: 'string',
-  validator: (value: any, country?: string) => {
-    const regex: RegExp = new RegExp(zipcodes[country || 'US'])
-    return regex.test(value)
+  validator: (value: any, props?: TypeProperties, country?: string) => {
+    if (Is.string(value)) {
+      const pattern: string = zipcodes[country || 'US']
+      const regex: RegExp = new RegExp(pattern)
+      return regex.test(value)
+    }
+    return false
   },
 })
 
