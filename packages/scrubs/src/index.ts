@@ -1,6 +1,7 @@
 export * from './Lincoln'
 export * from './Scrubs'
 
+import { Is } from '@nofrills/types'
 import { merge } from 'lodash'
 import { Registry, Scrubber, Scrubs, ScrubsOptions } from './Scrubs'
 
@@ -13,18 +14,22 @@ Registry.register<any>('object', (value: any, options: ScrubsOptions, instance: 
     Object.keys(object).forEach((key: string) => {
       if (options.properties.indexOf(key) >= 0) {
         object[key] = options.text
-      } else if (typeof object[key] === 'object') {
+      } else if (Is.array(object[key]) || Is.object(object[key])) {
         object[key] = walk(object[key])
-      } else if (typeof object[key] === 'string') {
+      } else if (Is.string(object[key])) {
         object[key] = instance.scrub<string>(object[key])
+      } else {
+        object[key] = value
       }
     })
     return object
   }
 
-  if (value instanceof Date) {
+  /* istanbul ignore next */
+  if (Is.date(value)) {
     return value
   }
+
   const clone: any = walk(merge({}, value))
   options.log.debug('ObjectScrubber', value, clone)
   return clone

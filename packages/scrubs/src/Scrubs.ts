@@ -1,7 +1,8 @@
-import { Registry as RegistryMap } from '@nofrills/collections'
-import { Lincoln } from '@nofrills/lincoln'
+import { RegistryMap } from '@nofrills/collections'
+import { Is, Types } from '@nofrills/types'
 import { merge } from 'lodash'
-import { Logger } from './Logging'
+
+import { Lincoln, Logger } from './Logging'
 
 export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
 export type Scrubbers = Array<Scrubber<any>>
@@ -21,53 +22,52 @@ const defaults: ScrubsOptions = {
 export class Scrubs {
   private readonly log: Lincoln
   private readonly options: ScrubsOptions
-  private readonly registry: RegistryMap<Scrubbers>
+  private readonly registry: RegistryMap<Scrubber<any>>
 
   constructor(options?: ScrubsOptions) {
     this.options = merge({}, options, defaults)
-    this.registry = new RegistryMap<Scrubbers>()
+    this.registry = new RegistryMap<Scrubber<any>>()
 
     this.log = this.options.log
   }
 
   public clear(type: string): Scrubs {
-    this.registry.register(type, [])
+    this.registry.reset(type)
     return this
   }
 
-  public get<T>(type: string): Array<Scrubber<T>> {
+  public get<T>(type: string): Scrubbers {
     this.options.log.debug('get', type)
-    return this.registry.resolve(type) || []
+    return this.registry.resolve(type)
   }
 
   public register<T>(type: string, scrubber: Scrubber<T>): Scrubs {
     this.options.log.debug('register', type)
-    let scrubbers = this.registry.resolve(type)
-    if (scrubbers === undefined) {
-      scrubbers = [scrubber]
-    } else {
-      scrubbers.push(scrubber)
-    }
-    this.registry.register(type, scrubbers)
+    this.registry.register(type, scrubber)
     return this
   }
 
   public scrub<T>(value: T, type?: string): T {
-    type = type || typeof value
-    this.options.log.debug('scrub', value, type)
-    let result: T = value
-    const scrubbers: Scrubbers | undefined = this.registry.resolve(type)
-    if (scrubbers) {
-      for (const scrubber of scrubbers) {
-        result = scrubber(result, this.options, this)
+    if (value) {
+      type = type || Types.from(value)
+      this.options.log.debug('scrub', value, type)
+      let result: T = value
+      const scrubbers: Scrubbers | undefined = this.registry.resolve(type)
+      /* istanbul ignore next */
+      if (scrubbers) {
+        for (const scrubber of scrubbers) {
+          result = scrubber(result, this.options, this)
+        }
       }
+      this.options.log.debug('scrub', value, result)
+      return result
     }
-    this.options.log.debug('scrub', value, result)
-    return result
+    return value
   }
 }
 
 export const Registry: Scrubs = new Scrubs()
+
 export const scrub = (value: any): any => {
   const result: any = Registry.scrub<any>(value)
   Logger.debug('scrub', value, result)

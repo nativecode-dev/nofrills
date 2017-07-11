@@ -5,6 +5,22 @@ describe('when using scrubs', () => {
   const root = require('./artifacts/data.json')
 
   describe('the "scrub" function', () => {
+    it('should echo null', () => {
+      const sut = scrubs.scrub(null)
+      expect(sut).to.be.null
+    })
+
+    it('should echo undefined', () => {
+      const sut = scrubs.scrub(undefined)
+      expect(sut).to.be.undefined
+    })
+
+    it('should echo array', () => {
+      const array = []
+      const sut = scrubs.scrub(array)
+      expect(sut).to.be.instanceOf(Array)
+    })
+
     it('should echo boolean', () => {
       const bool = true
       const sut = scrubs.scrub(bool)

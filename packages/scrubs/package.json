@@ -6,27 +6,27 @@
   "main": "./lib/index.js",
   "name": "@nofrills/scrubs",
   "types": "./lib/index.d.ts",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-scrubs/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^0.6.1",
-    "@nofrills/lincoln": "^0.6.2",
+    "@nofrills/collections": "^0.9.1",
+    "@nofrills/lincoln-debug": "^0.3.0",
+    "@nofrills/types": "^0.8.0",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "@nofrills/lincoln": "^0.6.2",
-    "@types/lodash": "^4.14.67",
-    "@types/node": "^8.0.2",
+    "@types/lodash": "^4.14.68",
+    "@types/node": "^8.0.10",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
-    "tslint": "^5.4.3",
-    "typescript": "^2.3.4"
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.1"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "pretest": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
-    "prepush": "npm run test"
+    "prepush": "npm run test",
+    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
   }
 }
