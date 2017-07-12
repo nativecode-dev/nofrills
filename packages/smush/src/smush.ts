@@ -20,28 +20,30 @@ export class Smush {
     this.log = Logger.extend('Smush')
   }
 
-  public clear(key: string): void {
-    this.log.debug('clear', key)
-    delete this.root[key]
-  }
-
   public json(key: string, filename: string, transform?: (object: any) => any): Promise<Smush> {
     return this.schema<any>(key, filename, transform ? transform : (obj: any) => obj)
       .then(() => this)
   }
 
   public string(key: string, value: string, transform?: (object: any) => any): Promise<Smush> {
-    return this.transform<any>(key, JSON.parse(value), transform ? transform : (obj: any) => obj)
-      .catch((error: Error) => { throw new SmushError(error) })
-      .then(() => this)
+    try {
+      const callback = transform ? transform : (obj: any) => obj
+      const json: string = JSON.parse(value)
+      return this.transform<any>(key, json, callback)
+        .catch((error: Error) => { throw new SmushError(error) })
+        .then(() => this)
+    } catch (error) {
+      return Promise.reject(new SmushError(error))
+    }
   }
 
   public schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
     const config: any = this.get(key)
+    const transformer = transform ? transform : (obj: T) => obj
 
     return this.reader(filename)
       .then((buffer: Buffer) => JSON.parse(buffer.toString('utf-8')))
-      .then((object: T) => this.transform<T>(key, object, transform))
+      .then((object: T) => this.transform<T>(key, object, transformer))
       .catch((error: Error) => { throw new SmushError(error) })
       .then(() => this)
   }
@@ -65,9 +67,9 @@ export class Smush {
     return key ? this.config<any>(key) : exported
   }
 
-  private transform<T>(key: string, object: T, transform?: (object: T) => T): Promise<T> {
+  private transform<T>(key: string, object: T, transform: (object: T) => T): Promise<T> {
     return Promise.resolve(object)
-      .tap((obj: T) => transform ? transform(obj) : obj)
+      .tap((obj: T) => transform(obj))
       .tap((obj: T) => this.set<T>(key, obj))
       .tap((obj: T) => this.log.info(obj))
   }

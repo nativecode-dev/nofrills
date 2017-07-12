@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const smush = require('../lib/smush')
+const smush = require('../lib')
 
 describe('smush', () => {
   let $S
@@ -7,12 +7,46 @@ describe('smush', () => {
   beforeEach(() => $S = new smush.Smush())
 
   describe('when smushing', () => {
-    const KEY = 'smushi'
-    const PATH = 'smush'
+    const KEY = 'smushit'
+    const PATH = 'realgood'
 
     it('should throw SmushError when file not found.', (done) => {
       $S.json(KEY, 'fake.file.json')
-        .catch(error => done())
+        .catch(error => {
+          expect(error).to.be.instanceof(Error)
+          done()
+        })
+    })
+
+    it('should convert string to json and smush', (done) => {
+      $S.string(KEY, JSON.stringify({}))
+        .then(config => {
+          expect(config).to.be.instanceof(Object)
+          done()
+        })
+        .catch(error => done(error))
+    })
+
+    it('should throw error if transformer throws', (done) => {
+      const transformer = () => {
+        throw new Error()
+      }
+      $S.string(KEY, JSON.stringify({}), transformer)
+        .catch(error => {
+          expect(error).to.be.instanceof(smush.SmushError)
+          done()
+        })
+    })
+
+    it('should throw error for invalid JSON string', (done) => {
+      $S.string(KEY, 'invalid')
+        .then(config => {
+          done(config)
+        })
+        .catch(error => {
+          expect(error).to.be.instanceof(smush.SmushError)
+          done()
+        })
     })
   })
 
@@ -68,7 +102,7 @@ describe('smush', () => {
         B: {
           name: 'B',
         },
-        numbers: [2, 3, 4, 5, 6, ],
+        numbers: [2, 3, 4, 5, 6],
         payload: {
           key: 'sourceB.payload',
         }
