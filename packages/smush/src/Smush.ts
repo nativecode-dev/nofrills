@@ -21,7 +21,7 @@ export class Smush {
   }
 
   public json(key: string, filename: string, transform?: (object: any) => any): Promise<Smush> {
-    return this.schema<any>(key, filename, transform ? transform : (obj: any) => obj)
+    return this.schema<any>(key, filename, transform)
       .then(() => this)
   }
 
