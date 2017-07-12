@@ -37,7 +37,7 @@
     "url": "https://github.com/nativecode-dev/nofrills-smush"
   },
   "scripts": {
-    "build": "tsc --project . --outdir lib",
+    "build": "tsc --project .",
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
