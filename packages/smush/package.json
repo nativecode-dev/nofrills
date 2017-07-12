@@ -11,8 +11,8 @@
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.6.0",
-    "@nofrills/scrubs": "^0.6.0",
+    "@nofrills/lincoln-debug": "^0.3.0",
+    "@nofrills/scrubs": "^0.8.0",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "shortid": "^2.2.8"
@@ -41,12 +41,11 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "start": "node lib/smush",
-    "prestart": "npm run build",
-    "test": "nyc cross-env DEBUG= mocha tests/",
+    "test": "cross-env DEBUG= nyc mocha tests/",
     "pretest": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
-    "prepush": "npm run test"
+    "prepush": "npm run test",
+    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
   }
 }
