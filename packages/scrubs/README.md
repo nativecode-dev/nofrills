@@ -4,7 +4,7 @@
 [![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-scrubs.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-scrubs)
 [![David](https://img.shields.io/david/nativecode-dev/nofrills-scrubs.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/scrubs)
 [![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-scrubs.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/scrubs)
-[![Coverage Status](https://coveralls.io/repos/github/nativecode-dev/nofrills-scrubs/badge.svg?branch=master)](https://coveralls.io/github/nativecode-dev/nofrills-scrubs?branch=master)
+[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-scrubs/master.svg?style=flat-square)](https://coveralls.io/github/nativecode-dev/nofrills-scrubs?branch=master)
 
 No frills data scrubbing to help remove sensitive data from object properties and strings.
 
