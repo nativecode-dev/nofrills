@@ -4,7 +4,7 @@
 [![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-lincoln.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-lincoln)
 [![David](https://img.shields.io/david/nativecode-dev/nofrills-lincoln.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/lincoln)
 [![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-lincoln.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/lincoln)
-[![Coverage Status](https://coveralls.io/repos/nativecode-dev/nofrills-lincoln/badge.svg?branch=master)](https://coveralls.io/r/nativecode-dev/nofrills-lincoln?branch=master)
+[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-lincoln/master.svg?style=flat-square)](https://coveralls.io/r/nativecode-dev/nofrills-lincoln?branch=master)
 
 NOTE: As of 0.9.0, this packge merely provides a slim abstraction for logging. Not useful by itself,
 as it provides no output. Please see one of the compatible packages, such as `@nofrills/lincoln-debug`.
