@@ -1,6 +1,5 @@
 {
   "exclude": [
-    "lib/Interceptors/Console.js",
     "tests/**/*.js"
   ],
   "sourceMap": true
