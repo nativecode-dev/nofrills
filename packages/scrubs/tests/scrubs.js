@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const scrubs = require('../lib')
 
 describe('when using scrubs', () => {
-  const root = require('./artifacts/data.json')
+  const root = require('./artifacts/data')
 
   describe('the "scrub" function', () => {
     it('should echo null', () => {

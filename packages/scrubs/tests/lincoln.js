@@ -3,7 +3,7 @@ describe('when using lincoln interceptor', () => {
   const interceptor = require('../lib').ScrubsInterceptor
   const scrubs = require('../lib')
 
-  const root = require('./artifacts/data.json')
+  const root = require('./artifacts/data')
 
   it('should scrub data', () => {
     const expected_url = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
