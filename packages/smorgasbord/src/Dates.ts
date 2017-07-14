@@ -1,7 +1,10 @@
+import * as moment from 'moment'
+
 export const Dates: any = {
-  today: (): string => new Date().toDateString(),
-  tomorrow: (): string => {
-    const now = new Date()
-    return (new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)).toDateString()
-  },
+  $: (date?: Date): moment.Moment => moment.utc(date),
+  lastWeek: (date?: Date): Date => Dates.$(date).weekday(-7).toDate(),
+  nextWeek: (date?: Date): Date => Dates.$(date).weekday(7).toDate(),
+  today: (date?: Date): Date => Dates.$(date).toDate(),
+  tomorrow: (date?: Date): Date => Dates.$(date).add(1, 'days').toDate(),
+  yesterday: (date?: Date): Date => Dates.$(date).subtract(1, 'days').toDate(),
 }
