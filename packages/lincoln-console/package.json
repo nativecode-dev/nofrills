@@ -1,0 +1,46 @@
+{
+  "author": "support@nativecode.com",
+  "description": "Provides logging via debug.",
+  "homepage": "https://github.com/nativecode-dev/nofrills-lincoln-console#readme",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/lincoln-console",
+  "types": "./lib/index.d.ts",
+  "version": "0.1.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills-lincoln-console/issues"
+  },
+  "dependencies": {
+    "@nofrills/lincoln": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/debug": "0.0.29",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.2",
+    "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
+    "cross-env": "^5.0.1",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills-lincoln-console"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "prebuild": "rimraf lib/",
+    "postbuild": "npm run lint",
+    "lint": "tslint src/",
+    "test": "cross-env DEBUG= nyc mocha tests/",
+    "pretest": "npm run build",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "push": "npm publish --access public",
+    "prepush": "npm run test",
+    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
+  }
+}
