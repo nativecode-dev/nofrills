@@ -4,9 +4,9 @@ import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@no
 export const ConsoleInterceptor: Interceptor = (log: Log): Log => {
   const logger = console.log
   if (log.parameters.length && typeof log.parameters[0] === 'string') {
-    logger(log.parameters[0], log.parameters.slice(1))
+    logger(`${log.namespace} -> ${log.parameters[0]}`, log.parameters.slice(1))
   } else {
-    logger(log.parameters)
+    logger(log.namespace, log.parameters)
   }
   return log
 }
