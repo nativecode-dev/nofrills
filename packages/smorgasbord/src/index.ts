@@ -1,4 +1,4 @@
 export * from './Dates'
-export * from './Patterns'
+export * from './Patterns/Index'
 export * from './Strings'
 export * from './Walk'

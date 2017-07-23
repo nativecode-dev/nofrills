@@ -23,7 +23,6 @@
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
-    "mocha-typescript": "^1.1.7",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
     "source-map-support": "^0.4.15",
@@ -34,8 +33,13 @@
   "nyc": {
     "all": true,
     "exclude": [],
-    "extension": [".ts"],
-    "include": ["tests/*.ts", "tests/**/*.ts"],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "tests/*.ts",
+      "tests/**/*.ts"
+    ],
     "instrument": true,
     "sourceMap": true
   },
