@@ -1,4 +1,4 @@
-export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, Partial<R>>) => Partial<T>
+export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, Partial<R>>) => Partial<R>
 export type ChainHandlerLink<T, R> = (object: T) => Partial<R>
 export type ChainHandlers<T, R> = Array<ChainHandler<T, R>>
 
@@ -13,11 +13,12 @@ export class Chain<T, R> {
     return this
   }
 
-  public execute(object: T, initializer?: () => Partial<R>): R {
+  public execute(object: T, reverse?: boolean, initializer?: () => Partial<R>): R {
     const result: Partial<R> = initializer ? initializer() : {}
     const reducer = (previous: Partial<R>, current: ChainHandler<T, R>): Partial<R> => {
       return Object.assign(previous, current(object, (obj: T): Partial<R> => previous))
     }
-    return this.handlers.reduce(reducer, result) as R
+    return (reverse ? this.handlers.reverse() : this.handlers)
+      .reduce(reducer, result) as R
   }
 }
