@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { Strings } from '../src/Index'
+import { Strings } from '../src'
 
 describe('when using string extensions', () => {
   describe('format', () => {

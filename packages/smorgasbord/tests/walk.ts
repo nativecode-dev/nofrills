@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { Dates, Walk, WalkType } from '../src/Index'
+import { Dates, Walk, WalkType } from '../src'
 
 import { Is } from '@nofrills/types'
 
