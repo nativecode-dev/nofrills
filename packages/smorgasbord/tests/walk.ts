@@ -1,28 +1,25 @@
-const expect = require('chai').expect
+import { expect } from 'chai'
+import { Dates, Walk, WalkType } from '../src/Index'
 
-const Is = require('@nofrills/types').Is
-
-const Dates = require('../lib').Dates
-const Walk = require('../lib').Walk
-const WalkType = require('../lib').WalkType
+import { Is } from '@nofrills/types'
 
 describe('when using Walk', () => {
   const context = require('./artifacts/context.walk')
 
   describe('to walk properties of an object', () => {
     const object = context.object
-    const expected_members = context.expected.members
+    const expectedMembers = context.expected.members
 
     it('should navigate all properties', () => {
-      const members = []
-      const interceptor = (type, value, path) => {
+      const members: string[] = []
+      const interceptor = (type: WalkType, value: any, path: string[]) => {
         if (type === WalkType.Object) {
           members.push(path.join('.'))
         }
       }
       const sut = Walk(object, interceptor)
       expect(members.length).to.deep.equal(7)
-      expect(members).to.deep.equal(expected_members)
+      expect(members).to.deep.equal(expectedMembers)
     })
   })
 
@@ -39,8 +36,8 @@ describe('when using Walk', () => {
     describe('of objects', () => {
       it('should walk object elements', () => {
         const array = [elements.today, elements.tomorrow]
-        const members = []
-        const interceptor = (type, value, path) => {
+        const members: string[] = []
+        const interceptor = (type: WalkType, value: any, path: string[]) => {
           if (type === WalkType.Object) {
             members.push(path.join('.'))
           }
@@ -56,7 +53,7 @@ describe('when using Walk', () => {
           [elements.tomorrow]
         ]
         let count = 0
-        const interceptor = (type, value) => {
+        const interceptor = (type: WalkType, value: any) => {
           if (type === WalkType.Array && Is.array(value)) {
             count++
           }

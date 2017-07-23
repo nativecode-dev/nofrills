@@ -1,9 +1,7 @@
-const expect = require('chai').expect
-const smorgasbord = require('../lib')
+import { expect } from 'chai'
+import { Strings } from '../src/Index'
 
 describe('when using string extensions', () => {
-  const Strings = smorgasbord.Strings
-
   describe('format', () => {
     it('should format string', () => {
       const expected = 'smorgasbord'
