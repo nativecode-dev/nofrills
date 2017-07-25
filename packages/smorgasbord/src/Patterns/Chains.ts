@@ -14,17 +14,25 @@ export class Chain<T, R> {
 
   public add(handler: ChainHandler<T, R>): Chain<T, R> {
     this.handlers.push(handler)
+    this.log.debug('add', handler)
     return this
   }
 
   public execute(object: T, reverse?: boolean, initializer?: () => Partial<R>): R {
+    if (reverse) {
+      this.log.debug('execute.reverse', reverse)
+    }
     const result: Partial<R> = initializer ? initializer() : {}
     const initial = (obj: T, n: ChainHandler<T, R>): Partial<R> => result
     const handlers = reverse ? this.handlers.reverse() : this.handlers
     const proxy = handlers.reduce((previous: ChainHandler<T, R>, current: ChainHandler<T, R>): ChainHandler<T, R> => {
-      return (obj: T, next: ChainHandlerLink<T, R>): Partial<R> => {
-        return current(object, (o: T): Partial<R> => previous(obj, next))
+      this.log.debug('execute.proxy', previous, current)
+      const inner = (obj: T, next: ChainHandlerLink<T, R>): Partial<R> => {
+        const processed = current(object, (o: T): Partial<R> => previous(obj, next))
+        this.log.debug('execute.proxy.call', processed, obj, next)
+        return processed
       }
+      return inner
     }, initial)
     return proxy(object, (o: T): Partial<R> => result) as R
   }
