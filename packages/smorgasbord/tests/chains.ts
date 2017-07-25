@@ -66,11 +66,7 @@ describe('when using Chain of Responsibilty pattern', () => {
     }
 
     // Act
-    const result: Partial<Response> = new Chain<any, Response>()
-      .add(first)
-      .add(second)
-      .add(third)
-      .execute({}, true)
+    const result: Partial<Response> = new Chain<any, Response>([first, second, third]).execute({}, true)
 
     // Assert
     expect(result.text).to.be.equal('first')
