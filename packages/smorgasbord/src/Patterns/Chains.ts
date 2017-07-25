@@ -29,3 +29,5 @@ export class Chain<T, R> {
     return proxy(object, (o: T): Partial<R> => result) as R
   }
 }
+
+export type Chains<T> = Chain<T, T>
