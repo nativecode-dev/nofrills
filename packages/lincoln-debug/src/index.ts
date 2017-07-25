@@ -27,7 +27,7 @@ export const CreateOptions = (namespace: string): Options => {
   return options
 }
 
-export const CreateLogger = (options: string | Options): Lincoln => {
+export const CreateLogger = (options: string | Options | Partial<Options>): Lincoln => {
   if (typeof options === 'string') {
     return new Lincoln(CreateOptions(options))
   }

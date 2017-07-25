@@ -1,29 +1,29 @@
-const expect = require('chai').expect
-const debug = require('../lib')
+import { expect } from 'chai'
+import { CreateLogger, Options } from '../src/index'
 
 describe('when using debug lincoln interceptor', () => {
   const NAMESPACE = 'nativecode:test'
 
   it('should create instance with default options', () => {
     expect(() => {
-      const logger = debug.CreateLogger(NAMESPACE)
+      const logger = CreateLogger(NAMESPACE)
       logger.debug('Hello, %s!', 'World')
     }).to.not.throw()
   })
 
   it('should create instance with options', () => {
     expect(() => {
-      const options = {
+      const options: Partial<Options> = {
         namespace: NAMESPACE,
       }
-      const logger = debug.CreateLogger(options)
+      const logger = CreateLogger(options)
       logger.debug('Hello, %s!', 'World')
     }).to.not.throw()
   })
 
   it('should log parameterless calls', () => {
     expect(() => {
-      const logger = debug.CreateLogger(NAMESPACE)
+      const logger = CreateLogger(NAMESPACE)
       logger.debug()
     }).to.not.throw()
   })

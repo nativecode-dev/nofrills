@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln-debug",
   "types": "./lib/index.d.ts",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln-debug/issues"
   },
@@ -25,8 +25,22 @@
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
+    "ts-node": "^3.3.0",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
+  },
+  "nyc": {
+    "all": true,
+    "exclude": [],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "tests/*.ts",
+      "tests/**/*.ts"
+    ],
+    "instrument": true,
+    "sourceMap": true
   },
   "repository": {
     "type": "git",
@@ -37,9 +51,9 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "test": "cross-env DEBUG= nyc mocha tests/",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "npm run build",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
     "prepush": "npm run test",
     "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"

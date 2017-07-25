@@ -11,5 +11,13 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2015"
-  }
+  },
+  "exclude": [
+    "node_modules/**/*",
+    "tests/**/*.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }
