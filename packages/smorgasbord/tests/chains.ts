@@ -9,6 +9,7 @@ describe('when using Chain of Responsibilty pattern', () => {
   }
 
   it('should call all registered handlers', () => {
+    // Arrange
     const first: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Partial<Response> => {
       const response: Partial<Response> = next(object)
       expect(response.text).to.be.undefined
@@ -23,12 +24,26 @@ describe('when using Chain of Responsibilty pattern', () => {
       return response
     }
 
-    const chain: Chain<any, Response> = new Chain<any, Response>()
-    const result: Partial<Response> = chain.add(first).add(second).execute({})
-    expect(result.text).to.be.equal('second')
+    const third: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Partial<Response> => {
+      const response: Partial<Response> = next(object)
+      expect(response.text).to.be.equal('second')
+      response.text = 'third'
+      return response
+    }
+
+    // Act
+    const result: Partial<Response> = new Chain<any, Response>()
+      .add(first)
+      .add(second)
+      .add(third)
+      .execute({})
+
+    // Assert
+    expect(result.text).to.be.equal('third')
   })
 
   it('should call all registered handlers in reverse', () => {
+    // Arrange
     const first: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Partial<Response> => {
       const response: Partial<Response> = next(object)
       expect(response.text).to.be.equal('second')
@@ -38,13 +53,26 @@ describe('when using Chain of Responsibilty pattern', () => {
 
     const second: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Partial<Response> => {
       const response: Partial<Response> = next(object)
-      expect(response.text).to.be.undefined
+      expect(response.text).to.be.equal('third')
       response.text = 'second'
       return response
     }
 
-    const chain: Chain<any, Response> = new Chain<any, Response>()
-    const result: Partial<Response> = chain.add(first).add(second).execute({}, true)
+    const third: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Partial<Response> => {
+      const response: Partial<Response> = next(object)
+      expect(response.text).to.be.undefined
+      response.text = 'third'
+      return response
+    }
+
+    // Act
+    const result: Partial<Response> = new Chain<any, Response>()
+      .add(first)
+      .add(second)
+      .add(third)
+      .execute({}, true)
+
+    // Assert
     expect(result.text).to.be.equal('first')
   })
 })

@@ -4,6 +4,9 @@ export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, R>) => Pa
 export type ChainHandlerLink<T, R> = (object: T) => Partial<R>
 export type ChainHandlers<T, R> = Array<ChainHandler<T, R>>
 
+type Handler<T, R> = ChainHandler<T, R>
+type Link<T, R> = ChainHandlerLink<T, R>
+
 export class Chain<T, R> {
   private readonly handlers: ChainHandlers<T, R>
   private readonly log: Lincoln
@@ -22,19 +25,26 @@ export class Chain<T, R> {
     if (reverse) {
       this.log.debug('execute.reverse', reverse)
     }
-    const result: Partial<R> = initializer ? initializer() : {}
-    const initial = (obj: T, n: ChainHandler<T, R>): Partial<R> => result
-    const handlers = reverse ? this.handlers.reverse() : this.handlers
-    const proxy = handlers.reduce((previous: ChainHandler<T, R>, current: ChainHandler<T, R>): ChainHandler<T, R> => {
+    const initiator: Link<T, R> = (obj: T): Partial<R> => initializer ? initializer() : {}
+    const proxy: Link<T, R> = this.proxy(reverse || false, initiator)
+    return proxy(object) as R
+  }
+
+  private proxy(reverse: boolean, initiator: Link<T, R>): Link<T, R> {
+    const handlers: Array<Handler<T, R>> = (reverse ? this.handlers.reverse() : this.handlers)
+
+    const proxy: Handler<T, R> = handlers.reduce((previous: Handler<T, R>, current: Handler<T, R>): Handler<T, R> => {
       this.log.debug('execute.proxy', previous, current)
-      const inner = (obj: T, next: ChainHandlerLink<T, R>): Partial<R> => {
-        const processed = current(object, (o: T): Partial<R> => previous(obj, next))
-        this.log.debug('execute.proxy.call', processed, obj, next)
+      const innerHandler: Handler<T, R> = (object: T, next: Link<T, R>): Partial<R> => {
+        const callee: Link<T, R> = (o: T): Partial<R> => previous(object, next)
+        const processed = current(object, callee)
+        this.log.debug('execute.proxy.call', processed, object, next)
         return processed
       }
-      return inner
-    }, initial)
-    return proxy(object, (o: T): Partial<R> => result) as R
+      return innerHandler
+    }, initiator)
+
+    return (object: T) => proxy(object, initiator)
   }
 }
 
