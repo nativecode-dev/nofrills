@@ -36,7 +36,9 @@ describe('when using Chain of Responsibilty pattern', () => {
       .add(first)
       .add(second)
       .add(third)
-      .execute({})
+      .execute({}, false, () => {
+        return {}
+      })
 
     // Assert
     expect(result.text).to.be.equal('third')
