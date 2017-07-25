@@ -6,8 +6,13 @@
   "main": "./lib/index.js",
   "name": "@nofrills/collections",
   "types": "./lib/index.d.ts",
-  "version": "0.10.0",
-  "bugs": {
+  <<
+  << << < HEAD "version": "0.10.0",
+  ===
+  === =
+  "version": "0.9.2",
+  >>>
+  >>> > bf57ff457cef7d4841a71f4a5f12cb58d63446ec "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
   },
   "dependencies": {},
