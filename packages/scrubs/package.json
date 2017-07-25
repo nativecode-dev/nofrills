@@ -14,10 +14,13 @@
     "@nofrills/collections": "^0.9.1",
     "@nofrills/lincoln-debug": "^0.3.0",
     "@nofrills/types": "^0.8.0",
-    "lodash": "^4.17.4"
+    "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.1",
     "@types/lodash": "^4.14.68",
+    "@types/lodash.merge": "^4.6.2",
+    "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.10",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
@@ -25,8 +28,22 @@
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
+    "ts-node": "^3.3.0",
     "tslint": "^5.5.0",
     "typescript": "^2.4.1"
+  },
+  "nyc": {
+    "all": true,
+    "exclude": [],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "tests/*.ts",
+      "tests/**/*.ts"
+    ],
+    "instrument": true,
+    "sourceMap": true
   },
   "repository": {
     "type": "git",
@@ -37,11 +54,9 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "start": "node lib/scrubs.js",
-    "prestart": "npm run build",
-    "test": "cross-env DEBUG= nyc mocha tests/",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "npm run build",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
     "prepush": "npm run test",
     "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"

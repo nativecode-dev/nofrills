@@ -2,8 +2,9 @@ export * from './Lincoln'
 export * from './Scrubs'
 
 import { Is } from '@nofrills/types'
-import { merge } from 'lodash'
 import { Registry, Scrubber, Scrubs, ScrubsOptions } from './Scrubs'
+
+import merge = require('lodash.merge')
 
 Registry.register<any[]>('array', (value: any[], options: ScrubsOptions, instance: Scrubs): any[] => {
   return value.map((v) => instance.scrub(v))

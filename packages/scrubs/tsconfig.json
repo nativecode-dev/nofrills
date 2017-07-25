@@ -14,5 +14,13 @@
     "typeRoots": [
       "node_modules/@nofrills/lincoln/lib"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules/**/*",
+    "tests/**/*.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

@@ -1,8 +1,8 @@
 import { RegistryMap } from '@nofrills/collections'
 import { Is, Types } from '@nofrills/types'
-import { merge } from 'lodash'
 
 import { Lincoln, Logger } from './Logging'
+import merge = require('lodash.merge')
 
 export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
 export type Scrubbers = Array<Scrubber<any>>
@@ -49,6 +49,7 @@ export class Scrubs {
 
   public scrub<T>(value: T, type?: string): T {
     if (value) {
+      /* istanbul ignore next */
       type = type || Types.from(value)
       this.options.log.debug('scrub', value, type)
       let result: T = value

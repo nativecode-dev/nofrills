@@ -1,11 +1,13 @@
-const expect = require('chai').expect
-const Scrubs = require('../lib').Scrubs
+import * as mocha from 'mocha'
+
+import { expect } from 'chai'
+import { Scrubs } from '../src/index'
 
 describe('when using scrubs registry', () => {
   const message = 'test'
 
   it('should register type handler', (done) => {
-    const handler = (value) => {
+    const handler = (value: any) => {
       const handlers = scrubs.get('string')
       expect(handlers.length).to.equal(1)
       expect(value).to.equal(message)
@@ -17,7 +19,7 @@ describe('when using scrubs registry', () => {
   })
 
   it('should clear type handlers', (done) => {
-    const handler = (value) => {
+    const handler = (value: any) => {
       scrubs.clear('string')
       const handlers = scrubs.get('string')
       expect(handlers.length).to.equal(0)
