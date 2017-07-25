@@ -5,6 +5,15 @@ import { scrub, Scrubs } from '../src/index'
 import { data } from './artifacts/data'
 
 describe('when using scrubs', () => {
+  describe('creating a new Scrubs instance', () => {
+    it('should call scrub with unknown type', () => {
+      const type: string = 'unknown-type-asshole'
+      const scrubs: Scrubs = new Scrubs()
+      const result = scrubs.scrub(type, type)
+      expect(result).to.equal(type)
+    })
+  })
+
   describe('the "scrub" function', () => {
     it('should echo null', () => {
       const sut: any = scrub(null)
