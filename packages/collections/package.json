@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/collections",
   "types": "./lib/index.d.ts",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
   },
@@ -17,6 +17,7 @@
     "@types/node": "^8.0.6",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
+    "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
@@ -34,9 +35,9 @@
     "lint": "tslint src/",
     "start": "node lib/",
     "prestart": "npm run build",
-    "test": "nyc mocha --recursive tests/",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "npm run build",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
     "prepush": "npm run test",
     "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
