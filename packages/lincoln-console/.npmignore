@@ -7,8 +7,9 @@ tests/
 
 .nycrc
 .travis.yml
-tslint.json
+mocha.opts
 tsconfig.json
+tslint.json
 
 lib/**/*.map
 
