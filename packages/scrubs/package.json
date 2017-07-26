@@ -6,19 +6,18 @@
   "main": "./lib/index.js",
   "name": "@nofrills/scrubs",
   "types": "./lib/index.d.ts",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-scrubs/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^0.9.1",
     "@nofrills/lincoln-debug": "^0.3.2",
     "@nofrills/types": "^0.8.0",
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
-    "@types/lodash": "^4.14.68",
+    "@types/lodash": "^4.14.71",
     "@types/lodash.merge": "^4.6.2",
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.10",

@@ -1,7 +1,7 @@
-import { RegistryMap } from '@nofrills/collections'
 import { Is, Types } from '@nofrills/types'
 
 import { Lincoln, Logger } from './Logging'
+
 import merge = require('lodash.merge')
 
 export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
@@ -20,27 +20,33 @@ const defaults: ScrubsOptions = {
 export class Scrubs {
   private readonly log: Lincoln
   private readonly options: ScrubsOptions
-  private readonly registry: RegistryMap<Scrubber<any>>
+  private readonly registry: Map<string, Scrubbers>
 
   constructor(options?: ScrubsOptions) {
     this.log = Logger.extend('scrubs')
     this.options = merge({}, options, defaults)
-    this.registry = new RegistryMap<Scrubber<any>>()
+    this.registry = new Map<string, Scrubbers>()
   }
 
   public clear(type: string): Scrubs {
-    this.registry.reset(type)
+    this.registry.set(type, [])
     return this
   }
 
-  public get<T>(type: string): Scrubbers {
+  public get<T>(type: string): Scrubbers | undefined {
     this.log.debug('get', type)
-    return this.registry.resolve(type)
+    return this.registry.get(type)
   }
 
   public register<T>(type: string, scrubber: Scrubber<T>): Scrubs {
     this.log.debug('register', type)
-    this.registry.register(type, scrubber)
+    const scrubbers: Scrubbers | undefined = this.registry.get(type)
+    if (scrubbers) {
+      scrubbers.push(scrubber)
+      this.registry.set(type, scrubbers)
+    } else {
+      this.registry.set(type, [scrubber])
+    }
     return this
   }
 
@@ -50,12 +56,14 @@ export class Scrubs {
       this.log.debug('scrub.pre', value, typedef)
 
       let result: T = value
-      const scrubbers: Scrubbers = this.registry.resolve(typedef)
-      for (const scrubber of scrubbers) {
-        result = scrubber(result, this.options, this)
+      const scrubbers: Scrubbers | undefined = this.registry.get(typedef)
+      if (scrubbers) {
+        for (const scrubber of scrubbers) {
+          result = scrubber(result, this.options, this)
+        }
+        this.log.debug('scrub.post', value, result)
+        return result
       }
-      this.log.debug('scrub.post', value, result)
-      return result
     }
     return value
   }
