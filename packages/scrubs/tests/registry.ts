@@ -1,7 +1,7 @@
 import * as mocha from 'mocha'
 
 import { expect } from 'chai'
-import { Scrubber, Scrubs } from '../src/index'
+import { Scrubber, Scrubbers, Scrubs } from '../src/index'
 
 import { data } from './artifacts/data'
 
@@ -10,9 +10,13 @@ describe('when using scrubs registry', () => {
 
   it('should register type handler', (done) => {
     const handler = (value: any) => {
-      const handlers = scrubs.get('string')
-      expect(handlers.length).to.equal(1)
-      expect(value).to.equal(message)
+      const handlers: Scrubbers | undefined = scrubs.get('string')
+      if (handlers) {
+        expect(handlers.length).to.equal(1)
+        expect(value).to.equal(message)
+      } else {
+        expect(handlers).to.not.equal(undefined)
+      }
       done()
     }
     const scrubs = new Scrubs()
@@ -34,8 +38,12 @@ describe('when using scrubs registry', () => {
   it('should clear type handlers', (done) => {
     const handler = (value: any) => {
       scrubs.clear('string')
-      const handlers = scrubs.get('string')
-      expect(handlers.length).to.equal(0)
+      const handlers: Scrubbers | undefined = scrubs.get('string')
+      if (handlers) {
+        expect(handlers.length).to.equal(0)
+      } else {
+        expect(handlers).to.not.equal(undefined)
+      }
       done()
     }
     const scrubs = new Scrubs()
