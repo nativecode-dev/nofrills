@@ -6,13 +6,13 @@
   "main": "./lib/index.js",
   "name": "@nofrills/smorgasbord",
   "types": "./lib/index.d.ts",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smorgasbord/issues"
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^0.3.2",
-    "@nofrills/types": "^0.7.1",
+    "@nofrills/types": "^0.9.0",
     "moment": "^2.18.1"
   },
   "devDependencies": {
