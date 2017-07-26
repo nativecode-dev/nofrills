@@ -11,7 +11,7 @@
     "url": "https://github.com/nativecode-dev/nofrills-lincoln-console/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.10.1"
+    "@nofrills/lincoln": "^0.10.2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
