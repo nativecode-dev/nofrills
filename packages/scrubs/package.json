@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@nofrills/collections": "^0.9.1",
-    "@nofrills/lincoln-debug": "^0.3.0",
+    "@nofrills/lincoln-debug": "^0.3.2",
     "@nofrills/types": "^0.8.0",
     "lodash.merge": "^4.6.0"
   },
