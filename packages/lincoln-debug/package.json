@@ -11,7 +11,7 @@
     "url": "https://github.com/nativecode-dev/nofrills-lincoln-debug/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.10.0",
+    "@nofrills/lincoln": "^0.10.2",
     "debug": "^2.6.8"
   },
   "devDependencies": {
