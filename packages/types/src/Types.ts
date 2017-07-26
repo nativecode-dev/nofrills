@@ -1,6 +1,6 @@
 export interface Type {
-  default?: string
-  properties?: TypeProperties,
+  default: string | undefined
+  properties: TypeProperties
   type: string
   typebase: string
   validator: TypeValidator

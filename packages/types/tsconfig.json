@@ -14,5 +14,13 @@
     "typeRoots": [
       "src/declarations/"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules/**/*",
+    "tests/**/*.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

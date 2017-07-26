@@ -8,23 +8,32 @@ export class TypeParser {
     return TypeParser.parse(typestr)
   }
 
-  public static serialize(type: Type, full: boolean = false): string {
-    const ignored: string[] = ['default']
-    if (type.properties) {
-      const keys: string[] = Object.keys(type.properties)
-      const props = type.properties
-      if (type.default && full === false) {
-        return `${type.type}:${props[type.default]}`
-      } else if (!type.default && full === false) {
-        return type.type
-      }
-      const properties: string[] = keys.map<string>((key: string): string => {
-        const value: any = props[key]
-        return `${key}=${value}`
-      })
-      return `${type.type}:${properties.join(',')}`
+  public static serialize(type: Partial<Type>, full: boolean = false): string {
+    const typedef: Type = TypeParser.materialize(type)
+    const keys: string[] = Object.keys(typedef.properties)
+    const props = typedef.properties
+
+    if (keys.length === 0) {
+      return typedef.type
     }
-    return type.type
+
+    if (typedef.default && full === false) {
+      return `${typedef.type}:${props[typedef.default]}`
+    } else if (!typedef.default && full === false) {
+      return typedef.type
+    }
+
+    const properties: string[] = keys.map<string>((key: string): string => {
+      const value: any = props[key]
+      return `${key}=${value}`
+    })
+
+    return `${typedef.type}:${properties.join(',')}`
+  }
+
+  private static materialize(type: Partial<Type>): Type {
+    const typedef: Type = Types.resolve(type.typebase || 'any')
+    return Object.assign({}, typedef, type)
   }
 
   private static parse(typestr: string): Type {

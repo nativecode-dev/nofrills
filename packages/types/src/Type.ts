@@ -1,22 +1,22 @@
-import { Registry as RegistryType } from '@nofrills/collections'
-
 import { Is } from './Is'
 import { TypeParser } from './TypeParser'
 import { Type, TypeProperties } from './Types'
 
 const Any: Type = {
+  default: undefined,
+  properties: {},
   type: 'any',
   typebase: 'object',
-  validator: (value: any) => true
+  validator: (value: any) => true,
 }
 
 const BaseTypes: string[] = ['Array', 'Boolean', 'Date', 'Error', 'Number', 'Object', 'String']
 
 export class TypeRegistry {
-  private readonly registry: RegistryType<Type>
+  private readonly registry: Map<string, Type>
 
   constructor() {
-    this.registry = new RegistryType<Type>()
+    this.registry = new Map<string, Type>()
   }
 
   public from(value: any): string {
@@ -34,13 +34,15 @@ export class TypeRegistry {
     throw new TypeError(`Could not parse for type: ${value}.`)
   }
 
-  public register(type: Type): TypeRegistry {
-    this.registry.register(type.type, type)
+  public register(type: Partial<Type>): TypeRegistry {
+    const baseType: Type = this.resolve(type.typebase || 'any')
+    const merged: Type = Object.assign({}, baseType, type)
+    this.registry.set(merged.type, merged)
     return this
   }
 
   public resolve(name: string): Type {
-    const type = this.registry.resolve(name)
+    const type = this.registry.get(name)
     if (type) {
       return type
     }
