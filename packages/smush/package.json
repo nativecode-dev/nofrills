@@ -11,10 +11,10 @@
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^0.3.0",
-    "@nofrills/scrubs": "^0.8.0",
+    "@nofrills/lincoln-debug": "^0.3.2",
+    "@nofrills/scrubs": "^0.8.1",
     "bluebird": "^3.5.0",
-    "lodash": "^4.17.4",
+    "lodash.merge": "^4.6.0",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
+    "nyc": "^11.1.0",
     "rimraf": "^2.6.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.4.3",

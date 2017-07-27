@@ -1,9 +1,10 @@
+import merge = require('lodash.merge')
+
 import * as Promise from 'bluebird'
 import * as fs from 'fs'
 import * as shortid from 'shortid'
 
 import { Lincoln } from '@nofrills/lincoln'
-import { merge } from 'lodash'
 
 import { Logger } from './Logging'
 import { SmushError } from './SmushError'

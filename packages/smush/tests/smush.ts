@@ -1,18 +1,28 @@
-const expect = require('chai').expect
-const smush = require('../lib')
+import * as fs from 'fs'
+import * as path from 'path'
+
+import { expect } from 'chai'
+import { Smush, SmushError } from '../src/index'
 
 describe('smush', () => {
-  let $S
+  let $S: Smush
 
-  beforeEach(() => $S = new smush.Smush())
+  const readjson = (filename: string): any => {
+    const filepath: string = path.resolve(filename)
+    const buffer: Buffer = fs.readFileSync(filepath)
+    const json: string = buffer.toString()
+    return JSON.parse(json)
+  }
+
+  beforeEach(() => $S = new Smush())
 
   describe('when smushing', () => {
-    const KEY = 'smushit'
-    const PATH = 'realgood'
+    const KEY: string = 'smushit'
+    const PATH: string = 'realgood'
 
     it('should throw SmushError when file not found.', (done) => {
       $S.json(KEY, 'fake.file.json')
-        .catch(error => {
+        .catch((error: SmushError) => {
           expect(error).to.be.instanceof(Error)
           done()
         })
@@ -20,11 +30,11 @@ describe('smush', () => {
 
     it('should convert string to json and smush', (done) => {
       $S.string(KEY, JSON.stringify({}))
-        .then(config => {
+        .then((config: any) => {
           expect(config).to.be.instanceof(Object)
           done()
         })
-        .catch(error => done(error))
+        .catch((error: SmushError) => done(error))
     })
 
     it('should throw error if transformer throws', (done) => {
@@ -32,76 +42,76 @@ describe('smush', () => {
         throw new Error()
       }
       $S.string(KEY, JSON.stringify({}), transformer)
-        .catch(error => {
-          expect(error).to.be.instanceof(smush.SmushError)
+        .catch((error: SmushError) => {
+          expect(error).to.be.instanceof(SmushError)
           done()
         })
     })
 
     it('should throw error for invalid JSON string', (done) => {
       $S.string(KEY, 'invalid')
-        .then(config => {
+        .then((config: any) => {
           done(config)
         })
-        .catch(error => {
-          expect(error).to.be.instanceof(smush.SmushError)
+        .catch((error: SmushError) => {
+          expect(error).to.be.instanceof(SmushError)
           done()
         })
     })
   })
 
   describe('when merging two configurations', () => {
-    const KEY = 'config'
-    const PATH = 'smush.config'
+    const KEY: string = 'config'
+    const PATH: string = 'smush.config'
 
     describe('should merge simple, one-level deep object', () => {
-      const sourceA = {
+      const sourceA: any = {
         id: 'sourceA',
       }
 
-      const sourceB = {
+      const sourceB: any = {
         id: 'sourceB',
       }
 
       it('uses last-in property setting', () => {
-        const merged = $S.set(KEY, sourceA, sourceB)
+        const merged: any = $S.set(KEY, sourceA, sourceB)
         expect(merged).to.not.deep.equal(sourceA)
       })
 
       it('does override existing value', () => {
-        const merged = $S.set(KEY, sourceA, sourceB)
+        const merged: any = $S.set(KEY, sourceA, sourceB)
         expect(merged).to.deep.equal(sourceB)
       })
     })
 
     describe('should merge complex, multi-level deep object', () => {
-      const sourceA = {
-        id: 'sourceA',
+      const sourceA: any = {
         A: {
           name: 'A',
         },
+        id: 'sourceA',
         numbers: [1, 7, 8, 9],
       }
 
-      const sourceB = {
-        id: 'sourceB',
+      const sourceB: any = {
         B: {
           name: 'B',
         },
+        id: 'sourceB',
         numbers: [2, 3, 4, 5, 6],
         payload: {
           key: 'sourceB.payload'
         }
       }
 
-      const expected = {
-        id: 'sourceB',
+      const expected: any = {
         A: {
           name: 'A',
         },
         B: {
           name: 'B',
         },
+        id: 'sourceB',
         numbers: [2, 3, 4, 5, 6],
         payload: {
           key: 'sourceB.payload',
@@ -109,28 +119,28 @@ describe('smush', () => {
       }
 
       it('merges deeply nested properties', () => {
-        const merged = $S.set(KEY, sourceA, sourceB)
-        const sut = $S.toObject()[KEY]
+        const merged: any = $S.set(KEY, sourceA, sourceB)
+        const sut: any = $S.toObject()[KEY]
         expect(sut).to.deep.equal(expected)
       })
 
       it('exports by specific key', () => {
-        const merged = $S.set(KEY, sourceA, sourceB)
-        const sut = $S.toObject(`${KEY}.payload`)
+        const merged: any = $S.set(KEY, sourceA, sourceB)
+        const sut: any = $S.toObject(`${KEY}.payload`)
         expect(sut).to.deep.equal({
           key: 'sourceB.payload'
         })
       })
 
       it('exports by specific value', () => {
-        const merged = $S.set(KEY, sourceA, sourceB)
-        const sut = $S.toObject(`${KEY}.payload.key`)
+        const merged: any = $S.set(KEY, sourceA, sourceB)
+        const sut: any = $S.toObject(`${KEY}.payload.key`)
         expect(sut).to.equal('sourceB.payload')
       })
 
       describe('should allow using dotted-paths', () => {
         it('setting and getting value', () => {
-          const merged = $S.set(PATH, {
+          const merged: any = $S.set(PATH, {
             id: 'dotted-path'
           })
 
@@ -142,10 +152,10 @@ describe('smush', () => {
       describe('should load .json files', () => {
         it('contents', (done) => {
           $S.json('config', './tests/test.simple.base.json')
-            .then(smush => smush.toObject().config)
-            .then(config => {
-              const expected = require('./test.simple.base.json')
-              expect(config).to.deep.equal(expected)
+            .then((smush: Smush) => smush.toObject().config)
+            .then((config: any) => {
+              const simpleBase: any = readjson('./tests/test.simple.base.json')
+              expect(config).to.deep.equal(simpleBase)
               done()
             })
             .catch(done)
@@ -153,26 +163,26 @@ describe('smush', () => {
 
         it('multiple instances', (done) => {
           $S.json('config', './tests/test.simple.base.json')
-            .then(smush => smush.json('config', './tests/test.simple.derived.json'))
-            .then(smush => smush.toObject().config)
-            .then(config => {
-              const expected = require('./test.simple.merged.json')
-              expect(config).to.deep.equal(expected)
+            .then((smush: Smush) => smush.json('config', './tests/test.simple.derived.json'))
+            .then((smush: Smush) => smush.toObject().config)
+            .then((config: any) => {
+              const simpleMerged: any = readjson('./tests/test.simple.merged.json')
+              expect(config).to.deep.equal(simpleMerged)
               done()
             })
             .catch(done)
         })
 
         it('transforms properties', (done) => {
-          const transformer = (object) => {
+          const transformer = (object: any) => {
             object.id = 'transformed'
             object.schema.name = 'transformed'
             return object
           }
 
           $S.json('config', './tests/test.simple.merged.json', transformer)
-            .then(smush => smush.toObject().config)
-            .then(config => {
+            .then((smush: Smush) => smush.toObject().config)
+            .then((config: any) => {
               expect(config.id).to.equal('transformed')
               expect(config.schema.name).to.equal('transformed')
               done()
