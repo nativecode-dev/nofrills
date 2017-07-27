@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
   "types": "./lib/index.d.ts",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
@@ -19,8 +19,10 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.5",
-    "@types/chai": "^4.0.0",
+    "@types/chai": "^4.0.1",
     "@types/lodash": "^4.14.66",
+    "@types/lodash.merge": "^4.6.2",
+    "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.31",
     "@types/shortid": "0.0.29",
     "chai": "^4.0.2",
@@ -29,8 +31,23 @@
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
+    "ts-node": "^3.3.0",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
+  },
+  "nyc": {
+    "all": true,
+    "exclude": [
+      "tests/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "sourceMap": true
   },
   "repository": {
     "type": "git",
@@ -41,9 +58,9 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "test": "cross-env DEBUG= nyc mocha tests/",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "npm run build",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
     "prepush": "npm run test",
     "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
