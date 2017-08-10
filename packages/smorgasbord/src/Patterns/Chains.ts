@@ -1,7 +1,7 @@
 import { Lincoln, Logger } from '../Logging'
 
-export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, R>) => Partial<R>
-export type ChainHandlerLink<T, R> = (object: T) => Partial<R>
+export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, R>) => R
+export type ChainHandlerLink<T, R> = (object: T) => R
 export type ChainHandlers<T, R> = Array<ChainHandler<T, R>>
 
 type Handler<T, R> = ChainHandler<T, R>
@@ -21,11 +21,11 @@ export class Chain<T, R> {
     return this
   }
 
-  public execute(object: T, reverse?: boolean, initializer?: () => Partial<R>): R {
+  public execute(object: T, reverse?: boolean, initializer?: () => R): R {
     if (reverse) {
       this.log.debug('execute.reverse', reverse)
     }
-    const initiator: Link<T, R> = (obj: T): Partial<R> => initializer ? initializer() : {}
+    const initiator: Link<T, R> = (obj: T): R => initializer ? initializer() : {} as R
     const proxy: Link<T, R> = this.proxy(reverse || false, initiator)
     return proxy(object) as R
   }
@@ -35,8 +35,8 @@ export class Chain<T, R> {
 
     const proxy: Handler<T, R> = handlers.reduce((previous: Handler<T, R>, current: Handler<T, R>): Handler<T, R> => {
       this.log.debug('execute.proxy', previous, current)
-      const innerHandler: Handler<T, R> = (object: T, next: Link<T, R>): Partial<R> => {
-        const callee: Link<T, R> = (o: T): Partial<R> => previous(object, next)
+      const innerHandler: Handler<T, R> = (object: T, next: Link<T, R>): R => {
+        const callee: Link<T, R> = (o: T): R => previous(object, next)
         const processed = current(object, callee)
         this.log.debug('execute.proxy.call', processed, object, next)
         return processed
