@@ -3,13 +3,33 @@
 	"private": true,
 	"version": "0.0.0",
 	"devDependencies": {
-		"lerna": "^2.5.1"
+		"coveralls": "^3.0.0",
+		"cross-env": "^5.1.1",
+		"lerna": "^2.5.1",
+		"mocha": "^4.0.1",
+		"nyc": "^11.3.0",
+		"ts-node": "^3.3.0",
+		"typescript": "^2.6.1"
+	},
+	"nyc": {
+		"all": true,
+		"exclude": [
+			"packages/*/tests/**/*.ts"
+		],
+		"extension": [
+			".ts"
+		],
+		"include": [
+			"packages/*/src/**/*.ts"
+		],
+		"instrument": true,
+		"sourceMap": true
 	},
 	"scripts": {
 		"build": "lerna run build",
 		"prebuild": "lerna bootstrap",
 		"clean": "lerna run clean",
-		"test": "lerna run test",
+		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build"
 	},
 	"workspaces": [
