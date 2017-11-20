@@ -1,0 +1,23 @@
+0 silly input [ '/Users/mpham/Code/nofrills/types' ]
+1 silly flags { _: [ 'import' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   pathToRepo: '/Users/mpham/Code/nofrills/types' }
+2 verbose rootPath /Users/mpham/Code/nativecode/nofrills
+3 info version 2.5.1
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /Users/mpham/Code/nativecode/nofrills/VERSION
+7 silly initialize attempt
+8 silly statSync /Users/mpham/Code/nofrills/types
+9 silly existsSync /Users/mpham/Code/nativecode/nofrills/packages/types
+10 silly getCurrentSHA
+11 error initialize caught error
+12 error Error: fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+12 error Use '--' to separate paths from revisions, like this:
+12 error 'git <command> [<revision>...] -- [<file>...]'
+12 error
+12 error     at Function.module.exports.sync (/Users/mpham/.config/yarn/global/node_modules/execa/index.js:303:26)
+12 error     at Function.execSync (/Users/mpham/.config/yarn/global/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+12 error     at Function.getCurrentSHA (/Users/mpham/.config/yarn/global/node_modules/lerna/lib/GitUtilities.js:198:49)
+12 error     at ImportCommand.initialize (/Users/mpham/.config/yarn/global/node_modules/lerna/lib/commands/ImportCommand.js:145:51)
