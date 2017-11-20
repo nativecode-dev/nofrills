@@ -2,17 +2,29 @@
 # yarn lockfile v1
 
 
+"@nofrills/collections@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@nofrills/collections/-/collections-0.10.1.tgz#8968c88ecea138c561075ddef7ac48c20edca741"
+
 "@types/chai@^4.0.1":
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.0.5.tgz#b6e250e281b47e0192e236619e9b1afe62fd345c"
+
+"@types/debug@0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.29.tgz#a1e514adfbd92f03a224ba54d693111dbf1f3754"
 
 "@types/mocha@^2.2.41":
   version "2.2.44"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.44.tgz#1d4a798e53f35212fd5ad4d04050620171cd5b5e"
 
-"@types/node@^8.0.10":
+"@types/node@^8.0.10", "@types/node@^8.0.16", "@types/node@^8.0.2":
   version "8.0.53"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
+
+"@types/uuidjs@^3.3.1":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@types/uuidjs/-/uuidjs-3.3.2.tgz#2f391dee8a303a885eacb2051bb4c5c2127dec7a"
 
 "@types/validator@^6.2.1":
   version "6.3.0"
@@ -1895,7 +1907,7 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nyc@^11.0.3:
+nyc@^11.0.3, nyc@^11.1.0:
   version "11.3.0"
   resolved "https://registry.yarnpkg.com/nyc/-/nyc-11.3.0.tgz#a42bc17b3cfa41f7b15eb602bc98b2633ddd76f0"
   dependencies:
@@ -2626,7 +2638,7 @@ tslib@^1.7.1:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.0.tgz#dc604ebad64bcbf696d613da6c954aa0e7ea1eb6"
 
-tslint@^5.5.0:
+tslint@^5.4.3, tslint@^5.5.0:
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.8.0.tgz#1f49ad5b2e77c76c3af4ddcae552ae4e3612eb13"
   dependencies:
@@ -2664,7 +2676,7 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.4.1:
+typescript@^2.3.4, typescript@^2.4.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.1.tgz#ef39cdea27abac0b500242d6726ab90e0c846631"
 
@@ -2706,6 +2718,10 @@ uuid@^2.0.1:
 uuid@^3.0.0, uuid@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
+
+uuidjs@^3.5.3:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/uuidjs/-/uuidjs-3.6.1.tgz#5e669ddba6a975e6cffea8b948dd2c4dca002952"
 
 v8flags@^3.0.0:
   version "3.0.1"

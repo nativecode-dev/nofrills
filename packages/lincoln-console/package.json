@@ -49,13 +49,13 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "prebuild": "rimraf lib/",
-    "postbuild": "npm run lint",
+    "postbuild": "yarn run lint",
     "lint": "tslint src/",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "npm run build",
+    "pretest": "yarn run build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
-    "prepush": "npm run test",
+    "prepush": "yarn run test",
     "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
   }
 }
