@@ -1,5 +1,7 @@
+export type IsTypeHandler = (value: any, type?: string) => boolean
+
 export interface IsType {
-  [name: string]: (value: any, type?: string) => boolean
+  [name: string]: IsTypeHandler
 }
 
 export const Is: IsType = {
@@ -8,9 +10,9 @@ export const Is: IsType = {
     return (value instanceof Array)
       && Is.string(value) === false
   },
-  arrayOf: (value: any[], type: string): boolean => {
+  arrayOf: (value: any[], type?: string): boolean => {
     return Is.array(value) && value
-      .map((element: any) => Is[type](element))
+      .map((element: any) => Is[type || 'any'](element))
       .every((element: boolean) => element === true)
   },
   boolean: (value: any): boolean => {
