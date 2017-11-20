@@ -4,6 +4,13 @@
 	"devDependencies": {
 		"lerna": "^2.5.1"
 	},
+	"scripts": {
+		"build": "lerna run build",
+		"prebuild": "lerna bootstrap",
+		"clean": "lerna run clean",
+		"test": "lerna run test",
+		"pretest": "yarn run build"
+	},
 	"workspaces": [
 		"packages/*"
 	]

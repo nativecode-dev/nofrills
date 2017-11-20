@@ -1,6 +1,9 @@
 {
   "lerna": "2.5.1",
-  "npmCliet": "yarn",
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--quiet"
+  ],
   "packages": [
     "packages/*"
   ],

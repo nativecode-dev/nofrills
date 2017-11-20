@@ -1,0 +1,6 @@
+.nyc_output/
+dist/
+lib/
+node_modules/
+
+*.log
