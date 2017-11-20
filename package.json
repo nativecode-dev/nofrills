@@ -30,7 +30,8 @@
 		"prebuild": "lerna bootstrap",
 		"clean": "lerna run clean",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-		"pretest": "yarn run build"
+		"pretest": "yarn run build",
+		"coveralls": "nyc report --reporter=text-lcov | coveralls"
 	},
 	"workspaces": [
 		"packages/*"
