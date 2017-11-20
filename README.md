@@ -1,5 +1,8 @@
 # @nofrills
 
+![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)
+![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)
+
 `nofrills` is a collection of `npm` packages to help ease common application features designed to be as simple and easy to use as possible. We choose the sanest default configuration settings.
 
 # @nofrills/collections
