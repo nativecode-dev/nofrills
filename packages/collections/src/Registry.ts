@@ -1,11 +1,11 @@
 export class Registry<T> {
-  protected readonly map: Map<string, T | undefined> = new Map<string, T | undefined>()
+  protected readonly map: Map<string, T> = new Map<string, T>()
 
   public get keys(): IterableIterator<string> {
     return this.map.keys()
   }
 
-  public get values(): IterableIterator<T | undefined> {
+  public get values(): IterableIterator<T> {
     return this.map.values()
   }
 
@@ -27,7 +27,7 @@ export class Registry<T> {
 
   public unregister(key: string, value: T): void {
     if (this.map.has(key)) {
-      this.map.set(key, undefined)
+      this.map.delete(key)
     }
   }
 }
