@@ -1,3 +1,4 @@
+cache: yarn
 language: node_js
 node_js:
   - node
@@ -6,4 +7,3 @@ node_js:
 os:
   - linux
 after_success: npm run coveralls
-
