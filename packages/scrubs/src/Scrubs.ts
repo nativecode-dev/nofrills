@@ -1,4 +1,4 @@
-import { Is, Types } from '@nofrills/types'
+import { Is, Registry as Types } from '@nofrills/types'
 
 import { Lincoln, Logger } from './Logging'
 

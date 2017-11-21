@@ -1,39 +1,43 @@
 export * from './Is'
+export * from './Registry'
 export * from './Type'
 export * from './TypeParser'
-export * from './Types'
+export * from './TypeRegistry'
+export * from './TypeValidator'
+export * from './Type'
 
 import * as validator from 'validator'
 import * as zipcodes from 'zipcodes-regex'
 
 import { Is } from './Is'
-import { Types } from './Type'
-import { Type, TypeProperties } from './Types'
+import { Registry } from './Registry'
+import { Type } from './Type'
+import { TypeProperties } from './TypeProperties'
 
 const phone = (): RegExp => {
   return /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
 }
 
-Types.register({
+Registry.register({
   default: 'max',
   type: 'array',
   typebase: 'Array',
   validator: (value: any) => Is.array(value),
 })
 
-Types.register({
+Registry.register({
   type: 'boolean',
   typebase: 'Boolean',
   validator: (value: any) => Is.boolean(value),
 })
 
-Types.register({
+Registry.register({
   type: 'date',
   typebase: 'Date',
   validator: (value: any) => Is.date(value),
 })
 
-Types.register({
+Registry.register({
   default: 'max',
   properties: {
     max: 254,
@@ -48,32 +52,32 @@ Types.register({
   },
 })
 
-Types.register({
+Registry.register({
   type: 'error',
   typebase: 'Error',
   validator: (value: any) => Is.error(value),
 })
 
-Types.register({
+Registry.register({
   default: 'max',
   type: 'number',
   typebase: 'Number',
   validator: (value: any) => Is.number(value),
 })
 
-Types.register({
+Registry.register({
   type: 'object',
   typebase: 'Object',
   validator: (value: any) => Is.object(value),
 })
 
-Types.register({
+Registry.register({
   type: 'phone',
   typebase: 'string',
   validator: (value: any) => phone().test(value),
 })
 
-Types.register({
+Registry.register({
   properties: {
     max: 16,
     min: 5,
@@ -91,7 +95,7 @@ Types.register({
   },
 })
 
-Types.register({
+Registry.register({
   default: 'max',
   type: 'string',
   typebase: 'String',
@@ -111,7 +115,7 @@ Types.register({
   },
 })
 
-Types.register({
+Registry.register({
   type: 'timestamp',
   typebase: 'number',
   validator: (value: any) => Is.number(value),

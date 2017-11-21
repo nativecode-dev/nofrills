@@ -1,37 +1,16 @@
 {
-  "defaultSeverity": "error",
   "extends": [
-    "tslint:recommended"
+    "tslint-config-standard"
   ],
-  "jsRules": {
-    "max-line-length": [
-      160
-    ]
-  },
   "rules": {
-    "class-name": true,
-    "interface-name": [
-      "always-prefix"
-    ],
-    "eofline": true,
-    "max-line-length": [
-      160
-    ],
-    "new-parens": true,
-    "no-var-keyword": true,
-    "no-unused-expression": true,
-    "only-arrow-functions": [
-      true
-    ],
-    "quotemark": [
-      "single"
-    ],
-    "semicolon": [
-      "never"
-    ],
-    "trailing-comma": [
-      true
-    ]
-  },
-  "rulesDirectory": []
+    "await-promise": true,
+    "no-floating-promises": true,
+    "no-unnecessary-qualifier": true,
+    "no-unused-variable": true,
+    "no-use-before-declare": true,
+    "return-undefined": false,
+    "strict-type-predicates": true,
+    "space-before-function-paren": false,
+    "trailing-comma": true
+  }
 }

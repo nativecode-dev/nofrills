@@ -14,7 +14,8 @@
 	"nyc": {
 		"all": true,
 		"exclude": [
-			"packages/*/tests/**/*.ts"
+			"node_modules",
+			"packages/*/src/**/*.spec.ts"
 		],
 		"extension": [
 			".ts"

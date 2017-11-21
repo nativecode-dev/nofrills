@@ -1,11 +1,13 @@
+import 'mocha'
+
 import { expect } from 'chai'
 
-import * as mocha from 'mocha'
-import * as types from '../src/index'
+import { Registry } from './Registry'
+import { Type } from './Type'
 
 describe('when using types library for validation', () => {
-  const validate: (value: any, type: string) => boolean = types.Types.validate
-  const testtype: Partial<types.Type> = {
+  const validate: (value: any, type: string) => boolean = Registry.validate
+  const testtype: Partial<Type> = {
     properties: {
       max: 5,
       min: 2,
@@ -14,10 +16,10 @@ describe('when using types library for validation', () => {
     type: 'test',
     typebase: 'string',
     validator: (value) => {
-      return types.Types.resolve('string').validator(value, testtype.properties)
+      return Registry.resolve('string').validator(value, testtype.properties)
     }
   }
-  types.Types.register(testtype)
+  Registry.register(testtype)
 
   describe('to validate primitive values', () => {
     it('should validate value is a any', () => {

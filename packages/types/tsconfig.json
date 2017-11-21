@@ -16,11 +16,10 @@
     ]
   },
   "exclude": [
-    "node_modules/**/*",
-    "tests/**/*.ts"
+    "node_modules",
+    "src/**/*.spec.ts"
   ],
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/**/*.ts"
   ]
 }

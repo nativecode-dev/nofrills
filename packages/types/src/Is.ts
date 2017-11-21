@@ -1,8 +1,4 @@
-export type IsTypeHandler = (value: any, type?: string) => boolean
-
-export interface IsType {
-  [name: string]: IsTypeHandler
-}
+import { IsType } from './IsType'
 
 export const Is: IsType = {
   any: (value: any): boolean => true,
