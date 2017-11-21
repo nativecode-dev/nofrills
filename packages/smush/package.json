@@ -60,6 +60,7 @@
     "lint": "tslint src/",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "yarn run build",
+    "testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
     "prepush": "yarn run test",
