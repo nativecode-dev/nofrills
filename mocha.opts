@@ -3,4 +3,5 @@
 --full-trace
 --recursive
 --bail
+packages/*/src/**/*.spec.ts
 packages/*/tests/**/*.ts

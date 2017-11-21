@@ -2,14 +2,13 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Is } from './Is'
-import { Registry } from './Registry'
+import { Is, Types } from './index'
 
 describe('when using type library', () => {
 
-  describe('"Is" functions', () => {
+  describe('"Is" module', () => {
 
-    describe('to validate value types', () => {
+    describe('to validate types', () => {
 
       it('should validate array type', () => expect(Is.array([])).to.equal(true))
       it('should validate arrayOf type', () => expect(Is.arrayOf([1, 2, 3, 4, 5], 'number')).to.equal(true))

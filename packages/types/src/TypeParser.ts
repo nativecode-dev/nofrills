@@ -1,8 +1,6 @@
 import * as validator from 'validator'
 
-import { Registry } from './Registry'
-import { Type } from './Type'
-import { TypeProperties } from './TypeProperties'
+import { Type, TypeProperties, Types } from './index'
 
 export class TypeParser {
   public static deserialize(typestr: string): Type {
@@ -33,13 +31,13 @@ export class TypeParser {
   }
 
   private static materialize(type: Partial<Type>): Type {
-    const typedef: Type = Registry.resolve(type.typebase || 'any')
+    const typedef: Type = Types.resolve(type.typebase || 'any')
     return Object.assign({}, typedef, type)
   }
 
   private static parse(typestr: string): Type {
     const parts: string[] = typestr.split(':')
-    const type: Type = Registry.resolve(parts[0])
+    const type: Type = Types.resolve(parts[0])
     if (parts.length === 2) {
       const properties = { properties: TypeParser.properties(type, parts[1]) }
       return { ...type, ...properties }

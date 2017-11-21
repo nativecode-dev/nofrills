@@ -1,8 +1,8 @@
 import { Is } from './Is'
-import { Registry } from './Registry'
 import { Type } from './Type'
 import { TypeParser } from './TypeParser'
 import { TypeProperties } from './TypeProperties'
+import { Types } from './Types'
 
 const Any: Type = {
   default: undefined,
@@ -52,7 +52,7 @@ export class TypeRegistry {
   }
 
   public validate(value: any, type: string): boolean {
-    const typedef = Registry.resolve(type)
+    const typedef = Types.resolve(type)
     return typedef.validator(value, typedef.properties)
   }
 }
