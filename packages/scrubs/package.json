@@ -16,8 +16,10 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.5",
     "@types/lodash": "^4.14.71",
     "@types/lodash.merge": "^4.6.2",
+    "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.10",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",

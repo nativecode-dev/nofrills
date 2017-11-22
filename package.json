@@ -41,9 +41,7 @@
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"lint": "tslint packages/*/src/**/*.ts",
 		"pretest": "yarn run build",
-		"testall": "lerna run test",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-		"testonlyall": "lerna run testonly",
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"
 	},
 	"workspaces": [

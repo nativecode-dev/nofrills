@@ -16,6 +16,8 @@
     "moment": "^2.18.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.5",
+    "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.2",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
