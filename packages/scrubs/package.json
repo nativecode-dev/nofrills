@@ -26,23 +26,6 @@
     "ts-node": "^3.3.0",
     "typescript": "^2.4.1"
   },
-  "nyc": {
-    "all": true,
-    "exclude": [
-      "src/**/*.spec.ts"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "include": [
-      "src/**/*.ts"
-    ],
-    "instrument": true,
-    "report-dir": ".cache/coverage",
-    "reporter": "text",
-    "sourceMap": true,
-    "temp-directory": ".cache/nyc"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills-scrubs"
