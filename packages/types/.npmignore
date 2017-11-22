@@ -1,12 +1,7 @@
-.nyc_output/
-.vscode/
-coverage/
+.nyc_output
 node_modules/
 src/
-tests/
 
-.nycrc
-.travis.yml
 mocha.opts
 tsconfig.json
 tslint.json

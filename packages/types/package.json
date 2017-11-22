@@ -41,7 +41,10 @@
       "src/**/*.ts"
     ],
     "instrument": true,
-    "sourceMap": true
+		"report-dir": ".cache/coverage",
+		"reporter": "text",
+		"sourceMap": true,
+		"temp-directory": ".cache/nyc"
   },
   "repository": {
     "type": "git",
