@@ -92,6 +92,15 @@ describe('when using Lincoln', () => {
       sut.error(message)
     })
 
+    it('should call fatal', (done) => {
+      const options: Options = context.options((log: Log) => {
+        expect(log.namespace).to.equal(`${namespace}:fatal`)
+        done()
+      })
+      const sut: Lincoln = new Lincoln(options)
+      sut.fatal(message)
+    })
+
     it('should call info', (done) => {
       const options: Options = context.options((log: Log) => {
         expect(log.namespace).to.equal(`${namespace}:info`)
@@ -99,6 +108,15 @@ describe('when using Lincoln', () => {
       })
       const sut: Lincoln = new Lincoln(options)
       sut.info(message)
+    })
+
+    it('should call trace', (done) => {
+      const options: Options = context.options((log: Log) => {
+        expect(log.namespace).to.equal(`${namespace}:trace`)
+        done()
+      })
+      const sut: Lincoln = new Lincoln(options)
+      sut.trace(message)
     })
 
     it('should call warn', (done) => {

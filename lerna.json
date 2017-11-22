@@ -2,7 +2,7 @@
   "lerna": "2.5.1",
   "npmClient": "yarn",
   "npmClientArgs": [
-    "--quiet"
+    "--silent"
   ],
   "packages": [
     "packages/*"
