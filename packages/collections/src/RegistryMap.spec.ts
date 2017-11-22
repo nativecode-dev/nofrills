@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { RegistryMap } from '../src/index'
+import { RegistryMap } from './index'
 
 describe('when using RegistryMap', () => {
   const KEY1 = 'key-1'

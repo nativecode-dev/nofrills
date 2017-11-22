@@ -32,7 +32,7 @@
   "nyc": {
     "all": true,
     "exclude": [
-      "tests/**/*.ts"
+      "src/**/*.spec.ts"
     ],
     "extension": [
       ".ts"

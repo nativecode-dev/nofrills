@@ -33,6 +33,7 @@
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"testonlyall": "lerna run testonly",
 		"coveralls": "nyc report --reporter=text-lcov | coveralls"
 	},
 	"workspaces": [
