@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "diagnostics": true,
+    "diagnostics": false,
     "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "lib",

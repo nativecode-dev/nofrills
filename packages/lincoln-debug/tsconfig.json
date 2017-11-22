@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "diagnostics": true,
+    "diagnostics": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",

@@ -9,7 +9,10 @@
 		"mocha": "^4.0.1",
 		"nyc": "^11.3.0",
 		"rimraf": "^2.6.2",
+		"source-map-support": "^0.5.0",
 		"ts-node": "^3.3.0",
+		"tslint": "^5.8.0",
+		"tslint-config-standard": "^7.0.0",
 		"typescript": "^2.6.1"
 	},
 	"nyc": {
@@ -33,8 +36,10 @@
 	"scripts": {
 		"build": "lerna run build",
 		"prebuild": "lerna bootstrap",
+		"postbuild": "yarn run lint",
 		"clean": "rimraf .cache && lerna run clean",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"lint": "tslint packages/*/src/**/*.ts",
 		"pretest": "yarn run build",
 		"testall": "lerna run test",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",

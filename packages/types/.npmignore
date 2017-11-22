@@ -1,4 +1,4 @@
-.nyc_output
+.cache
 node_modules/
 src/
 
@@ -6,7 +6,6 @@ mocha.opts
 tsconfig.json
 tslint.json
 
-lib/**/*.map
-
+*.map
 *.log
 *.tgz

@@ -15,18 +15,13 @@
     "zipcodes-regex": "^1.0.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.1",
-    "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.10",
     "@types/validator": "^6.2.1",
-    "chai": "^4.0.2",
-    "coveralls": "^2.13.1",
+    "chai": "^4.1.2",
     "cross-env": "^5.0.1",
-    "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
+    "mocha": "^4.0.1",
     "rimraf": "^2.6.1",
     "ts-node": "^3.3.0",
-    "tslint": "^5.5.0",
     "typescript": "^2.4.1"
   },
   "nyc": {
@@ -41,10 +36,10 @@
       "src/**/*.ts"
     ],
     "instrument": true,
-		"report-dir": ".cache/coverage",
-		"reporter": "text",
-		"sourceMap": true,
-		"temp-directory": ".cache/nyc"
+    "report-dir": ".cache/coverage",
+    "reporter": "text",
+    "sourceMap": true,
+    "temp-directory": ".cache/nyc"
   },
   "repository": {
     "type": "git",
@@ -52,15 +47,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "prebuild": "rimraf lib/",
-    "postbuild": "yarn run lint",
-    "lint": "tslint src/",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "yarn run build",
-    "testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "push": "yarn publish --access public",
-    "prepush": "yarn run test",
+    "prebuild": "yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }

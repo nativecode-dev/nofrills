@@ -1,3 +1,5 @@
+import 'mocha'
+
 import { expect } from 'chai'
 import { ChainAsync, ChainAsyncHandler, ChainAsyncHandlerLink } from './ChainAsync'
 
