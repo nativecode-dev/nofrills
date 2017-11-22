@@ -4,7 +4,7 @@ export const Is: IsType = {
   any: (value: any): boolean => true,
   array: (value: any): boolean => (value instanceof Array) && Is.string(value) === false,
   arrayOf: (value: any[], type?: string): boolean => Is.array(value) && value
-    .map((element: any) => Is[type || 'any'](element))
+    .map((element: any) => Is[type || 'any'](element, type))
     .every((element: boolean) => element === true),
   boolean: (value: any): boolean => typeof value === 'boolean',
   date: (value: any): boolean => value instanceof Date,
