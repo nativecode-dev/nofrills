@@ -61,6 +61,6 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "npm publish --access public",
     "prepush": "yarn run test",
-    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
+    "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }
