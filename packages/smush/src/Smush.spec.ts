@@ -1,8 +1,10 @@
+import 'mocha'
+
 import * as fs from 'fs'
 import * as path from 'path'
 
 import { expect } from 'chai'
-import { Smush, SmushError } from '../src/index'
+import { Smush, SmushError } from './index'
 
 describe('smush', () => {
   let $S: Smush
@@ -151,10 +153,10 @@ describe('smush', () => {
 
       describe('should load .json files', () => {
         it('contents', (done) => {
-          $S.json('config', path.join(__dirname, './test.simple.base.json'))
+          $S.json('config', path.join(__dirname, '../artifacts/test.simple.base.json'))
             .then((smush: Smush) => smush.toObject().config)
             .then((config: any) => {
-              const simpleBase: any = readjson(path.join(__dirname, './test.simple.base.json'))
+              const simpleBase: any = readjson(path.join(__dirname, '../artifacts/test.simple.base.json'))
               expect(config).to.deep.equal(simpleBase)
               done()
             })
@@ -162,11 +164,11 @@ describe('smush', () => {
         })
 
         it('multiple instances', (done) => {
-          $S.json('config', path.join(__dirname, './test.simple.base.json'))
-            .then((smush: Smush) => smush.json('config', path.join(__dirname, './test.simple.derived.json')))
+          $S.json('config', path.join(__dirname, '../artifacts/test.simple.base.json'))
+            .then((smush: Smush) => smush.json('config', path.join(__dirname, '../artifacts/test.simple.derived.json')))
             .then((smush: Smush) => smush.toObject().config)
             .then((config: any) => {
-              const simpleMerged: any = readjson(path.join(__dirname, './test.simple.merged.json'))
+              const simpleMerged: any = readjson(path.join(__dirname, '../artifacts/test.simple.merged.json'))
               expect(config).to.deep.equal(simpleMerged)
               done()
             })
@@ -180,7 +182,7 @@ describe('smush', () => {
             return object
           }
 
-          $S.json('config', path.join(__dirname, './test.simple.merged.json'), transformer)
+          $S.json('config', path.join(__dirname, '../artifacts/test.simple.merged.json'), transformer)
             .then((smush: Smush) => smush.toObject().config)
             .then((config: any) => {
               expect(config.id).to.equal('transformed')

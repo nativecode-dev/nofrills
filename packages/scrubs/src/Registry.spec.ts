@@ -1,9 +1,9 @@
-import * as mocha from 'mocha'
+import 'mocha'
 
 import { expect } from 'chai'
-import { Scrubber, Scrubbers, Scrubs } from '../src/index'
+import { Scrubber, Scrubbers, Scrubs } from './index'
 
-import { data } from './artifacts/data'
+import { data } from '../artifacts/data'
 
 describe('when using scrubs registry', () => {
   const message = 'test'

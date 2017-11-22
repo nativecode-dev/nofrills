@@ -1,8 +1,8 @@
 import { expect } from 'chai'
-import { Lincoln, Log, Options } from '../src/index'
+import { Lincoln, Log, Options } from './index'
 
 describe('when using Lincoln', () => {
-  const context = require('./artifacts/context')
+  const context = require('../artifacts/context')
   const extension = context.EXTENSION
   const namespace = context.NAMESPACE
   const message = context.MESSAGE

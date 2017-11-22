@@ -1,7 +1,8 @@
 import { expect } from 'chai'
-import { Dates, Walk, WalkType } from '../src'
+import { Dates, Walk, WalkType } from './index'
 
 describe('when using Dates helping', () => {
+
   it('should return today\'s date', () => {
     const expected = new Date(2017, 6, 30)
     const today = Dates.today(expected)
@@ -30,4 +31,5 @@ describe('when using Dates helping', () => {
     expect(nextWeek.getDate()).to.equal(6)
     expect(nextWeek.getMonth()).to.equal(7)
   })
+
 })

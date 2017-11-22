@@ -5,7 +5,7 @@ import { expect } from 'chai'
 import { Type, Types } from './index'
 
 describe('when using types library for validation', () => {
-  const validate: (value: any, type: string) => boolean = Types.validate
+  const validate: (value: any, type: string) => boolean = (value: any, type: string) => Types.validate(value, type)
   const testtype: Partial<Type> = {
     properties: {
       max: 5,

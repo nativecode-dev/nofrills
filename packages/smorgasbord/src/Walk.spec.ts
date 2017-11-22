@@ -1,10 +1,10 @@
 import { expect } from 'chai'
-import { Dates, Walk, WalkType } from '../src'
+import { Dates, Walk, WalkType } from './index'
 
 import { Is } from '@nofrills/types'
 
 describe('when using Walk', () => {
-  const context = require('./artifacts/context.walk')
+  const context = require('../artifacts/context.walk')
 
   describe('to walk properties of an object', () => {
     const object = context.object
@@ -65,6 +65,7 @@ describe('when using Walk', () => {
   })
 
   describe('to walk other types', () => {
+
     it('should not walk array', () => {
       expect(Walk(context.array)).to.deep.equal(context.expected.array)
     })
@@ -84,5 +85,7 @@ describe('when using Walk', () => {
     it('should not walk string', () => {
       expect(Walk(context.string)).to.equal(context.expected.string)
     })
+
   })
+
 })

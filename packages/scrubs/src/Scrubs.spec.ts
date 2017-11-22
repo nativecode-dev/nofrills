@@ -1,8 +1,8 @@
-import * as mocha from 'mocha'
+import 'mocha'
 
 import { expect } from 'chai'
-import { scrub, Scrubs } from '../src/index'
-import { data } from './artifacts/data'
+import { scrub, Scrubs } from './index'
+import { data } from '../artifacts/data'
 
 describe('when using scrubs', () => {
   describe('creating a new Scrubs instance', () => {

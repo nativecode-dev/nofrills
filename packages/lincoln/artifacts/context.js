@@ -1,6 +1,6 @@
 const collections = require('@nofrills/collections')
 
-const lincoln = require('../../lib')
+const lincoln = require('../lib')
 
 const EXTENSION = 'extension'
 const NAMESPACE = 'nativecode:lincoln:test'

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { Chain, ChainHandler, ChainHandlerLink } from '../src'
+import { Chain, ChainHandler, ChainHandlerLink } from './Chains'
 
 // tslint:disable:no-unused-expression
 

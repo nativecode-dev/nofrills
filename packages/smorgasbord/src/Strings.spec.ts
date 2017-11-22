@@ -1,8 +1,10 @@
 import { expect } from 'chai'
-import { Strings } from '../src'
+import { Strings } from './Strings'
 
 describe('when using string extensions', () => {
+
   describe('format', () => {
+
     it('should format string', () => {
       const expected = 'smorgasbord'
       const message = '{0}'
@@ -16,5 +18,7 @@ describe('when using string extensions', () => {
       const args = ['quick', 'test']
       expect(Strings.format(message, ...args)).to.equal(expected)
     })
+
   })
+
 })

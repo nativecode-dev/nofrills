@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { CreateLogger, Options } from '../src/index'
+import { CreateLogger, Options } from './index'
 
 describe('when using debug lincoln interceptor', () => {
   const NAMESPACE = 'nativecode:test'

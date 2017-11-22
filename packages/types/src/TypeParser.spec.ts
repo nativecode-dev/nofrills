@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Registry, Type, TypeParser } from './index'
+import { Type, Types, TypeParser } from './index'
 
 describe('when using type parser', () => {
   it('should throw error when deserializing unsupported types', () => {
@@ -37,49 +37,49 @@ describe('when using type parser', () => {
 
   describe('serialization', () => {
     it('should serialize boolean type', () => {
-      const typedef: Type = Registry.resolve('boolean')
+      const typedef: Type = Types.resolve('boolean')
       const serialized = TypeParser.serialize(typedef)
       expect(serialized).to.equal('boolean')
     })
 
     it('should serialize complete boolean type', () => {
-      const typedef: Type = Registry.resolve('boolean')
+      const typedef: Type = Types.resolve('boolean')
       const serialized = TypeParser.serialize(typedef, true)
       expect(serialized).to.equal('boolean')
     })
 
     it('should serialize email type', () => {
-      const typedef: Type = Registry.resolve('email')
+      const typedef: Type = Types.resolve('email')
       const serialized = TypeParser.serialize(typedef)
       expect(serialized).to.equal('email:254')
     })
 
     it('should serialize complete email type', () => {
-      const typedef: Type = Registry.resolve('email')
+      const typedef: Type = Types.resolve('email')
       const serialized = TypeParser.serialize(typedef, true)
       expect(serialized).to.equal('email:max=254')
     })
 
     it('should serialize postalcode type', () => {
-      const typedef: Type = Registry.resolve('postalcode')
+      const typedef: Type = Types.resolve('postalcode')
       const serialized = TypeParser.serialize(typedef)
       expect(serialized).to.equal('postalcode')
     })
 
     it('should serialize complete postalcode type', () => {
-      const typedef: Type = Registry.resolve('postalcode')
+      const typedef: Type = Types.resolve('postalcode')
       const serialized = TypeParser.serialize(typedef, true)
       expect(serialized).to.equal('postalcode:max=16,min=5,required=true')
     })
 
     it('should serialize string type', () => {
-      const typedef: Type = Registry.resolve('string')
+      const typedef: Type = Types.resolve('string')
       const serialized = TypeParser.serialize(typedef)
       expect(serialized).to.equal('string')
     })
 
     it('should serialize complete string type', () => {
-      const typedef: Type = Registry.resolve('string')
+      const typedef: Type = Types.resolve('string')
       const serialized = TypeParser.serialize(typedef, true)
       expect(serialized).to.equal('string')
     })

@@ -12,7 +12,6 @@ import * as validator from 'validator'
 import * as zipcodes from 'zipcodes-regex'
 
 import { Is } from './Is'
-import { Type } from './Type'
 import { TypeProperties } from './TypeProperties'
 import { Types } from './Types'
 
