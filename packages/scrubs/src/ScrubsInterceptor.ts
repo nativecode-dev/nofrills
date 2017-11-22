@@ -1,5 +1,5 @@
 import { Interceptor, Log } from '@nofrills/lincoln'
-import { scrub } from './Scrubs'
+import { scrub } from './Registry'
 
 import merge = require('lodash.merge')
 

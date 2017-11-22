@@ -1,9 +1,11 @@
-export * from './Lincoln'
+export * from './Registry'
 export * from './Scrubs'
+export * from './ScrubsInterceptor'
 
 import { Is } from '@nofrills/types'
 import { Lincoln, Logger } from './Logging'
-import { Registry, Scrubber, Scrubs, ScrubsOptions } from './Scrubs'
+import { Registry } from './Registry'
+import { Scrubber, Scrubs, ScrubsOptions } from './Scrubs'
 
 import merge = require('lodash.merge')
 

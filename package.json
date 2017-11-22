@@ -8,6 +8,7 @@
 		"lerna": "^2.5.1",
 		"mocha": "^4.0.1",
 		"nyc": "^11.3.0",
+		"rimraf": "^2.6.2",
 		"ts-node": "^3.3.0",
 		"typescript": "^2.6.1"
 	},
@@ -24,12 +25,15 @@
 			"packages/*/src/**/*.ts"
 		],
 		"instrument": true,
-		"sourceMap": true
+		"report-dir": ".cache/coverage",
+		"reporter": "text",
+		"sourceMap": true,
+		"temp-directory": ".cache/nyc"
 	},
 	"scripts": {
 		"build": "lerna run build",
-		"prebuild": "lerna bootstrap",
-		"clean": "lerna run clean",
+		"prebuild": "yarn run clean && lerna bootstrap",
+		"clean": "rimraf .cache && lerna run clean",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",

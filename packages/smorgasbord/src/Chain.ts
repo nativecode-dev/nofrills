@@ -1,4 +1,4 @@
-import { Lincoln, Logger } from '../Logging'
+import { Lincoln, Logger } from './Logging'
 
 export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, R>) => R
 export type ChainHandlerLink<T, R> = (object: T) => R
