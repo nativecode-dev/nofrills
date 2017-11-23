@@ -11,7 +11,7 @@ jobs:
   include:
     - stage: deploy
       script:
-        - yarn run predeploy
+        - yarn run ssh
         - 'export RELEASE_BRANCH=release-$TRAVIS_BUILD_NUMBER'
         - 'git remote set-url origin git@github.com:nativecode-dev/nofrills.git'
         - 'git status'
