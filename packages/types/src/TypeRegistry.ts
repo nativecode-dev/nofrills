@@ -1,7 +1,5 @@
 import { Is } from './Is'
 import { Type } from './Type'
-import { TypeParser } from './TypeParser'
-import { TypeProperties } from './TypeProperties'
 
 const Any: Type = {
   default: undefined,
@@ -10,8 +8,6 @@ const Any: Type = {
   typebase: 'object',
   validator: (value: any) => true,
 }
-
-const BaseTypes: string[] = ['Array', 'Boolean', 'Date', 'Error', 'Number', 'Object', 'String']
 
 export class TypeRegistry {
   private readonly registry: Map<string, Type>

@@ -18,7 +18,7 @@ export class TypeParser {
 
     if (typedef.default && full === false) {
       return `${typedef.type}:${props[typedef.default]}`
-    } else if (!typedef.default && full === false) {
+    } else if (!typedef.default && full === false && keys.length === 0) {
       return typedef.type
     }
 

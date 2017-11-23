@@ -60,12 +60,6 @@ describe('when using type parser', () => {
       expect(serialized).to.equal('email:max=254')
     })
 
-    it('should serialize postalcode type', () => {
-      const typedef: Type = Types.resolve('postalcode')
-      const serialized = TypeParser.serialize(typedef)
-      expect(serialized).to.equal('postalcode')
-    })
-
     it('should serialize complete postalcode type', () => {
       const typedef: Type = Types.resolve('postalcode')
       const serialized = TypeParser.serialize(typedef, true)
@@ -86,9 +80,25 @@ describe('when using type parser', () => {
 
     it('should serialize partial type', () => {
       const typedef: Partial<Type> = {
+        properties: {
+          max: 2,
+        },
         type: 'custom'
       }
-      const serialized = TypeParser.serialize(typedef)
+      const serialized = TypeParser.serialize(typedef, false)
+      expect(serialized).to.equal('custom:max=2')
+    })
+
+    it('should serialize complete type', () => {
+      const typedef: Partial<Type> = {
+        properties: {
+          max: 2,
+          min: 2,
+        },
+        type: 'custom'
+      }
+      const serialized = TypeParser.serialize(typedef, true)
+      expect(serialized).to.equal('custom:max=2,min=2')
     })
   })
 })

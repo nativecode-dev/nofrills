@@ -5,7 +5,7 @@ export * from './ScrubsInterceptor'
 import { Is } from '@nofrills/types'
 import { Lincoln, Logger } from './Logging'
 import { Registry } from './Registry'
-import { Scrubber, Scrubs, ScrubsOptions } from './Scrubs'
+import { Scrubs, ScrubsOptions } from './Scrubs'
 
 import merge = require('lodash.merge')
 

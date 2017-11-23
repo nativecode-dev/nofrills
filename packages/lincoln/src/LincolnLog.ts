@@ -1,5 +1,3 @@
-import { Dictionary } from '@nofrills/collections'
-
 export interface LincolnLog {
   debug(...parameters: any[]): void
   error(...parameters: any[]): void

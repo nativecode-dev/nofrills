@@ -10,12 +10,11 @@ import { Logger } from './Logging'
 import { SmushError } from './SmushError'
 
 export class Smush {
-  private readonly identifier: string = shortid.generate()
+  public readonly identifier: string = shortid.generate()
 
   private log: Lincoln
   private reader = Promise.promisify(fs.readFile)
   private root: any = {}
-  private writer = Promise.promisify(fs.writeFile)
 
   constructor() {
     this.log = Logger.extend('Smush')
@@ -39,7 +38,6 @@ export class Smush {
   }
 
   public schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
-    const config: any = this.get(key)
     const transformer = transform ? transform : (obj: T) => obj
 
     return this.reader(filename)

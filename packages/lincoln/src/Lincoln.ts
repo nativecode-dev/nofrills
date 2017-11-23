@@ -90,8 +90,6 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
       timestamp: Date.now(),
     }
 
-    const logger = console.log
-
     const filters = Array.from(this.options.filters.values)
     const filtered: boolean = filters.every((filter: Filter) => filter(log))
 

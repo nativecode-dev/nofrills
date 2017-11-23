@@ -9,7 +9,9 @@ describe('when using scrubs registry', () => {
   const message = 'test'
 
   it('should register type handler', (done) => {
-    const handler = (value: any) => {
+    const scrubs = new Scrubs()
+
+    scrubs.register('string', (value: any) => {
       const handlers: Scrubbers | undefined = scrubs.get('string')
       if (handlers) {
         expect(handlers.length).to.equal(1)
@@ -18,9 +20,8 @@ describe('when using scrubs registry', () => {
         expect(handlers).to.not.equal(undefined)
       }
       done()
-    }
-    const scrubs = new Scrubs()
-    scrubs.register('string', handler)
+    })
+
     scrubs.scrub(message)
   })
 
@@ -36,7 +37,9 @@ describe('when using scrubs registry', () => {
   })
 
   it('should clear type handlers', (done) => {
-    const handler = (value: any) => {
+    const scrubs = new Scrubs()
+
+    scrubs.register('string', (value: any) => {
       scrubs.clear('string')
       const handlers: Scrubbers | undefined = scrubs.get('string')
       if (handlers) {
@@ -45,9 +48,8 @@ describe('when using scrubs registry', () => {
         expect(handlers).to.not.equal(undefined)
       }
       done()
-    }
-    const scrubs = new Scrubs()
-    scrubs.register('string', handler)
+    })
+
     scrubs.scrub(message)
   })
 })

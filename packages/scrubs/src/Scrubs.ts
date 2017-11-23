@@ -1,4 +1,4 @@
-import { Is, Types } from '@nofrills/types'
+import { Types } from '@nofrills/types'
 
 import { Lincoln, Logger } from './Logging'
 
@@ -33,7 +33,7 @@ export class Scrubs {
     return this
   }
 
-  public get<T>(type: string): Scrubbers | undefined {
+  public get(type: string): Scrubbers | undefined {
     this.log.debug('get', type)
     return this.registry.get(type)
   }

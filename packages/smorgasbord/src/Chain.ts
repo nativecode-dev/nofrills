@@ -27,7 +27,7 @@ export class Chain<T, R> {
     }
     const initiator: Link<T, R> = (obj: T): R => initializer ? initializer() : {} as R
     const proxy: Link<T, R> = this.proxy(reverse || false, initiator)
-    return proxy(object) as R
+    return proxy(object)
   }
 
   private proxy(reverse: boolean, initiator: Link<T, R>): Link<T, R> {

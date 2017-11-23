@@ -19,7 +19,7 @@ describe('when using Walk', () => {
           members.push(path.join('.'))
         }
       }
-      const sut = Walk(object, interceptor)
+      Walk(object, interceptor)
       expect(members.length).to.deep.equal(7)
       expect(members).to.deep.equal(expectedMembers)
     })
@@ -60,7 +60,7 @@ describe('when using Walk', () => {
             count++
           }
         }
-        const sut = Walk(array, interceptor)
+        Walk(array, interceptor)
         expect(count).to.equal(2)
       })
     })

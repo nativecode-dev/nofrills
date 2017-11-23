@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Dates, Walk, WalkType } from './index'
+import { Dates } from './index'
 
 describe('when using Dates helping', () => {
 

@@ -1,5 +1,3 @@
-import { Registry } from './Registry'
-
 export class RegistryMap<T> {
   protected readonly map: Map<string, T[]> = new Map<string, T[]>()
 

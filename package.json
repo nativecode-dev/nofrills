@@ -39,7 +39,7 @@
 		"postbuild": "yarn run lint",
 		"clean": "rimraf .cache && lerna run clean",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-		"lint": "tslint packages/*/src/**/*.ts",
+		"lint": "tslint --project tsconfig.json --config tslint.json",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"

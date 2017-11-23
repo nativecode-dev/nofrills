@@ -20,7 +20,6 @@ describe('smush', () => {
 
   describe('when smushing', () => {
     const KEY: string = 'smushit'
-    const PATH: string = 'realgood'
 
     it('should throw SmushError when file not found.', (done) => {
       $S.json(KEY, 'fake.file.json')
@@ -121,13 +120,13 @@ describe('smush', () => {
       }
 
       it('merges deeply nested properties', () => {
-        const merged: any = $S.set(KEY, sourceA, sourceB)
+        $S.set(KEY, sourceA, sourceB)
         const sut: any = $S.toObject()[KEY]
         expect(sut).to.deep.equal(expected)
       })
 
       it('exports by specific key', () => {
-        const merged: any = $S.set(KEY, sourceA, sourceB)
+        $S.set(KEY, sourceA, sourceB)
         const sut: any = $S.toObject(`${KEY}.payload`)
         expect(sut).to.deep.equal({
           key: 'sourceB.payload'
@@ -135,7 +134,7 @@ describe('smush', () => {
       })
 
       it('exports by specific value', () => {
-        const merged: any = $S.set(KEY, sourceA, sourceB)
+        $S.set(KEY, sourceA, sourceB)
         const sut: any = $S.toObject(`${KEY}.payload.key`)
         expect(sut).to.equal('sourceB.payload')
       })
