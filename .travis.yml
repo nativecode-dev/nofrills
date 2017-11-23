@@ -1,13 +1,7 @@
 cache: yarn
-language: node_js
-node_js:
-  - node
-  - '8'
-  - '6'
-os:
-  - linux
-before_deploy:
-  - yarn run predeploy
+language: node
+node: node
+os: linux
 stages:
   - test
   - name: deploy
@@ -16,5 +10,9 @@ jobs:
   include:
     - stage: deploy
       script: yarn run push
+after_failure:
+  - cat lerna-debug.log
 after_success:
   - yarn run coveralls
+before_deploy:
+  - yarn run predeploy

@@ -13,12 +13,12 @@
   "loglevel": "silent",
   "npmClient": "yarn",
   "npmClientArgs": [
-    "--x-silent"
+    "--silent"
   ],
   "packages": [
     "packages/*"
   ],
-  "stream": true,
+  "stream": false,
   "useWorkspaces": true,
   "version": "1.0.0"
 }
