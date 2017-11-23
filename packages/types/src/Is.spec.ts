@@ -13,6 +13,7 @@ describe('when using type library', () => {
       it('should validate array type', () => expect(Is.array([])).to.equal(true))
       it('should validate arrayOf type', () => expect(Is.arrayOf([1, 2, 3, 4, 5], 'number')).to.equal(true))
       it('should validate arrayOf are not expected type', () => expect(Is.arrayOf([1, 2, 3, 4, '5'], 'number')).to.equal(false))
+      it('should validate arrayOf any', () => expect(Is.arrayOf([1])).to.equal(true))
       it('should validate string is not array', () => expect(Is.array('string')).to.equal(false))
       it('should validate boolean type', () => expect(Is.boolean(true)).to.equal(true))
       it('should validate boolean is not string', () => expect(Is.boolean('yes')).to.equal(false))

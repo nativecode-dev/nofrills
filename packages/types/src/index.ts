@@ -15,9 +15,7 @@ import { Is } from './Is'
 import { TypeProperties } from './TypeProperties'
 import { Types } from './Types'
 
-const phone = (): RegExp => {
-  return /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
-}
+const phone = (): RegExp => /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
 
 Types.register({
   default: 'max',
@@ -45,12 +43,7 @@ Types.register({
   },
   type: 'email',
   typebase: 'string',
-  validator: (value: any) => {
-    if (Is.string(value)) {
-      return validator.isEmail(value)
-    }
-    return false
-  },
+  validator: (value: any) => Is.string(value) ? validator.isEmail(value) : false,
 })
 
 Types.register({
@@ -86,7 +79,7 @@ Types.register({
   },
   type: 'postalcode',
   typebase: 'string',
-  validator: (value: any, props?: TypeProperties, country?: string) => {
+  validator: (value: any, props?: TypeProperties, country?: string): boolean => {
     if (Is.string(value)) {
       const pattern: string = zipcodes[country || 'US']
       const regex: RegExp = new RegExp(pattern)
@@ -100,24 +93,41 @@ Types.register({
   default: 'max',
   type: 'string',
   typebase: 'String',
-  validator: (value: any, props?: TypeProperties) => {
+  validator: (value: any, props?: TypeProperties): boolean => {
     const valid: boolean = Is.string(value)
 
     if (valid === false && props && props.required) {
       return false
-    } else if (value) {
-      if (props && props.max && value.length > props.max) {
-        return false
-      } else if (props && props.min && value.length < props.min) {
-        return false
-      }
     }
+
+    if (!value) {
+      return valid
+    }
+
+    if (props && props.max && value.length > props.max) {
+      return false
+    } else if (props && props.min && value.length < props.min) {
+      return false
+    }
+
     return valid
   },
 })
 
+const timestamp = (timestamp: number) => {
+  const date = new Date(timestamp)
+  const max = new Date('2038-01-19 03:14:07')
+  const min = new Date('1970-01-01 00:00:01')
+  return date > min && date < max
+}
+
 Types.register({
+  properties: {
+    max: 8640000000000000,
+    min: -8640000000000000,
+    required: true,
+  },
   type: 'timestamp',
   typebase: 'number',
-  validator: (value: any) => Is.number(value),
+  validator: (value: any) => Is.number(value) && timestamp(value),
 })
