@@ -11,7 +11,7 @@ after_success:
 stages:
   - test
   - name: deploy
-    if: branch = master && type IN (push)
+    if: branch = master AND NOT type = pull_request
 jobs:
   include:
     - stage: deploy
