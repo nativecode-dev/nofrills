@@ -11,8 +11,7 @@ after_success:
 stages:
   - test
   - name: deploy
-  - if: branch = master
-  - if: type IN (push)
+    if: branch = master && type IN (push)
 jobs:
   include:
     - stage: deploy
