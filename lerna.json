@@ -1,7 +1,11 @@
 {
   "command": {
     "publish": {
-      "message": "release: %s"
+      "allowBranch": "master",
+      "cdVersion": "prerelease",
+      "message": "release: %s",
+      "skipGit": false,
+      "yes": true
     }
   },
   "lerna": "2.5.1",
@@ -15,5 +19,5 @@
   ],
   "stream": true,
   "useWorkspaces": true,
-  "version": "1.0.0"
+  "version": "1.0.1-0"
 }

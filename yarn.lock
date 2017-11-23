@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@alrra/travis-scripts@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@alrra/travis-scripts/-/travis-scripts-3.0.1.tgz#45d5b9357317b6cc5553dfd99931843ae0b0e53a"
+
 "@types/bluebird@^3.5.5":
   version "3.5.18"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.18.tgz#6a60435d4663e290f3709898a4f75014f279c4d6"
