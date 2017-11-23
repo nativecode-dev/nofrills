@@ -10,6 +10,7 @@ describe('when using type parser', () => {
   })
 
   describe('parsing type strings', () => {
+
     it('should resolve type', () => {
       const typedef: Type = TypeParser.deserialize('string')
       expect(typedef.typebase).to.equal('String')
@@ -33,6 +34,23 @@ describe('when using type parser', () => {
       expect(typedef.type).to.equal('email')
       expect(typedef.properties.max).to.equal(128)
     })
+
+    it('should resolve type with constrained number', () => {
+      const typedef: Type = TypeParser.deserialize('number:5')
+      expect(typedef.properties.max).to.equal(5)
+      expect(typedef.validator(1, typedef.properties)).to.equal(true)
+      expect(typedef.validator(6, typedef.properties)).to.equal(false)
+      expect(typedef.validator(5, typedef.properties)).to.equal(true)
+    })
+
+    it('should resolve type with bounded number', () => {
+      const typedef: Type = TypeParser.deserialize('number:max=5,min=2')
+      expect(typedef.properties.max).to.equal(5)
+      expect(typedef.validator(1, typedef.properties)).to.equal(false)
+      expect(typedef.validator(6, typedef.properties)).to.equal(false)
+      expect(typedef.validator(5, typedef.properties)).to.equal(true)
+    })
+
   })
 
   describe('serialization', () => {
