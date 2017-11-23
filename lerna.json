@@ -2,10 +2,10 @@
   "command": {
     "publish": {
       "allowBranch": "master",
-      "canary": "alpha",
+      "canary": "beta",
       "cdVersion": "prerelease",
       "message": "release: %s",
-      "skipGit": true,
+      "skipGit": false,
       "yes": true
     }
   },
