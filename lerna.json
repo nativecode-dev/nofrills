@@ -3,7 +3,9 @@
     "publish": {
       "allowBranch": "master",
       "canary": "alpha",
-      "message": "release: %s"
+      "message": "release: %s",
+      "skipGit": true,
+      "yes": true
     }
   },
   "lerna": "2.5.1",
