@@ -42,7 +42,7 @@
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-		"push": "lerna publish --allow-branch=master --npm-tag=latest --cd-version=prerelease --yes"
+		"push": "lerna publish --allow-branch=master --cd-version=prerelease --yes"
 	},
 	"workspaces": [
 		"packages/*"
