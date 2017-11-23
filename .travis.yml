@@ -12,11 +12,15 @@ stages:
   - test
   - name: deploy-develop
     if: branch = develop AND type = pull_request
+  - name: deploy-lts
+    if: branch = lts AND type != pull_request
   - name: deploy-master
     if: branch = master AND type != pull_request
 jobs:
   include:
     - stage: deploy-develop
-      script: yarn run build && yarn run push --npm-tag=pr-$TRAVIS_PULL_REQUEST_BRANCH-$TRAVIS_PULL_REQUEST
+      script: yarn run build && yarn run push --cd-version=prerelease --npm-tag=pr-$TRAVIS_PULL_REQUEST_BRANCH-$TRAVIS_PULL_REQUEST
+    - stage: deploy-lts
+      script: yarn run build && yarn run push --cd-version=minor --npm-tag=latest
     - stage: deploy-master
-      script: yarn run build && yarn run push --npm-tag=latest
+      script: yarn run build && yarn run push --cd-version=major --npm-tag=next
