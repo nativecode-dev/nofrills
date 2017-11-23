@@ -85,8 +85,8 @@ describe('when using type parser', () => {
         },
         type: 'custom'
       }
-      const serialized = TypeParser.serialize(typedef, false)
-      expect(serialized).to.equal('custom:max=2')
+      const serialized = TypeParser.serialize(typedef)
+      expect(serialized).to.equal('custom')
     })
 
     it('should serialize complete type', () => {
