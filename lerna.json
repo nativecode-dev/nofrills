@@ -3,6 +3,7 @@
     "publish": {
       "allowBranch": "master",
       "canary": "alpha",
+      "cdVersion": "prerelease",
       "message": "release: %s",
       "skipGit": true,
       "yes": true
@@ -12,7 +13,7 @@
   "loglevel": "silent",
   "npmClient": "yarn",
   "npmClientArgs": [
-    "--silent"
+    "--x-silent"
   ],
   "packages": [
     "packages/*"
