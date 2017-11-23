@@ -1,6 +1,7 @@
 cache: yarn
-language: node
-node: node
+language: node_js
+node_js:
+  - node
 os: linux
 stages:
   - test
