@@ -17,6 +17,6 @@ stages:
 jobs:
   include:
     - stage: deploy-develop
-      script: yarn run build && yarn run push --allow-branch=develop --npm-tag=pr
+      script: yarn run build && yarn run push --allow-branch=develop --npm-tag=pr-$TRAVIS_PULL_REQUEST
     - stage: deploy-master
       script: yarn run build && yarn run push --allow-branch=master --npm-tag=latest
