@@ -2,6 +2,7 @@
   "command": {
     "publish": {
       "allowBranch": "master",
+      "canary": "latest",
       "message": "release: %s",
       "preid": "latest"
     }
