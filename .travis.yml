@@ -20,3 +20,4 @@ before_deploy:
 before_install:
   - 'curl -o- -L https://yarnpkg.com/install.sh | bash -s'
   - 'export PATH="$HOME/.yarn/bin:$PATH"'
+  - 'npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"'
