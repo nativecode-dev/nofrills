@@ -5,14 +5,15 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smorgasbord",
+  "private": false,
   "types": "./lib/index.d.ts",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smorgasbord/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^0.3.2",
-    "@nofrills/types": "^0.9.0",
+    "@nofrills/lincoln-debug": "^1.0.0",
+    "@nofrills/types": "^1.0.0",
     "moment": "^2.18.1"
   },
   "devDependencies": {
