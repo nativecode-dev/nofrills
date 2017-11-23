@@ -1,7 +1,7 @@
 {
 	"name": "nofrills",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"devDependencies": {
 		"coveralls": "^3.0.0",
 		"cross-env": "^5.1.1",

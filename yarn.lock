@@ -2,27 +2,6 @@
 # yarn lockfile v1
 
 
-"@nofrills/collections@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@nofrills/collections/-/collections-0.9.1.tgz#4904cf0620f7f044b3ce6712daf4f729ef36e40d"
-
-"@nofrills/scrubs@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@nofrills/scrubs/-/scrubs-0.8.1.tgz#9aaebd8c652b40d9633017b9b46e80c443b9ae7a"
-  dependencies:
-    "@nofrills/collections" "^0.9.1"
-    "@nofrills/lincoln-debug" "^0.3.0"
-    "@nofrills/types" "^0.8.0"
-    lodash "^4.17.4"
-
-"@nofrills/types@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@nofrills/types/-/types-0.8.0.tgz#3947234c61207446abd3b595a7371928493be18c"
-  dependencies:
-    "@nofrills/collections" "^0.9.1"
-    validator "^7.2.0"
-    zipcodes-regex "^1.0.1"
-
 "@types/bluebird@^3.5.5":
   version "3.5.18"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.18.tgz#6a60435d4663e290f3709898a4f75014f279c4d6"
