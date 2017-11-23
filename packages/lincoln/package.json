@@ -5,13 +5,14 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln",
+  "private": false,
   "types": "./lib/index.d.ts",
-  "version": "0.10.2",
+  "version": "1.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-lincoln/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^0.10.1",
+    "@nofrills/collections": "^1.0.0",
     "uuidjs": "^3.5.3"
   },
   "devDependencies": {

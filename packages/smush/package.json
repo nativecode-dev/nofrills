@@ -5,14 +5,15 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
+  "private": false,
   "types": "./lib/index.d.ts",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^0.3.2",
-    "@nofrills/scrubs": "^0.8.1",
+    "@nofrills/lincoln-debug": "^1.0.0",
+    "@nofrills/scrubs": "^1.0.0",
     "bluebird": "^3.5.0",
     "lodash.merge": "^4.6.0",
     "shortid": "^2.2.8"
