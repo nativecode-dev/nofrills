@@ -15,4 +15,4 @@ stages:
 jobs:
   include:
     - stage: deploy-master
-      script: yarn run build && yarn run push
+      script: yarn run push
