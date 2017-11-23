@@ -39,8 +39,9 @@
 		"clean": "rimraf .cache && lerna run clean",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-		"pretest": "yarn run build",
-		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"pretest": "lerna bootstrap && yarn run lint",
+		"testall": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"pretestall": "yarn run build",
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
 		"push": "lerna publish --cd-version prerelease --yes"
 	},
