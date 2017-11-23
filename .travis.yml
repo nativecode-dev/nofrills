@@ -14,7 +14,6 @@ jobs:
         - yarn run ssh
         - 'git remote set-url origin git@github.com:nativecode-dev/nofrills.git'
         - git checkout master
-        - git status
         - 'npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"'
         - yarn run push
 after_failure:

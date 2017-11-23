@@ -1,7 +1,7 @@
 {
   "command": {
     "publish": {
-      "allowBranch": "master-x",
+      "allowBranch": "master",
       "cdVersion": "prerelease",
       "message": "release: %s",
       "skipGit": false,
