@@ -1,6 +1,7 @@
 {
   "command": {
     "publish": {
+      "allowBranch": "master",
       "message": "release: %s"
     }
   },
