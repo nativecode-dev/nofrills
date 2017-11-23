@@ -35,11 +35,10 @@
 	},
 	"scripts": {
 		"build": "lerna run build",
-		"prebuild": "lerna bootstrap",
-		"postbuild": "yarn run lint",
+		"prebuild": "lerna bootstrap && yarn run lint",
 		"clean": "rimraf .cache && lerna run clean",
-		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
+		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"
