@@ -1,10 +1,7 @@
 {
   "command": {
     "publish": {
-      "allowBranch": "master",
-      "canary": "latest",
-      "message": "release: %s",
-      "preid": "latest"
+      "message": "release: %s"
     }
   },
   "lerna": "2.5.1",
