@@ -8,3 +8,10 @@ os:
   - linux
 after_success:
   - npm run coveralls
+jobs:
+  include:
+    - if: branch = master
+    - stage: npm release
+      node_js: '6'
+      before_deploy: yarn run build
+      script: yarn run push

@@ -1,4 +1,11 @@
 {
+  "command": {
+    "publish": {
+      "allowBranch": "master",
+      "message": "release: %s",
+      "preid": "latest"
+    }
+  },
   "lerna": "2.5.1",
   "loglevel": "silent",
   "npmClient": "yarn",
