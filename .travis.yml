@@ -13,6 +13,7 @@ jobs:
       script:
         - yarn run predeploy
         - 'git remote set-url origin git@github.com:nativecode-dev/nofrills.git'
+        - 'echo HEAD:release-$TRAVIS_BUILD_NUMBER'
         - 'git push origin HEAD:release-$TRAVIS_BUILD_NUMBER'
         - yarn run push
 after_failure:

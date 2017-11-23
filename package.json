@@ -45,7 +45,7 @@
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
 		"push": "lerna publish",
 		"prepush": "yarn run build",
-		"predeploy": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+		"predeploy": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
 	},
 	"workspaces": [
 		"packages/*"
