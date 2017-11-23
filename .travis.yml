@@ -19,11 +19,11 @@ before_install:
            "  LogLevel ERROR" >> ~/.ssh/config
 stages:
   - test
-  - name: deploy-master
+  - name: deploy
     if: branch = master AND type != pull_request
 jobs:
   include:
-    - stage: deploy-master
+    - stage: deploy
       script: yarn run push
 after_success:
   - yarn run coveralls
