@@ -12,11 +12,8 @@ jobs:
     - stage: deploy
       script:
         - yarn run ssh
-        - export RELEASE_BRANCH=release-$TRAVIS_BUILD_NUMBER
         - 'git remote set-url origin git@github.com:nativecode-dev/nofrills.git'
-        - git status
-        - echo $RELEASE_BRANCH
-        - git checkout -b $RELEASE_BRANCH
+        - git checkout master
         - git status
         - 'npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"'
         - yarn run push
