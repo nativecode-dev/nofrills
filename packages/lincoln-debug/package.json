@@ -15,33 +15,16 @@
     "debug": "^2.6.8"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.1",
+    "@types/chai": "^4.0.5",
     "@types/debug": "0.0.29",
-    "@types/mocha": "^2.2.41",
+    "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.2",
-    "chai": "^4.0.2",
-    "coveralls": "^2.13.1",
+    "chai": "^4.1.2",
     "cross-env": "^5.0.1",
-    "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
+    "mocha": "^4.0.1",
     "rimraf": "^2.6.1",
     "ts-node": "^3.3.0",
-    "tslint": "^5.4.3",
     "typescript": "^2.3.4"
-  },
-  "nyc": {
-    "all": true,
-    "exclude": [
-      "tests/**/*.ts"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "include": [
-      "src/**/*.ts"
-    ],
-    "instrument": true,
-    "sourceMap": true
   },
   "repository": {
     "type": "git",
@@ -49,14 +32,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "prebuild": "rimraf lib/",
-    "postbuild": "yarn run lint",
-    "lint": "tslint src/",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "yarn run build",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "push": "npm publish --access public",
-    "prepush": "yarn run test",
-    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
+    "prebuild": "yarn run clean",
+    "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }

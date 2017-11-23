@@ -8,13 +8,18 @@
 		"lerna": "^2.5.1",
 		"mocha": "^4.0.1",
 		"nyc": "^11.3.0",
+		"rimraf": "^2.6.2",
+		"source-map-support": "^0.5.0",
 		"ts-node": "^3.3.0",
+		"tslint": "^5.8.0",
+		"tslint-config-standard": "^7.0.0",
 		"typescript": "^2.6.1"
 	},
 	"nyc": {
 		"all": true,
 		"exclude": [
-			"packages/*/tests/**/*.ts"
+			"node_modules",
+			"packages/*/src/**/*.spec.ts"
 		],
 		"extension": [
 			".ts"
@@ -23,15 +28,21 @@
 			"packages/*/src/**/*.ts"
 		],
 		"instrument": true,
-		"sourceMap": true
+		"report-dir": ".cache/coverage",
+		"reporter": "text",
+		"sourceMap": true,
+		"temp-directory": ".cache/nyc"
 	},
 	"scripts": {
 		"build": "lerna run build",
-		"prebuild": "lerna bootstrap",
-		"clean": "lerna run clean",
+		"prebuild": "lerna bootstrap && yarn run lint",
+		"clean": "rimraf .cache && lerna run clean",
+		"lint": "tslint --project tsconfig.json --config tslint.json",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
-		"coveralls": "nyc report --reporter=text-lcov | coveralls"
+		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
+		"push": "lerna publish --cd-version prerelease --yes"
 	},
 	"workspaces": [
 		"packages/*"

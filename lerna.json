@@ -1,12 +1,22 @@
 {
+  "command": {
+    "publish": {
+      "allowBranch": "master",
+      "canary": "latest",
+      "message": "release: %s",
+      "preid": "latest"
+    }
+  },
   "lerna": "2.5.1",
+  "loglevel": "silent",
   "npmClient": "yarn",
   "npmClientArgs": [
-    "--quiet"
+    "--silent"
   ],
   "packages": [
     "packages/*"
   ],
+  "stream": true,
   "useWorkspaces": true,
-  "version": "3.0.0-alpha-0"
+  "version": "1.0.0"
 }

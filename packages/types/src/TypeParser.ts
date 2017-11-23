@@ -1,7 +1,6 @@
 import * as validator from 'validator'
 
-import { Types } from './Type'
-import { Type, TypeProperties } from './Types'
+import { Type, TypeProperties, Types } from './index'
 
 export class TypeParser {
   public static deserialize(typestr: string): Type {
@@ -19,7 +18,7 @@ export class TypeParser {
 
     if (typedef.default && full === false) {
       return `${typedef.type}:${props[typedef.default]}`
-    } else if (!typedef.default && full === false) {
+    } else if (typedef.default === undefined && full === false) {
       return typedef.type
     }
 

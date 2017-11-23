@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "diagnostics": true,
+    "diagnostics": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",
@@ -16,11 +17,10 @@
     ]
   },
   "exclude": [
-    "node_modules/**/*",
-    "tests/**/*.ts"
+    "node_modules",
+    "src/**/*.spec.ts"
   ],
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/**/*.ts"
   ]
 }

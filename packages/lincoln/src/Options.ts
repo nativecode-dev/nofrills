@@ -1,5 +1,4 @@
-import { Registry } from '@nofrills/collections'
-import { Filter, Interceptor, LincolnRegistry } from './Types'
+import { Filter, Interceptor, LincolnRegistry } from './LincolnRegistry'
 
 export interface Options {
   filters: LincolnRegistry<Filter>,

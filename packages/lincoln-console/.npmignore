@@ -1,17 +1,11 @@
-.nyc_output/
-.vscode/
-coverage/
+.cache
 node_modules/
 src/
-tests/
 
-.nycrc
-.travis.yml
 mocha.opts
 tsconfig.json
 tslint.json
 
-lib/**/*.map
-
+*.map
 *.log
 *.tgz

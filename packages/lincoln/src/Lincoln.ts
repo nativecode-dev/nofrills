@@ -5,7 +5,8 @@ import { Dictionary, Registry } from '@nofrills/collections'
 
 import { Log } from './Log'
 import { Options } from './Options'
-import { Filter, Interceptor } from './Types'
+import { LincolnLog } from './LincolnLog'
+import { Filter, Interceptor } from './LincolnRegistry'
 
 const defaults: Options = {
   filters: new Registry<Filter>(),
@@ -17,11 +18,13 @@ const defaults: Options = {
 const types: Dictionary<string> = {
   debug: 'debug',
   error: 'error',
+  fatal: 'fatal',
   info: 'info',
+  trace: 'trace',
   warn: 'warn',
 }
 
-export class Lincoln extends events.EventEmitter {
+export class Lincoln extends events.EventEmitter implements LincolnLog {
   public static events: { [key: string]: string } = {
     log: 'log'
   }
@@ -59,8 +62,16 @@ export class Lincoln extends events.EventEmitter {
     })
   }
 
+  public fatal(...parameters: any[]): void {
+    this.write(types.fatal, parameters)
+  }
+
   public info(...parameters: any[]): void {
     this.write(types.info, parameters)
+  }
+
+  public trace(...parameters: any[]): void {
+    this.write(types.trace, parameters)
   }
 
   public warn(...parameters: any[]): void {
@@ -78,8 +89,6 @@ export class Lincoln extends events.EventEmitter {
       parameters,
       timestamp: Date.now(),
     }
-
-    const logger = console.log
 
     const filters = Array.from(this.options.filters.values)
     const filtered: boolean = filters.every((filter: Filter) => filter(log))

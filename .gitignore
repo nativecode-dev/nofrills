@@ -1,6 +1,8 @@
-.nyc_output/
+.cache/
+coverage/
 dist/
 lib/
 node_modules/
 
 *.log
+*.tgz

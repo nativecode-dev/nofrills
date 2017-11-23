@@ -6,4 +6,13 @@ node_js:
   - '6'
 os:
   - linux
-after_success: npm run coveralls
+after_success:
+  - npm run coveralls
+stages:
+  - test
+  - name: deploy
+    if: branch = master AND type != pull_request
+jobs:
+  include:
+    - stage: deploy
+      script: yarn run build && yarn run push

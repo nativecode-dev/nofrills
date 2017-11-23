@@ -1,16 +1,3 @@
-export interface Type {
-  default: string | undefined
-  properties: TypeProperties
-  type: string
-  typebase: string
-  validator: TypeValidator
-}
+import { TypeRegistry } from './TypeRegistry'
 
-export interface TypeProperties {
-  [key: string]: any
-  max?: number
-  min?: number
-  required?: boolean
-}
-
-export type TypeValidator = (value: any, ...args: any[]) => boolean
+export const Types: TypeRegistry = new TypeRegistry()

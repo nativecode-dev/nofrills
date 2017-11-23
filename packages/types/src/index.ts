@@ -1,14 +1,19 @@
 export * from './Is'
+export * from './IsType'
+export * from './IsTypeHandler'
 export * from './Type'
 export * from './TypeParser'
+export * from './TypeProperties'
+export * from './TypeRegistry'
 export * from './Types'
+export * from './TypeValidator'
 
 import * as validator from 'validator'
 import * as zipcodes from 'zipcodes-regex'
 
 import { Is } from './Is'
-import { Types } from './Type'
-import { Type, TypeProperties } from './Types'
+import { TypeProperties } from './TypeProperties'
+import { Types } from './Types'
 
 const phone = (): RegExp => {
   return /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i

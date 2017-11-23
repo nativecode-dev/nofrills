@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "diagnostics": true,
+    "diagnostics": false,
     "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "lib",
@@ -14,7 +14,7 @@
   },
   "exclude": [
     "node_modules/**/*",
-    "tests/**/*.ts"
+    "src/**/*.spec.ts"
   ],
   "include": [
     "src/**/*.ts",
