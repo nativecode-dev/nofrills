@@ -40,10 +40,7 @@ export class TypeRegistry {
 
   public resolve(name: string): Type {
     const type = this.registry.get(name)
-    if (type) {
-      return type
-    }
-    return Any
+    return type ? type : Any
   }
 
   public validate(value: any, type: string): boolean {
