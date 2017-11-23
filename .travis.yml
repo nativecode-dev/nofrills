@@ -13,18 +13,18 @@ stages:
   - name: deploy-develop
     if: branch = develop AND type = pull_request
     env:
-      - BUILD_TAG: pr-$TRAVIS_PULL_REQUEST_BRANCH-$TRAVIS_PULL_REQUEST
-      - BUILD_VERSION: prerelease
+      - BUILD_TAG=pr-$TRAVIS_PULL_REQUEST_BRANCH-$TRAVIS_PULL_REQUEST
+      - BUILD_VERSION=prerelease
   - name: deploy-lts
     if: branch = lts AND type != pull_request
     env:
-      - BUILD_TAG: latest
-      - BUILD_VERSION: patch
+      - BUILD_TAG=latest
+      - BUILD_VERSION=patch
   - name: deploy-master
     if: branch = master AND type != pull_request
     env:
-      - BUILD_TAG: next
-      - BUILD_VERSION: minor
+      - BUILD_TAG=next
+      - BUILD_VERSION=minor
 jobs:
   include:
     - stage: deploy-develop
