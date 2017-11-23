@@ -43,7 +43,7 @@
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-		"push": "lerna publish --cd-version prerelease --yes",
+		"push": "lerna publish --yes",
 		"prepush": "yarn run build",
 		"predeploy": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"nofrills_deploy_key.enc\""
 	},

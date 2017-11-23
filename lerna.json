@@ -2,6 +2,7 @@
   "command": {
     "publish": {
       "allowBranch": "master",
+      "canary": "alpha",
       "message": "release: %s"
     }
   },
