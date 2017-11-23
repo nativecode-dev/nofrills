@@ -32,6 +32,9 @@
     "ts-node": "^3.3.0",
     "typescript": "^2.3.4"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills-smush"
