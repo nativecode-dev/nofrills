@@ -7,13 +7,13 @@
   "name": "@nofrills/scrubs",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "1.0.1-2",
+  "version": "2.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^1.0.1-2",
-    "@nofrills/types": "^1.0.1-2",
+    "@nofrills/lincoln-debug": "^2.0.0",
+    "@nofrills/types": "^2.0.0",
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
