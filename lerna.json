@@ -2,7 +2,7 @@
   "command": {
     "publish": {
       "allowBranch": "master",
-      "cdVersion": "prerelease",
+      "cdVersion": "minor",
       "message": "release: %s",
       "skipGit": false,
       "yes": true
