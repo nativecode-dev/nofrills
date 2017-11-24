@@ -7,10 +7,20 @@ const logger: Lincoln = Logger.extend('strings')
 export const Strings: Dictionary<any> = {
   format: (message: string, ...args: any[]): string => {
     logger.debug('format', message, args)
-    for (let index: number = 0; index < args.length; index++) {
-      const regex = new RegExp('\\{' + index + '\\}', 'gm')
-      message = message.replace(regex, args[index])
-    }
-    return message
-  }
+
+    return args.reduce((previous, current, index) => {
+      const regex = new RegExp(`\\{${index}\\}`, 'gm')
+      return previous.replace(regex, current)
+    }, message)
+  },
+
+  formatObject: (message: string, object: Dictionary<string>): string => {
+    const keys = Object.keys(object)
+    logger.debug('formatObject', message, keys)
+
+    return keys.reduce((previous, current, index) => {
+      const regex = new RegExp(`\\{${current}\\}`, 'igm')
+      return previous.replace(regex, object[current])
+    }, message)
+  },
 }
