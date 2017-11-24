@@ -1,7 +1,7 @@
 {
   "author": "support@nativecode.com",
   "description": "Library for runtime type helpers.",
-  "homepage": "https://github.com/nativecode-dev/nofrills-types#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/types",
@@ -9,7 +9,7 @@
   "types": "./lib/index.d.ts",
   "version": "1.0.1-1",
   "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-types/issues"
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
     "validator": "^7.2.0",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nativecode-dev/nofrills-types.git"
+    "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
