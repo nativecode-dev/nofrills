@@ -12,12 +12,12 @@ describe('when using scrubs registry', () => {
     const scrubs = new Scrubs()
 
     scrubs.register('string', (value: any) => {
-      const handlers: Scrubbers | undefined = scrubs.get('string')
-      if (handlers) {
-        expect(handlers.length).to.equal(1)
+      const scrubbers: Scrubbers | undefined = scrubs.get('string')
+      if (scrubbers) {
+        expect(scrubbers.length).to.equal(1)
         expect(value).to.equal(message)
       } else {
-        expect(handlers).to.not.equal(undefined)
+        expect(scrubbers).to.not.equal(undefined)
       }
       done()
     })
@@ -41,11 +41,11 @@ describe('when using scrubs registry', () => {
 
     scrubs.register('string', (value: any) => {
       scrubs.clear('string')
-      const handlers: Scrubbers | undefined = scrubs.get('string')
-      if (handlers) {
-        expect(handlers.length).to.equal(0)
+      const scrubbers: Scrubbers | undefined = scrubs.get('string')
+      if (scrubbers) {
+        expect(scrubbers.length).to.equal(0)
       } else {
-        expect(handlers).to.not.equal(undefined)
+        expect(scrubbers).to.not.equal(undefined)
       }
       done()
     })

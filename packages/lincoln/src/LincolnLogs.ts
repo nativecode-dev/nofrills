@@ -23,6 +23,10 @@ export class LincolnLogs implements LincolnLog {
     this.loggers.forEach(logger => logger.info(...parameters))
   }
 
+  public silly(...parameters: any[]): void {
+    this.loggers.forEach(logger => logger.silly(...parameters))
+  }
+
   public trace(...parameters: any[]): void {
     this.loggers.forEach(logger => logger.trace(...parameters))
   }

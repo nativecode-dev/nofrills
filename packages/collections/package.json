@@ -1,7 +1,7 @@
 {
   "author": "support@nativecode.com",
   "description": "Set of useful (maybe) collection types.",
-  "homepage": "https://github.com/nativecode-dev/nofrills-collections#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/collections",
@@ -9,7 +9,7 @@
   "types": "./lib/index.d.ts",
   "version": "1.0.1-0",
   "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-collections/issues"
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nativecode-dev/nofrills-collections.git"
+    "url": "https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",

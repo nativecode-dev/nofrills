@@ -54,8 +54,7 @@ describe('when using RegistryMap', () => {
   it('should do nothing when calling remove with non-existant key', () => {
     const registry = new RegistryMap()
     registry.remove(KEY1, 1)
-    const sut: any = registry.resolve(KEY1)
-    expect(sut).to.deep.equal([])
+    expect(registry.keys).to.deep.equal([])
   })
 
   it('should do nothing when calling reset on empty registry', () => {

@@ -1,7 +1,7 @@
 {
   "author": "support@nativecode.com",
   "description": "Provides logging via debug.",
-  "homepage": "https://github.com/nativecode-dev/nofrills-lincoln-console#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills-console#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln-console",
@@ -9,7 +9,7 @@
   "types": "./lib/index.d.ts",
   "version": "1.0.1-0",
   "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-lincoln-console/issues"
+    "url": "https://github.com/nativecode-dev/nofrills-console/issues"
   },
   "dependencies": {
     "@nofrills/lincoln": "^1.0.1-0"
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nativecode-dev/nofrills-lincoln-console"
+    "url": "https://github.com/nativecode-dev/nofrills-console"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",

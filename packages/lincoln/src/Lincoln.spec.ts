@@ -1,3 +1,5 @@
+import 'mocha'
+
 import { expect } from 'chai'
 import { Lincoln, Log, Options } from './index'
 
@@ -108,6 +110,15 @@ describe('when using Lincoln', () => {
       })
       const sut: Lincoln = new Lincoln(options)
       sut.info(message)
+    })
+
+    it('should call silly', (done) => {
+      const options: Options = context.options((log: Log) => {
+        expect(log.namespace).to.equal(`${namespace}:silly`)
+        done()
+      })
+      const sut: Lincoln = new Lincoln(options)
+      sut.silly(message)
     })
 
     it('should call trace', (done) => {

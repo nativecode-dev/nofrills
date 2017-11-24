@@ -1,7 +1,7 @@
 {
   "author": "support@nativecode.com",
   "description": "Smushes things together.",
-  "homepage": "https://github.com/nativecode-dev/nofrills-smush#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
@@ -9,7 +9,7 @@
   "types": "./lib/index.d.ts",
   "version": "1.0.1-1",
   "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-smush/issues"
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^1.0.1-0",
@@ -38,7 +38,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nativecode-dev/nofrills-smush"
+    "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",

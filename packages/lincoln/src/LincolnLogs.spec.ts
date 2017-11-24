@@ -11,6 +11,7 @@ describe('when working with multiple log writers', () => {
     error: 0,
     fatal: 0,
     info: 0,
+    silly: 0,
     trace: 0,
     warn: 0,
   }
@@ -20,6 +21,7 @@ describe('when working with multiple log writers', () => {
     error: (...parameters: any[]): void => Counts.error = Counts.error + 1,
     fatal: (...parameters: any[]): void => Counts.fatal = Counts.fatal + 1,
     info: (...parameters: any[]): void => Counts.info = Counts.info + 1,
+    silly: (...parameters: any[]): void => Counts.silly = Counts.silly + 1,
     trace: (...parameters: any[]): void => Counts.trace = Counts.trace + 1,
     warn: (...parameters: any[]): void => Counts.warn = Counts.warn + 1,
   })
@@ -61,6 +63,12 @@ describe('when working with multiple log writers', () => {
     const sut = new LincolnLogs(Loggers)
     sut.info('test')
     expect(Counts.info).to.equal(Loggers.length)
+  })
+
+  it('should write to all silly loggers', () => {
+    const sut = new LincolnLogs(Loggers)
+    sut.silly('test')
+    expect(Counts.silly).to.equal(Loggers.length)
   })
 
   it('should write to all trace loggers', () => {

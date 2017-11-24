@@ -4,8 +4,17 @@ import * as debug from 'debug'
 
 import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 
+interface DebugCache {
+  [key: string]: debug.IDebugger
+}
+
+const Cache: DebugCache = {}
+
 export const DebugInterceptor: Interceptor = (log: Log): Log => {
-  const logger: debug.IDebugger = debug(log.namespace)
+  const logger: debug.IDebugger = Cache[log.namespace]
+    ? Cache[log.namespace]
+    : (Cache[log.namespace] = debug(log.namespace))
+
   if (log.parameters.length && typeof log.parameters[0] === 'string') {
     logger(log.parameters[0], log.parameters.slice(1))
   } else {
