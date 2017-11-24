@@ -1,7 +1,7 @@
 import * as events from 'events'
 import * as uuid from 'uuidjs'
 
-import { Dictionary, Registry } from '@nofrills/collections'
+import { Registry } from '@nofrills/collections'
 
 import { Log } from './Log'
 import { Options } from './Options'
