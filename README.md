@@ -1,12 +1,6 @@
-# @nofrills
+# @nofrills ![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)](https://coveralls.io/r/nativecode-dev/nofrills?branch=master)[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square)](https://lernajs.io/)
 
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square)](https://lernajs.io/)
-
-![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)](https://coveralls.io/r/nativecode-dev/nofrills?branch=master)
-
-![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)](https://coveralls.io/r/nativecode-dev/nofrills?branch=develop)
+![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)](https://coveralls.io/r/nativecode-dev/nofrills?branch=develop)
 
 `nofrills` is a collection of `npm` packages to help ease common application features designed to be as simple and easy to use as possible. We choose the sanest default configuration settings.
 
