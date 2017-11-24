@@ -42,8 +42,8 @@
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-		"push": "lerna publish",
-		"prepush": "yarn run test",
+		"push": "sh push.sh",
+		"prepushx": "yarn run test",
 		"travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
 		"travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
 	},
