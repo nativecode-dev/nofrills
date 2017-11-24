@@ -1,6 +1,10 @@
 export class RegistryMap<T> {
   protected readonly map: Map<string, T[]> = new Map<string, T[]>()
 
+  public get keys(): string[] {
+    return Array.from(this.map.keys())
+  }
+
   public clear(): void {
     this.map.clear()
   }

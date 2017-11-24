@@ -7,21 +7,13 @@ import { Log } from './Log'
 import { Options } from './Options'
 import { LincolnLog } from './LincolnLog'
 import { Filter, Interceptor } from './LincolnRegistry'
+import { LogMessageType } from './LogMessageType'
 
 const defaults: Options = {
   filters: new Registry<Filter>(),
   interceptors: new Registry<Interceptor>(),
   namespace: 'app',
   separator: ':'
-}
-
-const types: Dictionary<string> = {
-  debug: 'debug',
-  error: 'error',
-  fatal: 'fatal',
-  info: 'info',
-  trace: 'trace',
-  warn: 'warn',
 }
 
 export class Lincoln extends events.EventEmitter implements LincolnLog {
@@ -48,11 +40,11 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
   }
 
   public debug(...parameters: any[]): void {
-    this.write(types.debug, parameters)
+    this.write(LogMessageType.debug, parameters)
   }
 
   public error(...parameters: any[]): void {
-    this.write(types.error, parameters)
+    this.write(LogMessageType.error, parameters)
   }
 
   public extend(tag: string): Lincoln {
@@ -63,26 +55,30 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
   }
 
   public fatal(...parameters: any[]): void {
-    this.write(types.fatal, parameters)
+    this.write(LogMessageType.fatal, parameters)
   }
 
   public info(...parameters: any[]): void {
-    this.write(types.info, parameters)
+    this.write(LogMessageType.info, parameters)
+  }
+
+  public silly(...parameters: any[]): void {
+    this.write(LogMessageType.silly, parameters)
   }
 
   public trace(...parameters: any[]): void {
-    this.write(types.trace, parameters)
+    this.write(LogMessageType.trace, parameters)
   }
 
   public warn(...parameters: any[]): void {
-    this.write(types.warn, parameters)
+    this.write(LogMessageType.warn, parameters)
   }
 
   private tag(tag: string): string {
     return `${this.options.namespace}${this.options.separator}${tag}`
   }
 
-  private write(tag: string, parameters: any[]): void {
+  private write(tag: LogMessageType, parameters: any[]): void {
     const log: Log = {
       id: uuid.generate(),
       namespace: this.tag(tag),

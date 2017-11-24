@@ -3,6 +3,7 @@ export interface LincolnLog {
   error(...parameters: any[]): void
   fatal(...parameters: any[]): void
   info(...parameters: any[]): void
+  silly(...parameters: any[]): void
   trace(...parameters: any[]): void
   warn(...parameters: any[]): void
 }
