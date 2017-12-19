@@ -5,17 +5,14 @@ export interface Dictionary<T> {
   [key: string]: T
 }
 
-type ValueCallback<T> = (value: T) => T
-type ValueProvider<T> = () => T
-type VoidCallback<T> = (value: T) => void
+export type ValueCallback<T> = (value: T) => T
+export type ValueProvider<T> = () => T
+export type VoidCallback<T> = (value: T) => void
 
-const $also = <T>(value: T, ...callbacks: VoidCallback<T>[]): T => callbacks
+export const $also = <T>(value: T, ...callbacks: VoidCallback<T>[]): T => callbacks
   .reduce((result, callback) => callback(result) || result, value)
 
-const $returns = <T>(value: ValueProvider<T>, ...callbacks: ValueCallback<T>[]): T => callbacks
-  .reduce((result, callback) => callback(result) || result, value())
-
-export class HTML {
+export class Html {
   private readonly cache: Dictionary<HTMLElement[]>
 
   constructor(cache: Dictionary<HTMLElement[]>) {
@@ -76,7 +73,7 @@ export class HTML {
     return options.reduce((previous, current) =>
       current.value === value
         ? $also(current, x => x.setAttribute('selected', ''))
-        : $also(previous, x => x.removAttribute('selected'))
+        : $also(previous, x => x.removeAttribute('selected'))
     )
   }
 
@@ -89,6 +86,9 @@ export class HTML {
   }
 
   private convert<T extends HTMLElement>(id: string | T): T {
-    return (typeof (id) === 'string' ? this.element(id) : id) as T
+    return (typeof (id) === 'string' ? this.element(id) : id)
   }
 }
+
+const cache: any = {}
+export const HTML: Html = new Html(cache)
