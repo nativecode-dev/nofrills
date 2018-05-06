@@ -12,16 +12,13 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "docker-file-parser": "^1.0.3",
     "mustache": "^2.3.0",
-    "ts-node": "^6.0.2"
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.5",
-    "@types/mocha": "^2.2.44",
-    "chai": "^4.1.2",
-    "mocha": "^4.0.1",
+    "@types/yargs": "^11.0.0",
     "rimraf": "^2.6.1",
+    "ts-node": "^6.0.2",
     "typescript": "^2.3.4"
   },
   "publishConfig": {
@@ -35,7 +32,7 @@
     "build": "tsc --project tsconfig.json",
     "prebuild": "yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib",
-    "start": "ts-node src/Docker.ts",
+    "start": "ts-node src/docker.ts",
     "prestart": "yarn build"
   }
 }
