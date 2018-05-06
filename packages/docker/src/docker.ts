@@ -1,6 +1,6 @@
 import * as yargs from 'yargs'
 
-const args = yargs.usage('$0 [options] <command>')
+export const args = yargs.usage('$0 [options] <command>')
   .options({
     't': {
       alias: 'tag',
