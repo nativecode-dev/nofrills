@@ -1,0 +1,41 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "Does stuff with docker...",
+  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "license": "MIT",
+  "main": "./lib/cli.js",
+  "name": "@nofrills/docker",
+  "private": false,
+  "types": "./lib/index.d.ts",
+  "version": "1.0.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {
+    "docker-file-parser": "^1.0.3",
+    "mustache": "^2.3.0",
+    "ts-node": "^6.0.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.5",
+    "@types/mocha": "^2.2.44",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "rimraf": "^2.6.1",
+    "typescript": "^2.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "prebuild": "yarn run clean",
+    "clean": "rimraf .cache && rimraf coverage && rimraf lib",
+    "start": "ts-node src/Docker.ts",
+    "prestart": "yarn build"
+  }
+}
