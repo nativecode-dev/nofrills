@@ -1,24 +1,30 @@
 {
   "author": "opensource@nativecode.com",
-  "description": "Does stuff with docker...",
+  "description": "Provides a simple, Fetch-based HTTP client.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
-  "main": "./lib/cli.js",
-  "name": "@nofrills/docker",
+  "main": "./lib/index.js",
+  "name": "@nofrills/http",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "mustache": "^2.3.0",
-    "yargs": "^11.0.0"
+    "@nofrills/lincoln": "^2.0.0",
+    "@nofrills/lincoln-debug": "^2.0.0",
+    "node-fetch": "^1.7.3"
   },
   "devDependencies": {
-    "@types/yargs": "^11.0.0",
+    "@types/chai": "^4.0.5",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.2",
+    "chai": "^4.1.2",
+    "cross-env": "^5.0.1",
+    "mocha": "^4.0.1",
     "rimraf": "^2.6.1",
-    "ts-node": "^6.0.2",
+    "ts-node": "^3.3.0",
     "typescript": "^2.3.4"
   },
   "publishConfig": {
@@ -31,8 +37,6 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "prebuild": "yarn && yarn run clean",
-    "clean": "rimraf .cache && rimraf coverage && rimraf lib",
-    "start": "ts-node src/docker.ts",
-    "prestart": "yarn build"
+    "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }
