@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import { expect } from 'chai'
-import { Smush, SmushError } from './index'
+import { Smush, SmushError } from '../src/index'
 
 describe('smush', () => {
   let $S: Smush

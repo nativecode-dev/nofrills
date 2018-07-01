@@ -4,7 +4,7 @@ import { Log } from '@nofrills/lincoln-debug'
 import { expect } from 'chai'
 import { data } from '../artifacts/data'
 
-import { ScrubsInterceptor } from './index'
+import { ScrubsInterceptor } from '../src/index'
 
 describe('when using lincoln interceptor', () => {
 

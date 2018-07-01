@@ -13,10 +13,9 @@
   },
   "exclude": [
     "node_modules",
-    "packages/*/tests/**/*.ts"
+    "packages/*/specs/**/*.ts"
   ],
   "include": [
-    "packages/*/src/**/*.ts",
-    "packages/*/src/**/*.tsx"
+    "packages/*/src/**/*.ts"
   ]
 }

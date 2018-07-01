@@ -16,7 +16,6 @@
     "node_modules/**/*"
   ],
   "include": [
-    "specs/**/*.ts",
     "src/**/*.ts"
   ]
 }

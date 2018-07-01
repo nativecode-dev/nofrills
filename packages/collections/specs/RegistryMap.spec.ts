@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { RegistryMap } from '../index'
+import { RegistryMap } from '../src/index'
 
 describe('when using RegistryMap', () => {
   const KEY1 = 'key-1'

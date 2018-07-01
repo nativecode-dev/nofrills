@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Is } from './index'
+import { Is } from '../src/index'
 
 describe('when using type library', () => {
 

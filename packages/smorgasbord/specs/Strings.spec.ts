@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Strings } from './Strings'
+import { Strings } from '../src/Strings'
 
 describe('when using string extensions', () => {
 

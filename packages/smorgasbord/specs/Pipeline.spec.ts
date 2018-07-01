@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Pipeline, PipelineHandler } from './Pipeline'
+import { Pipeline, PipelineHandler } from '../src/Pipeline'
 
 describe('when using pipeline handlers', () => {
 
