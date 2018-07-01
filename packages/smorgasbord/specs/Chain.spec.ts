@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Chain, ChainHandler, ChainHandlerLink } from './Chain'
+import { Chain, ChainHandler, ChainHandlerLink } from '../src/Chain'
 
 // tslint:disable:no-unused-expression
 

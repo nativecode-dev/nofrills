@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { PipelineAsync, PipelineAsyncHandler } from './PipelineAsync'
+import { PipelineAsync, PipelineAsyncHandler } from '../src/PipelineAsync'
 
 describe('when using pipeline handlers', () => {
 

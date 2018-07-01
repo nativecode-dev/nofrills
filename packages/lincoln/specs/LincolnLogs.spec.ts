@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { LincolnLog, LincolnLogs } from './index'
+import { LincolnLog, LincolnLogs } from '../src/index'
 
 describe('when working with multiple log writers', () => {
 

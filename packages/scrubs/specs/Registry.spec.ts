@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Scrubber, Scrubbers, Scrubs } from './index'
+import { Scrubber, Scrubbers, Scrubs } from '../src/index'
 
 import { data } from '../artifacts/data'
 

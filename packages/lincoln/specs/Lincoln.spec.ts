@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Lincoln, Log, Options } from './index'
+import { Lincoln, Log, Options } from '../src/index'
 
 describe('when using Lincoln', () => {
   const context = require('../artifacts/context')

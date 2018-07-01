@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Type, Types, TypeParser } from './index'
+import { Type, Types, TypeParser } from '../src/index'
 
 describe('when using type parser', () => {
   it('should throw error when deserializing unsupported types', () => {
