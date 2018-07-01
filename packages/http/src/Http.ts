@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 
 import fetch, { Request, RequestInit } from 'node-fetch'
-import { Logger } from './Logger'
+import { Lincoln, Logger } from './Logger'
 
 export abstract class HTTP {
-  protected readonly log = Logger.extend(this.name)
+  protected readonly log: Lincoln = Logger.extend(this.name)
 
   public async delete<TResponse>(url: string): Promise<TResponse> {
     return this.send<TResponse>(url, await this.request<void>(), 'DELETE')

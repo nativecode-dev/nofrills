@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Registry } from './index'
+import { Registry } from '../index'
 
 describe('when using Registry', () => {
   const KEY = 'key'

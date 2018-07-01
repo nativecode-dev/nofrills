@@ -13,11 +13,10 @@
     "target": "es2015"
   },
   "exclude": [
-    "node_modules/**/*",
-    "src/**/*.spec.ts"
+    "node_modules/**/*"
   ],
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "specs/**/*.ts",
+    "src/**/*.ts"
   ]
 }
