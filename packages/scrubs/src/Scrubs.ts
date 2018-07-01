@@ -23,7 +23,7 @@ export class Scrubs {
   private readonly registry: Map<string, Scrubbers>
 
   constructor(options?: ScrubsOptions) {
-    this.log = Logger.extend('scrubs')
+    this.log = Logger
     this.options = merge({}, options, defaults)
     this.registry = new Map<string, Scrubbers>()
   }

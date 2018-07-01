@@ -1,5 +1,5 @@
 {
-  "author": "support@nativecode.com",
+  "author": "opensource@nativecode.com",
   "description": "Provides logging via debug.",
   "homepage": "https://github.com/nativecode-dev/nofrills-console#readme",
   "license": "MIT",
@@ -35,7 +35,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "prebuild": "yarn run clean",
+    "prebuild": "yarn && yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "author": "support@nativecode.com",
+  "author": "opensource@nativecode.com",
   "description": "Smushes things together.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "@types/lodash.merge": "^4.6.2",
     "@types/mocha": "^2.2.44",
     "@types/node": "^7.0.31",
+    "@types/node-fetch": "^1.6.7",
     "@types/shortid": "0.0.29",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
@@ -42,7 +43,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "prebuild": "yarn run clean",
+    "prebuild": "yarn && yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }

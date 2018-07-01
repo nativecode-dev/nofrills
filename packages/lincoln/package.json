@@ -1,5 +1,5 @@
 {
-  "author": "support@nativecode.com",
+  "author": "opensource@nativecode.com",
   "description": "Provides a slim abstraction for logging.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "prebuild": "yarn run clean",
+    "prebuild": "yarn && yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }

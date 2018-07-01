@@ -1,0 +1,11 @@
+.cache
+node_modules/
+src/
+
+mocha.opts
+tsconfig.json
+tslint.json
+
+*.map
+*.log
+*.tgz
