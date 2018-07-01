@@ -7,12 +7,12 @@
   "name": "@nofrills/lincoln",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^2.2.1",
+    "@nofrills/collections": "^2.2.2",
     "uuidjs": "^3.5.3"
   },
   "devDependencies": {
