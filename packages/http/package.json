@@ -12,7 +12,6 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^2.0.0",
     "@nofrills/lincoln-debug": "^2.0.0",
     "node-fetch": "^1.7.3"
   },
