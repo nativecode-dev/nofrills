@@ -1,0 +1,41 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "Provides a simple abstraction for console application lifecycle management.",
+  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/console",
+  "private": false,
+  "types": "./lib/index.d.ts",
+  "version": "2.2.2",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {
+    "@nofrills/lincoln-debug": "^2.2.2",
+    "node-fetch": "^1.7.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.5",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.2",
+    "chai": "^4.1.2",
+    "cross-env": "^5.0.1",
+    "mocha": "^4.0.1",
+    "rimraf": "^2.6.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "prebuild": "yarn && yarn run clean",
+    "clean": "rimraf .cache && rimraf coverage && rimraf lib"
+  }
+}
