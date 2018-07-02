@@ -1,8 +1,12 @@
 .cache/
+.vscode/
+bin/
 coverage/
 dist/
 lib/
 node_modules/
+deploy
+deploy.pub
 
 *.log
 *.tgz

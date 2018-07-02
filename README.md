@@ -1,49 +1,35 @@
-# @nofrills
+# @nofrills ![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)](https://coveralls.io/r/nativecode-dev/nofrills?branch=master)[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square)](https://lernajs.io/)
 
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square)](https://lernajs.io/)
-
-![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/master.svg?style=flat-square&label=master)](https://coveralls.io/r/nativecode-dev/nofrills?branch=master)
-
-![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)](https://coveralls.io/r/nativecode-dev/nofrills?branch=develop)
+![Travis](https://img.shields.io/travis/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills/develop.svg?style=flat-square&label=develop)](https://coveralls.io/r/nativecode-dev/nofrills?branch=develop)
 
 `nofrills` is a collection of `npm` packages to help ease common application features designed to be as simple and easy to use as possible. We choose the sanest default configuration settings.
 
-# @nofrills/collections
+# [![npm](https://img.shields.io/npm/v/@nofrills/collections.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/collections) @nofrills/collections
 
-[![npm](https://img.shields.io/npm/v/@nofrills/collections.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/collections)
+# [![npm](https://img.shields.io/npm/v/@nofrills/console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/console) @nofrills/console
 
-# @nofrills/lincoln
+# [![npm](https://img.shields.io/npm/v/@nofrills/fs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/fs) @nofrills/fs
 
-[![npm](https://img.shields.io/npm/v/@nofrills/lincoln.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln)
+# [![npm](https://img.shields.io/npm/v/@nofrills/html.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/html) @nofrills/html
 
-# @nofrills/lincoln-console
+# [![npm](https://img.shields.io/npm/v/@nofrills/http.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/http) @nofrills/http
 
-[![npm](https://img.shields.io/npm/v/@nofrills/lincoln-console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln-console)
+# [![npm](https://img.shields.io/npm/v/@nofrills/lincoln.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln) @nofrills/lincoln
 
-# @nofrills/lincoln-debug
+# [![npm](https://img.shields.io/npm/v/@nofrills/lincoln-console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln-console) @nofrills/lincoln-console
 
-[![npm](https://img.shields.io/npm/v/@nofrills/lincoln-debug.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln-debug)
+# [![npm](https://img.shields.io/npm/v/@nofrills/lincoln-debug.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln-debug) @nofrills/lincoln-debug
 
-# @nofrills/scrubs
+# [![npm](https://img.shields.io/npm/v/@nofrills/scrubs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/scrubs) @nofrills/scrubs
 
-[![npm](https://img.shields.io/npm/v/@nofrills/scrubs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/scrubs)
+# [![npm](https://img.shields.io/npm/v/@nofrills/smorgasbord.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/smorgasbord) @nofrills/smorgasbord
 
-# @nofrills/smorgasbord
+# [![npm](https://img.shields.io/npm/v/@nofrills/smush.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/smush) @nofrills/smush
 
-[![npm](https://img.shields.io/npm/v/@nofrills/smorgasbord.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/smorgasbord)
-
-# @nofrills/smush
-
-[![npm](https://img.shields.io/npm/v/@nofrills/smush.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/smush)
-
-# @nofrills/types
-
-[![npm](https://img.shields.io/npm/v/@nofrills/types.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/types)
+# [![npm](https://img.shields.io/npm/v/@nofrills/types.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/types) @nofrills/types
 
 # License
-Copyright 2017 NativeCode Development <support@nativecode.com>
+Copyright 2017 NativeCode Development <opensource@nativecode.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without

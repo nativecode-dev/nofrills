@@ -1,22 +1,9 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
-    "diagnostics": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "pretty": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2015"
-  },
-  "exclude": [
-    "node_modules",
-    "packages/*/tests/**/*.ts"
-  ],
-  "include": [
-    "packages/*/src/**/*.ts",
-    "packages/*/src/**/*.tsx"
-  ]
+    "baseUrl": "./packages",
+    "paths": {
+      "@nofrills/*": ["./*/src"]
+    }
+  }
 }

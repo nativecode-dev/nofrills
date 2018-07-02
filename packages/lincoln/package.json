@@ -1,5 +1,5 @@
 {
-  "author": "support@nativecode.com",
+  "author": "opensource@nativecode.com",
   "description": "Provides a slim abstraction for logging.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
@@ -7,19 +7,18 @@
   "name": "@nofrills/lincoln",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.0.0",
+  "version": "2.2.6",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^2.0.0",
+    "@nofrills/collections": "^2.2.5",
     "uuidjs": "^3.5.3"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.2",
-    "@types/uuidjs": "^3.3.1",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
     "mocha": "^4.0.1",
@@ -35,7 +34,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }

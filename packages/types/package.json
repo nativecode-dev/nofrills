@@ -1,5 +1,5 @@
 {
-  "author": "support@nativecode.com",
+  "author": "opensource@nativecode.com",
   "description": "Library for runtime type helpers.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "name": "@nofrills/types",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.0.0",
+  "version": "2.2.5",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
@@ -35,7 +35,7 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }

@@ -6,7 +6,7 @@
 		"@alrra/travis-scripts": "^3.0.1",
 		"coveralls": "^3.0.0",
 		"cross-env": "^5.1.1",
-		"lerna": "^2.5.1",
+		"lerna": "^2.11.0",
 		"mocha": "^4.0.1",
 		"nyc": "^11.3.0",
 		"rimraf": "^2.6.2",
@@ -20,7 +20,8 @@
 		"all": true,
 		"exclude": [
 			"node_modules",
-			"packages/*/src/**/*.spec.ts"
+      "packages/*/src/**/*.spec.ts",
+      "packages/*/src/Logger.ts"
 		],
 		"extension": [
 			".ts"
@@ -36,7 +37,7 @@
 	},
 	"scripts": {
 		"build": "lerna run build",
-		"prebuild": "lerna bootstrap && yarn run lint",
+		"prebuild": "yarn && lerna bootstrap && yarn run lint",
 		"clean": "rimraf .cache && lerna run clean",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
@@ -44,6 +45,8 @@
 		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"push": "sh push.sh",
 		"prepush": "yarn run test",
+		"start": "lerna run start",
+		"add-pkg": "lerna add",
 		"travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
 		"travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
 	},

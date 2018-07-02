@@ -1,9 +1,8 @@
 cache: yarn
 language: node_js
 node_js:
-  - node
+  - 'node'
   - '8'
-  - '6'
 os: linux
 stages:
   - test
@@ -14,14 +13,14 @@ jobs:
     - stage: deploy
       script:
         - yarn run travis-ssh
-        - 'git remote set-url origin git@github.com:nativecode-dev/nofrills.git'
+        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
-        - 'npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"'
+        - npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
         - yarn run push
 after_failure:
   - cat lerna-debug.log
 after_success:
   - yarn run travis-coveralls
 before_install:
-  - 'curl -o- -L https://yarnpkg.com/install.sh | bash -s'
-  - 'export PATH="$HOME/.yarn/bin:$PATH"'
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s
+  - export PATH="$HOME/.yarn/bin:$PATH"

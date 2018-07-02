@@ -1,5 +1,5 @@
 {
-  "author": "support@nativecode.com",
+  "author": "opensource@nativecode.com",
   "description": "Smushes things together.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
@@ -7,13 +7,13 @@
   "name": "@nofrills/smush",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.0.0",
+  "version": "2.2.6",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^2.0.0",
-    "@nofrills/scrubs": "^2.0.0",
+    "@nofrills/lincoln-debug": "^2.2.6",
+    "@nofrills/scrubs": "^2.2.6",
     "bluebird": "^3.5.0",
     "lodash.merge": "^4.6.0",
     "shortid": "^2.2.8"
@@ -25,6 +25,7 @@
     "@types/lodash.merge": "^4.6.2",
     "@types/mocha": "^2.2.44",
     "@types/node": "^7.0.31",
+    "@types/node-fetch": "^1.6.7",
     "@types/shortid": "0.0.29",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
@@ -41,7 +42,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
