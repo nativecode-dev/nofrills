@@ -12,13 +12,17 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
 
   private instance: Promise<void> | undefined
 
-  constructor(protected readonly options: T) {
+  constructor(
+    protected readonly options: T,
+    protected readonly exe: string,
+    protected readonly args: string[],
+  ) {
     super()
   }
 
-  start(exe: string, ...args: string[]): Promise<void> {
+  start(): Promise<void> {
     if (this.instance === undefined) {
-      this.logger.info(`starting "${exe}":`, ...args)
+      this.logger.info(`starting "${this.exe}":`, ...this.args)
       return (this.instance = new Promise<void>(async (resolve, reject) => {
         process.on('uncaughtException', () => this.shutdown(resolve, reject, 'uncaught-exception'))
         process.on('exit', () => this.shutdown(resolve, reject, 'exit'))
