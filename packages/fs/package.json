@@ -34,8 +34,8 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
-    "prebuild": "yarn && yarn run clean",
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "yarn run clean",
     "clean": "rimraf .cache && rimraf coverage && rimraf lib"
   }
 }
