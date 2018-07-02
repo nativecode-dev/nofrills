@@ -1,5 +1,3 @@
-import 'reflect-metadata'
-
 import fetch, { Request, RequestInit } from 'node-fetch'
 import { Lincoln, Logger } from './Logger'
 

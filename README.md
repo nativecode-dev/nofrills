@@ -6,6 +6,14 @@
 
 # [![npm](https://img.shields.io/npm/v/@nofrills/collections.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/collections) @nofrills/collections
 
+# [![npm](https://img.shields.io/npm/v/@nofrills/console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/console) @nofrills/console
+
+# [![npm](https://img.shields.io/npm/v/@nofrills/fs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/fs) @nofrills/fs
+
+# [![npm](https://img.shields.io/npm/v/@nofrills/html.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/html) @nofrills/html
+
+# [![npm](https://img.shields.io/npm/v/@nofrills/http.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/http) @nofrills/http
+
 # [![npm](https://img.shields.io/npm/v/@nofrills/lincoln.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln) @nofrills/lincoln
 
 # [![npm](https://img.shields.io/npm/v/@nofrills/lincoln-console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/lincoln-console) @nofrills/lincoln-console
