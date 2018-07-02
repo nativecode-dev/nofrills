@@ -1,18 +1,17 @@
 {
   "author": "opensource@nativecode.com",
-  "description": "Provides a simple abstraction for console application lifecycle management.",
+  "description": "Provides a simple, Promise-based access to the file system.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",
-  "name": "@nofrills/console",
+  "name": "@nofrills/fs",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.2.3",
+  "version": "2.2.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^2.2.2",
     "@nofrills/lincoln-debug": "^2.2.2",
     "node-fetch": "^1.7.3"
   },
