@@ -20,7 +20,8 @@
 		"all": true,
 		"exclude": [
 			"node_modules",
-			"packages/*/src/**/*.spec.ts"
+      "packages/*/src/**/*.spec.ts",
+      "packages/*/src/Logger.ts"
 		],
 		"extension": [
 			".ts"
