@@ -7,7 +7,7 @@ import { ConsoleOptions } from './ConsoleOptions'
 
 export class Cluster<T extends ConsoleOptions> extends Console<T> {
   constructor(options: T, filepath: string, ...args: string[]) {
-    super(options)
+    super(options, filepath, args)
 
     const settings = {
       args: args,

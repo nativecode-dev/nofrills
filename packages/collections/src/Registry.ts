@@ -23,6 +23,7 @@ export class Registry<T> {
     if (this.map.has(key)) {
       return this.map.get(key)
     }
+    return undefined
   }
 
   public unregister(key: string, value: T): void {
