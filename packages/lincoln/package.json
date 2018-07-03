@@ -7,23 +7,23 @@
   "name": "@nofrills/lincoln",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.2.6",
+  "version": "2.2.9",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^2.2.5",
-    "uuidjs": "^3.5.3"
+    "@nofrills/collections": "^2.2.9",
+    "uuidjs": "^4.0.3"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
-    "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.2",
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^10.5.1",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
-    "mocha": "^4.0.1",
+    "mocha": "^5.2.0",
     "rimraf": "^2.6.1",
-    "ts-node": "^3.3.0",
+    "ts-node": "^7.0.0",
     "typescript": "^2.3.4"
   },
   "publishConfig": {

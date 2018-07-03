@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./packages",
     "paths": {
-      "@nofrills/*": ["./*/src"]
+      "@nofrills/*": ["./*/src"],
+      "zipcodes-regex": ["./types/src/zipcodes-regex.d.ts"]
     }
   }
 }
