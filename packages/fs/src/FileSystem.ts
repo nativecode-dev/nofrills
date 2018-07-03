@@ -3,8 +3,9 @@ import * as fsp from 'path'
 import * as mkdirp from 'mkdirp'
 
 import { URL } from 'url'
-
 import { FileSystemEnumerator } from './FileSystemEnumerator'
+
+export const Constants = fs.constants
 
 export class FileSystem {
   static append(path: string | number | Buffer | URL, data: any, throws?: boolean): Promise<boolean> {
@@ -12,16 +13,25 @@ export class FileSystem {
       fs.writeFile(path, data, error => {
         if (error && throws) {
           reject(error)
-        } else if (error) {
-          resolve(false)
         }
-        resolve(true)
+        resolve(error ? false : true)
       })
     })
   }
 
   static basename(path: string, ext?: string): string {
     return fsp.basename(path, ext)
+  }
+
+  static close(fd: number, throws?: boolean): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      fs.close(fd, error => {
+        if (error && throws) {
+          reject(error)
+        }
+        resolve(error ? false : true)
+      })
+    })
   }
 
   static dirname(filepath: string): string {
@@ -95,8 +105,13 @@ export class FileSystem {
         if (error) {
           reject(error)
         }
-        const json = JSON.parse(data.toString())
-        resolve(json)
+
+        if (data) {
+          const json = JSON.parse(data.toString())
+          resolve(json)
+        }
+
+        resolve(undefined)
       })
     })
   }
@@ -106,10 +121,8 @@ export class FileSystem {
       fs.mkdir(path, mode, error => {
         if (error && throws) {
           reject(error)
-        } else if (error) {
-          resolve(false)
         }
-        resolve(true)
+        resolve(error ? false : true)
       })
     })
   }
@@ -137,6 +150,17 @@ export class FileSystem {
       .then(promises => promises.reduce((result, current) => result ? result : current, false))
   }
 
+  static open(path: fs.PathLike, flags: string | number, mode?: string | number): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      fs.open(path, flags, mode, (error, fd) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(fd)
+      })
+    })
+  }
+
   static read<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset: number, length: number, position: number): Promise<number> {
     return new Promise<number>((resolve, reject) => {
       fs.read(fd, buffer, offset, length, position, (error, data) => {
@@ -153,10 +177,8 @@ export class FileSystem {
       fs.rename(original, filename, error => {
         if (error && throws) {
           reject(error)
-        } else if (error) {
-          resolve(false)
         }
-        resolve(true)
+        resolve(error ? false : true)
       })
     })
   }
@@ -166,10 +188,8 @@ export class FileSystem {
       fs.writeFile(path, JSON.stringify(object), error => {
         if (error && throws) {
           reject(false)
-        } else if (error) {
-          resolve(false)
         }
-        resolve(true)
+        resolve(error ? false : true)
       })
     })
   }
