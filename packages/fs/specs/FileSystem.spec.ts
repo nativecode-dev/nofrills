@@ -7,19 +7,19 @@ describe('when working with Files', () => {
   const cwd = process.cwd()
 
   it('should get base filename', () => {
-    const path = fs.join(cwd, 'packages/fs/specs/index.spec.ts')
-    expect(fs.basename(path)).equals('index.spec.ts')
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
+    expect(fs.basename(path)).equals('FileSystem.spec.ts')
   })
 
   it('should get base filename without extension', () => {
-    const path = fs.join(cwd, 'packages/fs/specs/index.spec.ts')
-    expect(fs.basename(path, '.ts')).equals('index.spec')
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
+    expect(fs.basename(path, '.ts')).equals('FileSystem.spec')
   })
 
   it('should list all files and directories', async () => {
     const path = fs.join(cwd, 'packages/fs/specs')
     const files = await fs.list(path)
-    expect(files).contains('index.spec.ts')
+    expect(files).contains('FileSystem.spec.ts')
   })
 
   it('should fail to list all files and directories', async () => {
@@ -32,7 +32,7 @@ describe('when working with Files', () => {
   })
 
   it('should get file information', async () => {
-    const path = fs.join(cwd, 'packages/fs/specs/index.spec.ts')
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
     const info = await fs.info(path)
     expect(info.isFile()).equal(true)
   })
@@ -47,20 +47,20 @@ describe('when working with Files', () => {
   })
 
   it('should check if file exists', async () => {
-    const path = fs.join(cwd, 'packages/fs/specs/index.spec.ts')
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
     const exists = await fs.exists(path)
     expect(exists).equal(true)
   })
 
   it('should check if file does not exist', async () => {
-    const path = fs.join(cwd, 'packages/fs/specs/index.spec.ts.nope')
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts.nope')
     const exists = await fs.exists(path)
     expect(exists).equal(false)
   })
-
+/*
   it('should list all files recursively', async () => {
     const path = fs.join(cwd, 'node_modules')
     await fs.enumerate(path, true)
   })
-
+*/
 })
