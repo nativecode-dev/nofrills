@@ -86,6 +86,20 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@nofrills/lincoln-debug@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@nofrills/lincoln-debug/-/lincoln-debug-2.2.6.tgz#a6c33070e867c50cec57d8c76d3e7dde9761d949"
+  dependencies:
+    "@nofrills/lincoln" "^2.2.6"
+    debug "^2.6.8"
+
+"@nofrills/lincoln@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@nofrills/lincoln/-/lincoln-2.2.6.tgz#c71c999ddd5cd3bf6f4c752965d6f141954ec5d5"
+  dependencies:
+    "@nofrills/collections" "^2.2.5"
+    uuidjs "^3.5.3"
+
 "@types/bluebird@^3.5.5":
   version "3.5.21"
   resolved "https://packages.nativecode.com/repository/npm/@types/bluebird/-/bluebird-3.5.21.tgz#567615589cc913e84a28ecf9edb031732bdf2634"
@@ -107,6 +121,12 @@
 "@types/lodash@*", "@types/lodash@^4.14.66", "@types/lodash@^4.14.71":
   version "4.14.110"
   resolved "https://packages.nativecode.com/repository/npm/@types/lodash/-/lodash-4.14.110.tgz#fb07498f84152947f30ea09d89207ca07123461e"
+
+"@types/mkdirp@^0.5.2":
+  version "0.5.2"
+  resolved "https://packages.nativecode.com/repository/npm/@types/mkdirp/-/mkdirp-0.5.2.tgz#503aacfe5cc2703d5484326b1b27efa67a339c1f"
+  dependencies:
+    "@types/node" "*"
 
 "@types/mocha@^2.2.44":
   version "2.2.48"
@@ -2788,6 +2808,12 @@ rx-lite@*, rx-lite@^4.0.8:
   version "4.0.8"
   resolved "https://packages.nativecode.com/repository/npm/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
 
+rxjs@^6.2.1:
+  version "6.2.1"
+  resolved "https://packages.nativecode.com/repository/npm/rxjs/-/rxjs-6.2.1.tgz#246cebec189a6cbc143a3ef9f62d6f4c91813ca1"
+  dependencies:
+    tslib "^1.9.0"
+
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://packages.nativecode.com/repository/npm/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
@@ -3246,7 +3272,7 @@ tslib@1.9.0:
   version "1.9.0"
   resolved "https://packages.nativecode.com/repository/npm/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
-tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1:
+tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://packages.nativecode.com/repository/npm/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
@@ -3311,7 +3337,7 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://packages.nativecode.com/repository/npm/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.3.4, typescript@^2.4.1, typescript@^2.4.2, typescript@^2.6.1:
+typescript@^2.3.4, typescript@^2.4.1, typescript@^2.4.2, typescript@^2.9.2:
   version "2.9.2"
   resolved "https://packages.nativecode.com/repository/npm/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
 
