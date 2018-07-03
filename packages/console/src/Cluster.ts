@@ -1,6 +1,6 @@
 import * as cluster from 'cluster'
 
-import { Files } from '@nofrills/fs'
+import { FileSystem as fs } from '@nofrills/fs'
 
 import { Console } from './Console'
 import { ConsoleOptions } from './ConsoleOptions'
@@ -17,7 +17,7 @@ export class Cluster<T extends ConsoleOptions> extends Console<T> {
   }
 
   async spawn(filepath: string): Promise<void> {
-    const exists = await Files.exists(filepath)
+    const exists = await fs.exists(filepath)
 
     if (cluster.isMaster && exists === false) {
       return Promise.reject()

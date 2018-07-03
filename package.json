@@ -14,14 +14,14 @@
 		"ts-node": "^3.3.0",
 		"tslint": "^5.8.0",
 		"tslint-config-standard": "^7.0.0",
-		"typescript": "^2.6.1"
+		"typescript": "^2.9.2"
 	},
 	"nyc": {
 		"all": true,
 		"exclude": [
 			"node_modules",
-      "packages/*/src/**/*.spec.ts",
-      "packages/*/src/Logger.ts"
+			"packages/*/src/**/*.spec.ts",
+			"packages/*/src/Logger.ts"
 		],
 		"extension": [
 			".ts"

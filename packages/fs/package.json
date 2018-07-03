@@ -1,6 +1,6 @@
 {
   "author": "opensource@nativecode.com",
-  "description": "Provides a simple, Promise-based access to the file system.",
+  "description": "Provides a simple, Promise-based interface to the file system.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",
@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^2.2.6",
-    "node-fetch": "^1.7.3"
+    "mkdirp": "^0.5.1",
+    "node-fetch": "^1.7.3",
+    "rxjs": "^6.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
+    "@types/mkdirp": "^0.5.2",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.2",
     "chai": "^4.1.2",
