@@ -7,7 +7,7 @@
   "name": "@nofrills/types",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.2.5",
+  "version": "2.2.9",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
