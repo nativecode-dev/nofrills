@@ -106,7 +106,7 @@ describe('when working with Files', () => {
     const path = fs.join(cwd, 'package.json')
     const fd = await fs.open(path, Constants.O_RDONLY)
     try {
-      const buffer = new Buffer(4096)
+      const buffer = Buffer.alloc(4096)
       const length = await fs.read(fd, buffer, 0, 4096, 0)
       const json = JSON.parse(buffer.toString(undefined, 0, length))
       expect(json.name).equals('nofrills')
