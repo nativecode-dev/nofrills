@@ -95,8 +95,13 @@ export class FileSystem {
         if (error) {
           reject(error)
         }
-        const json = JSON.parse(data.toString())
-        resolve(json)
+
+        if (data) {
+          const json = JSON.parse(data.toString())
+          resolve(json)
+        }
+
+        resolve(undefined)
       })
     })
   }
