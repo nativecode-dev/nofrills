@@ -1,19 +1,18 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Constants, FileSystem as fs } from '../src/index'
+import { Constants, fs as fs } from '../src/index'
 
 describe('when working with Files', () => {
   const cwd = process.cwd()
+  const artifacts = fs.join(cwd, '.artifacts')
 
   before(async () => {
-    const path = fs.join(cwd, '.artifacts')
-    await fs.mkdir(path)
+    await fs.mkdir(artifacts)
   })
 
   after(async () => {
-    const path = fs.join(cwd, '.artifacts')
-    await fs.delete(path)
+    await fs.delete(artifacts)
   })
 
   it('should get base filename', () => {
@@ -113,6 +112,31 @@ describe('when working with Files', () => {
     } finally {
       await fs.close(fd)
     }
+  })
+
+  it('should resolve path', () => {
+    const path = fs.join(cwd, 'packages/*')
+    expect(fs.resolve(cwd, 'packages/*')).equals(path)
+  })
+
+  it('should resolve glob patterns', async () => {
+    const path = fs.join(cwd, 'packages/*')
+    const paths = await fs.glob(path)
+    expect(paths).includes(fs.join(cwd, 'packages/fs'))
+  })
+
+  it('should error when closing invalid file descriptor', async () => {
+    try {
+      await fs.close(-1, true)
+    } catch (error) {
+      expect(error).instanceof(Error)
+    }
+  })
+
+  it('should create deeply nested directory', async () => {
+    const path = fs.join(artifacts, '1/2/3')
+    await fs.mkdirp(path)
+    expect(await fs.exists(path)).equals(true)
   })
 
 })

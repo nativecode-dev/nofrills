@@ -98,6 +98,18 @@
   version "0.0.30"
   resolved "https://packages.nativecode.com/repository/npm/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
 
+"@types/events@*":
+  version "1.2.0"
+  resolved "https://packages.nativecode.com/repository/npm/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
+
+"@types/glob@^5.0.35":
+  version "5.0.35"
+  resolved "https://packages.nativecode.com/repository/npm/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
+  dependencies:
+    "@types/events" "*"
+    "@types/minimatch" "*"
+    "@types/node" "*"
+
 "@types/lodash.merge@^4.6.2":
   version "4.6.3"
   resolved "https://packages.nativecode.com/repository/npm/@types/lodash.merge/-/lodash.merge-4.6.3.tgz#a41c49fe404c4bfb653ae6dda76abeedeace14ff"
@@ -107,6 +119,10 @@
 "@types/lodash@*", "@types/lodash@^4.14.66", "@types/lodash@^4.14.71":
   version "4.14.110"
   resolved "https://packages.nativecode.com/repository/npm/@types/lodash/-/lodash-4.14.110.tgz#fb07498f84152947f30ea09d89207ca07123461e"
+
+"@types/minimatch@*":
+  version "3.0.3"
+  resolved "https://packages.nativecode.com/repository/npm/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
 
 "@types/mkdirp@^0.5.2":
   version "0.5.2"

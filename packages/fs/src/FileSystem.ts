@@ -1,4 +1,5 @@
 import * as $fs from 'fs'
+import * as $glob from 'glob'
 import * as $path from 'path'
 import * as $mkdirp from 'mkdirp'
 
@@ -73,6 +74,17 @@ export class FileSystem {
 
   static ext(filename: string): string {
     return $path.extname(filename)
+  }
+
+  static glob(pattern: string): Promise<string[]> {
+    return new Promise<string[]>((resolve, reject) => {
+      $glob(pattern, (error, matches) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(matches)
+      })
+    })
   }
 
   static list(path: $fs.PathLike): Promise<string[]> {
@@ -183,6 +195,10 @@ export class FileSystem {
         resolve(error ? false : true)
       })
     })
+  }
+
+  static resolve(...paths: string[]): string {
+    return $path.resolve(...paths)
   }
 
   static save<T>(path: number | string | Buffer | URL, object: T, throws?: boolean): Promise<boolean> {
