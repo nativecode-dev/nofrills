@@ -9,6 +9,6 @@ if [ $TRAVIS_BRANCH = "master" ] && [ $TRAVIS_EVENT_TYPE = "push" ]; then
 fi
 
 if [ $TRAVIS_BRANCH  = "master-lts" ] && [ $TRAVIS_EVENT_TYPE = "push" ]; then
-  RELEASE=minor
+  RELEASE=major
   lerna publish --allow-branch "master-lts" --cd-version $RELEASE --message "$TRAVIS_BRANCH:$RELEASE:%s" --yes
 fi

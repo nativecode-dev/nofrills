@@ -18,7 +18,7 @@ const defaults: Options = {
 
 export class Lincoln extends events.EventEmitter implements LincolnLog {
   public static events: { [key: string]: string } = {
-    log: 'log'
+    log: 'log-message'
   }
 
   public readonly id: string

@@ -13,20 +13,24 @@ export class Registry<T> {
     this.map.clear()
   }
 
+  public containsKey(key: string): boolean {
+    return Array.from(this.map.keys()).indexOf(key) > -1
+  }
+
   public register(key: string, value: T): void {
     if (this.map.has(key) === false) {
       this.map.set(key, value)
     }
   }
 
-  public resolve(key: string): T | undefined {
+  public resolve(key: string): T {
     if (this.map.has(key)) {
-      return this.map.get(key)
+      return this.map.get(key) as T
     }
-    return undefined
+    throw new Error(`could not resolve: ${key}`)
   }
 
-  public unregister(key: string, value: T): void {
+  public unregister(key: string): void {
     if (this.map.has(key)) {
       this.map.delete(key)
     }

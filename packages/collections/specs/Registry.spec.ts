@@ -14,10 +14,9 @@ describe('when using Registry', () => {
     expect(sut).to.equal(VALUE)
   })
 
-  it('should return undefined when no key found', () => {
+  it('should throw when key not found', () => {
     const registry = new Registry()
-    const sut: any = registry.resolve(KEY)
-    expect(sut).to.equal(undefined)
+    expect(() => registry.resolve(KEY)).throws(Error)
   })
 
   it('should not register second handler', () => {
@@ -32,29 +31,25 @@ describe('when using Registry', () => {
     const registry = new Registry()
     registry.register(KEY, VALUE)
     registry.clear()
-    const sut: any = registry.resolve(KEY)
-    expect(sut).to.equal(undefined)
+    expect(registry.containsKey(KEY)).to.equal(false)
   })
 
   it('should unregister known key', () => {
     const registry = new Registry()
     registry.register(KEY, VALUE)
-    registry.unregister(KEY, VALUE)
-    const sut: any = registry.resolve(KEY)
-    expect(sut).to.equal(undefined)
+    registry.unregister(KEY)
+    expect(registry.containsKey(KEY)).to.equal(false)
   })
 
-  it('should do nothing when unregistering unknown key', () => {
+  it('should throw when unregister given unknown key', () => {
     const registry = new Registry()
-    registry.unregister(KEY, VALUE)
-    const sut: any = registry.resolve(KEY)
-    expect(sut).to.equal(undefined)
+    registry.unregister(KEY)
+    expect(() => registry.resolve(KEY)).throws(Error)
   })
 
   it('should resolve nothing when resolving unknown key', () => {
     const registry = new Registry()
-    const sut: any = registry.resolve(KEY)
-    expect(sut).to.equal(undefined)
+    expect(registry.containsKey(KEY)).to.equal(false)
   })
 
   it('should return keys as iterable', () => {
