@@ -34,7 +34,7 @@ describe('when using Lincoln', () => {
     it('should act as emitter', (done) => {
       const options: Options = context.options((log: Log) => log)
       const sut: Lincoln = new Lincoln(options)
-      sut.on('log', (log) => {
+      sut.on(Lincoln.events.log, (log) => {
         expect(log.namespace).to.equal(`${namespace}:debug`)
         expect(log.parameters[0]).to.equal(message)
         done()

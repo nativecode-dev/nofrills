@@ -8,7 +8,7 @@ import { ScrubsInterceptor } from '../src/index'
 
 describe('when using lincoln interceptor', () => {
 
-  it('should scrub data', () => {
+  it('should scrub data object', () => {
     const expectedUrl: string = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
     const options: Log = {
       id: 'test',
@@ -18,6 +18,18 @@ describe('when using lincoln interceptor', () => {
     }
     const sut: Log = ScrubsInterceptor(options)
     expect(sut.parameters[0].url).to.equal(expectedUrl)
+  })
+
+  it('should scrub data strings', () => {
+    const expectedUrl: string = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
+    const options: Log = {
+      id: 'test',
+      namespace: 'test',
+      parameters: [data.url],
+      timestamp: Date.now(),
+    }
+    const sut: Log = ScrubsInterceptor(options)
+    expect(sut.parameters[0]).to.equal(expectedUrl)
   })
 
 })

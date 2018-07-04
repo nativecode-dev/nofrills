@@ -1,16 +1,18 @@
-import * as fs from 'fs'
-import * as fsp from 'path'
-import * as mkdirp from 'mkdirp'
+import * as $fs from 'fs'
+import * as $path from 'path'
+import * as $mkdirp from 'mkdirp'
 
 import { URL } from 'url'
 import { FileSystemEnumerator } from './FileSystemEnumerator'
 
-export const Constants = fs.constants
+export const Constants = $fs.constants
 
 export class FileSystem {
+  static readonly constants = $fs.constants
+
   static append(path: string | number | Buffer | URL, data: any, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.writeFile(path, data, error => {
+      $fs.writeFile(path, data, error => {
         if (error && throws) {
           reject(error)
         }
@@ -20,12 +22,12 @@ export class FileSystem {
   }
 
   static basename(path: string, ext?: string): string {
-    return fsp.basename(path, ext)
+    return $path.basename(path, ext)
   }
 
   static close(fd: number, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.close(fd, error => {
+      $fs.close(fd, error => {
         if (error && throws) {
           reject(error)
         }
@@ -35,12 +37,12 @@ export class FileSystem {
   }
 
   static dirname(filepath: string): string {
-    return fsp.dirname(filepath)
+    return $path.dirname(filepath)
   }
 
-  static delete(path: fs.PathLike, throws?: boolean): Promise<boolean> {
+  static delete(path: $fs.PathLike, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.unlink(path, (error) => {
+      $fs.unlink(path, (error) => {
         if (error && throws) {
           reject(error)
         } else if (error) {
@@ -56,9 +58,9 @@ export class FileSystem {
     return enumerator.enumerate(path, recursive)
   }
 
-  static exists(path: fs.PathLike, mode?: number, throws?: boolean): Promise<boolean> {
+  static exists(path: $fs.PathLike, mode?: number, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.access(path, mode, error => {
+      $fs.access(path, mode, error => {
         if (error && throws) {
           reject(error)
         } else if (error) {
@@ -70,12 +72,12 @@ export class FileSystem {
   }
 
   static ext(filename: string): string {
-    return fsp.extname(filename)
+    return $path.extname(filename)
   }
 
-  static list(path: fs.PathLike): Promise<string[]> {
+  static list(path: $fs.PathLike): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
-      fs.readdir(path, (error, files) => {
+      $fs.readdir(path, (error, files) => {
         if (error) {
           reject(error)
         }
@@ -84,9 +86,9 @@ export class FileSystem {
     })
   }
 
-  static info(path: fs.PathLike): Promise<fs.Stats> {
-    return new Promise<fs.Stats>((resolve, reject) => {
-      fs.stat(path, (error, stats) => {
+  static info(path: $fs.PathLike): Promise<$fs.Stats> {
+    return new Promise<$fs.Stats>((resolve, reject) => {
+      $fs.stat(path, (error, stats) => {
         if (error) {
           reject(error)
         }
@@ -96,12 +98,12 @@ export class FileSystem {
   }
 
   static join(...paths: string[]): string {
-    return fsp.join(...paths)
+    return $path.join(...paths)
   }
 
   static json<T>(path: string | number | Buffer | URL): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      fs.readFile(path, (error, data) => {
+      $fs.readFile(path, (error, data) => {
         if (error) {
           reject(error)
         }
@@ -116,9 +118,9 @@ export class FileSystem {
     })
   }
 
-  static mkdir(path: fs.PathLike, mode?: number | string, throws?: boolean): Promise<boolean> {
+  static mkdir(path: $fs.PathLike, mode?: number | string, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.mkdir(path, mode, error => {
+      $fs.mkdir(path, mode, error => {
         if (error && throws) {
           reject(error)
         }
@@ -134,7 +136,7 @@ export class FileSystem {
 
   static mkdirp(path: string, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      mkdirp(path, error => {
+      $mkdirp(path, error => {
         if (error && throws) {
           reject(error)
         } else {
@@ -150,9 +152,9 @@ export class FileSystem {
       .then(promises => promises.reduce((result, current) => result ? result : current, false))
   }
 
-  static open(path: fs.PathLike, flags: string | number, mode?: string | number): Promise<number> {
+  static open(path: $fs.PathLike, flags: string | number, mode?: string | number): Promise<number> {
     return new Promise<number>((resolve, reject) => {
-      fs.open(path, flags, mode, (error, fd) => {
+      $fs.open(path, flags, mode, (error, fd) => {
         if (error) {
           reject(error)
         }
@@ -163,7 +165,7 @@ export class FileSystem {
 
   static read<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset: number, length: number, position: number): Promise<number> {
     return new Promise<number>((resolve, reject) => {
-      fs.read(fd, buffer, offset, length, position, (error, data) => {
+      $fs.read(fd, buffer, offset, length, position, (error, data) => {
         if (error) {
           reject(error)
         }
@@ -172,9 +174,9 @@ export class FileSystem {
     })
   }
 
-  static rename(original: fs.PathLike, filename: fs.PathLike, throws?: boolean): Promise<boolean> {
+  static rename(original: $fs.PathLike, filename: $fs.PathLike, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.rename(original, filename, error => {
+      $fs.rename(original, filename, error => {
         if (error && throws) {
           reject(error)
         }
@@ -185,7 +187,7 @@ export class FileSystem {
 
   static save<T>(path: number | string | Buffer | URL, object: T, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      fs.writeFile(path, JSON.stringify(object), error => {
+      $fs.writeFile(path, JSON.stringify(object), error => {
         if (error && throws) {
           reject(false)
         }
@@ -194,9 +196,9 @@ export class FileSystem {
     })
   }
 
-  static stat(path: fs.PathLike): Promise<fs.Stats> {
-    return new Promise<fs.Stats>((resolve, reject) => {
-      fs.stat(path, (error, stats) => {
+  static stat(path: $fs.PathLike): Promise<$fs.Stats> {
+    return new Promise<$fs.Stats>((resolve, reject) => {
+      $fs.stat(path, (error, stats) => {
         if (error) {
           reject(error)
         }
@@ -206,13 +208,13 @@ export class FileSystem {
   }
 
   static unext(filename: string): string {
-    const extname = fsp.extname(filename)
+    const extname = $path.extname(filename)
     return filename.replace(extname, '')
   }
 
   static write<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset?: number, length?: number, position?: number): Promise<number> {
     return new Promise<number>((resolve, reject) => {
-      fs.write<T>(fd, buffer, offset, length, position, (error, written) => {
+      $fs.write<T>(fd, buffer, offset, length, position, (error, written) => {
         if (error) {
           reject(error)
         }
@@ -221,3 +223,5 @@ export class FileSystem {
     })
   }
 }
+
+export const fs = FileSystem
