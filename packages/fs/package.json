@@ -13,12 +13,14 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^3.0.1",
+    "glob": "^7.1.2",
     "mkdirp": "^0.5.1",
     "node-fetch": "^2.1.2",
     "rxjs": "^6.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
+    "@types/glob": "^5.0.35",
     "@types/mkdirp": "^0.5.2",
     "@types/mocha": "^5.2.4",
     "@types/node": "^10.5.1",
