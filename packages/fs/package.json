@@ -30,7 +30,7 @@
     "rimraf": "^2.6.1",
     "ts-node": "^7.0.0",
     "typedoc": "^0.11.1",
-    "typescript": "^2.3.4"
+    "typescript": "^2.9.2"
   },
   "publishConfig": {
     "access": "public"
@@ -44,6 +44,7 @@
     "prebuild": "yarn run clean",
     "postbuild": "yarn run docs",
     "docs": "typedoc --mode modules --out ./docs ./src",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "clean": "rimraf .cache && rimraf docs && rimraf lib",
+    "upgrade-packages": "yarn upgrade --latest"
   }
 }
