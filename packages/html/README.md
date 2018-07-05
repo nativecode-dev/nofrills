@@ -1,7 +1,19 @@
 # @nofrills/html
 
+[![npm](https://img.shields.io/npm/v/@nofrills/html.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/html)
+[![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-html.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-html)
+[![David](https://img.shields.io/david/nativecode-dev/nofrills-html.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/html)
+[![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-html.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/html)
+[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-html/master.svg?style=flat-square)](https://coveralls.io/r/nativecode-dev/nofrills-html?branch=master)
+
+# Install
+
+```bash
+npm install --save @nofrills/html
+```
+
 # License
-Copyright 2017 NativeCode Development <opensource@nativecode.com>
+Copyright 2018 NativeCode Development <opensource@nativecode.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without
