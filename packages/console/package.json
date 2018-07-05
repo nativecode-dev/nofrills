@@ -7,14 +7,14 @@
   "name": "@nofrills/console",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^3.0.4",
-    "@nofrills/lincoln-debug": "^3.0.4",
-    "@nofrills/scrubs": "^3.0.4",
+    "@nofrills/fs": "^3.0.5",
+    "@nofrills/lincoln-debug": "^3.0.5",
+    "@nofrills/scrubs": "^3.0.5",
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
