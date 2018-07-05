@@ -9,6 +9,8 @@ import { FileSystemEnumerator } from './FileSystemEnumerator'
 export const Constants = $fs.constants
 
 export class FileSystem {
+  private static readonly enumerator = new FileSystemEnumerator()
+
   static readonly constants = $fs.constants
 
   static append(path: string | number | Buffer | URL, data: any, throws?: boolean): Promise<boolean> {
@@ -55,8 +57,8 @@ export class FileSystem {
   }
 
   static enumerate(path: string, recursive?: boolean): Promise<void> {
-    const enumerator = new FileSystemEnumerator()
-    return enumerator.enumerate(path, recursive)
+
+    return this.enumerator.enumerate(path, recursive)
   }
 
   static exists(path: $fs.PathLike, mode?: number, throws?: boolean): Promise<boolean> {
@@ -221,11 +223,6 @@ export class FileSystem {
         resolve(stats)
       })
     })
-  }
-
-  static unext(filename: string): string {
-    const extname = $path.extname(filename)
-    return filename.replace(extname, '')
   }
 
   static write<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset?: number, length?: number, position?: number): Promise<number> {

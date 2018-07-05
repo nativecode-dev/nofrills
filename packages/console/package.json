@@ -14,6 +14,7 @@
   "dependencies": {
     "@nofrills/fs": "^3.0.2",
     "@nofrills/lincoln-debug": "^3.0.1",
+    "@nofrills/scrubs": "^3.0.1",
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
     "mocha": "^5.2.0",
     "rimraf": "^2.6.1",
     "ts-node": "^7.0.0",
+    "typedoc": "^0.11.1",
     "typescript": "^2.3.4"
   },
   "publishConfig": {
@@ -37,6 +39,8 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf coverage && rimraf lib"
+    "postbuild": "yarn run docs",
+    "docs": "typedoc --mode modules --out ./docs ./src",
+    "clean": "rimraf .cache && rimraf docs && rimraf lib"
   }
 }
