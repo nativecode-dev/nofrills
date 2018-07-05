@@ -2,8 +2,8 @@
 .cache/
 .vscode/
 bin/
-coverage/
 dist/
+docs/
 lib/
 node_modules/
 deploy
