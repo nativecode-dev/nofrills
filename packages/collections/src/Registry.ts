@@ -23,11 +23,11 @@ export class Registry<T> {
     }
   }
 
-  public resolve(key: string): T {
+  public resolve(key: string): T | undefined {
     if (this.map.has(key)) {
       return this.map.get(key) as T
     }
-    throw new Error(`could not resolve: ${key}`)
+    return undefined
   }
 
   public unregister(key: string): void {
