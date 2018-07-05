@@ -47,6 +47,7 @@
 		"prepush": "yarn run test",
 		"start": "lerna run start",
 		"add-pkg": "lerna add",
+		"upgrade-packages": "lerna run upgrade-packages",
 		"travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
 		"travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
 	},

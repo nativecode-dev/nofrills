@@ -56,4 +56,9 @@ describe('when using Registry', () => {
     const sut: any[] = Array.from(registry.values)
     expect(sut).to.deep.equal([0, 1])
   })
+
+  it('should return undefined when key does not exist', () => {
+    const sut = new Registry()
+    expect(sut.resolve(KEY)).to.equal(undefined)
+  })
 })
