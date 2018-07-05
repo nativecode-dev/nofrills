@@ -1,6 +1,6 @@
 import * as cluster from 'cluster'
 
-import { FileSystem as fs } from '@nofrills/fs'
+import { fs } from '@nofrills/fs'
 
 import { Console } from './Console'
 import { ConsoleOptions } from './ConsoleOptions'
