@@ -14,11 +14,6 @@ describe('when using Registry', () => {
     expect(sut).to.equal(VALUE)
   })
 
-  it('should throw when key not found', () => {
-    const registry = new Registry()
-    expect(() => registry.resolve(KEY)).throws(Error)
-  })
-
   it('should not register second handler', () => {
     const registry = new Registry()
     registry.register(KEY, VALUE)
@@ -39,12 +34,6 @@ describe('when using Registry', () => {
     registry.register(KEY, VALUE)
     registry.unregister(KEY)
     expect(registry.containsKey(KEY)).to.equal(false)
-  })
-
-  it('should throw when unregister given unknown key', () => {
-    const registry = new Registry()
-    registry.unregister(KEY)
-    expect(() => registry.resolve(KEY)).throws(Error)
   })
 
   it('should resolve nothing when resolving unknown key', () => {
