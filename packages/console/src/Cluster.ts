@@ -16,13 +16,13 @@ export class Cluster<T extends ConsoleOptions> extends Console<T> {
     cluster.setupMaster(settings)
   }
 
-  async spawn(filepath: string): Promise<void> {
+  async spawn(filepath: string): Promise<boolean> {
     const exists = await fs.exists(filepath)
 
     if (cluster.isMaster && exists === false) {
-      return Promise.reject()
+      return Promise.reject(false)
     }
 
-    return Promise.resolve()
+    return Promise.resolve(true)
   }
 }
