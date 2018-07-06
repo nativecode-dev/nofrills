@@ -1,10 +1,11 @@
 .cache
 node_modules/
+specs/
 src/
 
 mocha.opts
+tsconfig.build.json
 tsconfig.json
-tslint.json
 
 *.map
 *.log
