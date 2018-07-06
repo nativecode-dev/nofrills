@@ -157,7 +157,7 @@ describe('when working with Files', () => {
 
   it('should write json data', async () => {
     const path = fs.join(artifacts, 'env.json')
-    const fd = await fs.open(path, Constants.O_WRONLY)
+    const fd = await fs.open(path, 'w')
     const buffer = Buffer.from(JSON.stringify(process.env))
     await fs.write(fd, buffer, 0, buffer.length, 0)
     await fs.close(fd)

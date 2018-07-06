@@ -38,9 +38,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
-    "postbuild": "yarn run docs",
     "docs": "typedoc --mode modules --out ./docs ./src",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib",
-    "upgrade-packages": "yarn upgrade --latest"
+    "clean": "rimraf .cache && rimraf docs && rimraf lib"
   }
 }
