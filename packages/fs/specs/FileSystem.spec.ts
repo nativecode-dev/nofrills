@@ -1,19 +1,21 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Constants, fs as fs } from '../src/index'
+import { Constants, fs } from '../src/index'
 
 describe('when working with Files', () => {
   const cwd = process.cwd()
   const artifacts = fs.join(cwd, '.artifacts')
 
   before(async () => {
+    if (await fs.exists(artifacts)) {
+      await fs.delete(artifacts)
+    }
     await fs.mkdir(artifacts)
+    await fs.save(fs.join(artifacts, 'artifacts.json'), JSON.stringify({ path: artifacts }))
   })
 
-  after(async () => {
-    await fs.delete(artifacts)
-  })
+  after(() => fs.delete(artifacts))
 
   it('should get base filename', () => {
     const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
@@ -43,7 +45,7 @@ describe('when working with Files', () => {
   it('should get file information', async () => {
     const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
     const info = await fs.info(path)
-    expect(info.isFile()).equal(true)
+    expect(info.stats.isFile()).equal(true)
   })
 
   it('should fail to get file information', async () => {
@@ -67,9 +69,14 @@ describe('when working with Files', () => {
     expect(exists).equal(false)
   })
 
-  it('should list all files recursively', async () => {
-    const path = fs.join(cwd, 'node_modules/@types')
-    await fs.enumerate(path, true)
+  it('should throw if file does not exist', async () => {
+    try {
+      const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts.nope')
+      await fs.exists(path, true)
+      throw new Error('failed to fail')
+    } catch (error) {
+      expect(error.message).not.equal('failed to fail')
+    }
   })
 
   it('should write json file to disk', async () => {
@@ -137,6 +144,49 @@ describe('when working with Files', () => {
     const path = fs.join(artifacts, '1/2/3')
     await fs.mkdirp(path)
     expect(await fs.exists(path)).equals(true)
+  })
+
+  it('should stat multiple paths', async () => {
+    const paths = [
+      fs.join(cwd, 'packages/fs', 'specs'),
+      fs.join(cwd, 'packages/fs', 'src'),
+    ]
+    const stats = await fs.stats(...paths)
+    expect(stats.length).to.equal(2)
+  })
+
+  it('should write json data', async () => {
+    const path = fs.join(artifacts, 'env.json')
+    const fd = await fs.open(path, 'w')
+    const buffer = Buffer.from(JSON.stringify(process.env))
+    await fs.write(fd, buffer, 0, buffer.length, 0)
+    await fs.close(fd)
+    const exists = await fs.exists(path)
+    expect(exists).to.equal(true)
+  })
+
+  it('should rename file', async () => {
+    const path = fs.join(artifacts, 'artifacts.json')
+    const renamed = fs.join(artifacts, 'manifest.json')
+    const result = await fs.rename(path, renamed)
+    expect(result).to.equal(true)
+  })
+
+  it('should fail to rename file', async () => {
+    const path = fs.join(artifacts, '.artifacts.json')
+    const renamed = fs.join(artifacts, 'manifest.json')
+    const result = await fs.rename(path, renamed)
+    expect(result).to.equal(false)
+  })
+
+  it('should fail to rename file and throw', async () => {
+    try {
+      const path = fs.join(artifacts, '.artifacts.json')
+      const renamed = fs.join(artifacts, 'manifest.json')
+      await fs.rename(path, renamed, true)
+    } catch (error) {
+      expect(error).instanceof(Error)
+    }
   })
 
 })
