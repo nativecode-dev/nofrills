@@ -1,2 +1,2 @@
 export * from './FileSystem'
-export * from './FileSystemEnumerator'
+export * from './PathCollector'

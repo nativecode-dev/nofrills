@@ -4,13 +4,19 @@ import * as $path from 'path'
 import * as $mkdirp from 'mkdirp'
 
 import { URL } from 'url'
-import { FileSystemEnumerator } from './FileSystemEnumerator'
 
 export const Constants = $fs.constants
 
-export class FileSystem {
-  private static readonly enumerator = new FileSystemEnumerator()
+export type PathLike = $fs.PathLike | string
 
+export type Stats = $fs.Stats
+
+export interface Descriptor {
+  path: string
+  stats: Stats
+}
+
+export class FileSystem {
   static readonly constants = $fs.constants
 
   static append(path: string | number | Buffer | URL, data: any, throws?: boolean): Promise<boolean> {
@@ -43,7 +49,7 @@ export class FileSystem {
     return $path.dirname(filepath)
   }
 
-  static delete(path: $fs.PathLike, throws?: boolean): Promise<boolean> {
+  static delete(path: PathLike, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       $fs.unlink(path, (error) => {
         if (error && throws) {
@@ -56,12 +62,7 @@ export class FileSystem {
     })
   }
 
-  static enumerate(path: string, recursive?: boolean): Promise<void> {
-
-    return this.enumerator.enumerate(path, recursive)
-  }
-
-  static exists(path: $fs.PathLike, mode?: number, throws?: boolean): Promise<boolean> {
+  static exists(path: PathLike, throws?: boolean, mode?: number): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       $fs.access(path, mode, error => {
         if (error && throws) {
@@ -81,6 +82,7 @@ export class FileSystem {
   static glob(pattern: string): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
       $glob(pattern, (error, matches) => {
+        /** istanbul ignore next */
         if (error) {
           reject(error)
         }
@@ -89,9 +91,10 @@ export class FileSystem {
     })
   }
 
-  static list(path: $fs.PathLike): Promise<string[]> {
+  static list(path: PathLike): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
       $fs.readdir(path, (error, files) => {
+        /** istanbul ignore next */
         if (error) {
           reject(error)
         }
@@ -100,15 +103,8 @@ export class FileSystem {
     })
   }
 
-  static info(path: $fs.PathLike): Promise<$fs.Stats> {
-    return new Promise<$fs.Stats>((resolve, reject) => {
-      $fs.stat(path, (error, stats) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(stats)
-      })
-    })
+  static info(path: PathLike): Promise<Descriptor> {
+    return this.stat(path)
   }
 
   static join(...paths: string[]): string {
@@ -132,7 +128,7 @@ export class FileSystem {
     })
   }
 
-  static mkdir(path: $fs.PathLike, mode?: number | string, throws?: boolean): Promise<boolean> {
+  static mkdir(path: PathLike, mode?: number | string, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       $fs.mkdir(path, mode, error => {
         if (error && throws) {
@@ -166,7 +162,7 @@ export class FileSystem {
       .then(promises => promises.reduce((result, current) => result ? result : current, false))
   }
 
-  static open(path: $fs.PathLike, flags: string | number, mode?: string | number): Promise<number> {
+  static open(path: PathLike, flags: string | number, mode?: string | number): Promise<number> {
     return new Promise<number>((resolve, reject) => {
       $fs.open(path, flags, mode, (error, fd) => {
         if (error) {
@@ -188,7 +184,7 @@ export class FileSystem {
     })
   }
 
-  static rename(original: $fs.PathLike, filename: $fs.PathLike, throws?: boolean): Promise<boolean> {
+  static rename(original: PathLike, filename: PathLike, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       $fs.rename(original, filename, error => {
         if (error && throws) {
@@ -214,15 +210,19 @@ export class FileSystem {
     })
   }
 
-  static stat(path: $fs.PathLike): Promise<$fs.Stats> {
-    return new Promise<$fs.Stats>((resolve, reject) => {
+  static stat(path: PathLike): Promise<Descriptor> {
+    return new Promise<Descriptor>((resolve, reject) => {
       $fs.stat(path, (error, stats) => {
         if (error) {
           reject(error)
         }
-        resolve(stats)
+        resolve({ path: String(path), stats })
       })
     })
+  }
+
+  static stats(...paths: PathLike[]): Promise<Descriptor[]> {
+    return Promise.all(paths.map(path => this.stat(path)))
   }
 
   static write<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset?: number, length?: number, position?: number): Promise<number> {

@@ -42,7 +42,7 @@
 		"lint": "tslint --project tsconfig.json --config tslint.json",
 		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
-		"testonly": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"testonly": "cross-env DEBUG=nofrills* nyc mocha --opts mocha.opts",
 		"push": "sh push.sh",
 		"prepush": "yarn run test",
 		"start": "lerna run start",
