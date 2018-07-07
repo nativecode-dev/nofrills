@@ -2,7 +2,11 @@ import fetch, * as f from 'node-fetch'
 import { Lincoln, Logger } from './Logger'
 
 export abstract class HTTP {
-  protected readonly log: Lincoln = Logger.extend(this.name)
+  private readonly log: Lincoln
+
+  constructor(name: string = 'http') {
+    this.log = Logger.extend(name)
+  }
 
   public async delete<TResponse>(url: string): Promise<TResponse> {
     return this.send<TResponse>(url, await this.request<void>(), 'DELETE')

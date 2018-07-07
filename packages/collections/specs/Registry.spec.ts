@@ -36,6 +36,12 @@ describe('when using Registry', () => {
     expect(registry.containsKey(KEY)).to.equal(false)
   })
 
+  it('should unregister unknown key', () => {
+    const registry = new Registry()
+    registry.unregister(KEY)
+    expect(registry.containsKey(KEY)).to.equal(false)
+  })
+
   it('should resolve nothing when resolving unknown key', () => {
     const registry = new Registry()
     expect(registry.containsKey(KEY)).to.equal(false)

@@ -1,5 +1,11 @@
+export type RegistryEntries<T> = Iterable<[string, T]> | ReadonlyArray<[string, T]>
+
 export class Registry<T> {
-  protected readonly map: Map<string, T> = new Map<string, T>()
+  protected readonly map: Map<string, T>
+
+  constructor(entries: RegistryEntries<T> = []) {
+    this.map = new Map<string, T>(entries)
+  }
 
   public get keys(): IterableIterator<string> {
     return this.map.keys()

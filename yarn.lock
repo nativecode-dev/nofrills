@@ -86,6 +86,39 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@nofrills/collections@^3.1.4-1":
+  version "3.1.4-1"
+  resolved "https://registry.yarnpkg.com/@nofrills/collections/-/collections-3.1.4-1.tgz#513c3cd66836247db01cbeeab99aa78c507fd19e"
+
+"@nofrills/lincoln-debug@^3.1.4-1":
+  version "3.1.4-1"
+  resolved "https://registry.yarnpkg.com/@nofrills/lincoln-debug/-/lincoln-debug-3.1.4-1.tgz#9f86c24d3ed35e9e963338df12309e00ba656608"
+  dependencies:
+    "@nofrills/lincoln" "^3.1.4-1"
+    debug "^3.1.0"
+
+"@nofrills/lincoln@^3.1.4-1":
+  version "3.1.4-1"
+  resolved "https://registry.yarnpkg.com/@nofrills/lincoln/-/lincoln-3.1.4-1.tgz#da000f5d6f10143676c2989b730945461236ba6e"
+  dependencies:
+    "@nofrills/collections" "^3.1.4-1"
+    uuidjs "^4.0.3"
+
+"@nofrills/scrubs@^3.1.4-1":
+  version "3.1.4-1"
+  resolved "https://registry.yarnpkg.com/@nofrills/scrubs/-/scrubs-3.1.4-1.tgz#6be599b6298981288772dd31ba7e363ca425202b"
+  dependencies:
+    "@nofrills/lincoln-debug" "^3.1.4-1"
+    "@nofrills/types" "^3.1.4-1"
+    lodash.merge "^4.6.0"
+
+"@nofrills/types@^3.1.4-1":
+  version "3.1.4-1"
+  resolved "https://registry.yarnpkg.com/@nofrills/types/-/types-3.1.4-1.tgz#3380c280e8d7efe28f947105ae077a45f3bff290"
+  dependencies:
+    validator "^10.4.0"
+    zipcodes-regex "^1.0.1"
+
 "@types/bluebird@^3.5.5":
   version "3.5.21"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.21.tgz#567615589cc913e84a28ecf9edb031732bdf2634"

@@ -142,6 +142,7 @@ describe('when using Lincoln', () => {
 
   describe('to filter messages', () => {
     const filter = (log: Log) => log.namespace.indexOf('debug') < 0
+
     it('should filter message', () => {
       let calls = 0
       const options: Options = context.options((log: Log) => {
@@ -153,5 +154,7 @@ describe('when using Lincoln', () => {
       sut.debug(message)
       sut.warn(message)
     })
+
   })
+
 })

@@ -1,7 +1,7 @@
 import * as events from 'events'
 import * as uuid from 'uuidjs'
 
-import { Registry } from '@nofrills/collections'
+import { Chain, Chains, Registry } from '@nofrills/collections'
 
 import { Log } from './Log'
 import { Options } from './Options'
@@ -27,12 +27,23 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
 
   constructor(options?: Partial<Options> | string) {
     super()
+
     this.id = uuid.generate()
+
     if (options && typeof options === 'string') {
       options = { namespace: options }
     }
-    const opts: any = options || defaults
-    this.options = { ...defaults, ...opts }
+
+    const current: any = options || defaults
+    this.options = { ...defaults, ...current }
+  }
+
+  protected get filters(): Chain<Log, boolean> {
+    return new Chain<Log, boolean>(Array.from(this.options.filters.values))
+  }
+
+  protected get interceptors(): Chains<Log> {
+    return new Chain<Log, Log>(Array.from(this.options.interceptors.values))
   }
 
   public get namespace(): string {
@@ -86,14 +97,14 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
       timestamp: Date.now(),
     }
 
-    const filters = Array.from(this.options.filters.values)
-    const filtered: boolean = filters.every((filter: Filter) => filter(log))
+    const filtered: boolean = this.filters.execute(log)
 
-    if (filters.length === 0 || filtered === false) {
-      const interceptors = Array.from(this.options.interceptors.values)
-
-      const logs: Log[] = interceptors.map((interceptor: Interceptor) => interceptor(log))
-      this.emit(Lincoln.events.log, logs[logs.length - 1])
+    if (filtered === false) {
+      return
     }
+
+    const logitem = this.interceptors.execute(log)
+
+    this.emit(Lincoln.events.log, logitem)
   }
 }
