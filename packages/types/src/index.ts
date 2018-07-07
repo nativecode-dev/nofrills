@@ -1,6 +1,9 @@
 export * from './Is'
 export * from './IsType'
 export * from './IsTypeHandler'
+export * from './ObjectIterator'
+export * from './ObjectNavigator'
+export * from './ObjectPath'
 export * from './Type'
 export * from './TypeParser'
 export * from './TypeProperties'
@@ -152,6 +155,18 @@ Types.register({
 
     return valid
   },
+})
+
+Types.register({
+  type: 'null',
+  typebase: 'null',
+  validator: (value: any) => value === null,
+})
+
+Types.register({
+  type: 'undefined',
+  typebase: 'undefined',
+  validator: (value: any) => value === undefined,
 })
 
 Types.register({

@@ -39,8 +39,6 @@ export class Lincoln extends EventEmitter {
 
     const current: any = logOptions || defaults
     this.options = { ...defaults, ...current }
-
-    this.info('logging', 'started', this.now(), 'namespace', this.namespace)
   }
 
   get namespace(): string {

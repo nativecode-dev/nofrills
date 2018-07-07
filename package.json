@@ -21,7 +21,8 @@
 		"exclude": [
 			"node_modules",
 			"packages/*/src/**/*.spec.ts",
-			"packages/*/src/Logger.ts"
+			"packages/*/src/Logger.ts",
+			"packages/*/src/Logging.ts"
 		],
 		"extension": [
 			".ts"

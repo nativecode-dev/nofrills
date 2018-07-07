@@ -1,6 +1,8 @@
 import * as validator from 'validator'
 
-import { Type, TypeProperties, Types } from './index'
+import { Type } from './Type'
+import { TypeProperties } from './TypeProperties'
+import { Types } from './Types'
 
 export class TypeParser {
   public static deserialize(typestr: string): Type {

@@ -1,8 +1,8 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { scrub, Scrubs } from '../src/index'
-import { data } from '../artifacts/data'
+import { scrub, Scrubs } from '@nofrills/scrubs'
+import { data } from './data'
 
 describe('when using scrubs', () => {
 

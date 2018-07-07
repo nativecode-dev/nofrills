@@ -13,13 +13,10 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^3.1.4",
-    "@nofrills/types": "^3.1.4",
-    "lodash.merge": "^4.6.0"
+    "@nofrills/types": "^3.1.4"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
-    "@types/lodash": "^4.14.71",
-    "@types/lodash.merge": "^4.6.2",
     "@types/mocha": "^5.2.4",
     "@types/node": "^10.5.1",
     "chai": "^4.1.2",
