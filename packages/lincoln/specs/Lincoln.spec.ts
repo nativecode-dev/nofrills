@@ -1,157 +1,203 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Lincoln, Log, Options } from '../src/index'
+import { Lincoln, Log, Options, LogMessageType } from '@nofrills/lincoln'
+
+import { EXTENSION, MESSAGE, NAMESPACE, Context } from './Context'
 
 describe('when using Lincoln', () => {
-  const context = require('../artifacts/context')
-  const extension = context.EXTENSION
-  const namespace = context.NAMESPACE
-  const message = context.MESSAGE
 
   describe('to log messages', () => {
+
     it('should create Lincoln with no options', () => {
       const sut: Lincoln = new Lincoln()
       expect(sut).to.be.instanceOf(Lincoln)
     })
 
     it('should create log object', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:debug`)
-        expect(log.parameters[0]).to.equal(message)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
+        expect(log.parameters[0]).to.equal(MESSAGE)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(message)
+      sut.debug(MESSAGE)
     })
 
     it('should create log object with no options', () => {
-      const sut: Lincoln = new Lincoln(namespace)
+      const sut: Lincoln = new Lincoln(NAMESPACE)
       expect(sut).to.be.instanceOf(Lincoln)
-      expect(sut.namespace).to.equal(namespace)
+      expect(sut.namespace).to.equal(NAMESPACE)
     })
 
     it('should act as emitter', (done) => {
-      const options: Options = context.options((log: Log) => log)
-      const sut: Lincoln = new Lincoln(options)
-      sut.on(Lincoln.events.log, (log) => {
-        expect(log.namespace).to.equal(`${namespace}:debug`)
-        expect(log.parameters[0]).to.equal(message)
+      const sut: Lincoln = new Lincoln(NAMESPACE)
+      sut.on('log-message', (log: Log) => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
+        expect(log.parameters[0]).to.equal(MESSAGE)
         done()
       })
-      sut.debug(message)
+      sut.debug(MESSAGE)
     })
 
     it('should extend instance', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:${extension}:debug`)
-        expect(log.parameters[0]).to.equal(message)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:${EXTENSION}:debug`)
+        expect(log.parameters[0]).to.equal(MESSAGE)
         done()
+        return log
       })
       const logger: Lincoln = new Lincoln(options)
-      const sut: Lincoln = logger.extend(extension)
+      const sut: Lincoln = logger.extend(EXTENSION)
       expect(logger.id).not.equal(sut.id)
-      sut.debug(message)
+      sut.debug(MESSAGE)
     })
 
     it('should log object', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.parameters[0].message).to.equal(message)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.parameters[0].message).to.equal(MESSAGE)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
       sut.debug({
-        message
+        message: MESSAGE
       })
     })
 
     it('should log empty parameters', (done) => {
-      const options: Options = context.options((log: Log) => {
+      const options: Options = Context.intercept((log: Log): Log => {
         expect(log.parameters.length).to.equal(0)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
       sut.debug()
     })
+
   })
 
   describe('to log different types of messages', () => {
+
     it('should call debug', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:debug`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(message)
+      sut.debug(MESSAGE)
     })
 
     it('should call error', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:error`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:error`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.error(message)
+      sut.error(MESSAGE)
     })
 
     it('should call fatal', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:fatal`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:fatal`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.fatal(message)
+      sut.fatal(MESSAGE)
     })
 
     it('should call info', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:info`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:info`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.info(message)
+      sut.info(MESSAGE)
     })
 
     it('should call silly', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:silly`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:silly`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.silly(message)
+      sut.silly(MESSAGE)
     })
 
     it('should call trace', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:trace`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:trace`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.trace(message)
+      sut.trace(MESSAGE)
     })
 
     it('should call warn', (done) => {
-      const options: Options = context.options((log: Log) => {
-        expect(log.namespace).to.equal(`${namespace}:warn`)
+      const options: Options = Context.intercept((log: Log): Log => {
+        expect(log.namespace).to.equal(`${NAMESPACE}:warn`)
         done()
+        return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.warn(message)
+      sut.warn(MESSAGE)
     })
+
   })
 
   describe('to filter messages', () => {
-    const filter = (log: Log) => log.namespace.indexOf('debug') < 0
-    it('should filter message', () => {
-      let calls = 0
-      const options: Options = context.options((log: Log) => {
-        calls++
-        expect(calls).to.equal(1)
-      })
-      options.filters.register('test', filter)
+
+    it('should filter message', (done) => {
+      const filter = (log: Log): boolean => {
+        const filtered = log.type === LogMessageType.debug
+        if (filtered) {
+          done()
+        }
+        return filtered
+      }
+
+      const options: Options = Context.filter(filter)
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(message)
-      sut.warn(message)
+      sut.debug(MESSAGE)
+      sut.warn(MESSAGE)
     })
+
+    it('should not filter message', (done) => {
+      const filter = (log: Log): boolean => {
+        if (log.type === LogMessageType.warn) {
+          done()
+        }
+        return false
+      }
+
+      const options: Options = Context.filter(filter)
+      const sut: Lincoln = new Lincoln(options)
+      sut.debug(MESSAGE)
+      sut.warn(MESSAGE)
+    })
+
   })
+
+  describe('to intercept messages', () => {
+
+    it('should intercept message', (done) => {
+      const interceptor = (log: Log): Log => {
+        done()
+        return log
+      }
+
+      const options: Options = Context.intercept(interceptor)
+      const sut: Lincoln = new Lincoln(options)
+      sut.debug(MESSAGE)
+    })
+
+  })
+
 })

@@ -3,6 +3,7 @@ export { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@no
 import * as debug from 'debug'
 
 import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
+import { RegistryEntries } from '@nofrills/collections'
 
 interface DebugCache {
   [key: string]: debug.IDebugger
@@ -23,15 +24,15 @@ export const DebugInterceptor: Interceptor = (log: Log): Log => {
   return log
 }
 
-export const CreateOptions = (namespace: string): Options => {
+export const CreateOptions = (namespace: string, filters?: RegistryEntries<Filter>, interceptors?: RegistryEntries<Interceptor>): Options => {
   const options: Options = {
-    filters: new LincolnRegistry<Filter>(),
-    interceptors: new LincolnRegistry<Interceptor>(),
+    filters: new LincolnRegistry<Filter>(filters),
+    interceptors: new LincolnRegistry<Interceptor>(interceptors),
     namespace,
     separator: ':',
   }
 
-  options.interceptors.register('debug', DebugInterceptor)
+  options.interceptors.register('debug-interceptor', DebugInterceptor)
 
   return options
 }

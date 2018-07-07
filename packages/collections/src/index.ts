@@ -1,3 +1,5 @@
+export * from './Chain'
+export * from './ChainAsync'
 export * from './Dictionary'
 export * from './Indexer'
 export * from './Registry'

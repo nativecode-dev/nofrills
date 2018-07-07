@@ -1,13 +1,13 @@
-import * as events from 'events'
-import * as uuid from 'uuidjs'
+import { generate as uuid } from 'uuidjs'
 
+import { EventEmitter } from 'events'
 import { Registry } from '@nofrills/collections'
 
 import { Log } from './Log'
-import { Options } from './Options'
+import { LogMessageType } from './LogMessageType'
 import { LincolnLog } from './LincolnLog'
 import { Filter, Interceptor } from './LincolnRegistry'
-import { LogMessageType } from './LogMessageType'
+import { Options } from './Options'
 
 const defaults: Options = {
   filters: new Registry<Filter>(),
@@ -16,23 +16,29 @@ const defaults: Options = {
   separator: ':'
 }
 
-export class Lincoln extends events.EventEmitter implements LincolnLog {
-  public static events: { [key: string]: string } = {
-    log: 'log-message'
-  }
+export enum LincolnEvents {
+  Filtered = 'log-message-filtered',
+  Log = 'log-message',
+}
 
+export class Lincoln extends EventEmitter {
   public readonly id: string
 
   private readonly options: Options
 
-  constructor(options?: Partial<Options> | string) {
+  constructor(
+    logOptions?: Partial<Options> | string,
+    private readonly loggers: LincolnLog[] = [],
+  ) {
     super()
-    this.id = uuid.generate()
-    if (options && typeof options === 'string') {
-      options = { namespace: options }
+    this.id = uuid()
+
+    if (logOptions && typeof logOptions === 'string') {
+      logOptions = { namespace: logOptions }
     }
-    const opts: any = options || defaults
-    this.options = { ...defaults, ...opts }
+
+    const current: any = logOptions || defaults
+    this.options = { ...defaults, ...current }
   }
 
   public get namespace(): string {
@@ -45,13 +51,6 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
 
   public error(...parameters: any[]): void {
     this.write(LogMessageType.error, parameters)
-  }
-
-  public extend(tag: string): Lincoln {
-    return new Lincoln({
-      ...this.options,
-      ...{ namespace: this.tag(tag) }
-    })
   }
 
   public fatal(...parameters: any[]): void {
@@ -74,26 +73,40 @@ export class Lincoln extends events.EventEmitter implements LincolnLog {
     this.write(LogMessageType.warn, parameters)
   }
 
-  private tag(tag: string): string {
+  public extend(tag: string): Lincoln {
+    return new Lincoln({
+      ...this.options,
+      ...{ namespace: this.normalize(tag) }
+    })
+  }
+
+  private normalize(tag: string): string {
     return `${this.options.namespace}${this.options.separator}${tag}`
   }
 
   private write(tag: LogMessageType, parameters: any[]): void {
-    const log: Log = {
-      id: uuid.generate(),
-      namespace: this.tag(tag),
+    const original: Log = {
+      id: uuid(),
+      namespace: this.normalize(tag),
       parameters,
       timestamp: Date.now(),
+      type: tag,
     }
 
-    const filters = Array.from(this.options.filters.values)
-    const filtered: boolean = filters.every((filter: Filter) => filter(log))
+    const log = Array.from(this.options.interceptors.values)
+      .reduce((result, interceptor) => interceptor(result), original)
 
-    if (filters.length === 0 || filtered === false) {
-      const interceptors = Array.from(this.options.interceptors.values)
+    const filtered: boolean = Array.from(this.options.filters.values)
+      .map(filter => filter(log))
+      .reduce((result, filter) => result ? result : filter, false)
 
-      const logs: Log[] = interceptors.map((interceptor: Interceptor) => interceptor(log))
-      this.emit(Lincoln.events.log, logs[logs.length - 1])
+    if (filtered === true) {
+      this.emit(LincolnEvents.Filtered, log)
+      return
     }
+
+    this.emit(LincolnEvents.Log, log)
+
+    this.loggers.map(logger => logger.write(log))
   }
 }

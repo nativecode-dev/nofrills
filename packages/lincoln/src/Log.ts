@@ -1,6 +1,9 @@
+import { LogMessageType } from './LogMessageType'
+
 export interface Log {
   readonly id: string
-  readonly timestamp: number
   readonly namespace: string
-  parameters: any[]
+  readonly timestamp: number
+  readonly type: LogMessageType
+  readonly parameters: any[]
 }

@@ -1,8 +1,12 @@
-import fetch, { Request, RequestInit } from 'node-fetch'
+import fetch, * as f from 'node-fetch'
 import { Lincoln, Logger } from './Logger'
 
 export abstract class HTTP {
-  protected readonly log: Lincoln = Logger.extend(this.name)
+  private readonly log: Lincoln
+
+  constructor(name: string = 'http') {
+    this.log = Logger.extend(name)
+  }
 
   public async delete<TResponse>(url: string): Promise<TResponse> {
     return this.send<TResponse>(url, await this.request<void>(), 'DELETE')
@@ -29,16 +33,17 @@ export abstract class HTTP {
   }
 
   protected abstract get name(): string
-  protected abstract request<TRequest>(body?: TRequest): Promise<RequestInit>
+  protected abstract request<TRequest>(body?: TRequest): Promise<f.RequestInit>
 
-  protected async send<T>(url: string, init: RequestInit, method: string = 'GET'): Promise<T> {
-    if (init.method === undefined) {
+  protected async send<T>(url: string, init?: f.RequestInit, method: string = 'GET'): Promise<T> {
+    if (init && init.method === undefined) {
       init.method = method
     }
+
     this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
 
-    const request = new Request(url, init)
-    const response = await fetch(request)
+    const request = new f.Request(url, init)
+    const response = await fetch(request, init)
 
     if (response.ok) {
       this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)

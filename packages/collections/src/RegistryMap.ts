@@ -1,5 +1,11 @@
+import { RegistryEntries } from './Registry'
+
 export class RegistryMap<T> {
-  protected readonly map: Map<string, T[]> = new Map<string, T[]>()
+  protected readonly map: Map<string, T[]>
+
+  constructor(entries: RegistryEntries<T[]> = []) {
+    this.map = new Map<string, T[]>(entries)
+  }
 
   public get keys(): string[] {
     return Array.from(this.map.keys())

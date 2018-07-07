@@ -1,6 +1,5 @@
 export * from './Lincoln'
 export * from './LincolnLog'
-export * from './LincolnLogs'
 export * from './LincolnRegistry'
 export * from './Log'
 export * from './LogMessageType'

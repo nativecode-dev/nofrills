@@ -11,6 +11,10 @@ import merge = require('lodash.merge')
 
 const log: Lincoln = Logger.extend('scrubslib')
 
+function escape(values: string[]): string[] {
+  return values.map(value => value.replace('-', '\\'))
+}
+
 Registry.register<any[]>('array', (value: any[], options: ScrubsOptions, instance: Scrubs): any[] => {
   return value.map((v) => instance.scrub(v))
 })
@@ -37,15 +41,16 @@ Registry.register<any>('object', (value: any, options: ScrubsOptions, instance: 
 })
 
 Registry.register<string>('string', (value: string, options: ScrubsOptions): string => {
-  const regex: RegExp = new RegExp(`([${options.properties.join('|')}]=[\'"]?)\\w+([\'"]?&?)`, 'g')
+  const properties = escape(options.properties)
+  const regex: RegExp = new RegExp(`([${properties.join('|')}]=[\'"]?)\\w+([\'"]?&?)`, 'g')
   const transformed: string = value.replace(regex, `$1${options.text}$2`)
   log.debug('StringScrubber', value, transformed)
   return transformed
 })
 
 Registry.register<string>('string', (value: string, options: ScrubsOptions): string => {
-  const regex: RegExp = /(http[s]:\/\/\w+:)\w+(@.*)/g
+  const regex: RegExp = /(https?:\/\/\w*:)\w+(@.*)/g
   const transformed: string = value.replace(regex, `$1${options.text}$2`)
-  log.debug('StringScrubber', value, transformed)
+  log.debug('UrlScrubber', value, transformed)
   return transformed
 })

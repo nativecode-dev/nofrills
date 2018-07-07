@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { CreateLogger, Options } from './index'
+import { CreateLogger, CreateOptions, Log, Options } from '../src/index'
 
 describe('when using debug lincoln interceptor', () => {
   const NAMESPACE = 'nativecode:test'
@@ -15,6 +15,28 @@ describe('when using debug lincoln interceptor', () => {
       namespace: NAMESPACE,
     }
     expect(() => CreateLogger(options).debug('Hello, %s!', 'World')).to.not.throw()
+  })
+
+  it('should create instance options with filter', (done) => {
+    const filter = () => {
+      done()
+      return false
+    }
+
+    const options = CreateOptions(NAMESPACE, [['test-filter', filter]])
+
+    CreateLogger(options).debug('test-message')
+  })
+
+  it('should create instance options with interceptor', (done) => {
+    const interceptor = (log: Log) => {
+      done()
+      return log
+    }
+
+    const options = CreateOptions(NAMESPACE, [], [['test-interceptor', interceptor]])
+
+    CreateLogger(options).debug('test-message')
   })
 
   it('should log parameterless calls', () => {

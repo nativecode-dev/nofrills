@@ -13,7 +13,7 @@ export interface ScrubsOptions {
 }
 
 const defaults: ScrubsOptions = {
-  properties: ['apikey', 'api_key', 'password'],
+  properties: ['apikey', 'api_key', 'password', 'x-api-key'],
   text: '<secured>'
 }
 
