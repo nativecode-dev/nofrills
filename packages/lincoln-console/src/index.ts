@@ -19,7 +19,7 @@ export const CreateOptions = (namespace: string): Options => {
     separator: ':',
   }
 
-  options.interceptors.register('console', ConsoleInterceptor)
+  options.interceptors.register('console-interceptor', ConsoleInterceptor)
 
   return options
 }

@@ -32,7 +32,7 @@ export const CreateOptions = (namespace: string, filters?: RegistryEntries<Filte
     separator: ':',
   }
 
-  options.interceptors.register('debug', DebugInterceptor)
+  options.interceptors.register('debug-interceptor', DebugInterceptor)
 
   return options
 }
