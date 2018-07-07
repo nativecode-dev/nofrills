@@ -17,25 +17,26 @@ describe('when using debug lincoln interceptor', () => {
     expect(() => CreateLogger(options).debug('Hello, %s!', 'World')).to.not.throw()
   })
 
-  it('should create instance with options with filters and interceptors', () => {
-    let filtered = 0
-    let intercepted = 0
-
+  it('should create instance options with filter', (done) => {
     const filter = () => {
-      filtered = filtered + 1
-      return true
+      done()
+      return false
     }
 
+    const options = CreateOptions(NAMESPACE, [['test-filter', filter]])
+
+    CreateLogger(options).debug('test-message')
+  })
+
+  it('should create instance options with interceptor', (done) => {
     const interceptor = (log: Log) => {
-      intercepted = intercepted + 1
+      done()
       return log
     }
 
-    const options = CreateOptions(NAMESPACE, [['test-filter', filter]], [['test-interceptor', interceptor]])
-    const logger = CreateLogger(options)
-    logger.debug('test')
-    expect(filtered).to.equal(1)
-    expect(intercepted).to.equal(1)
+    const options = CreateOptions(NAMESPACE, [], [['test-interceptor', interceptor]])
+
+    CreateLogger(options).debug('test-message')
   })
 
   it('should log parameterless calls', () => {

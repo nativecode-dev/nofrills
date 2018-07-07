@@ -27,9 +27,8 @@ export class Chain<T, R> {
 
     const proxy: Handler<T, R> = handlers.reduce((previous: Handler<T, R>, current: Handler<T, R>): Handler<T, R> => {
       const innerHandler: Handler<T, R> = (object: T, next: Link<T, R>): R => {
-        const callee: Link<T, R> = (o: T): R => previous(object, next)
-        const processed = current(object, callee)
-        return processed
+        const callee: Link<T, R> = (o: T): R => previous(o, next)
+        return current(object, callee)
       }
       return innerHandler
     }, initiator)
