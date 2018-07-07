@@ -39,45 +39,51 @@ export class Lincoln extends EventEmitter {
 
     const current: any = logOptions || defaults
     this.options = { ...defaults, ...current }
+
+    this.info('logging', 'started', this.now(), 'namespace', this.namespace)
   }
 
-  public get namespace(): string {
+  get namespace(): string {
     return this.options.namespace
   }
 
-  public debug(...parameters: any[]): void {
+  debug(...parameters: any[]): void {
     this.write(LogMessageType.debug, parameters)
   }
 
-  public error(...parameters: any[]): void {
+  error(...parameters: any[]): void {
     this.write(LogMessageType.error, parameters)
   }
 
-  public fatal(...parameters: any[]): void {
+  fatal(...parameters: any[]): void {
     this.write(LogMessageType.fatal, parameters)
   }
 
-  public info(...parameters: any[]): void {
+  info(...parameters: any[]): void {
     this.write(LogMessageType.info, parameters)
   }
 
-  public silly(...parameters: any[]): void {
+  silly(...parameters: any[]): void {
     this.write(LogMessageType.silly, parameters)
   }
 
-  public trace(...parameters: any[]): void {
+  trace(...parameters: any[]): void {
     this.write(LogMessageType.trace, parameters)
   }
 
-  public warn(...parameters: any[]): void {
+  warn(...parameters: any[]): void {
     this.write(LogMessageType.warn, parameters)
   }
 
-  public extend(tag: string): Lincoln {
+  extend(tag: string): Lincoln {
     return new Lincoln({
       ...this.options,
       ...{ namespace: this.normalize(tag) }
     })
+  }
+
+  now(): string {
+    return new Date().toISOString()
   }
 
   private normalize(tag: string): string {
