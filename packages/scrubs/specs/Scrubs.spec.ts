@@ -67,6 +67,12 @@ describe('when using scrubs', () => {
       expect(sut).to.equal('https://admin:<secured>@nowhere.com')
     })
 
+    it('should secure url auth password', () => {
+      const url: string = 'https://:password@nowhere.com'
+      const sut: any = scrub(url)
+      expect(sut).to.equal('https://:<secured>@nowhere.com')
+    })
+
     it('should secure url query parameters', () => {
       const url: string = 'https://nowhere.com?password=secret'
       const sut: any = scrub(url)
