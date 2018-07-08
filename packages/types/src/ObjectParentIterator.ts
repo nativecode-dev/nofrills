@@ -1,6 +1,6 @@
 import { ObjectNavigator } from './ObjectNavigator'
 
-export class ObjectIterator implements IterableIterator<ObjectNavigator> {
+export class ObjectParentIterator implements IterableIterator<ObjectNavigator> {
   private current: ObjectNavigator = this.object
 
   private constructor(private readonly object: ObjectNavigator) { }
@@ -9,14 +9,20 @@ export class ObjectIterator implements IterableIterator<ObjectNavigator> {
     return this
   }
 
-  static iterate(object: any): ObjectIterator {
-    return new ObjectIterator(object)
+  static from(object: ObjectNavigator): ObjectParentIterator {
+    return new ObjectParentIterator(object)
   }
 
   next(): IteratorResult<ObjectNavigator> {
-    return {
+    const result = {
       value: this.current,
       done: this.current.parent === undefined,
     }
+
+    if (this.current.parent) {
+      this.current = this.current.parent
+    }
+
+    return result
   }
 }

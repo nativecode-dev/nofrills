@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Type, Types, TypeParser } from '../src/index'
+import { Type, Types, TypeParser } from '@nofrills/types'
 
 describe('when using type parser', () => {
   it('should throw error when deserializing unsupported types', () => {
@@ -14,6 +14,18 @@ describe('when using type parser', () => {
     it('should resolve type', () => {
       const typedef: Type = TypeParser.deserialize('string')
       expect(typedef.typebase).to.equal('String')
+    })
+
+    it('should resolve undefined type', () => {
+      const typedef: Type = TypeParser.deserialize('undefined')
+      expect(typedef.typebase).to.equal('undefined')
+      expect(typedef.validator(undefined)).to.equal(true)
+    })
+
+    it('should resolve null type', () => {
+      const typedef: Type = TypeParser.deserialize('null')
+      expect(typedef.typebase).to.equal('null')
+      expect(typedef.validator(null)).to.equal(true)
     })
 
     it('should resolve type with boolean properties', () => {
