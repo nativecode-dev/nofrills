@@ -41,7 +41,7 @@
 		"build": "lerna run build",
 		"prebuild": "yarn && lerna bootstrap && yarn run lint",
     "clean": "rimraf .cache && lerna run clean",
-    "docs": "lerna run docs",
+    "docs": "tsdoc --mode modules --out ./doc ./packages/*/src/",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",

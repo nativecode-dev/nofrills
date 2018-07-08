@@ -25,7 +25,6 @@
     "mocha": "^5.2.0",
     "rimraf": "^2.6.1",
     "ts-node": "^7.0.0",
-    "typedoc": "^0.11.1",
     "typescript": "^2.9.2"
   },
   "publishConfig": {
@@ -38,7 +37,6 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
-    "docs": "typedoc --mode modules --out ./docs ./packages/*/src/",
     "clean": "rimraf .cache && rimraf docs && rimraf lib"
   }
 }
