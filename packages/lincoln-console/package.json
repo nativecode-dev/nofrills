@@ -7,12 +7,12 @@
   "name": "@nofrills/lincoln-console",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.4",
+  "version": "3.1.5-2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-console/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^3.1.4"
+    "@nofrills/lincoln": "^3.1.5-2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
@@ -24,7 +24,6 @@
     "mocha": "^5.2.0",
     "rimraf": "^2.6.1",
     "ts-node": "^7.0.0",
-    "typedoc": "^0.11.1",
     "typescript": "^2.9.2"
   },
   "publishConfig": {
@@ -37,7 +36,6 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
-    "docs": "typedoc --mode modules --out ./docs ./src",
     "clean": "rimraf .cache && rimraf docs && rimraf lib"
   }
 }

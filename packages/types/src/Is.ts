@@ -1,4 +1,4 @@
-import { IsType } from './index'
+import { IsType } from './IsType'
 
 export const Is: IsType = {
   any: (value: any): boolean => true,

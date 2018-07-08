@@ -12,6 +12,7 @@
 		"rimraf": "^2.6.2",
 		"source-map-support": "^0.5.0",
 		"ts-node": "^7.0.0",
+    "typedoc": "^0.11.1",
 		"tslint": "^5.8.0",
 		"tslint-config-standard": "^7.0.0",
 		"typescript": "^2.9.2"
@@ -21,7 +22,8 @@
 		"exclude": [
 			"node_modules",
 			"packages/*/src/**/*.spec.ts",
-			"packages/*/src/Logger.ts"
+			"packages/*/src/Logger.ts",
+			"packages/*/src/Logging.ts"
 		],
 		"extension": [
 			".ts"
@@ -38,8 +40,8 @@
 	"scripts": {
 		"build": "lerna run build",
 		"prebuild": "yarn && lerna bootstrap && yarn run lint",
-    "clean": "rimraf .cache && lerna run clean",
-    "docs": "lerna run docs",
+    "clean": "rimraf .cache && rimraf docs && lerna run clean",
+    "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",

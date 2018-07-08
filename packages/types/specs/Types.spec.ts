@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Type, Types } from '../src/index'
+import { Type, Types } from '@nofrills/types'
 
 describe('when using global TypeRegistry', () => {
 

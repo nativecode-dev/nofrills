@@ -17,7 +17,16 @@ export class TypeRegistry {
   }
 
   public from(value: any): string {
+    if (value === undefined) {
+      return 'undefined'
+    }
+
+    if (value === null) {
+      return 'null'
+    }
+
     const keys: string[] = Object.keys(Is)
+
     for (const key of keys) {
       const func = Is[key]
       if (key !== 'any' && func(value)) {

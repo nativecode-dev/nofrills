@@ -1,4 +1,4 @@
-import { Logger } from './Logging'
+import { Logger } from './Logger'
 import { Scrubs } from './Scrubs'
 
 export const Registry: Scrubs = new Scrubs()

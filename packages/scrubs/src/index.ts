@@ -3,11 +3,9 @@ export * from './Scrubs'
 export * from './ScrubsInterceptor'
 
 import { Is } from '@nofrills/types'
-import { Lincoln, Logger } from './Logging'
+import { Lincoln, Logger } from './Logger'
 import { Registry } from './Registry'
 import { Scrubs, ScrubsOptions } from './Scrubs'
-
-import merge = require('lodash.merge')
 
 const log: Lincoln = Logger.extend('scrubslib')
 
@@ -35,7 +33,7 @@ Registry.register<any>('object', (value: any, options: ScrubsOptions, instance: 
     return object
   }
 
-  const clone: any = walk(merge({}, value))
+  const clone: any = walk(Object.assign({}, value))
   log.debug('ObjectScrubber', value, clone)
   return clone
 })

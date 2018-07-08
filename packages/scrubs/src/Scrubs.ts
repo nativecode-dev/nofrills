@@ -1,8 +1,5 @@
 import { Types } from '@nofrills/types'
-
-import { Lincoln, Logger } from './Logging'
-
-import merge = require('lodash.merge')
+import { Lincoln, Logger } from './Logger'
 
 export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
 export type Scrubbers = Array<Scrubber<any>>
@@ -24,7 +21,7 @@ export class Scrubs {
 
   constructor(options?: ScrubsOptions) {
     this.log = Logger
-    this.options = merge({}, options, defaults)
+    this.options = Object.assign({}, options, defaults)
     this.registry = new Map<string, Scrubbers>()
   }
 

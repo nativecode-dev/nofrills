@@ -3,7 +3,6 @@
 .vscode/
 bin/
 dist/
-docs/
 lib/
 node_modules/
 deploy

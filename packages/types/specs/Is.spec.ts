@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Is } from '../src/index'
+import { Is } from '@nofrills/types'
 
 describe('when using type library', () => {
 

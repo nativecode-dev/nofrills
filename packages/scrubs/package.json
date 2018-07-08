@@ -7,19 +7,16 @@
   "name": "@nofrills/scrubs",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.4",
+  "version": "3.1.5-2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.1.4",
-    "@nofrills/types": "^3.1.4",
-    "lodash.merge": "^4.6.0"
+    "@nofrills/lincoln-debug": "^3.1.5-2",
+    "@nofrills/types": "^3.1.5-2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
-    "@types/lodash": "^4.14.71",
-    "@types/lodash.merge": "^4.6.2",
     "@types/mocha": "^5.2.4",
     "@types/node": "^10.5.1",
     "chai": "^4.1.2",
@@ -27,7 +24,6 @@
     "mocha": "^5.2.0",
     "rimraf": "^2.6.1",
     "ts-node": "^7.0.0",
-    "typedoc": "^0.11.1",
     "typescript": "^2.9.2"
   },
   "publishConfig": {
@@ -40,7 +36,6 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "prebuild": "yarn run clean",
-    "docs": "typedoc --mode modules --out ./docs ./src",
     "clean": "rimraf .cache && rimraf docs && rimraf lib"
   }
 }
