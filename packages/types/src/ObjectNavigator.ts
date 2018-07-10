@@ -18,14 +18,14 @@ export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavi
     }
   }
 
-  static from(instance: object): ObjectNavigator {
-    const proxy = ObjectNavigator.convert('#', instance)
+  static from(value: object, clone: boolean = true): ObjectNavigator {
+    const instance = ObjectNavigator.convert('#', value, '', clone)
 
-    if (proxy.type !== 'object') {
-      throw new Error(`instance was not an object, got: ${proxy.type}`)
+    if (instance.type !== 'object') {
+      throw new Error(`instance was not an object, got: ${instance.type}`)
     }
 
-    return new ObjectNavigator(proxy)
+    return new ObjectNavigator(instance)
   }
 
   get key(): string {
@@ -107,24 +107,40 @@ export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavi
     return this.parents().map(parent => parent.property).join('.')
   }
 
-  private static convert(key: string, value: any, path: string = ''): ObjectValue {
+  toObject(instance: any = {}): any {
+    return Array.from(this.properties.entries())
+      .reduce((object, kvp: [string, ObjectNavigator]) => {
+        const key = kvp[0]
+        const navigator = kvp[1]
+        if (navigator.type === 'object') {
+          object[key] = navigator.toObject(instance)
+        } else {
+          object[key] = navigator.value
+        }
+        return object
+      }, instance)
+  }
+
+  private static convert(key: string, value: any, path: string = '', clone: boolean = true): ObjectValue {
+    const type = Types.from(value)
+
     return {
       key: `${key}::${path}`,
       path,
       property: key,
-      type: Types.from(value),
-      value,
+      type,
+      value: type === 'object' && clone ? { ...value } : value,
     }
   }
 
-  private static create(key: string, value: any, parent: ObjectNavigator): ObjectNavigator {
-    const objectValue = ObjectNavigator.convert(key, value, parent.pathstr())
+  private static create(key: string, value: any, parent: ObjectNavigator, clone: boolean = true): ObjectNavigator {
+    const objectValue = ObjectNavigator.convert(key, value, parent.pathstr(), clone)
     return new ObjectNavigator(objectValue, parent)
   }
 
-  private inspect = (ov: ObjectValue) => {
+  private inspect = (ov: ObjectValue, clone: boolean = true) => {
     Object.keys(ov.value)
-      .map(key => ObjectNavigator.create(key, ov.value[key], this))
+      .map(key => ObjectNavigator.create(key, ov.value[key], this, clone))
       .map(navigator => this.properties.set(navigator.property, navigator))
   }
 }
