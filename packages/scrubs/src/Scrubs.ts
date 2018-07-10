@@ -52,7 +52,7 @@ export class Scrubs {
   public scrub<T>(value: T, type?: string): T {
     if (value) {
       const typedef: string = type || Types.from(value)
-      this.log.debug('scrub.pre', value, typedef)
+      this.log.debug(`scrub.pre:${typedef}`, value)
 
       let result: T = value
       const scrubbers: Scrubbers | undefined = this.registry.get(typedef)
@@ -60,7 +60,7 @@ export class Scrubs {
         for (const scrubber of scrubbers) {
           result = scrubber(result, this.options, this)
         }
-        this.log.debug('scrub.post', value, result)
+        this.log.debug(`scrub.post:${typedef}`, result)
         return result
       }
     }
