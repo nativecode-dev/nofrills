@@ -54,15 +54,8 @@ export class Scrubs {
       const typedef: string = type || Types.from(value)
       this.log.debug(`scrub.pre:${typedef}`, value)
 
-      let result: T = value
-      const scrubbers: Scrubbers | undefined = this.registry.get(typedef)
-      if (scrubbers) {
-        for (const scrubber of scrubbers) {
-          result = scrubber(result, this.options, this)
-        }
-        this.log.debug(`scrub.post:${typedef}`, result)
-        return result
-      }
+      const scrubbers: Scrubbers = this.registry.get(typedef) || []
+      return scrubbers.reduce((previous, scrubber) => scrubber(previous, this.options, this), value)
     }
     return value
   }
