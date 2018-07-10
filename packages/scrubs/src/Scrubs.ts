@@ -1,3 +1,5 @@
+import * as merge from 'deepmerge'
+
 import { Types } from '@nofrills/types'
 import { Lincoln, Logger } from './Logger'
 
@@ -9,7 +11,7 @@ export interface ScrubsOptions {
   text: string
 }
 
-const defaults: ScrubsOptions = {
+const defaults: Partial<ScrubsOptions> = {
   properties: ['apikey', 'api_key', 'password', 'x-api-key'],
   text: '<secured>'
 }
@@ -19,9 +21,9 @@ export class Scrubs {
   private readonly options: ScrubsOptions
   private readonly registry: Map<string, Scrubbers>
 
-  constructor(options?: ScrubsOptions) {
+  constructor(options: Partial<ScrubsOptions> = {}) {
     this.log = Logger
-    this.options = Object.assign({}, options, defaults)
+    this.options = merge.all<ScrubsOptions>([options, defaults])
     this.registry = new Map<string, Scrubbers>()
   }
 

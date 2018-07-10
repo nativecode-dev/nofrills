@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^3.1.5",
-    "@nofrills/types": "^3.1.5"
+    "@nofrills/types": "^3.1.5",
+    "deepmerge": "^2.1.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
+    "@types/deepmerge": "^2.1.0",
     "@types/mocha": "^5.2.4",
     "@types/node": "^10.5.1",
     "chai": "^4.1.2",

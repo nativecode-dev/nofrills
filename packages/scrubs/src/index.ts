@@ -2,6 +2,8 @@ export * from './Registry'
 export * from './Scrubs'
 export * from './ScrubsInterceptor'
 
+import { all as merge } from 'deepmerge'
+
 import { Is } from '@nofrills/types'
 import { Lincoln, Logger } from './Logger'
 import { Registry } from './Registry'
@@ -33,7 +35,7 @@ Registry.register<any>('object', (value: any, options: ScrubsOptions, instance: 
     return object
   }
 
-  const clone: any = walk(Object.assign({}, value))
+  const clone: any = walk(merge([{}, value]))
   log.debug('ObjectScrubber', value, clone)
   return clone
 })
