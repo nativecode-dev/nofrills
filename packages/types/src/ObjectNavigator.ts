@@ -1,8 +1,10 @@
+import { EventEmitter } from 'events'
+
 import { Types } from './Types'
 import { ObjectValue } from './ObjectValue'
 import { ObjectParentIterator } from './ObjectParentIterator'
 
-export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavigator> {
+export class ObjectNavigator extends EventEmitter implements ObjectValue, IterableIterator<ObjectNavigator> {
   private readonly properties: Map<string, ObjectNavigator>
 
   private current = 0
@@ -11,6 +13,7 @@ export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavi
     private readonly proxy: ObjectValue,
     public readonly parent?: ObjectNavigator,
   ) {
+    super()
     this.properties = new Map<string, ObjectNavigator>()
 
     if (proxy.type === 'object') {
@@ -107,6 +110,17 @@ export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavi
     return this.parents().map(parent => parent.property).join('.')
   }
 
+  recurse(): void {
+    Array.from(this.properties)
+      .map(kvp => {
+        const name = kvp[0]
+        const navigator = kvp[1]
+        this.emit('property', name, navigator)
+        return navigator
+      })
+      .map(navigator => navigator.recurse())
+  }
+
   toObject(instance: any = {}): any {
     return Array.from(this.properties.entries())
       .reduce((object, kvp: [string, ObjectNavigator]) => {
@@ -121,7 +135,7 @@ export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavi
       }, instance)
   }
 
-  private static convert(key: string, value: any, path: string = '', clone: boolean = true): ObjectValue {
+  private static convert(key: string, value: any, path: string, clone: boolean): ObjectValue {
     const type = Types.from(value)
 
     return {
@@ -133,7 +147,7 @@ export class ObjectNavigator implements ObjectValue, IterableIterator<ObjectNavi
     }
   }
 
-  private static create(key: string, value: any, parent: ObjectNavigator, clone: boolean = true): ObjectNavigator {
+  private static create(key: string, value: any, parent: ObjectNavigator, clone: boolean): ObjectNavigator {
     const objectValue = ObjectNavigator.convert(key, value, parent.pathstr(), clone)
     return new ObjectNavigator(objectValue, parent)
   }

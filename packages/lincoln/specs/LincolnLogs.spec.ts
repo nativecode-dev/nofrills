@@ -4,16 +4,16 @@ import { expect } from 'chai'
 
 import { LincolnLog, Lincoln, Log } from '@nofrills/lincoln'
 
-describe('when working with multiple log writers', () => {
+describe('when working with multiple log writers', async () => {
 
   let logs: Log[] = []
 
   const options = 'test'
 
   const CreateLogger = (): LincolnLog => ({
-    write: (log: Log): boolean => {
+    write: (log: Log): Promise<boolean> => {
       logs.push(log)
-      return true
+      return Promise.resolve(true)
     }
   })
 
@@ -25,45 +25,45 @@ describe('when working with multiple log writers', () => {
 
   beforeEach(() => logs = [])
 
-  it('should write to all debug loggers', () => {
+  it('should write to all debug loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.debug('test')
+    await sut.debug('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 
-  it('should write to all error loggers', () => {
+  it('should write to all error loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.error('test')
+    await sut.error('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 
-  it('should write to all fatal loggers', () => {
+  it('should write to all fatal loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.fatal('test')
+    await sut.fatal('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 
-  it('should write to all info loggers', () => {
+  it('should write to all info loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.info('test')
+    await sut.info('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 
-  it('should write to all silly loggers', () => {
+  it('should write to all silly loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.silly('test')
+    await sut.silly('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 
-  it('should write to all trace loggers', () => {
+  it('should write to all trace loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.trace('test')
+    await sut.trace('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 
-  it('should write to all warn loggers', () => {
+  it('should write to all warn loggers', async () => {
     const sut = new Lincoln(options, Loggers)
-    sut.warn('test')
+    await sut.warn('test')
     expect(logs.length).to.equal(Loggers.length)
   })
 

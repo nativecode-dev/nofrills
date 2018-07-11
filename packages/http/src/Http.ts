@@ -40,17 +40,17 @@ export abstract class HTTP {
       init.method = method
     }
 
-    this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
+    await this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
 
     const request = new f.Request(url, init)
     const response = await fetch(request, init)
 
     if (response.ok) {
-      this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)
+      await this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)
       try {
         return await response.json()
       } catch (error) {
-        this.log.error(`http.error:${response.status}`, response.statusText, error)
+        await this.log.error(`http.error:${response.status}`, response.statusText, error)
       }
     }
 

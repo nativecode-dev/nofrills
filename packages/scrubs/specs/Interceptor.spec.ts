@@ -9,8 +9,9 @@ import { LogMessageType } from '@nofrills/lincoln'
 
 describe('when using lincoln interceptor', () => {
 
-  it('should scrub data object', () => {
+  it('should scrub data object', async () => {
     const expectedUrl = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
+
     const log: Log = {
       id: 'test',
       namespace: 'test',
@@ -18,12 +19,13 @@ describe('when using lincoln interceptor', () => {
       timestamp: Date.now(),
       type: LogMessageType.info,
     }
-    const sut: Log = ScrubsInterceptor(log)
+    const sut: Log = await ScrubsInterceptor(log)
     expect(sut.parameters[0].url).to.equal(expectedUrl)
   })
 
-  it('should scrub data strings', () => {
-    const expectedUrl = 'https://nobody:<secured>@nowhere.com/?apikey<secured>&password<secured>'
+  it('should scrub data strings', async () => {
+    const expectedUrl = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
+
     const log: Log = {
       id: 'test',
       namespace: 'test',
@@ -31,7 +33,7 @@ describe('when using lincoln interceptor', () => {
       timestamp: Date.now(),
       type: LogMessageType.info,
     }
-    const sut: Log = ScrubsInterceptor(log)
+    const sut: Log = await ScrubsInterceptor(log)
     expect(sut.parameters[0]).to.equal(expectedUrl)
   })
 

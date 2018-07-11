@@ -10,7 +10,7 @@ export class PathCollector extends EventEmitter {
   }
 
   async collect(patterns: string[], recursive?: boolean): Promise<Descriptor[]> {
-    this.log.debug('collect', recursive, ...patterns)
+    await this.log.debug('collect', recursive, ...patterns)
 
     const descriptors = await Promise.all(
       patterns
@@ -23,11 +23,11 @@ export class PathCollector extends EventEmitter {
     if (recursive) {
       const directories = collected.filter(desc => desc.stats.isDirectory()).map(desc => `${desc.path}/**`)
       const nested = await this.collect(directories)
-      this.log.debug('nested', nested.length)
+      await this.log.debug('nested', nested.length)
       return nested
     }
 
-    this.log.debug('collected', collected.length)
+    await this.log.debug('collected', collected.length)
 
     return collected
   }

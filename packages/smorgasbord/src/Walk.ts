@@ -15,7 +15,7 @@ class ATAT {
 
   public static WalkArray(value: any[], interceptor?: WalkInterceptor): any[] {
     return value.map((element: any, index: number) => {
-      logger.debug('WalkArray', element, index)
+      logger.debug('WalkArray', element, index).catch(console.error)
       if (interceptor) {
         interceptor(WalkType.Array, element, [index.toString()])
       }
@@ -35,7 +35,7 @@ class ATAT {
       try {
         const current: any = value[key]
 
-        logger.debug('WalkObject', key, current, path)
+        logger.debug('WalkObject', key, current, path).catch(console.error)
 
         if (interceptor) {
           interceptor(WalkType.Object, current, path)

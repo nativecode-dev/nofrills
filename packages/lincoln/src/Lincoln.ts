@@ -45,32 +45,32 @@ export class Lincoln extends EventEmitter {
     return this.options.namespace
   }
 
-  debug(...parameters: any[]): void {
-    this.write(LogMessageType.debug, parameters)
+  debug(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.debug, parameters).catch(console.error)
   }
 
-  error(...parameters: any[]): void {
-    this.write(LogMessageType.error, parameters)
+  error(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.error, parameters).catch(console.error)
   }
 
-  fatal(...parameters: any[]): void {
-    this.write(LogMessageType.fatal, parameters)
+  fatal(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.fatal, parameters).catch(console.error)
   }
 
-  info(...parameters: any[]): void {
-    this.write(LogMessageType.info, parameters)
+  info(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.info, parameters).catch(console.error)
   }
 
-  silly(...parameters: any[]): void {
-    this.write(LogMessageType.silly, parameters)
+  silly(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.silly, parameters).catch(console.error)
   }
 
-  trace(...parameters: any[]): void {
-    this.write(LogMessageType.trace, parameters)
+  trace(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.trace, parameters).catch(console.error)
   }
 
-  warn(...parameters: any[]): void {
-    this.write(LogMessageType.warn, parameters)
+  warn(...parameters: any[]): Promise<void> {
+    return this.write(LogMessageType.warn, parameters).catch(console.error)
   }
 
   extend(tag: string): Lincoln {
@@ -88,7 +88,7 @@ export class Lincoln extends EventEmitter {
     return `${this.options.namespace}${this.options.separator}${tag}`
   }
 
-  private write(tag: LogMessageType, parameters: any[]): void {
+  private async write(tag: LogMessageType, parameters: any[]) {
     const original: Log = {
       id: uuid(),
       namespace: this.normalize(tag),
@@ -97,12 +97,12 @@ export class Lincoln extends EventEmitter {
       type: tag,
     }
 
-    const log = Array.from(this.options.interceptors.values)
-      .reduce((result, interceptor) => interceptor(result), original)
+    const log = await Array.from(this.options.interceptors.values)
+      .reduce(async (result, interceptor) => interceptor(await result), Promise.resolve(original))
 
-    const filtered: boolean = Array.from(this.options.filters.values)
+    const filtered: boolean = await Array.from(this.options.filters.values)
       .map(filter => filter(log))
-      .reduce((result, filter) => result ? result : filter, false)
+      .reduce(async (result, current) => await result ? result : current, Promise.resolve(false))
 
     if (filtered === true) {
       this.emit(LincolnEvents.Filtered, log)
@@ -111,6 +111,6 @@ export class Lincoln extends EventEmitter {
 
     this.emit(LincolnEvents.Log, log)
 
-    this.loggers.map(logger => logger.write(log))
+    this.loggers.map(logger => logger.write(log).catch(console.error))
   }
 }
