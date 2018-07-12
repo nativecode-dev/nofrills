@@ -3,25 +3,30 @@ import { ObjectNavigator } from '@nofrills/types'
 import { Logger } from '../Logger'
 import { Scrubs, ScrubsOptions } from '../Scrubs'
 
-const log = Logger.extend('object-scrubber')
+const Key = 'object-scrubber'
+const Name = 'ObjectScrubber'
 
-async function Transform(property: ObjectNavigator, options: ScrubsOptions, scrubs: Scrubs): Promise<any> {
-  if (property.type === 'string' && options.properties.indexOf(property.property) >= 0) {
+const log = Logger.extend(Key)
+
+async function transform(property: ObjectNavigator, options: ScrubsOptions, scrubs: Scrubs): Promise<any> {
+  await log.debug('transform', property.property, property.type, property.value)
+  if (property.type === 'string' && options.properties.some(p => p === property.property)) {
     await log.debug(`replacing property`, property.property, options.text)
-    property.value = options.text
-  } else {
-    await log.debug(`scrubbing property`, property.property, property.type, property.value)
-    property.value = await scrubs.scrub(property.value, property.type)
+    return (property.value = options.text)
   }
-  return property.value
+
+  await log.debug(`scrubbing property`, property.property, property.type, property.value)
+  return (property.value = await scrubs.scrub(property.value, property.type))
 }
 
 export async function ObjectScrubber(value: any, options: ScrubsOptions, scrubs: Scrubs): Promise<any> {
   const navigator = ObjectNavigator.from(value)
+  const transformations = Array.from(navigator)
+    .map(property => transform(property, options, scrubs))
 
-  await Promise.all(Array.from(navigator).map(property => Transform(property, options, scrubs)))
+  await Promise.all(transformations)
 
   const transformed = navigator.toObject()
-  await log.debug('ObjectScrubber', value, transformed)
+  await log.debug(Name, value, transformed)
   return transformed
 }

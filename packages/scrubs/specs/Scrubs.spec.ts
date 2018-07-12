@@ -86,7 +86,6 @@ describe('when using scrubs', () => {
     it('should replace property with secured option', async () => {
       const expectedUrl: string = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
       const sut: any = await scrub(data)
-      console.log(sut)
       expect(sut.user.email).to.equal(data.user.email)
       expect(sut.user.password).to.equal('<secured>')
       expect(sut.strings).to.deep.equal([expectedUrl])

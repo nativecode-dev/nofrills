@@ -16,9 +16,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     super()
     this.properties = new Map<string, ObjectNavigator>()
 
-    if (proxy.type === 'object') {
-      this.inspect(this.proxy)
-    }
+    this.inspect(this.proxy)
   }
 
   static from(value: object, clone: boolean = true): ObjectNavigator {
@@ -91,7 +89,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
 
     if (property) {
       return {
-        done: this.current >= this.properties.size,
+        done: this.current > this.properties.size,
         value: property,
       }
     }
@@ -122,7 +120,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
   }
 
   toObject(instance: any = {}): any {
-    return Array.from(this.properties.entries())
+    const clone = Array.from(this.properties.entries())
       .reduce((object, kvp: [string, ObjectNavigator]) => {
         const key = kvp[0]
         const navigator = kvp[1]
@@ -133,6 +131,8 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
         }
         return object
       }, instance)
+
+    return clone
   }
 
   private static convert(key: string, value: any, path: string, clone: boolean): ObjectValue {
@@ -153,7 +153,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
   }
 
   private inspect = (ov: ObjectValue, clone: boolean = true) => {
-    if (ov.value) {
+    if (ov.type === 'object' && ov.value) {
       Object.keys(ov.value)
         .map(key => ObjectNavigator.create(key, ov.value[key], this, clone))
         .map(navigator => this.properties.set(navigator.property, navigator))

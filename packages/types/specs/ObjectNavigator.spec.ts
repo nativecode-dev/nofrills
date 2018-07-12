@@ -65,6 +65,7 @@ describe('when using ObjectNavigator', () => {
     expect(properties).contains('address')
     expect(properties).contains('contacts')
     expect(properties).contains('name')
+    expect(properties).contains('profile')
   })
 
   it('should navigate to immediate child property value', () => {
