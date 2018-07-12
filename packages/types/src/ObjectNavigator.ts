@@ -127,7 +127,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
         const key = kvp[0]
         const navigator = kvp[1]
         if (navigator.type === 'object') {
-          object[key] = navigator.toObject(instance)
+          object[key] = navigator.toObject(object[key])
         } else {
           object[key] = navigator.value
         }
@@ -153,8 +153,10 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
   }
 
   private inspect = (ov: ObjectValue, clone: boolean = true) => {
-    Object.keys(ov.value)
-      .map(key => ObjectNavigator.create(key, ov.value[key], this, clone))
-      .map(navigator => this.properties.set(navigator.property, navigator))
+    if (ov.value) {
+      Object.keys(ov.value)
+        .map(key => ObjectNavigator.create(key, ov.value[key], this, clone))
+        .map(navigator => this.properties.set(navigator.property, navigator))
+    }
   }
 }

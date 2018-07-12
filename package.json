@@ -43,7 +43,7 @@
     "clean": "rimraf .cache && rimraf docs && lerna run clean",
     "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
-    "test": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
+    "test": "cross-env DEBUG=nofrills:*:*-scrubber* nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
 		"push": "sh push.sh",

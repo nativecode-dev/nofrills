@@ -101,4 +101,10 @@ describe('when using ObjectNavigator', () => {
     expect(favorites.keys()).contains('links')
   })
 
+  it('should re-create object structure', () => {
+    const navigator = ObjectNavigator.from(person)
+    const sut = navigator.toObject()
+    expect(person).to.deep.equal(sut)
+  })
+
 })

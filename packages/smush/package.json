@@ -16,7 +16,7 @@
     "@nofrills/scrubs": "^3.1.6-0",
     "bluebird": "^3.5.0",
     "deepmerge": "^2.1.1",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.11"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.5",

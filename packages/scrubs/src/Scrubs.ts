@@ -12,7 +12,7 @@ export interface ScrubsOptions {
 }
 
 const defaults: Partial<ScrubsOptions> = {
-  properties: ['apikey', 'api_key', 'password', 'x-api-key'],
+  properties: ['apikey', 'api-key', 'api_key', 'password', 'x-api-key'],
   text: '<secured>'
 }
 
