@@ -62,10 +62,7 @@ describe('when using ObjectNavigator', () => {
   it('should create instance over an object', () => {
     const sut = ObjectNavigator.from(person)
     const properties = Array.from(sut).map(x => x.property)
-    expect(properties).contains('address')
-    expect(properties).contains('contacts')
-    expect(properties).contains('name')
-    expect(properties).contains('profile')
+    expect(properties).to.deep.equal(['address', 'contacts', 'name', 'profile'])
   })
 
   it('should navigate to immediate child property value', () => {

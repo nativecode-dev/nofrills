@@ -4,7 +4,6 @@ import { Logger } from '../Logger'
 import { Scrubs, ScrubsOptions } from '../Scrubs'
 
 const Key = 'object-scrubber'
-const Name = 'ObjectScrubber'
 
 const log = Logger.extend(Key)
 
@@ -27,6 +26,6 @@ export async function ObjectScrubber(value: any, options: ScrubsOptions, scrubs:
   await Promise.all(transformations)
 
   const transformed = navigator.toObject()
-  await log.debug(Name, value, transformed)
+  await log.debug('transformed', value, transformed)
   return transformed
 }

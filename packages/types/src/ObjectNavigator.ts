@@ -19,8 +19,8 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     this.inspect(this.proxy)
   }
 
-  static from(value: object, clone: boolean = true): ObjectNavigator {
-    const instance = ObjectNavigator.convert('#', value, '', clone)
+  static from(value: object): ObjectNavigator {
+    const instance = ObjectNavigator.convert('#', value, '')
 
     if (instance.type !== 'object') {
       throw new Error(`instance was not an object, got: ${instance.type}`)
@@ -119,15 +119,20 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
       .map(navigator => navigator.recurse())
   }
 
+  set<T>(key: string, value: T) {
+    const ov = ObjectNavigator.convert(key, value, this.pathstr())
+    this.properties.set(key, new ObjectNavigator(ov))
+  }
+
   toObject(instance: any = {}): any {
     const clone = Array.from(this.properties.entries())
       .reduce((object, kvp: [string, ObjectNavigator]) => {
         const key = kvp[0]
-        const navigator = kvp[1]
-        if (navigator.type === 'object') {
-          object[key] = navigator.toObject(object[key])
+        const property = kvp[1]
+        if (property.type === 'object') {
+          object[key] = property.toObject()
         } else {
-          object[key] = navigator.value
+          object[key] = property.value
         }
         return object
       }, instance)
@@ -135,27 +140,28 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     return clone
   }
 
-  private static convert(key: string, value: any, path: string, clone: boolean): ObjectValue {
+  private static convert(key: string, value: any, path: string): ObjectValue {
+    const keyid = `${key}::${path}`
     const type = Types.from(value)
 
     return {
-      key: `${key}::${path}`,
+      key: keyid,
       path,
       property: key,
       type,
-      value: type === 'object' && clone ? { ...value } : value,
+      value,
     }
   }
 
-  private static create(key: string, value: any, parent: ObjectNavigator, clone: boolean): ObjectNavigator {
-    const objectValue = ObjectNavigator.convert(key, value, parent.pathstr(), clone)
+  private static create(key: string, value: any, parent: ObjectNavigator): ObjectNavigator {
+    const objectValue = ObjectNavigator.convert(key, value, parent.pathstr())
     return new ObjectNavigator(objectValue, parent)
   }
 
-  private inspect = (ov: ObjectValue, clone: boolean = true) => {
+  private inspect = (ov: ObjectValue) => {
     if (ov.type === 'object' && ov.value) {
       Object.keys(ov.value)
-        .map(key => ObjectNavigator.create(key, ov.value[key], this, clone))
+        .map(key => ObjectNavigator.create(key, ov.value[key], this))
         .map(navigator => this.properties.set(navigator.property, navigator))
     }
   }
