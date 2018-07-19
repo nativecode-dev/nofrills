@@ -1,4 +1,3 @@
-import fetch, * as f from 'node-fetch'
 import { Lincoln, Logger } from './Logger'
 
 export abstract class HTTP {
@@ -33,16 +32,16 @@ export abstract class HTTP {
   }
 
   protected abstract get name(): string
-  protected abstract request<TRequest>(body?: TRequest): Promise<f.RequestInit>
+  protected abstract request<TRequest>(body?: TRequest): Promise<RequestInit>
 
-  protected async send<T>(url: string, init?: f.RequestInit, method: string = 'GET'): Promise<T> {
+  protected async send<T>(url: string, init?: RequestInit, method: string = 'GET'): Promise<T> {
     if (init && init.method === undefined) {
       init.method = method
     }
 
     await this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
 
-    const request = new f.Request(url, init)
+    const request = new Request(url, init)
     const response = await fetch(request, init)
 
     if (response.ok) {
@@ -51,6 +50,7 @@ export abstract class HTTP {
         return await response.json()
       } catch (error) {
         await this.log.error(`http.error:${response.status}`, response.statusText, error)
+        throw error
       }
     }
 
