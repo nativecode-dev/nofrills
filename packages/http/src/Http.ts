@@ -1,7 +1,7 @@
 import { Lincoln, Logger } from './Logger'
 
 export abstract class HTTP {
-  private readonly log: Lincoln
+  protected readonly log: Lincoln
 
   constructor(name: string = 'http') {
     this.log = Logger.extend(name)
