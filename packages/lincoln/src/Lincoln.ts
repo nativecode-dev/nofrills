@@ -19,6 +19,7 @@ const defaults: Options = {
 export enum LincolnEvents {
   Filtered = 'log-message-filtered',
   Log = 'log-message',
+  Written = 'log-written',
 }
 
 export class Lincoln extends EventEmitter {
@@ -45,32 +46,32 @@ export class Lincoln extends EventEmitter {
     return this.options.namespace
   }
 
-  debug(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.debug, parameters).catch(console.error)
+  debug(...parameters: any[]): void {
+    this.write(LogMessageType.debug, parameters).catch(console.error)
   }
 
-  error(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.error, parameters).catch(console.error)
+  error(...parameters: any[]): void {
+    this.write(LogMessageType.error, parameters).catch(console.error)
   }
 
-  fatal(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.fatal, parameters).catch(console.error)
+  fatal(...parameters: any[]): void {
+    this.write(LogMessageType.fatal, parameters).catch(console.error)
   }
 
-  info(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.info, parameters).catch(console.error)
+  info(...parameters: any[]): void {
+    this.write(LogMessageType.info, parameters).catch(console.error)
   }
 
-  silly(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.silly, parameters).catch(console.error)
+  silly(...parameters: any[]): void {
+    this.write(LogMessageType.silly, parameters).catch(console.error)
   }
 
-  trace(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.trace, parameters).catch(console.error)
+  trace(...parameters: any[]): void {
+    this.write(LogMessageType.trace, parameters).catch(console.error)
   }
 
-  warn(...parameters: any[]): Promise<void> {
-    return this.write(LogMessageType.warn, parameters).catch(console.error)
+  warn(...parameters: any[]): void {
+    this.write(LogMessageType.warn, parameters).catch(console.error)
   }
 
   extend(tag: string): Lincoln {
@@ -109,8 +110,10 @@ export class Lincoln extends EventEmitter {
       return
     }
 
-    this.emit(LincolnEvents.Log, log)
+    await Promise.all(
+      this.loggers.map(logger => logger.write(log).then(x => this.emit(LincolnEvents.Written, x)))
+    )
 
-    this.loggers.map(logger => logger.write(log).catch(console.error))
+    this.emit(LincolnEvents.Log, log, this.loggers.length)
   }
 }

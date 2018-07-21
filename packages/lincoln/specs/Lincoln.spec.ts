@@ -22,7 +22,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
     })
 
     it('should create log object with no options', () => {
@@ -38,7 +38,7 @@ describe('when using Lincoln', () => {
         expect(log.parameters[0]).to.equal(MESSAGE)
         done()
       })
-      sut.debug(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
     })
 
     it('should extend instance', (done) => {
@@ -51,7 +51,7 @@ describe('when using Lincoln', () => {
       const logger: Lincoln = new Lincoln(options)
       const sut: Lincoln = logger.extend(EXTENSION)
       expect(logger.id).not.equal(sut.id)
-      sut.debug(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
     })
 
     it('should log object', (done) => {
@@ -61,7 +61,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.debug({ message: MESSAGE }).catch(console.error)
+      sut.debug({ message: MESSAGE })
     })
 
     it('should log empty parameters', (done) => {
@@ -71,7 +71,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.debug().catch(console.error)
+      sut.debug()
     })
 
   })
@@ -85,7 +85,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
     })
 
     it('should call error', (done) => {
@@ -95,7 +95,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.error(MESSAGE).catch(console.error)
+      sut.error(MESSAGE)
     })
 
     it('should call fatal', (done) => {
@@ -105,7 +105,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.fatal(MESSAGE).catch(console.error)
+      sut.fatal(MESSAGE)
     })
 
     it('should call info', (done) => {
@@ -115,7 +115,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.info(MESSAGE).catch(console.error)
+      sut.info(MESSAGE)
     })
 
     it('should call silly', (done) => {
@@ -125,7 +125,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.silly(MESSAGE).catch(console.error)
+      sut.silly(MESSAGE)
     })
 
     it('should call trace', (done) => {
@@ -135,7 +135,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.trace(MESSAGE).catch(console.error)
+      sut.trace(MESSAGE)
     })
 
     it('should call warn', (done) => {
@@ -145,7 +145,7 @@ describe('when using Lincoln', () => {
         return log
       })
       const sut: Lincoln = new Lincoln(options)
-      sut.warn(MESSAGE).catch(console.error)
+      sut.warn(MESSAGE)
     })
 
   })
@@ -163,8 +163,8 @@ describe('when using Lincoln', () => {
 
       const options: Options = Context.filter(filter)
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(MESSAGE).catch(console.error)
-      sut.warn(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
+      sut.warn(MESSAGE)
     })
 
     it('should not filter message', (done) => {
@@ -177,8 +177,8 @@ describe('when using Lincoln', () => {
 
       const options: Options = Context.filter(filter)
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(MESSAGE).catch(console.error)
-      sut.warn(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
+      sut.warn(MESSAGE)
     })
 
   })
@@ -193,7 +193,7 @@ describe('when using Lincoln', () => {
 
       const options: Options = Context.intercept(interceptor)
       const sut: Lincoln = new Lincoln(options)
-      sut.debug(MESSAGE).catch(console.error)
+      sut.debug(MESSAGE)
     })
 
   })

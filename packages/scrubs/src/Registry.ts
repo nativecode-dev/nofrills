@@ -5,6 +5,6 @@ export const Registry: Scrubs = new Scrubs()
 
 export const scrub = async (value: any): Promise<any> => {
   const result: any = await Registry.scrub<any>(value)
-  await Logger.debug('scrub', value, result)
+  Logger.debug('scrub', value, result)
   return result
 }

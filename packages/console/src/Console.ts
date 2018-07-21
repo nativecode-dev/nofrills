@@ -22,7 +22,7 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
 
   async start(): Promise<void> {
     if (this.instance === undefined) {
-      await this.logger.info(`starting "${this.exe}":`, ...this.args)
+      this.logger.info(`starting "${this.exe}":`, ...this.args)
       return (this.instance = new Promise<void>(async (resolve, reject) => {
         process.on('uncaughtException', () => this.shutdown(resolve, reject, 'uncaught-exception'))
         process.on('exit', () => this.shutdown(resolve, reject, 'exit'))
@@ -40,7 +40,7 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
   }
 
   private shutdown = async (resolve: Resolver, reject: Rejector, reason: string) => {
-    await this.logger.info('SHUTDOWN', `(${process.pid}::${process.exitCode}::${reason})`)
+    this.logger.info('SHUTDOWN', `(${process.pid}::${process.exitCode}::${reason})`)
     if (process.exitCode === 0) {
       reject(reason)
     }

@@ -25,7 +25,7 @@ describe('when using debug lincoln interceptor', () => {
 
     const options = CreateOptions(NAMESPACE, [['test-filter', filter]])
 
-    CreateLogger(options).debug('test-message').catch(console.error)
+    CreateLogger(options).debug('test-message')
   })
 
   it('should create instance options with interceptor', (done) => {
@@ -36,7 +36,7 @@ describe('when using debug lincoln interceptor', () => {
 
     const options = CreateOptions(NAMESPACE, [], [['test-interceptor', interceptor]])
 
-    CreateLogger(options).debug('test-message').catch(console.error)
+    CreateLogger(options).debug('test-message')
   })
 
   it('should log parameterless calls', () => {

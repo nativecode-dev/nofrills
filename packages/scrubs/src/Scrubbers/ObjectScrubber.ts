@@ -8,13 +8,13 @@ const Key = 'object-scrubber'
 const log = Logger.extend(Key)
 
 async function transform(property: ObjectNavigator, options: ScrubsOptions, scrubs: Scrubs): Promise<any> {
-  await log.debug('transform', property.property, property.type, property.value)
+  log.debug('transform', property.property, property.type, property.value)
   if (property.type === 'string' && options.properties.some(p => p === property.property)) {
-    await log.debug(`replacing property`, property.property, options.text)
+    log.debug(`replacing property`, property.property, options.text)
     return (property.value = options.text)
   }
 
-  await log.debug(`scrubbing property`, property.property, property.type, property.value)
+  log.debug(`scrubbing property`, property.property, property.type, property.value)
   return (property.value = await scrubs.scrub(property.value, property.type))
 }
 
@@ -26,6 +26,6 @@ export async function ObjectScrubber(value: any, options: ScrubsOptions, scrubs:
   await Promise.all(transformations)
 
   const transformed = navigator.toObject()
-  await log.debug('transformed', value, transformed)
+  log.debug('transformed', value, transformed)
   return transformed
 }

@@ -33,12 +33,12 @@ export class Scrubs {
   }
 
   public get(type: string): Scrubbers | undefined {
-    this.log.debug('get', type).catch(console.error)
+    this.log.debug('get', type)
     return this.registry.get(type)
   }
 
   public register<T>(type: string, scrubber: Scrubber<T>): Scrubs {
-    this.log.debug('register', type).catch(console.error)
+    this.log.debug('register', type)
     const scrubbers: Scrubbers | undefined = this.registry.get(type)
     if (scrubbers) {
       scrubbers.push(scrubber)
@@ -52,7 +52,7 @@ export class Scrubs {
   public async scrub<T>(value: T, type?: string): Promise<T> {
     if (value) {
       const typedef: string = type || Types.from(value)
-      await this.log.debug(`scrub.pre:${typedef}`, value)
+      this.log.debug(`scrub.pre:${typedef}`, value)
 
       return (this.registry.get(typedef) || []).reverse()
         .reduce(async (previous, scrubber) => scrubber(await previous, this.options, this), Promise.resolve(value))

@@ -9,6 +9,6 @@ export async function KeyValueScrubber(value: string, options: ScrubsOptions): P
   const pattern = `((${keys})\\s*=)\\s*['"]?([\\d\\s\\w~!@#$%^,-<>:;\\?\\+\\*\\?\\$\\.\\[\\]\\{\\}\\(\\)\\|\\/]+)['"]?`
   const regex: RegExp = new RegExp(pattern, 'gi')
   const transformed: string = value.replace(regex, `$1${options.text}`)
-  await log.debug('transformed', value, transformed)
+  log.debug('transformed', value, transformed)
   return transformed
 }
