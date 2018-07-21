@@ -1,4 +1,15 @@
+import 'isomorphic-fetch'
+
 import { Lincoln, Logger } from './Logger'
+
+export enum HttpMethods {
+  Delete = 'DELETE',
+  Get = 'GET',
+  Head = 'HEAD',
+  Patch = 'PATCH',
+  Post = 'POST',
+  Put = 'PUT',
+}
 
 export abstract class HTTP {
   protected readonly log: Lincoln
@@ -8,27 +19,39 @@ export abstract class HTTP {
   }
 
   public async delete<TResponse>(url: string): Promise<TResponse> {
-    return this.send<TResponse>(url, await this.request<void>(), 'DELETE')
+    const request = await this.request<void>()
+    await this.log.debug(HttpMethods.Delete, url, request)
+    return this.send<TResponse>(url, request, HttpMethods.Delete)
   }
 
   public async get<TResponse>(url: string): Promise<TResponse> {
-    return this.send<TResponse>(url, await this.request<void>(), 'GET')
+    const request = await this.request<void>()
+    await this.log.debug(HttpMethods.Get, url, request)
+    return this.send<TResponse>(url, request, HttpMethods.Get)
   }
 
   public async head<TResponse>(url: string): Promise<TResponse> {
-    return this.send<TResponse>(url, await this.request<void>(), 'HEAD')
+    const request = await this.request<void>()
+    await this.log.debug(HttpMethods.Head, url, request)
+    return this.send<TResponse>(url, request, HttpMethods.Head)
   }
 
   public async patch<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
-    return this.send<TResponse>(url, await this.request<TRequest>(body), 'PATCH')
+    const request = await this.request<TRequest>(body)
+    await this.log.debug(HttpMethods.Patch, url, request)
+    return this.send<TResponse>(url, request, HttpMethods.Patch)
   }
 
   public async post<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
-    return this.send<TResponse>(url, await this.request<TRequest>(body), 'POST')
+    const request = await this.request<TRequest>(body)
+    await this.log.debug(HttpMethods.Post, url, request)
+    return this.send<TResponse>(url, request, HttpMethods.Post)
   }
 
   public async put<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
-    return this.send<TResponse>(url, await this.request<TRequest>(body), 'PUT')
+    const request = await this.request<TRequest>(body)
+    await this.log.debug(HttpMethods.Put, url, request)
+    return this.send<TResponse>(url, request, HttpMethods.Put)
   }
 
   protected abstract get name(): string
@@ -42,7 +65,7 @@ export abstract class HTTP {
     await this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
 
     const request = new Request(url, init)
-    const response = await fetch(request, init)
+    const response = await fetch(request)
 
     if (response.ok) {
       await this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)
