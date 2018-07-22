@@ -3,4 +3,5 @@ export interface Enum {
   mappings: {
     [name: string]: any
   }
+  source?: string
 }

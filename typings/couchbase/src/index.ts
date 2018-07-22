@@ -1,1 +1,1 @@
-export * from './CouchbaseImportReader'
+export * from './CouchbaseProvider'

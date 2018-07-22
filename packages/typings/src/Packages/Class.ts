@@ -5,4 +5,5 @@ export interface Class {
   name: string
   methods: Method[]
   properties: Property[]
+  source?: string
 }

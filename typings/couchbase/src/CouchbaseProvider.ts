@@ -3,9 +3,9 @@ import 'isomorphic-fetch'
 import { load } from 'cheerio'
 
 import { URL } from 'url'
-import { Class, ImportReader } from '@nofrills/typings'
+import { Class, Provider } from '@nofrills/typings'
 
-export class CouchbaseImportReader extends ImportReader {
+export class CouchbaseProvider extends Provider {
   constructor(version: string = '2.1.4') {
     super(new URL(`http://docs.couchbase.com/sdk-api/couchbase-node-client-${version}/classes.list.html`))
   }
@@ -16,16 +16,23 @@ export class CouchbaseImportReader extends ImportReader {
     const $ = load(html)
 
     const classes = this.getClassIndex($)
-    classes.map((_, element) => element.nodeValue)
 
-    return Promise.resolve([])
+    return Array.from(classes).map(node => ({
+      name: node.nodeValue,
+      methods: [],
+      properties: [],
+      source: node.attribs['href'],
+    }))
   }
 
   protected getClassIndex($: CheerioStatic): Cheerio {
-    return $('dt a', $('section article dl')[0])
+    const classes = $('section article dl')[0]
+    console.log(classes.childNodes)
+    return $('dt a', classes)
   }
 
   protected getEventIndex($: CheerioStatic): Cheerio {
-    return $('dt a', $('section article dl')[1])
+    const events = $('section article dl')[1]
+    return $('dt a', events)
   }
 }

@@ -7,4 +7,5 @@ export interface Namespace {
   classes: Class[]
   enums: Enum[]
   types: Type[]
+  source?: string
 }

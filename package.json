@@ -47,7 +47,6 @@
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
 		"push": "sh push.sh",
-		"prepush": "yarn run docs",
 		"start": "lerna run start",
 		"add-pkg": "lerna add",
 		"coveralls": "nyc report --reporter=text-lcov | coveralls",

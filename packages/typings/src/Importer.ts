@@ -1,8 +1,8 @@
 import { Package } from './Packages'
-import { ImportReader } from './ImportReader'
+import { Provider } from './Provider'
 
 export class Importer {
-  constructor(private readonly reader: ImportReader) { }
+  constructor(private readonly reader: Provider) { }
 
   async import(): Promise<Package> {
     const classes = await this.reader.classes()

@@ -2,4 +2,4 @@
 --require ts-node/register
 --full-trace
 --recursive
-packages/*/specs/**/*.spec.ts
+**/specs/**/*.spec.ts
