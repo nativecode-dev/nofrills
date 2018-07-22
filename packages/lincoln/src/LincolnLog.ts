@@ -1,5 +1,5 @@
 import { Log } from './Log'
 
 export interface LincolnLog {
-  write(log: Log): boolean | undefined
+  write(log: Log): Promise<boolean | undefined>
 }

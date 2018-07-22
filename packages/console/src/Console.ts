@@ -20,7 +20,7 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
     super()
   }
 
-  start(): Promise<void> {
+  async start(): Promise<void> {
     if (this.instance === undefined) {
       this.logger.info(`starting "${this.exe}":`, ...this.args)
       return (this.instance = new Promise<void>(async (resolve, reject) => {
@@ -39,7 +39,7 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
     process.exit(0)
   }
 
-  private shutdown = (resolve: Resolver, reject: Rejector, reason: string): void => {
+  private shutdown = async (resolve: Resolver, reject: Rejector, reason: string) => {
     this.logger.info('SHUTDOWN', `(${process.pid}::${process.exitCode}::${reason})`)
     if (process.exitCode === 0) {
       reject(reason)

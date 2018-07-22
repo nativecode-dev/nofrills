@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { ObjectNavigator, ObjectPath } from '@nofrills/types'
+import { ObjectNavigator } from '@nofrills/types'
 
 describe('when using ObjectNavigator', () => {
 
@@ -61,26 +61,48 @@ describe('when using ObjectNavigator', () => {
 
   it('should create instance over an object', () => {
     const sut = ObjectNavigator.from(person)
-    const properties = Array.from(sut).map(x => x.key)
-    expect(sut.name).to.equal('')
-    expect(properties).contains('address')
-    expect(properties).contains('contacts')
-    expect(properties).contains('name')
+    const properties = Array.from(sut).map(x => x.property)
+    expect(properties).to.deep.equal(['address', 'contacts', 'name', 'profile'])
   })
 
-  it('should navigate to child property', () => {
+  it('should navigate to immediate child property value', () => {
     const sut = ObjectNavigator.from(person)
-    const profile: ObjectPath = sut.value('profile')
-    const favorites: ObjectPath = profile.navigator.value('favorites')
-    const links: ObjectPath = favorites.navigator.value('links')
-    expect(links.path).to.equal('profile.favorites')
-  })
-
-  it('should navigate to child property value', () => {
-    const sut = ObjectNavigator.from(person)
-    const name = sut.get<Name>('name')
+    const name = sut.getValue<Name>('name')
     expect(name.first).to.equal('Joshua')
-    expect(name.last).to.equal('Tree')
+  })
+
+  it('should get property ObjectNavigator', () => {
+    const sut = ObjectNavigator.from(person)
+    const profile = sut.get('profile')
+    expect(profile).instanceof(ObjectNavigator)
+  })
+
+  it('should get property ObjectNavigator and match property name', () => {
+    const sut = ObjectNavigator.from(person)
+    const profile = sut.get('profile')
+    expect(profile.property).equals('profile')
+  })
+
+  it('should navigate to deeply nested child property', () => {
+    const sut = ObjectNavigator.from(person)
+    const links = sut.get('profile.favorites.links')
+    expect(links).to.not.equal(undefined)
+    if (links) {
+      expect(links.path).to.equal('profile.favorites')
+    }
+  })
+
+  it('should be able to walk properties', () => {
+    const sut = ObjectNavigator.from(person)
+    const profile = sut.get('profile')
+    const favorites = profile.get('favorites')
+    expect(favorites.keys()).contains('links')
+  })
+
+  it('should re-create object structure', () => {
+    const navigator = ObjectNavigator.from(person)
+    const sut = navigator.toObject()
+    expect(person).to.deep.equal(sut)
   })
 
 })

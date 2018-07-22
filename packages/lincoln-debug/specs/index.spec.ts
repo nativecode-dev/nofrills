@@ -20,7 +20,7 @@ describe('when using debug lincoln interceptor', () => {
   it('should create instance options with filter', (done) => {
     const filter = () => {
       done()
-      return false
+      return Promise.resolve(false)
     }
 
     const options = CreateOptions(NAMESPACE, [['test-filter', filter]])
@@ -31,7 +31,7 @@ describe('when using debug lincoln interceptor', () => {
   it('should create instance options with interceptor', (done) => {
     const interceptor = (log: Log) => {
       done()
-      return log
+      return Promise.resolve(log)
     }
 
     const options = CreateOptions(NAMESPACE, [], [['test-interceptor', interceptor]])

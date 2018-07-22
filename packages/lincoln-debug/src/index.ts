@@ -11,7 +11,7 @@ interface DebugCache {
 
 const Cache: DebugCache = {}
 
-export const DebugInterceptor: Interceptor = (log: Log): Log => {
+export const DebugInterceptor: Interceptor = (log: Log): Promise<Log> => {
   const logger: debug.IDebugger = Cache[log.namespace]
     ? Cache[log.namespace]
     : (Cache[log.namespace] = debug(log.namespace))
@@ -21,7 +21,7 @@ export const DebugInterceptor: Interceptor = (log: Log): Log => {
   } else {
     logger(log.parameters)
   }
-  return log
+  return Promise.resolve(log)
 }
 
 export const CreateOptions = (namespace: string, filters?: RegistryEntries<Filter>, interceptors?: RegistryEntries<Interceptor>): Options => {

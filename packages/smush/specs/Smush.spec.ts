@@ -113,7 +113,7 @@ describe('smush', () => {
           name: 'B',
         },
         id: 'sourceB',
-        numbers: [2, 3, 4, 5, 6],
+        numbers: [1, 7, 8, 9, 2, 3, 4, 5, 6],
         payload: {
           key: 'sourceB.payload',
         }

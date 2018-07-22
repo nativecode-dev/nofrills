@@ -19,6 +19,7 @@ const defaults: Options = {
 export enum LincolnEvents {
   Filtered = 'log-message-filtered',
   Log = 'log-message',
+  Written = 'log-written',
 }
 
 export class Lincoln extends EventEmitter {
@@ -46,31 +47,31 @@ export class Lincoln extends EventEmitter {
   }
 
   debug(...parameters: any[]): void {
-    this.write(LogMessageType.debug, parameters)
+    this.write(LogMessageType.debug, parameters).catch(console.error)
   }
 
   error(...parameters: any[]): void {
-    this.write(LogMessageType.error, parameters)
+    this.write(LogMessageType.error, parameters).catch(console.error)
   }
 
   fatal(...parameters: any[]): void {
-    this.write(LogMessageType.fatal, parameters)
+    this.write(LogMessageType.fatal, parameters).catch(console.error)
   }
 
   info(...parameters: any[]): void {
-    this.write(LogMessageType.info, parameters)
+    this.write(LogMessageType.info, parameters).catch(console.error)
   }
 
   silly(...parameters: any[]): void {
-    this.write(LogMessageType.silly, parameters)
+    this.write(LogMessageType.silly, parameters).catch(console.error)
   }
 
   trace(...parameters: any[]): void {
-    this.write(LogMessageType.trace, parameters)
+    this.write(LogMessageType.trace, parameters).catch(console.error)
   }
 
   warn(...parameters: any[]): void {
-    this.write(LogMessageType.warn, parameters)
+    this.write(LogMessageType.warn, parameters).catch(console.error)
   }
 
   extend(tag: string): Lincoln {
@@ -88,7 +89,7 @@ export class Lincoln extends EventEmitter {
     return `${this.options.namespace}${this.options.separator}${tag}`
   }
 
-  private write(tag: LogMessageType, parameters: any[]): void {
+  private async write(tag: LogMessageType, parameters: any[]) {
     const original: Log = {
       id: uuid(),
       namespace: this.normalize(tag),
@@ -97,20 +98,22 @@ export class Lincoln extends EventEmitter {
       type: tag,
     }
 
-    const log = Array.from(this.options.interceptors.values)
-      .reduce((result, interceptor) => interceptor(result), original)
+    const log = await Array.from(this.options.interceptors.values)
+      .reduce(async (result, interceptor) => interceptor(await result), Promise.resolve(original))
 
-    const filtered: boolean = Array.from(this.options.filters.values)
+    const filtered: boolean = await Array.from(this.options.filters.values)
       .map(filter => filter(log))
-      .reduce((result, filter) => result ? result : filter, false)
+      .reduce(async (result, current) => await result ? result : current, Promise.resolve(false))
 
     if (filtered === true) {
       this.emit(LincolnEvents.Filtered, log)
       return
     }
 
-    this.emit(LincolnEvents.Log, log)
+    await Promise.all(
+      this.loggers.map(logger => logger.write(log).then(x => this.emit(LincolnEvents.Written, x)))
+    )
 
-    this.loggers.map(logger => logger.write(log))
+    this.emit(LincolnEvents.Log, log, this.loggers.length)
   }
 }

@@ -1,7 +1,9 @@
+import * as merge from 'deepmerge'
+
 import { Types } from '@nofrills/types'
 import { Lincoln, Logger } from './Logger'
 
-export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
+export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => Promise<T>
 export type Scrubbers = Array<Scrubber<any>>
 
 export interface ScrubsOptions {
@@ -9,8 +11,8 @@ export interface ScrubsOptions {
   text: string
 }
 
-const defaults: ScrubsOptions = {
-  properties: ['apikey', 'api_key', 'password', 'x-api-key'],
+const defaults: Partial<ScrubsOptions> = {
+  properties: ['apikey', 'api-key', 'api_key', 'password', 'x-api-key'],
   text: '<secured>'
 }
 
@@ -19,9 +21,9 @@ export class Scrubs {
   private readonly options: ScrubsOptions
   private readonly registry: Map<string, Scrubbers>
 
-  constructor(options?: ScrubsOptions) {
+  constructor(options: Partial<ScrubsOptions> = {}) {
     this.log = Logger
-    this.options = Object.assign({}, options, defaults)
+    this.options = merge.all<ScrubsOptions>([options, defaults])
     this.registry = new Map<string, Scrubbers>()
   }
 
@@ -47,20 +49,13 @@ export class Scrubs {
     return this
   }
 
-  public scrub<T>(value: T, type?: string): T {
+  public async scrub<T>(value: T, type?: string): Promise<T> {
     if (value) {
       const typedef: string = type || Types.from(value)
-      this.log.debug('scrub.pre', value, typedef)
+      this.log.debug(`scrub.pre:${typedef}`, value)
 
-      let result: T = value
-      const scrubbers: Scrubbers | undefined = this.registry.get(typedef)
-      if (scrubbers) {
-        for (const scrubber of scrubbers) {
-          result = scrubber(result, this.options, this)
-        }
-        this.log.debug('scrub.post', value, result)
-        return result
-      }
+      return (this.registry.get(typedef) || []).reverse()
+        .reduce(async (previous, scrubber) => scrubber(await previous, this.options, this), Promise.resolve(value))
     }
     return value
   }

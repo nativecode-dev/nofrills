@@ -7,20 +7,19 @@
   "name": "@nofrills/http",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.5",
+  "version": "3.1.6-7",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.1.5",
-    "@nofrills/scrubs": "^3.1.5",
-    "node-fetch": "^2.1.2"
+    "@nofrills/lincoln-debug": "^3.1.6-7",
+    "@nofrills/scrubs": "^3.1.6-7",
+    "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
+    "@types/isomorphic-fetch": "^0.0.34",
     "@types/mocha": "^5.2.4",
-    "@types/node": "^10.5.1",
-    "@types/node-fetch": "^2.1.1",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
     "mocha": "^5.2.0",

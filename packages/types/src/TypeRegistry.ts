@@ -1,3 +1,5 @@
+import * as merge from 'deepmerge'
+
 import { Is } from './Is'
 import { Type } from './Type'
 
@@ -42,7 +44,7 @@ export class TypeRegistry {
 
   public register(type: Partial<Type>): TypeRegistry {
     const baseType: Type = this.resolve(type.typebase || 'any')
-    const merged: Type = Object.assign({}, baseType, type)
+    const merged: Type = merge.all([baseType, type])
     this.registry.set(merged.type, merged)
     return this
   }

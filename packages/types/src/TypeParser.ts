@@ -1,3 +1,4 @@
+import * as merge from 'deepmerge'
 import * as validator from 'validator'
 
 import { Type } from './Type'
@@ -34,7 +35,7 @@ export class TypeParser {
 
   private static materialize(type: Partial<Type>): Type {
     const typedef: Type = Types.resolve(type.typebase || 'any')
-    return Object.assign({}, typedef, type)
+    return merge.all([ typedef, type])
   }
 
   private static parse(typestr: string): Type {

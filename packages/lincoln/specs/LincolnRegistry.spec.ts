@@ -6,7 +6,7 @@ import { Filter, LincolnRegistry } from '@nofrills/lincoln'
 describe('when using LincolnRegistry', () => {
 
   it('should create instance', () => {
-    const registry = new LincolnRegistry<Filter>([['test', () => true]])
+    const registry = new LincolnRegistry<Filter>([['test', () => Promise.resolve(true)]])
     expect(registry.containsKey('test')).to.equal(true)
   })
 

@@ -1,4 +1,4 @@
-import merge = require('lodash.merge')
+import * as merge from 'deepmerge'
 
 import * as Promise from 'bluebird'
 import * as fs from 'fs'
@@ -53,7 +53,7 @@ export class Smush {
 
   public set<T>(key: string, ...values: T[]): T {
     const config: any = this.get(key)
-    const merged: any = merge({}, config, ...values)
+    const merged: any = merge.all([config, ...values])
     return this.config<T>(key, merged)
   }
 
