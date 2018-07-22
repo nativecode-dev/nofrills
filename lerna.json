@@ -23,7 +23,8 @@
     "--quiet"
   ],
   "packages": [
-    "packages/*"
+    "packages/*",
+    "typings/*"
   ],
   "sort": true,
   "useWorkspaces": true,
