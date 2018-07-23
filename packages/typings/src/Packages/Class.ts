@@ -1,9 +1,13 @@
-import { Method } from './Method'
-import { Property } from './Property'
+import { Methods } from './Method'
+import { Properties } from './Property'
 
 export interface Class {
   name: string
-  methods: Method[]
-  properties: Property[]
+  methods: Methods
+  properties: Properties
   source?: string
+}
+
+export interface Classes {
+  [name: string]: Class
 }

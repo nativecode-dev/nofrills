@@ -6,3 +6,7 @@ export interface Property {
   type: Type
   source?: string
 }
+
+export interface Properties {
+  [name: string]: Property
+}

@@ -1,38 +1,42 @@
 import 'isomorphic-fetch'
 
-import { load } from 'cheerio'
-
 import { URL } from 'url'
-import { Class, Provider } from '@nofrills/typings'
+import { Package, Provider } from '@nofrills/typings'
+import { Lincoln } from './Logger'
+
+import { PackageParser } from './PackageParser'
+
+export const CouchbaseVersion = {
+  latest: '2.1.4',
+  '2.1.4': '2.1.4',
+}
+
+export interface Couchbase {
+  version: string
+  url(pagename?: string): URL
+}
+
+function Create(version: string): Couchbase {
+  return {
+    version,
+    url(pagename: string = ''): URL {
+      return new URL(`http://docs.couchbase.com/sdk-api/couchbase-node-client-${version}/${pagename}`)
+    }
+  }
+}
 
 export class CouchbaseProvider extends Provider {
-  constructor(version: string = '2.1.4') {
-    super(new URL(`http://docs.couchbase.com/sdk-api/couchbase-node-client-${version}/classes.list.html`))
+  private readonly log: Lincoln
+
+  constructor(version: string = CouchbaseVersion.latest) {
+    super(version)
+    this.log = this.baselog.extend('couchbase')
   }
 
-  async classes(): Promise<Class[]> {
-    const response = await fetch(this.url.toString())
-    const html = await response.text()
-    const $ = load(html)
-
-    const classes = this.getClassIndex($)
-
-    return Array.from(classes).map(node => ({
-      name: node.nodeValue,
-      methods: [],
-      properties: [],
-      source: node.attribs['href'],
-    }))
-  }
-
-  protected getClassIndex($: CheerioStatic): Cheerio {
-    const classes = $('section article dl')[0]
-    console.log(classes.childNodes)
-    return $('dt a', classes)
-  }
-
-  protected getEventIndex($: CheerioStatic): Cheerio {
-    const events = $('section article dl')[1]
-    return $('dt a', events)
+  import(): Promise<Package> {
+    const couchbase = Create(CouchbaseVersion.latest)
+    const parser = new PackageParser(couchbase)
+    this.log.debug('import', couchbase.version)
+    return parser.parse()
   }
 }

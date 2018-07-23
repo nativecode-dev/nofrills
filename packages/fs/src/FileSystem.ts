@@ -199,7 +199,12 @@ export class FileSystem {
     return $path.resolve(...paths)
   }
 
-  static save<T>(path: number | string | Buffer | URL, object: T, throws?: boolean): Promise<boolean> {
+  static async save<T>(path: string, object: T, throws?: boolean): Promise<boolean> {
+    const dirname = this.dirname(path)
+    if (await this.exists(dirname, throws) === false) {
+      await this.mkdirp(dirname)
+    }
+
     return new Promise<boolean>((resolve, reject) => {
       $fs.writeFile(path, JSON.stringify(object), error => {
         if (error && throws) {

@@ -5,3 +5,7 @@ export interface Enum {
   }
   source?: string
 }
+
+export interface Enums {
+  [name: string]: Enum
+}

@@ -1,7 +1,7 @@
-import { Namespace } from './Namespace'
+import { Namespaces } from './Namespace'
 
 export interface Package {
   name: string
-  namespaces: Namespace[]
+  namespaces: Namespaces
   source?: string
 }

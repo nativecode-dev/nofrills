@@ -110,10 +110,14 @@ export class Lincoln extends EventEmitter {
       return
     }
 
-    await Promise.all(
-      this.loggers.map(logger => logger.write(log).then(x => this.emit(LincolnEvents.Written, x)))
-    )
+    await Promise.all(this.loggers.map(logger => this.writer(logger, log)))
 
     this.emit(LincolnEvents.Log, log, this.loggers.length)
+  }
+
+  private async writer(logger: LincolnLog, log: Log) {
+    if (await logger.write(log)) {
+      this.emit(LincolnEvents.Written, log)
+    }
   }
 }

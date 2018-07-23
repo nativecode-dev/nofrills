@@ -6,11 +6,11 @@ import { CouchbaseProvider } from '../src/CouchbaseProvider'
 
 describe('when importing couchbase documentation', () => {
 
-  it.skip('should get list of classes', async () => {
+  it('should get list of classes', async () => {
     const sut = new CouchbaseProvider()
-    const classes = await sut.classes()
-    console.log(classes)
-    expect(classes.length).gt(0)
+    const pkg = await sut.import()
+    console.log(pkg)
+    expect(pkg).not.equal(undefined)
   })
 
 })

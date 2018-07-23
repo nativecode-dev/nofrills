@@ -40,10 +40,10 @@
 	"scripts": {
 		"build": "lerna run build",
 		"prebuild": "yarn && lerna bootstrap && yarn run lint",
-		"clean": "rimraf .cache && rimraf docs && lerna run clean",
+		"clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
 		"docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
 		"lint": "tslint --project tsconfig.json --config tslint.json",
-		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"test": "cross-env DEBUG=typings:* nyc mocha --opts mocha.opts",
 		"pretest": "yarn run build",
 		"testonly": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
 		"push": "sh push.sh",

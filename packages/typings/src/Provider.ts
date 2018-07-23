@@ -1,8 +1,14 @@
-import { URL } from 'url'
-
-import { Class } from './Packages'
+import { Package } from './Packages'
+import { Logger } from './Logger'
 
 export abstract class Provider {
-  constructor(protected readonly url: URL) { }
-  abstract classes(): Promise<Class[]>
+  protected readonly package: Package
+
+  protected readonly baselog = Logger.extend('provider')
+
+  constructor(name: string) {
+    this.package = { name, namespaces: {} }
+  }
+
+  abstract import(): Promise<Package>
 }
