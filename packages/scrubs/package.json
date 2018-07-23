@@ -7,12 +7,12 @@
   "name": "@nofrills/scrubs",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.6-8",
+  "version": "3.1.6-9",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.1.6-8",
+    "@nofrills/lincoln-debug": "^3.1.6-9",
     "@nofrills/types": "^3.1.6-8",
     "deepmerge": "^2.1.1"
   },
