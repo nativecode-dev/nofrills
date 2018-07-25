@@ -22,8 +22,11 @@ export class ClassParser extends Parser<Class> {
 
     this.log.debug('parse', this.url.toString())
 
-    const $class: Partial<Class> = {
+    const $class: Class = {
+      constructors: {},
+      methods: {},
       name: this.name,
+      properties: {},
       source: this.url.toString(),
     }
 
@@ -31,25 +34,23 @@ export class ClassParser extends Parser<Class> {
       const $element = $(element)
       const section = $element.text().toLowerCase()
 
-      this.log.trace('section', section)
-
       switch (section) {
         case 'members':
-          $class.properties = this.properties($, $element.next().children())
+          this.properties($class.properties, $, $element.next().children())
+          this.log.trace(`${this.name}:${section}`, ...Object.keys($class.properties))
           break
 
         case 'methods':
-          $class.methods = this.methods($, $element.next().children())
+          this.methods($class.methods, $, $element.next().children())
+          this.log.trace(`${this.name}:${section}`, ...Object.keys($class.methods))
           break
       }
     })
 
-    return $class as Class
+    return $class
   }
 
-  private methods($: CheerioStatic, element: Cheerio): Methods {
-    const methods: Methods = {}
-
+  private methods(methods: Methods, $: CheerioStatic, element: Cheerio): void {
     element.filter('dt').each((_, dt) => {
       const $method = $(dt)
 
@@ -74,13 +75,9 @@ export class ClassParser extends Parser<Class> {
 
       methods[id] = method
     })
-
-    return methods
   }
 
-  private properties($: CheerioStatic, element: Cheerio): Properties {
-    const properties: Properties = {}
-
+  private properties(properties: Properties, $: CheerioStatic, element: Cheerio): void {
     element.filter('dt').each((_, dt) => {
       const $property = $(dt)
       const $types = $property.next()
@@ -96,8 +93,6 @@ export class ClassParser extends Parser<Class> {
         type: this.resolve(...types),
       }
     })
-
-    return properties
   }
 
   private resolve(...types: string[]): Type {

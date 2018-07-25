@@ -5,6 +5,7 @@ import { Type } from './Type'
 export interface Method extends CodeObject {
   parameters: Parameters
   return?: Type
+  static?: boolean
 }
 
 export interface Methods {
