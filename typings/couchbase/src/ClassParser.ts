@@ -82,16 +82,16 @@ export class ClassParser extends Parser<Class> {
     const properties: Properties = {}
 
     element.filter('dt').each((_, dt) => {
-      const $dt = $(dt)
-      const $dd = $dt.next()
-      const id = $dt.attr('id')
+      const $property = $(dt)
+      const $types = $property.next()
+      const name = $property.attr('id')
       const types: string[] = []
 
-      $dd.find('ul li span.param-type')
+      $types.find('ul li span.param-type')
         .each((_, span) => types.push($(span).text().trim()))
 
-      properties[id] = {
-        name: id,
+      properties[name] = {
+        name,
         readonly: false,
         type: this.resolve(...types),
       }

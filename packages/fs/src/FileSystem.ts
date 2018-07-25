@@ -79,6 +79,22 @@ export class FileSystem {
     return $path.extname(filename)
   }
 
+  static async file(path: string, content: string, throws?: boolean): Promise<boolean> {
+    const dirname = this.dirname(path)
+    if (await this.exists(dirname, throws) === false) {
+      await this.mkdirp(dirname)
+    }
+
+    return new Promise<boolean>((resolve, reject) => {
+      $fs.writeFile(path, content, error => {
+        if (error && throws) {
+          reject(false)
+        }
+        resolve(error ? false : true)
+      })
+    })
+  }
+
   static glob(pattern: string): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
       $glob(pattern, (error, matches) => {
@@ -111,21 +127,14 @@ export class FileSystem {
     return $path.join(...paths)
   }
 
-  static json<T>(path: string | number | Buffer | URL): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
-      $fs.readFile(path, (error, data) => {
-        if (error) {
-          reject(error)
-        }
+  static async json<T>(path: string | number | Buffer | URL): Promise<T> {
+    const text = await this.text(path)
 
-        if (data) {
-          const json = JSON.parse(data.toString())
-          resolve(json)
-        }
+    if (text) {
+      return JSON.parse(text)
+    }
 
-        resolve(undefined)
-      })
-    })
+    return Promise.reject(text)
   }
 
   static mkdir(path: PathLike, mode?: number | string, throws?: boolean): Promise<boolean> {
@@ -228,6 +237,22 @@ export class FileSystem {
 
   static stats(...paths: PathLike[]): Promise<Descriptor[]> {
     return Promise.all(paths.map(path => this.stat(path)))
+  }
+
+  static text(path: string | number | Buffer | URL): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      $fs.readFile(path, (error, data) => {
+        if (error) {
+          reject(error)
+        }
+
+        if (data) {
+          resolve(data.toString())
+        }
+
+        resolve(undefined)
+      })
+    })
   }
 
   static write<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset?: number, length?: number, position?: number): Promise<number> {
