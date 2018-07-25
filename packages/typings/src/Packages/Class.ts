@@ -1,14 +1,12 @@
+import { Type } from './Type'
+import { Method } from './Method'
+import { Property } from './Property'
 import { CodeObject } from './CodeObject'
-import { Constructors } from './Constructor'
-import { Methods } from './Method'
-import { Properties } from './Property'
+import { Constructor } from './Constructor'
 
 export interface Class extends CodeObject {
-  constructors: Constructors
-  methods: Methods
-  properties: Properties
-}
-
-export interface Classes {
-  [name: string]: Class
+  constructors: Constructor[]
+  extends?: Type[]
+  methods: Method[]
+  properties: Property[]
 }

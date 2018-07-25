@@ -12,6 +12,7 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
+    "@nofrills/fs": "^3.1.6-11",
     "@nofrills/lincoln-debug": "^3.1.6-9",
     "@nofrills/scrubs": "^3.1.6-9",
     "@nofrills/typings": "^3.1.6-12",
@@ -24,7 +25,7 @@
     "@types/cheerio": "^0.22.8",
     "@types/isomorphic-fetch": "^0.0.34",
     "@types/mocha": "^5.2.5",
-    "@types/node": "^10.5.2",
+    "@types/node": "^10.5.3",
     "chai": "^4.1.2",
     "cross-env": "^5.0.1",
     "mocha": "^5.2.0",

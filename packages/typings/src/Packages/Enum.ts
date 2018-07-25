@@ -5,7 +5,3 @@ export interface Enum extends CodeObject {
     [name: string]: any
   }
 }
-
-export interface Enums {
-  [name: string]: Enum
-}

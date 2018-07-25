@@ -19,11 +19,11 @@
     "shortid": "^2.2.12"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.22",
+    "@types/bluebird": "^3.5.23",
     "@types/chai": "^4.0.5",
     "@types/deepmerge": "^2.1.0",
     "@types/mocha": "^5.2.5",
-    "@types/node": "^10.5.2",
+    "@types/node": "^10.5.3",
     "@types/node-fetch": "^2.1.2",
     "@types/shortid": "0.0.29",
     "chai": "^4.1.2",

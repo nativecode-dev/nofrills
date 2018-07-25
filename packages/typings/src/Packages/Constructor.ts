@@ -1,10 +1,6 @@
-import { Parameters } from './Parameter'
+import { Parameter } from './Parameter'
 
 export interface Constructor {
-  parameters: Parameters
+  parameters: Parameter[]
   public: boolean
-}
-
-export interface Constructors {
-  [index: number]: Constructor
 }

@@ -1,6 +1,7 @@
 import { CodeObject } from './CodeObject'
-import { Namespaces } from './Namespace'
+import { Namespace } from './Namespace'
 
 export interface Package extends CodeObject {
-  namespaces: Namespaces
+  namespaces: Namespace[]
+  version: string
 }

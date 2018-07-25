@@ -1,7 +1,7 @@
 import { CodeObject } from './CodeObject'
 
 export interface Type extends CodeObject {
-  external?: boolean
+  external: boolean
   reference?: any
 }
 

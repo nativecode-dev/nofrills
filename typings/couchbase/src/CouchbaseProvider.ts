@@ -36,7 +36,7 @@ export class CouchbaseProvider extends Provider {
 
   import(): Promise<Package> {
     const couchbase = Create(CouchbaseVersion.latest)
-    const parser = new PackageParser(couchbase)
+    const parser = new PackageParser(couchbase, 'couchbase')
     this.log.debug('import', couchbase.version)
     return parser.parse()
   }

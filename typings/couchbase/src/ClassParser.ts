@@ -1,4 +1,4 @@
-import { Class, Method, Methods, Namespace, Properties, Type } from '@nofrills/typings'
+import { Class, Method, Namespace, Property, Type } from '@nofrills/typings'
 
 import { Parser } from './Parser'
 import { Lincoln } from './Logger'
@@ -23,10 +23,10 @@ export class ClassParser extends Parser<Class> {
     this.log.debug('parse', this.url.toString())
 
     const $class: Class = {
-      constructors: {},
-      methods: {},
+      constructors: [],
+      methods: [],
       name: this.name,
-      properties: {},
+      properties: [],
       source: this.url.toString(),
     }
 
@@ -37,47 +37,48 @@ export class ClassParser extends Parser<Class> {
       switch (section) {
         case 'members':
           this.properties($class.properties, $, $element.next().children())
-          this.log.trace(`${this.name}:${section}`, ...Object.keys($class.properties))
           break
 
         case 'methods':
           this.methods($class.methods, $, $element.next().children())
-          this.log.trace(`${this.name}:${section}`, ...Object.keys($class.methods))
           break
       }
+
+      this.log.trace(`${this.name}:${section}`)
     })
 
     return $class
   }
 
-  private methods(methods: Methods, $: CheerioStatic, element: Cheerio): void {
+  private methods(methods: Method[], $: CheerioStatic, element: Cheerio): void {
     element.filter('dt').each((_, dt) => {
       const $method = $(dt)
 
       const id = $method.find('h4.name').attr('id')
       const returns = this.type($method.next().find('dl dd span.param-type a').text().trim())
-      const method: Method = { name: id, parameters: {}, return: returns }
+      const method: Method = { name: id, parameters: [], return: returns }
 
-      $method.next().find('table.params tbody tr').each((_, tr) => {
+      $method.next().find('> table.params > tbody > tr').each((_, tr) => {
         const $param = $(tr)
-        const description = $param.find('td.description p').text().trim()
-        const name = $param.find('td.name code').text().trim()
+        const optional = $param.find('> td.attributes').text().trim() === '<optional>'
+        const description = $param.find('> td.description > p').text().trim()
+        const name = $param.find('> td.name > code').text().trim()
 
         const types: string[] = []
 
-        $param.find('td.type span.param-type')
+        $param.find('> td.type > span.param-type')
           .each((_, t) => types.push($(t).text().trim()))
 
         const type = this.resolve(...types)
-
-        method.parameters[name] = { description, name, type }
+        const parameter = { description, name, optional, type }
+        method.parameters.push(parameter)
       })
 
-      methods[id] = method
+      methods.push(method)
     })
   }
 
-  private properties(properties: Properties, $: CheerioStatic, element: Cheerio): void {
+  private properties(properties: Property[], $: CheerioStatic, element: Cheerio): void {
     element.filter('dt').each((_, dt) => {
       const $property = $(dt)
       const $types = $property.next()
@@ -87,16 +88,12 @@ export class ClassParser extends Parser<Class> {
       $types.find('ul li span.param-type')
         .each((_, span) => types.push($(span).text().trim()))
 
-      properties[name] = {
-        name,
-        readonly: false,
-        type: this.resolve(...types),
-      }
+      properties.push({ name, readonly: false, type: this.resolve(...types) })
     })
   }
 
   private resolve(...types: string[]): Type {
-    const filtered = types.map(name => this.clean(name))
+    const filtered = types.map(name => this.typename(name))
       .filter((name, index, array) => array.indexOf(name) === index)
 
     const key = filtered.join('|')
@@ -106,18 +103,24 @@ export class ClassParser extends Parser<Class> {
   }
 
   private type(name: string, reference?: any): Type {
-    const key = name
+    const keyname = this.typename(name)
 
-    if (this.namespace.types[key]) {
-      return this.namespace.types[key]
+    if (this.namespace.types[keyname]) {
+      return this.namespace.types[keyname]
     }
 
-    return (this.namespace.types[key] = { external: reference ? true : false, name, reference })
+    return (this.namespace.types[keyname] = { external: reference ? true : false, name: keyname, reference })
   }
 
-  private clean(name: string): string {
-    return name
-      .replace('Array.<number>', 'number[]')
-      .replace('Array.<string>', 'string[]')
+  private typename(name: string): string {
+    if (!name || name === '') {
+      return 'void'
+    }
+
+    if (name === '*') {
+      return 'any'
+    }
+
+    return name.replace(/Array\.<(.*)>/g, 'Array<$1>')
   }
 }

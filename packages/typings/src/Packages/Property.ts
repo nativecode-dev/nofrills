@@ -5,7 +5,3 @@ export interface Property extends CodeObject {
   readonly?: boolean
   type: Type
 }
-
-export interface Properties {
-  [name: string]: Property
-}
