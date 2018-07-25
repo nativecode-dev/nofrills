@@ -7,20 +7,28 @@ import { Logger } from './Logger'
 export abstract class Parser<T> {
   protected baselog = Logger.extend('parser')
 
-  private readonly cachefile: string = fs.join(process.cwd(), '.cache', 'couchbase.json')
+  private readonly cachefile: string
 
   private cache: { [key: string]: string } = {}
 
-  constructor(protected readonly url: URL) { }
+  constructor(name: string, protected readonly url: URL) {
+    this.cachefile = fs.join(process.cwd(), 'couchbase-cache', `.${name}.json`)
+  }
 
   async parse(): Promise<T> {
-    if (await fs.exists(this.cachefile)) {
+    const cached = await fs.exists(this.cachefile)
+
+    if (cached) {
       this.cache = await fs.json<{ [key: string]: string }>(this.cachefile)
+      this.baselog.debug('cache.load', this.cachefile)
     }
 
     const parsed = await this.run()
 
-    await fs.save(this.cachefile, this.cache)
+    if (cached === false) {
+      const saved = await fs.save(this.cachefile, this.cache)
+      this.baselog.debug('cache.save', this.cachefile, saved)
+    }
 
     return parsed
   }
@@ -37,7 +45,8 @@ export abstract class Parser<T> {
     const response = await fetch(urlstring)
     this.baselog.debug('html', urlstring)
 
-    const html = (this.cache[urlstring] = await response.text())
+    const text = await response.text()
+    const html = (this.cache[urlstring] = text)
 
     return load(html)
   }

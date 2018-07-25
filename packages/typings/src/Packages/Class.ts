@@ -1,11 +1,10 @@
+import { CodeObject } from './CodeObject'
 import { Methods } from './Method'
 import { Properties } from './Property'
 
-export interface Class {
-  name: string
+export interface Class extends CodeObject {
   methods: Methods
   properties: Properties
-  source?: string
 }
 
 export interface Classes {

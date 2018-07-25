@@ -19,8 +19,9 @@ export interface Couchbase {
 function Create(version: string): Couchbase {
   return {
     version,
-    url(pagename: string = ''): URL {
-      return new URL(`http://docs.couchbase.com/sdk-api/couchbase-node-client-${version}/${pagename}`)
+    url(name?: string): URL {
+      const pagename = name ? `/${name}` : ''
+      return new URL(`http://docs.couchbase.com/sdk-api/couchbase-node-client-${version}${pagename}`)
     }
   }
 }

@@ -9,7 +9,7 @@ export class PackageParser extends Parser<Package> {
   private readonly log: Lincoln
 
   constructor(private readonly couchbase: Couchbase) {
-    super(couchbase.url())
+    super(couchbase.version, couchbase.url())
     this.log = this.baselog.extend('package')
   }
 

@@ -1,8 +1,8 @@
-export interface Type {
-  name: string
+import { CodeObject } from './CodeObject'
+
+export interface Type extends CodeObject {
   external: boolean
   reference?: any
-  source?: string
 }
 
 export interface Types {

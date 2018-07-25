@@ -1,4 +1,4 @@
-import { Class, Namespace, Method, Methods, Properties, Property, Type } from '@nofrills/typings'
+import { Class, Method, Methods, Namespace, Properties, Type } from '@nofrills/typings'
 
 import { Parser } from './Parser'
 import { Lincoln } from './Logger'
@@ -13,7 +13,7 @@ export class ClassParser extends Parser<Class> {
     private readonly name: string,
     page: string,
   ) {
-    super(couchbase.url(page))
+    super(name, couchbase.url(page))
     this.log = this.baselog.extend('class')
   }
 
@@ -22,76 +22,107 @@ export class ClassParser extends Parser<Class> {
 
     this.log.debug('parse', this.url.toString())
 
-    const metadata: Class = {
+    const $class: Partial<Class> = {
       name: this.name,
-      methods: this.methods($),
-      properties: this.properties($),
       source: this.url.toString(),
     }
 
-    this.namespace.types[this.name] = this.type(this.name, true, metadata)
+    $('div#main section article h3.subsection-title').each((_, element) => {
+      const $element = $(element)
+      const section = $element.text().toLowerCase()
 
-    return metadata
-  }
+      this.log.trace('section', section)
 
-  private method($: CheerioStatic, dt: CheerioElement, dd: CheerioElement): Method {
-    const name = $('span.type-signature', dt).text().trim()
-    this.log.debug('method', name)
-    const metadata: Method = { name }
-    return metadata
-  }
+      switch (section) {
+        case 'members':
+          $class.properties = this.properties($, $element.next().children())
+          break
 
-  private methods($: CheerioStatic): Methods {
-    const results: Methods = {}
-
-    this.section($, 2, (dt: CheerioElement, dd: CheerioElement) => {
-      const method = this.method($, dt, dd)
-      results[method.name] = method
+        case 'methods':
+          $class.methods = this.methods($, $element.next().children())
+          break
+      }
     })
 
-    return results
+    return $class as Class
   }
 
-  private properties($: CheerioStatic): Properties {
-    const results: Properties = {}
+  private methods($: CheerioStatic, element: Cheerio): Methods {
+    const methods: Methods = {}
 
-    this.section($, 1, (dt: CheerioElement, dd: CheerioElement) => {
-      const property = this.property($, dt, dd)
-      results[property.name] = property
+    element.filter('dt').each((_, dt) => {
+      const $method = $(dt)
+
+      const id = $method.find('h4.name').attr('id')
+      const returns = this.type($method.next().find('dl dd span.param-type a').text().trim())
+      const method: Method = { name: id, parameters: {}, return: returns }
+
+      $method.next().find('table.params tbody tr').each((_, tr) => {
+        const $param = $(tr)
+        const description = $param.find('td.description p').text().trim()
+        const name = $param.find('td.name code').text().trim()
+
+        const types: string[] = []
+
+        $param.find('td.type span.param-type')
+          .each((_, t) => types.push($(t).text().trim()))
+
+        const type = this.resolve(...types)
+
+        method.parameters[name] = { description, name, type }
+      })
+
+      methods[id] = method
     })
 
-    return results
+    return methods
   }
 
-  private property($: CheerioStatic, dt: CheerioElement, dd: CheerioElement): Property {
-    const name = $(dd).text().trim()
-    const type = this.type(dt.attribs['id'])
+  private properties($: CheerioStatic, element: Cheerio): Properties {
+    const properties: Properties = {}
 
-    this.log.debug('property', name)
+    element.filter('dt').each((_, dt) => {
+      const $dt = $(dt)
+      const $dd = $dt.next()
+      const id = $dt.attr('id')
+      const types: string[] = []
 
-    const metadata: Property = { name, readonly: false, type }
-    return metadata
+      $dd.find('ul li span.param-type')
+        .each((_, span) => types.push($(span).text().trim()))
+
+      properties[id] = {
+        name: id,
+        readonly: false,
+        type: this.resolve(...types),
+      }
+    })
+
+    return properties
   }
 
-  private section($: CheerioStatic, index: number, callback: (dt: CheerioElement, dd: CheerioElement) => void): void {
-    const list = $('div#main section article dl:not([class])')
-    const items = $(list[index])
+  private resolve(...types: string[]): Type {
+    const filtered = types.map(name => this.clean(name))
+      .filter((name, index, array) => array.indexOf(name) === index)
 
-    for (let index = 0; index < items.length; index + 2) {
-      const dt = items[index]
-      const dd = items[index + 1]
-      this.log.trace(`section:${index}`)
-      callback(dt, dd)
+    const key = filtered.join('|')
+    const references = filtered.map(name => this.type(name))
+
+    return this.type(key, references)
+  }
+
+  private type(name: string, reference?: any): Type {
+    const key = name
+
+    if (this.namespace.types[key]) {
+      return this.namespace.types[key]
     }
 
-    this.log.debug('section', items.length)
+    return (this.namespace.types[key] = { external: reference ? true : false, name, reference })
   }
 
-  private type(name: string, external: boolean = false, reference?: any): Type {
-    if (this.namespace.types[name]) {
-      return this.namespace.types[name]
-    }
-
-    return (this.namespace.types[name] = { external, name, reference })
+  private clean(name: string): string {
+    return name
+      .replace('Array.<number>', 'number[]')
+      .replace('Array.<string>', 'string[]')
   }
 }

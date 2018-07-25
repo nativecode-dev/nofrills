@@ -10,7 +10,7 @@ export class NamespaceParser extends Parser<Namespace> {
   private readonly log: Lincoln
 
   constructor(private readonly couchbase: Couchbase, protected readonly name: string) {
-    super(couchbase.url('classes.list.html'))
+    super(name, couchbase.url('classes.list.html'))
     this.log = this.baselog.extend('namespace')
   }
 
