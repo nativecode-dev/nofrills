@@ -16,7 +16,7 @@ export class PackageParser extends Parser<Package> {
     this.log = this.baselog.extend('package')
   }
 
-  protected async run(): Promise<Package> {
+  protected async exec(): Promise<Package> {
     const parser = new NamespaceParser(this.couchbase, 'couchbase')
     const namespace = await parser.parse()
 

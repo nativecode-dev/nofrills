@@ -1,4 +1,4 @@
-import { Class, Method, Namespace, Property, Type } from '@nofrills/typings'
+import { Class, Constructor, Method, Namespace, Parameter, Property, Type } from '@nofrills/typings'
 
 import { Parser } from './Parser'
 import { Lincoln } from './Logger'
@@ -17,30 +17,42 @@ export class ClassParser extends Parser<Class> {
     this.log = this.baselog.extend('class')
   }
 
-  protected async run(): Promise<Class> {
+  protected async exec(): Promise<Class> {
     const $ = await this.html(this.url)
 
     this.log.debug('parse', this.url.toString())
 
     const $class: Class = {
       constructors: [],
+      description: $('div#main > section > header > div.class-description > p').text().trim(),
       methods: [],
       name: this.name,
       properties: [],
       source: this.url.toString(),
     }
 
-    $('div#main section article h3.subsection-title').each((_, element) => {
+    this.constructors($class.constructors, $)
+
+    $('div#main > section > article > h3.subsection-title').each((_, element) => {
       const $element = $(element)
-      const section = $element.text().toLowerCase()
+      const section = $element.text()
 
       switch (section) {
-        case 'members':
+        case 'Classes':
+          break
+
+        case 'Events':
+          break
+
+        case 'Members':
           this.properties($class.properties, $, $element.next().children())
           break
 
-        case 'methods':
+        case 'Methods':
           this.methods($class.methods, $, $element.next().children())
+          break
+
+        case 'Type Definitions':
           break
       }
 
@@ -48,6 +60,15 @@ export class ClassParser extends Parser<Class> {
     })
 
     return $class
+  }
+
+  private constructors(constructors: Constructor[], $: CheerioStatic): void {
+    const $params = $('div#main > section > article > div.container-overview > dd > table.params > tbody > tr')
+    if ($params.length) {
+      const constructor: Constructor = { parameters: [], public: true }
+      this.parameter(constructor.parameters, $, $params)
+      constructors.push(constructor)
+    }
   }
 
   private methods(methods: Method[], $: CheerioStatic, element: Cheerio): void {
@@ -58,24 +79,26 @@ export class ClassParser extends Parser<Class> {
       const returns = this.type($method.next().find('dl dd span.param-type a').text().trim())
       const method: Method = { name: id, parameters: [], return: returns }
 
-      $method.next().find('> table.params > tbody > tr').each((_, tr) => {
-        const $param = $(tr)
-        const optional = $param.find('> td.attributes').text().trim() === '<optional>'
-        const description = $param.find('> td.description > p').text().trim()
-        const name = $param.find('> td.name > code').text().trim()
-
-        const types: string[] = []
-
-        $param.find('> td.type > span.param-type')
-          .each((_, t) => types.push($(t).text().trim()))
-
-        const type = this.resolve(...types)
-        const parameter = { description, name, optional, type }
-        method.parameters.push(parameter)
-      })
+      $method.next()
+        .find('> table.params > tbody > tr')
+        .each((_, tr) => this.parameter(method.parameters, $, $(tr)))
 
       methods.push(method)
     })
+  }
+
+  private parameter(parameters: Parameter[], $: CheerioStatic, $param: Cheerio): void {
+    const optional = $param.find('> td.attributes').text().trim() === '<optional>'
+    const description = $param.find('> td.description > p').text().trim()
+    const name = $param.find('> td.name > code').text().trim()
+    const types: string[] = []
+
+    $param.find('> td.type > span.param-type')
+      .each((_, t) => types.push($(t).text().trim()))
+
+    const type = this.resolve(...types)
+    const parameter = { description, name, optional, type }
+    parameters.push(parameter)
   }
 
   private properties(properties: Property[], $: CheerioStatic, element: Cheerio): void {

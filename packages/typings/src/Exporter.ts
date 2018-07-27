@@ -26,7 +26,7 @@ export class Exporter {
   }
 
   protected async generate(source: Package, outpath: string): Promise<void> {
-    const template = fs.join(this.templates, 'default.ttsd')
+    const template = fs.join(this.templates, 'default.stache')
 
     if (await fs.exists(template) === false) {
       throw new Error(`missing template: ${template}`)

@@ -14,7 +14,7 @@ export class NamespaceParser extends Parser<Namespace> {
     this.log = this.baselog.extend('namespace')
   }
 
-  protected async run(): Promise<Namespace> {
+  protected async exec(): Promise<Namespace> {
     const namespace: Namespace = {
       classes: [],
       enums: [],

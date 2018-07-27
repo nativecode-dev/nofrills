@@ -1,4 +1,5 @@
 export * from './Class'
+export * from './Constructor'
 export * from './Enum'
 export * from './Method'
 export * from './Namespace'

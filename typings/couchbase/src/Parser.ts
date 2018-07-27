@@ -23,7 +23,7 @@ export abstract class Parser<T> {
       this.baselog.debug('cache.load', this.cachefile)
     }
 
-    const parsed = await this.run()
+    const parsed = await this.exec()
 
     if (cached === false) {
       const saved = await fs.save(this.cachefile, this.cache)
@@ -33,7 +33,7 @@ export abstract class Parser<T> {
     return parsed
   }
 
-  protected abstract run(): Promise<T>
+  protected abstract exec(): Promise<T>
 
   protected async html(url: URL): Promise<CheerioStatic> {
     const urlstring = url.toString()
