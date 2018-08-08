@@ -13,24 +13,28 @@ export class Exporter {
 
   constructor(private readonly templates: string) { }
 
-  async export(source: Package, outpath: string, separate: boolean = false): Promise<void> {
+  async export(source: Package, outpath: string, separate: boolean = false): Promise<any> {
     this.log.debug('templates', this.templates)
     this.log.debug('outpath', outpath)
 
     const navigator = ObjectNavigator.from(source)
     navigator.recurse(this.onPropertyConverter)
-    const transformed = navigator.toObject()
+    const context = navigator.toObject()
 
-    return separate
-      ? this.files(transformed, outpath)
-      : this.generate(transformed, outpath)
+    if (separate) {
+      await this.files(context, outpath)
+    } else {
+      await this.generate(context, outpath)
+    }
+
+    return context
   }
 
-  protected files(source: Package, outpath: string): Promise<void> {
+  protected files(source: any, outpath: string): Promise<void> {
     return Promise.reject(new PackageError(source, 'currently not supported'))
   }
 
-  protected async generate(source: Package, outpath: string): Promise<void> {
+  protected async generate(source: any, outpath: string): Promise<void> {
     const template = fs.join(this.templates, 'default.stache')
 
     if (await fs.exists(template) === false) {
@@ -39,8 +43,8 @@ export class Exporter {
 
     const text = await fs.text(template)
     const rendered = render(text, { package: source })
-
     const output = fs.join(outpath, `${source.name}.d.ts`)
+
     await fs.file(output, rendered)
     this.log.info('exported', output)
   }

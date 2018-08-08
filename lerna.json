@@ -5,7 +5,7 @@
     },
     "publish": {
       "allowBranch": "master",
-      "ignore": [
+      "ignoreChanges": [
         "*.md",
         "LICENSE"
       ],
