@@ -18,9 +18,8 @@ export class Exporter {
     this.log.debug('outpath', outpath)
 
     const navigator = ObjectNavigator.from(source)
-    const properties = navigator.recurse(this.onPropertyConverter)
+    navigator.recurse(this.onPropertyConverter)
     const transformed = navigator.toObject()
-    await fs.save('D:\\properties.json', JSON.stringify(properties))
 
     return separate
       ? this.files(transformed, outpath)
