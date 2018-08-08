@@ -1,24 +1,30 @@
 import { render } from 'mustache'
+import { Is, ObjectNavigator } from '@nofrills/types'
 import { FileSystem as fs } from '@nofrills/fs'
 
 import { Logger } from './Logger'
 import { Package } from './Packages'
 import { PackageError } from './Errors'
 
+const Properties: string[] = ['constructors', 'enums', 'functions', 'methods', 'namespaces', 'properties', 'types']
+
 export class Exporter {
   private readonly log = Logger.extend('exporter')
 
   constructor(private readonly templates: string) { }
 
-  export(source: Package, outpath: string, separate: boolean = false): Promise<void> {
+  async export(source: Package, outpath: string, separate: boolean = false): Promise<void> {
     this.log.debug('templates', this.templates)
     this.log.debug('outpath', outpath)
 
-    if (separate) {
-      return this.files(source, outpath)
-    }
+    const navigator = ObjectNavigator.from(source)
+    const properties = navigator.recurse(this.onPropertyConverter)
+    const transformed = navigator.toObject()
+    await fs.save('D:\\properties.json', JSON.stringify(properties))
 
-    return this.generate(source, outpath)
+    return separate
+      ? this.files(transformed, outpath)
+      : this.generate(transformed, outpath)
   }
 
   protected files(source: Package, outpath: string): Promise<void> {
@@ -38,5 +44,12 @@ export class Exporter {
     const output = fs.join(outpath, `${source.name}.d.ts`)
     await fs.file(output, rendered)
     this.log.info('exported', output)
+  }
+
+  private onPropertyConverter = (name: string, navigator: ObjectNavigator): void => {
+    if (Properties.indexOf(name.toLowerCase()) >= 0 && Is.object(navigator.value)) {
+      const value = Object.keys(navigator.value).map(key => navigator.value[key])
+      navigator.set(name, value)
+    }
   }
 }

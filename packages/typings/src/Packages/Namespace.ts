@@ -1,10 +1,16 @@
-import { Class } from './Class'
+import { Classes } from './Class'
 import { CodeObject } from './CodeObject'
-import { Enum } from './Enum'
+import { Enums } from './Enum'
+import { Functions } from './Function'
 import { Types } from './Type'
 
 export interface Namespace extends CodeObject {
-  classes: Class[]
-  enums: Enum[]
+  classes: Classes
+  enums: Enums
+  functions: Functions
   types: Types
+}
+
+export interface Namespaces {
+  [key: string]: Namespace
 }

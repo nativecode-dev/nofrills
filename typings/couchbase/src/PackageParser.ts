@@ -1,4 +1,4 @@
-import { Namespace, Package } from '@nofrills/typings'
+import { Namespaces, Package } from '@nofrills/typings'
 
 import { Lincoln } from './Logger'
 import { Parser } from './Parser'
@@ -22,8 +22,8 @@ export class PackageParser extends Parser<Package> {
 
     this.log.debug('parse', namespace.name, this.url.toString())
 
-    const namespaces: Namespace[] = []
-    namespaces.push(namespace)
+    const namespaces: Namespaces = {}
+    namespaces[namespace.name] = namespace
 
     return { name: this.name, namespaces, source: this.url.toString(), version: this.couchbase.version }
   }

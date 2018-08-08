@@ -2,12 +2,11 @@ import { Type } from './Type'
 import { Parameters } from './Parameter'
 import { CodeObject } from './CodeObject'
 
-export interface Method extends CodeObject {
+export interface Function extends CodeObject {
   parameters: Parameters
   return?: Type
-  static?: boolean
 }
 
-export interface Methods {
-  [key: string]: Method
+export interface Functions {
+  [key: string]: Function
 }

@@ -2,7 +2,7 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Is } from '@nofrills/types'
+import { Is } from '../src/Is'
 
 describe('when using type library', () => {
 
@@ -19,6 +19,8 @@ describe('when using type library', () => {
       it('should validate boolean is not string', () => expect(Is.boolean('yes')).to.equal(false))
       it('should validate date type', () => expect(Is.date(new Date())).to.equal(true))
       it('should validate date is not string', () => expect(Is.date('yes')).to.equal(false))
+      it('should validate error type', () => expect(Is.error(new Error())).to.equal(true))
+      it('should validate error is not valid', () => expect(Is.error(null)).to.equal(false))
       it('should validate function', () => expect(Is.function(() => void (0))).to.equal(true))
       it('should validate function is not a string', () => expect(Is.function('function')).to.equal(false))
       it('should validate number type', () => expect(Is.number(123)).to.equal(true))

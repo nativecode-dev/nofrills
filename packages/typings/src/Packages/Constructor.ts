@@ -1,6 +1,6 @@
-import { Parameter } from './Parameter'
+import { Parameters } from './Parameter'
 
 export interface Constructor {
-  parameters: Parameter[]
+  parameters: Parameters
   public: boolean
 }

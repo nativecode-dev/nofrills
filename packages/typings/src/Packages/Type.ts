@@ -1,8 +1,7 @@
 import { CodeObject } from './CodeObject'
 
 export interface Type extends CodeObject {
-  external: boolean
-  reference?: any
+  basetypes: string[]
 }
 
 export interface Types {

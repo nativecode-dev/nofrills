@@ -7,7 +7,7 @@ export abstract class Provider {
   protected readonly baselog = Logger.extend('provider')
 
   constructor(name: string) {
-    this.package = { name, namespaces: [], version: '' }
+    this.package = { name, namespaces: {}, version: '' }
   }
 
   abstract import(): Promise<Package>

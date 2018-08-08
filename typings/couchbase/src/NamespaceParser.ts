@@ -1,5 +1,5 @@
 import { all as throttle } from 'promise-parallel-throttle'
-import { Class, Namespace } from '@nofrills/typings'
+import { Classes, Namespace } from '@nofrills/typings'
 
 import { Parser } from './Parser'
 import { Lincoln } from './Logger'
@@ -16,8 +16,9 @@ export class NamespaceParser extends Parser<Namespace> {
 
   protected async exec(): Promise<Namespace> {
     const namespace: Namespace = {
-      classes: [],
-      enums: [],
+      classes: {},
+      enums: {},
+      functions: {},
       name: this.name,
       types: {},
       source: this.url.toString(),
@@ -28,7 +29,7 @@ export class NamespaceParser extends Parser<Namespace> {
     return namespace
   }
 
-  private async classes(namespace: Namespace): Promise<Class[]> {
+  private async classes(namespace: Namespace): Promise<Classes> {
     const $ = await this.html(this.url)
     this.log.debug('classes', this.url.toString())
 
@@ -45,9 +46,9 @@ export class NamespaceParser extends Parser<Namespace> {
       return () => parser.parse()
     }))
 
-    return classes.reduce((previous, current) => {
-      previous.push(current)
-      return previous
+    return classes.reduce((container, $class) => {
+      container[$class.name] = $class
+      return container
     }, namespace.classes)
   }
 }

@@ -1,4 +1,13 @@
-import { Class, Constructor, Method, Namespace, Parameter, Property, Type } from '@nofrills/typings'
+import {
+  Class,
+  Constructor,
+  Method,
+  Methods,
+  Namespace,
+  Parameters,
+  Properties,
+  Type,
+} from '@nofrills/typings'
 
 import { Parser } from './Parser'
 import { Lincoln } from './Logger'
@@ -25,9 +34,9 @@ export class ClassParser extends Parser<Class> {
     const $class: Class = {
       constructors: [],
       description: $('div#main > section > header > div.class-description > p').text().trim(),
-      methods: [],
+      methods: {},
       name: this.name,
-      properties: [],
+      properties: {},
       source: this.url.toString(),
     }
 
@@ -65,29 +74,29 @@ export class ClassParser extends Parser<Class> {
   private constructors(constructors: Constructor[], $: CheerioStatic): void {
     const $params = $('div#main > section > article > div.container-overview > dd > table.params > tbody > tr')
     if ($params.length) {
-      const constructor: Constructor = { parameters: [], public: true }
+      const constructor: Constructor = { parameters: {}, public: true }
       this.parameter(constructor.parameters, $, $params)
       constructors.push(constructor)
     }
   }
 
-  private methods(methods: Method[], $: CheerioStatic, element: Cheerio): void {
+  private methods(methods: Methods, $: CheerioStatic, element: Cheerio): void {
     element.filter('dt').each((_, dt) => {
       const $method = $(dt)
 
       const id = $method.find('h4.name').attr('id')
       const returns = this.type($method.next().find('dl dd span.param-type a').text().trim())
-      const method: Method = { name: id, parameters: [], return: returns }
+      const method: Method = { name: id, parameters: {}, return: returns }
 
       $method.next()
         .find('> table.params > tbody > tr')
         .each((_, tr) => this.parameter(method.parameters, $, $(tr)))
 
-      methods.push(method)
+      methods[method.name] = method
     })
   }
 
-  private parameter(parameters: Parameter[], $: CheerioStatic, $param: Cheerio): void {
+  private parameter(parameters: Parameters, $: CheerioStatic, $param: Cheerio): void {
     const optional = $param.find('> td.attributes').text().trim() === '<optional>'
     const description = $param.find('> td.description > p').text().trim()
     const name = $param.find('> td.name > code').text().trim()
@@ -97,11 +106,10 @@ export class ClassParser extends Parser<Class> {
       .each((_, t) => types.push($(t).text().trim()))
 
     const type = this.resolve(...types)
-    const parameter = { description, name, optional, type }
-    parameters.push(parameter)
+    parameters[name] = { description, name, optional, type }
   }
 
-  private properties(properties: Property[], $: CheerioStatic, element: Cheerio): void {
+  private properties(properties: Properties, $: CheerioStatic, element: Cheerio): void {
     element.filter('dt').each((_, dt) => {
       const $property = $(dt)
       const $types = $property.next()
@@ -111,7 +119,7 @@ export class ClassParser extends Parser<Class> {
       $types.find('ul li span.param-type')
         .each((_, span) => types.push($(span).text().trim()))
 
-      properties.push({ name, readonly: false, type: this.resolve(...types) })
+      properties[name] = { name, readonly: false, type: this.resolve(...types) }
     })
   }
 
@@ -120,19 +128,22 @@ export class ClassParser extends Parser<Class> {
       .filter((name, index, array) => array.indexOf(name) === index)
 
     const key = filtered.join('|')
-    const references = filtered.map(name => this.type(name))
 
-    return this.type(key, references)
+    if (filtered.length === 1) {
+      return this.type(key)
+    }
+
+    return this.type(key, filtered)
   }
 
-  private type(name: string, reference?: any): Type {
+  private type(name: string, basetypes: string[] = []): Type {
     const keyname = this.typename(name)
 
     if (this.namespace.types[keyname]) {
       return this.namespace.types[keyname]
     }
 
-    return (this.namespace.types[keyname] = { external: reference ? true : false, name: keyname, reference })
+    return (this.namespace.types[keyname] = { name: keyname, basetypes })
   }
 
   private typename(name: string): string {

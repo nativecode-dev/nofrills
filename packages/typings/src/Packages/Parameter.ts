@@ -6,3 +6,7 @@ export interface Parameter extends CodeObject {
   optional?: boolean
   type: Type
 }
+
+export interface Parameters {
+  [key: string]: Parameter
+}

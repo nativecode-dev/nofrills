@@ -1,11 +1,11 @@
 import 'mocha'
 
 import { Log } from '@nofrills/lincoln-debug'
+import { LogMessageType } from '@nofrills/lincoln'
 import { expect } from 'chai'
 import { data } from './data'
 
-import { ScrubsInterceptor } from '@nofrills/scrubs'
-import { LogMessageType } from '@nofrills/lincoln'
+import { ScrubsInterceptor } from '../src/ScrubsInterceptor'
 
 describe('when using lincoln interceptor', () => {
 

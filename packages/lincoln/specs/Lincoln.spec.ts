@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Lincoln, Log, Options, LogMessageType } from '@nofrills/lincoln'
+import { Lincoln, Log, Options, LogMessageType } from '../src'
 
 import { EXTENSION, MESSAGE, NAMESPACE, Context } from './Context'
 

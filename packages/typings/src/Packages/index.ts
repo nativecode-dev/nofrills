@@ -1,6 +1,7 @@
 export * from './Class'
 export * from './Constructor'
 export * from './Enum'
+export * from './Function'
 export * from './Method'
 export * from './Namespace'
 export * from './Package'
