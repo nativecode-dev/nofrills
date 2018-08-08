@@ -1,61 +1,63 @@
 {
-	"name": "nofrills",
-	"private": true,
-	"version": "1.0.0",
-	"devDependencies": {
-		"@alrra/travis-scripts": "^3.0.1",
-		"coveralls": "^3.0.0",
-		"cross-env": "^5.1.1",
-		"lerna": "^2.11.0",
-		"mocha": "^5.2.0",
-		"nyc": "^12.0.2",
-		"rimraf": "^2.6.2",
-		"source-map-support": "^0.5.0",
-		"ts-node": "^7.0.0",
+  "name": "nofrills",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "@alrra/travis-scripts": "^3.0.1",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.1.1",
+    "lerna": "^2.11.0",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.0",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^7.0.0",
     "typedoc": "^0.11.1",
-		"tslint": "^5.8.0",
-		"tslint-config-standard": "^7.0.0",
-		"typescript": "^2.9.2"
-	},
-	"nyc": {
-		"all": true,
-		"exclude": [
-			"node_modules",
-			"packages/*/src/**/*.spec.ts",
-			"packages/*/src/Logger.ts",
-			"packages/*/src/Logging.ts"
-		],
-		"extension": [
-			".ts"
-		],
-		"include": [
-			"packages/*/src/**/*.ts"
-		],
-		"instrument": true,
-		"report-dir": ".cache/coverage",
-		"reporter": "text",
-		"sourceMap": true,
-		"temp-directory": ".cache/nyc"
-	},
-	"scripts": {
-		"build": "lerna run build",
-		"prebuild": "yarn && lerna bootstrap && yarn run lint",
-    "clean": "rimraf .cache && rimraf docs && lerna run clean",
+    "typescript": "^2.9.2"
+  },
+  "nyc": {
+    "all": true,
+    "exclude": [
+      "node_modules",
+      "packages/*/src/**/*.spec.ts",
+      "packages/*/src/Logger.ts",
+      "packages/*/src/Logging.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "packages/*/src/**/*.ts"
+    ],
+    "instrument": true,
+    "report-dir": ".cache/coverage",
+    "reporter": "text",
+    "sourceMap": true,
+    "temp-directory": ".cache/nyc"
+  },
+  "scripts": {
+    "build": "lerna run build",
+    "prebuild": "yarn && lerna bootstrap && yarn run lint",
+    "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
     "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
-		"lint": "tslint --project tsconfig.json --config tslint.json",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-		"pretest": "yarn run build",
-		"testonly": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
-		"push": "sh push.sh",
-		"prepush": "yarn run docs",
-		"start": "lerna run start",
-		"add-pkg": "lerna add",
-		"coveralls": "nyc report --reporter=text-lcov | coveralls",
-		"upgrade-packages": "lerna run upgrade-packages",
-		"travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-		"travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
-	},
-	"workspaces": [
-		"packages/*"
-	]
+    "pretest": "yarn run build",
+    "testdebug": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+    "pretestdebug": "yarn run build",
+    "testonly": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
+    "push": "sh push.sh",
+    "start": "lerna run start",
+    "add-pkg": "lerna add",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "upgrade-packages": "lerna run upgrade-packages",
+    "travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
+    "travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+  },
+  "workspaces": [
+    "packages/*",
+    "typings/*"
+  ]
 }

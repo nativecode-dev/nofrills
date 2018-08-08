@@ -1,4 +1,4 @@
-import { Filter, Interceptor, Options, LincolnRegistry } from '@nofrills/lincoln'
+import { Filter, Interceptor, Options, LincolnRegistry } from '../src'
 
 export const EXTENSION = 'extension'
 export const NAMESPACE = 'nativecode:lincoln:test'

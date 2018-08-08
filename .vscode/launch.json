@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "console": "internalConsole",
+    "internalConsoleOptions": "openOnSessionStart",
+    "name": "Mocha",
+    "program": "${workspaceFolder}\\node_modules\\mocha\\bin\\_mocha",
+    "protocol": "inspector",
+    "request": "launch",
+    "sourceMaps": true,
+    "type": "node",
+    "useWSL": true,
+    "args": [
+      "--opts",
+      "mocha-debug.opts"
+    ],
+    "env": {
+      "DEBUG": ""
+    },
+    "outFiles": [
+      "packages/*/lib",
+      "typings/*/lib"
+    ],
+    "runtimeArgs": [
+      "--nolazy"
+    ]
+  }]
+}

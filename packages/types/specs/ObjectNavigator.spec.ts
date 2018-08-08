@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { ObjectNavigator } from '@nofrills/types'
+import { ObjectNavigator } from '../src'
 
 describe('when using ObjectNavigator', () => {
 
@@ -100,9 +100,16 @@ describe('when using ObjectNavigator', () => {
   })
 
   it('should re-create object structure', () => {
-    const navigator = ObjectNavigator.from(person)
-    const sut = navigator.toObject()
-    expect(person).to.deep.equal(sut)
+    const sut = ObjectNavigator.from(person)
+    const result = sut.toObject()
+    expect(person).to.deep.equal(result)
+  })
+
+  it('should recurse through object properties', () => {
+    const sut = ObjectNavigator.from(person)
+    const navigators: ObjectNavigator[] = []
+    sut.recurse((_, nav) => navigators.push(nav))
+    expect(navigators.length).equals(13)
   })
 
 })

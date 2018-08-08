@@ -141,7 +141,7 @@ describe('when working with Files', () => {
   })
 
   it('should create deeply nested directory', async () => {
-    const path = fs.join(artifacts, '1/2/3')
+    const path = fs.join(artifacts, 'level-1/level-2/level-3')
     await fs.mkdirp(path)
     expect(await fs.exists(path)).equals(true)
   })

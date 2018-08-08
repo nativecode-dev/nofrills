@@ -1,0 +1,41 @@
+/* GENERATOR: typings */
+/* PACKAGE: {{package.name}} */
+/* VERSION: {{package.version}} */
+
+{{#package.namespaces}}
+declare namespace {{name}} {
+  {{#classes}}
+    export class {{name}} {
+      {{#constructors}}
+      {{#description}}
+      /**
+       * {{{description}}}
+       {{#parameters}}
+       * @param {{name}}: {{{type.name}}}{{#description}} - {{{description}}}{{/description}}
+       {{/parameters}}
+       * @return {{{return.name}}}
+       */
+      {{/description}}
+      constructor({{#parameters}}{{name}}: {{{type.name}}},{{/parameters}})
+      {{/constructors}}
+
+      {{#properties}}
+      {{name}}: {{{type.name}}}
+      {{/properties}}
+
+      {{#methods}}
+      {{#description}}
+      /**
+       * {{{description}}}
+       {{#parameters}}
+       * @param {{name}}: {{{type.name}}}{{#description}} - {{{description}}}{{/description}}
+       {{/parameters}}
+       * @return {{{return.name}}}
+       */
+      {{/description}}
+      {{name}}({{#parameters}}{{name}}: {{{type.name}}},{{/parameters}}): {{{return.name}}}
+      {{/methods}}
+    }
+  {{/classes}}
+}
+{{/package.namespaces}}

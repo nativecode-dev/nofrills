@@ -4,6 +4,12 @@ import { Types } from './Types'
 import { ObjectValue } from './ObjectValue'
 import { ObjectParentIterator } from './ObjectParentIterator'
 
+export enum ObjectNavigatorEvents {
+  Property = 'property',
+}
+
+export type OnProperty = (name: string, value: ObjectNavigator) => void
+
 export class ObjectNavigator extends EventEmitter implements ObjectValue, IterableIterator<ObjectNavigator> {
   private readonly properties: Map<string, ObjectNavigator>
 
@@ -108,24 +114,30 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     return this.parents().map(parent => parent.property).join('.')
   }
 
-  recurse(): void {
-    Array.from(this.properties)
+  recurse(onProperty?: OnProperty): ObjectNavigator[] {
+    return Array.from(this.properties)
       .map(kvp => {
         const name = kvp[0]
         const navigator = kvp[1]
-        this.emit('property', name, navigator)
+        if (onProperty) {
+          onProperty(name, navigator)
+        }
+        this.emit(ObjectNavigatorEvents.Property, name, navigator)
         return navigator
       })
-      .map(navigator => navigator.recurse())
+      .map(navigator => navigator.recurse(onProperty))
+      .reduce((result, children) => [...result, ...children], [])
   }
 
-  set<T>(key: string, value: T) {
-    const ov = ObjectNavigator.convert(key, value, this.pathstr())
-    this.properties.set(key, new ObjectNavigator(ov))
+  set<T>(key: string, value: T): ObjectNavigator {
+    const objectValue = ObjectNavigator.convert(key, value, this.pathstr())
+    const navigator = new ObjectNavigator(objectValue)
+    this.properties.set(key, navigator)
+    return navigator
   }
 
   toObject(instance: any = {}): any {
-    const clone = Array.from(this.properties.entries())
+    return Array.from(this.properties.entries())
       .reduce((object, kvp: [string, ObjectNavigator]) => {
         const key = kvp[0]
         const property = kvp[1]
@@ -136,12 +148,10 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
         }
         return object
       }, instance)
-
-    return clone
   }
 
   private static convert(key: string, value: any, path: string): ObjectValue {
-    const keyid = `${key}::${path}`
+    const keyid = path && path.length ? `${path}::${key}` : key
     const type = Types.from(value)
 
     return {
@@ -158,7 +168,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     return new ObjectNavigator(objectValue, parent)
   }
 
-  private inspect = (ov: ObjectValue) => {
+  private inspect(ov: ObjectValue) {
     if (ov.type === 'object' && ov.value) {
       Object.keys(ov.value)
         .map(key => ObjectNavigator.create(key, ov.value[key], this))

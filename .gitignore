@@ -1,7 +1,9 @@
+!.vscode/launch.json
+
 .artifacts/
 .cache/
-.vscode/
 bin/
+couchbase-cache/
 dist/
 lib/
 node_modules/

@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { Filter, LincolnRegistry } from '@nofrills/lincoln'
+import { Filter, LincolnRegistry } from '../src'
 
 describe('when using LincolnRegistry', () => {
 
