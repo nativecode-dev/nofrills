@@ -30,11 +30,11 @@ export class Exporter {
     return context
   }
 
-  protected files(source: any, outpath: string): Promise<void> {
-    return Promise.reject(new PackageError(source, 'currently not supported'))
+  protected files(context: any, outpath: string): Promise<void> {
+    return Promise.reject(new PackageError(context, 'currently not supported'))
   }
 
-  protected async generate(source: any, outpath: string): Promise<void> {
+  protected async generate(context: any, outpath: string): Promise<void> {
     const template = fs.join(this.templates, 'default.stache')
 
     if (await fs.exists(template) === false) {
@@ -42,15 +42,15 @@ export class Exporter {
     }
 
     const text = await fs.text(template)
-    const rendered = render(text, { package: source })
-    const output = fs.join(outpath, `${source.name}.d.ts`)
+    const rendered = render(text, { package: context })
+    const output = fs.join(outpath, `${context.name}.d.ts`)
 
     await fs.file(output, rendered)
     this.log.info('exported', output)
   }
 
   private onPropertyConverter = (name: string, navigator: ObjectNavigator): void => {
-    if (Properties.indexOf(name.toLowerCase()) >= 0 && Is.object(navigator.value)) {
+    if (Properties.indexOf(name) >= 0 && Is.object(navigator.value)) {
       const value = Object.keys(navigator.value).map(key => navigator.value[key])
       navigator.set(name, value)
     }
