@@ -133,7 +133,6 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     const objectValue = ObjectNavigator.convert(key, value, this.pathstr())
     const navigator = new ObjectNavigator(objectValue)
     this.properties.set(key, navigator)
-    console.log('this:', this.pathstr(), 'set:', navigator.pathstr())
   }
 
   toObject(instance: any = {}): any {
