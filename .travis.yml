@@ -5,28 +5,19 @@ node_js:
   - '8'
 os: linux
 stages:
-  - name: test
+  - test
   - name: deploy
     if: (branch = "master" OR branch = "master-lts" OR branch = "develop") AND type != pull_request AND tag IS blank
 jobs:
   include:
-    - stage: test
-      script:
-        - yarn run travis-ssh
-        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
-        - git checkout $TRAVIS_BRANCH
-        - yarn run bootstrap
-        - yarn run test
     - stage: deploy
       node_js: '8'
       os: linux
       script:
-        - yarn run travis-ssh
-        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
-        - git checkout $TRAVIS_BRANCH
+#        - yarn run travis-ssh
+#        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
+#        - git checkout $TRAVIS_BRANCH
         - npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
-        - yarn run bootstrap
-        - yarn run build
         - yarn run push
 after_failure:
   - cat lerna-debug.log
