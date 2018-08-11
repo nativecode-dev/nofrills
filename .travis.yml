@@ -14,9 +14,9 @@ jobs:
       node_js: '8'
       os: linux
       script:
-#        - yarn run travis-ssh
-#        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
-#        - git checkout $TRAVIS_BRANCH
+        - yarn run travis-ssh
+        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
+        - git checkout $TRAVIS_BRANCH
         - npm set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
         - yarn run push
 after_failure:
