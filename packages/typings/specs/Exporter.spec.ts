@@ -15,7 +15,7 @@ describe('when using exporter', async () => {
     const imported = await fs.json<Package>(filename)
     const exporter = new Exporter(templates)
     const formatted = await exporter.export(imported, output)
-    await fs.save(fs.join(output, 'context2.json'), formatted)
+    await fs.save(fs.join(output, 'context.json'), formatted)
   })
 
 })

@@ -22,7 +22,7 @@ describe('when importing couchbase documentation', () => {
 
     const exporter = new Exporter(templates)
     const context = await exporter.export(imported, output)
-    await fs.save(fs.join(output, 'context.json'), context)
+    await fs.save(fs.join(output, 'context-couchbase.json'), context)
 
     expect(imported.name).equals('couchbase')
 

@@ -39,7 +39,8 @@
   },
   "scripts": {
     "build": "lerna run build",
-    "prebuild": "yarn && lerna bootstrap && yarn run lint",
+    "prebuild": "yarn run lint",
+    "bootstrap": "yarn install && lerna bootstrap",
     "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
     "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
     "lint": "tslint --project tsconfig.json --config tslint.json",
