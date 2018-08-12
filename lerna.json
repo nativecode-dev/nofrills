@@ -10,6 +10,9 @@
         "LICENSE"
       ],
       "npmClient": "npm",
+      "npmClientArgs": [
+        "--quiet"
+      ],
       "skipGit": false,
       "yes": true
     },
