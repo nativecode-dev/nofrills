@@ -1,1 +1,0 @@
-lerna publish bump "prepatch"   --allow-branch develop   --message develop:prepatch:%s   --npm-tag prerelease   --yes ;

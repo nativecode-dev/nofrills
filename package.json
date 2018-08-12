@@ -11,7 +11,7 @@
     "lint": "tslint --project tsconfig.json --config tslint.json",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "yarn run bootstrap && yarn run build",
-    "push": "sh push.sh",
+    "push": "sh ./scripts/push.sh",
     "prepush": "yarn run test",
     "start": "lerna run start",
     "do": "lerna",
