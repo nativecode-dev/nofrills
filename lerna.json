@@ -9,7 +9,7 @@
         "*.md",
         "LICENSE"
       ],
-      "npmClient": "yarn",
+      "npmClient": "npm",
       "skipGit": false,
       "yes": true
     },

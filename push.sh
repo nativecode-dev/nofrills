@@ -1,37 +1,40 @@
 #!/bin/bash
 
-export RELEASE=${RELEASE:="prerelease"}
+export BRANCH=${TRAVIS_BRANCH:="develop"}
+export EVENT=${TRAVIS_EVENT_TYPE:="push"}
+export TAG=next
+export TYPE=${TYPE:="prepatch"}
 
-RELEASE=invalid
-TRAVIS_BRANCH=${TRAVIS_BRANCH:="invalid"}
-TAG=latest
-
-if [ $TRAVIS_BRANCH = "master" ] && [ $TRAVIS_EVENT_TYPE = "push" ]; then
-  RELEASE=patch
+if [ $BRANCH = "master" ] && [ $EVENT = "push" ]; then
+  TAG=latest
+  TYPE=patch
 fi
 
-if [ $TRAVIS_BRANCH = "master-lts" ] && [ $TRAVIS_EVENT_TYPE = "push" ]; then
-  RELEASE=minor
+if [ $BRANCH = "master-lts" ] && [ $EVENT = "push" ]; then
   TAG=lts
+  TYPE=minor
 fi
 
-if [ $TRAVIS_BRANCH = "develop" ] && [ $TRAVIS_EVENT_TYPE = "push" ]; then
-  RELEASE=prerelease
+if [ $BRANCH = "develop" ] && [ $EVENT = "push" ]; then
   TAG=next
 fi
 
-if [ ! $RELEASE = "invalid" ]; then
-  MESSAGE="$TRAVIS_BRANCH:$RELEASE:%s"
-  echo "RELEASE=$RELEASE, BRANCH=$TRAVIS_BRANCH, EVENT=$TRAVIS_EVENT_TYPE", TAG=$TAG
-  echo "$MESSAGE"
+MESSAGE="$BRANCH:$TYPE:%s"
+echo "TYPE=$TYPE, BRANCH=$BRANCH, EVENT=$EVENT", TAG=$TAG
+echo "$MESSAGE"
 
-  lerna publish bump $RELEASE \
-    --allow-branch $TRAVIS_BRANCH \
-    --message $MESSAGE \
-    --npm-client npm \
-    --npm-tag $TAG \
-    --yes \
-    --verify-access \
-    --verify-registry \
-  ;
-fi
+cat <<EOF
+lerna publish bump $TYPE \
+  --allow-branch $BRANCH \
+  --message $MESSAGE \
+  --npm-tag $TAG \
+  --yes \
+;
+EOF
+
+lerna publish "$TYPE" \
+  --allow-branch $BRANCH \
+  --message $MESSAGE \
+  --npm-tag $TAG \
+  --yes \
+;
