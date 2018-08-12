@@ -9,7 +9,6 @@
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "lerna bootstrap && lerna run build",
     "push": "sh ./scripts/push.sh",
-    "prepush": "lerna bootstrap && lerna run build",
     "start": "lerna run start",
     "do": "lerna",
     "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",

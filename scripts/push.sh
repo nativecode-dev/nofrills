@@ -17,7 +17,7 @@ fi
 
 if [ $BRANCH = "develop" ] && [ $EVENT = "push" ]; then
   TAG=next
-  TYPE=patch
+  TYPE=prerelease
 fi
 
 MESSAGE="$BRANCH:$TYPE:%s"
