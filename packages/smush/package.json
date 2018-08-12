@@ -7,13 +7,13 @@
   "name": "@nofrills/smush",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.8",
+  "version": "3.1.10",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.1.8",
-    "@nofrills/scrubs": "^3.1.8",
+    "@nofrills/lincoln-debug": "^3.1.10",
+    "@nofrills/scrubs": "^3.1.10",
     "bluebird": "^3.5.0",
     "deepmerge": "^2.1.1",
     "shortid": "^2.2.12"

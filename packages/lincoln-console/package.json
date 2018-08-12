@@ -7,12 +7,12 @@
   "name": "@nofrills/lincoln-console",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.8",
+  "version": "3.1.10",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-console/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^3.1.8"
+    "@nofrills/lincoln": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"

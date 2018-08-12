@@ -7,13 +7,13 @@
   "name": "@nofrills/typings",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.8",
+  "version": "3.1.10",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^3.1.8",
-    "@nofrills/lincoln-debug": "^3.1.8",
+    "@nofrills/fs": "^3.1.10",
+    "@nofrills/lincoln-debug": "^3.1.10",
     "@nofrills/types": "^3.1.8",
     "mustache": "^2.3.0"
   },
