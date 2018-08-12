@@ -23,10 +23,12 @@ MESSAGE="$TRAVIS_BRANCH:$RELEASE:%s"
 echo "RELEASE=$RELEASE, BRANCH=$TRAVIS_BRANCH, EVENT=$TRAVIS_EVENT_TYPE", TAG=$TAG
 echo "$MESSAGE"
 
-lerna publish \
+lerna publish bump $RELEASE \
   --allow-branch $TRAVIS_BRANCH \
-  --cd-version $RELEASE \
   --message $MESSAGE \
+  --npm-client yarn \
   --npm-tag $TAG \
   --yes \
+  --verify-access \
+  --verify-registry \
 ;

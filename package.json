@@ -2,6 +2,23 @@
   "name": "nofrills",
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "build": "lerna run build",
+    "prebuild": "yarn run lint",
+    "bootstrap": "yarn install && lerna bootstrap",
+    "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
+    "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+    "pretest": "yarn run bootstrap && yarn run build",
+    "push": "sh push.sh",
+    "prepush": "yarn run test",
+    "start": "lerna run start",
+    "do": "lerna",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
+    "travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+  },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
     "@types/chai-as-promised": "^7.1.0",
@@ -39,23 +56,6 @@
     "reporter": "text",
     "sourceMap": true,
     "temp-directory": ".cache/nyc"
-  },
-  "scripts": {
-    "build": "lerna run build",
-    "prebuild": "yarn run lint",
-    "bootstrap": "yarn install && lerna bootstrap",
-    "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
-    "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
-    "lint": "tslint --project tsconfig.json --config tslint.json",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "yarn run bootstrap && yarn run build",
-    "push": "sh push.sh",
-    "prepush": "yarn run test",
-    "start": "lerna run start",
-    "do": "lerna",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-    "travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
   },
   "workspaces": [
     "packages/*",
