@@ -1,4 +1,3 @@
-cache: yarn
 language: node_js
 node_js:
   - 'node'
@@ -14,11 +13,11 @@ jobs:
       node_js: '8'
       os: linux
       script:
-        - yarn run travis-ssh
+        - npm run travis-ssh
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
-        - yarn run push
+        - npm run push
 after_failure:
   - cat lerna-debug.log
 after_success:
-  - yarn run travis-coveralls
+  - npm run travis-coveralls

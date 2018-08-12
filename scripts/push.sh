@@ -25,6 +25,6 @@ echo "TYPE=$TYPE, BRANCH=$BRANCH, EVENT=$EVENT", TAG=$TAG
 echo "$MESSAGE"
 
 cat <<EOF
-lerna publish $TYPE --allow-branch $BRANCH --message $MESSAGE --npm-tag $TAG
+lerna publish $TYPE --message $MESSAGE --npm-tag $TAG
 EOF
-lerna publish $TYPE --allow-branch $BRANCH --message $MESSAGE --npm-tag $TAG
+lerna publish $TYPE --message $MESSAGE --npm-tag $TAG

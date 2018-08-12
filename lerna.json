@@ -4,10 +4,18 @@
       "bail": true
     },
     "publish": {
-      "allowBranch": "master",
+      "allowBranch": [
+        "develop",
+        "master",
+        "master-lts"
+      ],
       "ignoreChanges": [
         "*.md",
         "LICENSE"
+      ],
+      "npmClient": "npm",
+      "npmClientArgs": [
+        "--quiet"
       ],
       "skipGit": false,
       "yes": true
@@ -18,9 +26,9 @@
   },
   "lerna": "3.0.3",
   "loglevel": "error",
-  "npmClient": "npm",
+  "npmClient": "yarn",
   "npmClientArgs": [
-    "--quiet"
+    "--silent"
   ],
   "packages": [
     "packages/*",
