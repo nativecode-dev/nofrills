@@ -1,6 +1,6 @@
 {
   "author": "opensource@nativecode.com",
-  "description": "Provides logging via debug.",
+  "description": "Provides a simple logger to the console.",
   "homepage": "https://github.com/nativecode-dev/nofrills-console#readme",
   "license": "MIT",
   "main": "./lib/index.js",

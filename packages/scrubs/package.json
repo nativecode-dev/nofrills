@@ -1,6 +1,6 @@
 {
   "author": "opensource@nativecode.com",
-  "description": "Scrubs an object of all sensitive data.",
+  "description": "Scrubs an object of sensitive data.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",

@@ -1,6 +1,6 @@
 {
   "author": "opensource@nativecode.com",
-  "description": "Provides a simple replacement for most jQuery functions.",
+  "description": "Provides some HTML utility functions.",
   "homepage": "https://github.com/nativecode-dev/nofrills#readme",
   "license": "MIT",
   "main": "./lib/index.js",
