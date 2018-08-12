@@ -11,14 +11,6 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "devDependencies": {
-    "@types/chai": "^4.0.5",
-    "@types/mocha": "^5.2.5",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "rimraf": "^2.6.1",
-    "typescript": "^3.0.1"
-  },
   "publishConfig": {
     "access": "public"
   },

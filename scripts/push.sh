@@ -2,21 +2,22 @@
 
 export BRANCH=${TRAVIS_BRANCH:="develop"}
 export EVENT=${TRAVIS_EVENT_TYPE:="push"}
-export TAG=next
-export TYPE=${TYPE:="prepatch"}
+export TAG=branch
+export TYPE=${TYPE:="prerelease"}
 
 if [ $BRANCH = "master" ] && [ $EVENT = "push" ]; then
   TAG=latest
-  TYPE=patch
+  TYPE=minor
 fi
 
 if [ $BRANCH = "master-lts" ] && [ $EVENT = "push" ]; then
   TAG=lts
-  TYPE=minor
+  TYPE=major
 fi
 
 if [ $BRANCH = "develop" ] && [ $EVENT = "push" ]; then
   TAG=next
+  TYPE=patch
 fi
 
 MESSAGE="$BRANCH:$TYPE:%s"
