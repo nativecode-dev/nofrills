@@ -1,6 +1,5 @@
 cache:
   yarn: true
-sudo: required
 language: node_js
 node_js:
   - 'node'
