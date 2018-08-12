@@ -12,12 +12,16 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
 
   private instance: Promise<void> | undefined
 
-  constructor(
+  protected constructor(
     protected readonly options: T,
     protected readonly exe: string,
     protected readonly args: string[],
   ) {
     super()
+  }
+
+  static create<T extends ConsoleOptions>(options: T, exe: string, ...args: string[]): Console<T> {
+    return new Console<T>(options, exe, args)
   }
 
   async start(): Promise<void> {

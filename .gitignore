@@ -3,7 +3,6 @@
 .artifacts/
 .cache/
 bin/
-couchbase-cache/
 dist/
 lib/
 node_modules/
