@@ -9,10 +9,6 @@
         "*.md",
         "LICENSE"
       ],
-      "npmClient": "npm",
-      "npmClientArgs": [
-        "--quiet"
-      ],
       "skipGit": false,
       "yes": true
     },
@@ -22,9 +18,9 @@
   },
   "lerna": "3.0.3",
   "loglevel": "error",
-  "npmClient": "yarn",
+  "npmClient": "npm",
   "npmClientArgs": [
-    "--silent"
+    "--quiet"
   ],
   "packages": [
     "packages/*",
