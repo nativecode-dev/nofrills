@@ -6,7 +6,7 @@
     "build": "lerna run build",
     "prebuild": "lerna bootstrap && tslint --project tsconfig.json --config tslint.json",
     "bootstrap": "lerna bootstrap",
-    "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
+    "clean": "rimraf .cache && rimraf docs && lerna run clean",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "lerna bootstrap && lerna run build",
     "start": "lerna run start",

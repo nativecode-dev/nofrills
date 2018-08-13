@@ -5,7 +5,7 @@ import { Constants, fs } from '../src/index'
 
 describe('when working with Files', () => {
   const cwd = process.cwd()
-  const artifacts = fs.join(cwd, '.artifacts')
+  const artifacts = fs.join(cwd, '.cache', '.artifacts')
 
   before(async () => {
     if (await fs.exists(artifacts)) {
@@ -80,14 +80,14 @@ describe('when working with Files', () => {
   })
 
   it('should write json file to disk', async () => {
-    const path = fs.join(cwd, '.artifacts', 'test.json')
+    const path = fs.join(cwd, '.cache', '.artifacts', 'test.json')
     const json = { test: true }
     const saved = await fs.save(path, json)
     expect(saved).equals(true)
   })
 
   it('should fail to write json file to disk', async () => {
-    const path = fs.join(cwd, '.artifacts')
+    const path = fs.join(cwd, '.cache', '.artifacts')
     const json = { test: true }
     const saved = await fs.save(path, json)
     expect(saved).equals(false)
@@ -178,7 +178,7 @@ describe('when working with Files', () => {
   })
 
   it('should fail to rename file', async () => {
-    const path = fs.join(artifacts, '.artifacts.json')
+    const path = fs.join(artifacts, '.cache', '.artifacts.json')
     const renamed = fs.join(artifacts, 'manifest.json')
     const result = await fs.rename(path, renamed)
     expect(result).to.equal(false)
@@ -186,7 +186,7 @@ describe('when working with Files', () => {
 
   it('should fail to rename file and throw', async () => {
     try {
-      const path = fs.join(artifacts, '.artifacts.json')
+      const path = fs.join(artifacts, '.cache', '.artifacts.json')
       const renamed = fs.join(artifacts, 'manifest.json')
       await fs.rename(path, renamed, true)
     } catch (error) {
