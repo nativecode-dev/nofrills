@@ -12,12 +12,13 @@
     "start": "lerna run start",
     "do": "lerna",
     "commit": "git add -A . && git-cz",
+    "precommit": "yarn run test",
     "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
     "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
     "setup-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\"",
+    "travis-deploy-once": "travis-deploy-once",
     "release": "lerna-semantic-release perform",
-    "prerelease": "lerna-semantic-release pre",
-    "postrelease": "lerna-semantic-release post"
+    "prerelease": "yarn run build && lerna-semantic-release pre"
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
@@ -34,6 +35,7 @@
     "nyc": "^12.0.2",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.0",
+    "travis-deploy-once": "^5.0.2",
     "ts-node": "^7.0.0",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^7.0.0",
