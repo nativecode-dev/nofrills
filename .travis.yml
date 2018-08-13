@@ -22,6 +22,10 @@ jobs:
       os: linux
       script:
         - yarn run setup-ssh
+        - git config --global user.email "opensource+nofrills@nativecode.com"
+        - git config --global user.name "Native Open Source"
+        - git config --global push.default simple
+        - npm whoami
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
         - yarn run test
