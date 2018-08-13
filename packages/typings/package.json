@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a unified API for generation TypeScript declaration files.",
-  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/typings/#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/typings",

@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Smushes things together.",
-  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush/#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smush",

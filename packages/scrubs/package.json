@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Scrubs an object of sensitive data.",
-  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/scrubs/#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/scrubs",

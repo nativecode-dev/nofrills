@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a simple, Fetch-based HTTP client.",
-  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/http/#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/http",
