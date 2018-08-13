@@ -12,6 +12,7 @@
     "start": "lerna run start",
     "do": "lerna",
     "commit": "git add -A . && git-cz",
+    "precommit": "yarn run test",
     "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
     "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
     "setup-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\"",
