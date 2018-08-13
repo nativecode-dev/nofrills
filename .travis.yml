@@ -5,8 +5,9 @@ cache:
 language: node_js
 node_js:
   - 'node'
-  - '8'
-os: linux
+os:
+  - linux
+  - osx
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
   - export PATH="$HOME/.yarn/bin:$PATH"
