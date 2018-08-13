@@ -12,7 +12,7 @@ export abstract class Parser<T> {
   private cache: { [key: string]: string } = {}
 
   constructor(name: string, protected readonly url: URL) {
-    this.cachefile = fs.join(process.cwd(), 'couchbase-cache', `.${name}.json`)
+    this.cachefile = fs.join(process.cwd(), '.cache', 'couchbase-cache', `.${name}.json`)
   }
 
   async parse(): Promise<T> {

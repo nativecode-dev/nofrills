@@ -95,9 +95,10 @@ export class FileSystem {
     })
   }
 
-  static glob(pattern: string): Promise<string[]> {
+  static glob(pattern: string, cwd?: string): Promise<string[]> {
+    const patternstr = cwd ? this.join(cwd, pattern) : pattern
     return new Promise<string[]>((resolve, reject) => {
-      $glob(pattern, (error, matches) => {
+      $glob(patternstr, (error, matches) => {
         /** istanbul ignore next */
         if (error) {
           reject(error)
@@ -193,6 +194,17 @@ export class FileSystem {
     })
   }
 
+  static readFile(path: string | number | Buffer | URL): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+      $fs.readFile(path, (error, buffer) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(buffer)
+      })
+    })
+  }
+
   static rename(original: PathLike, filename: PathLike, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       $fs.rename(original, filename, error => {
@@ -262,6 +274,17 @@ export class FileSystem {
           reject(error)
         }
         resolve(written)
+      })
+    })
+  }
+
+  static writeFile(path: string | number | Buffer | URL, data: any): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      $fs.writeFile(path, data, error => {
+        if (error) {
+          reject(error)
+        }
+        resolve()
       })
     })
   }

@@ -2,11 +2,34 @@
   "name": "nofrills",
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "build": "lerna run build",
+    "prebuild": "lerna bootstrap && tslint --project tsconfig.json --config tslint.json",
+    "bootstrap": "lerna bootstrap",
+    "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+    "pretest": "lerna bootstrap && lerna run build",
+    "start": "lerna run start",
+    "do": "lerna",
+    "commit": "git add -A . && git-cz",
+    "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
+    "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
+    "setup-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\"",
+    "release": "lerna-semantic-release perform",
+    "prerelease": "lerna-semantic-release pre",
+    "postrelease": "lerna-semantic-release post"
+  },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
+    "@types/chai-as-promised": "^7.1.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "commitizen": "^2.10.1",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
+    "cz-lerna-changelog": "^1.2.1",
     "lerna": "^2.11.0",
+    "lerna-semantic-release": "^9.1.0",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "rimraf": "^2.6.2",
@@ -14,8 +37,9 @@
     "ts-node": "^7.0.0",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^7.0.0",
+    "tslint-no-unused-expression-chai": "^0.1.3",
     "typedoc": "^0.11.1",
-    "typescript": "^2.9.2"
+    "typescript": "^3.0.1"
   },
   "nyc": {
     "all": true,
@@ -37,27 +61,13 @@
     "sourceMap": true,
     "temp-directory": ".cache/nyc"
   },
-  "scripts": {
-    "build": "lerna run build",
-    "prebuild": "yarn && lerna bootstrap && yarn run lint",
-    "clean": "rimraf .artifacts && rimraf .cache && rimraf docs && lerna run clean",
-    "docs": "typedoc --mode modules --out ./doc ./packages/*/src/",
-    "lint": "tslint --project tsconfig.json --config tslint.json",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "yarn run build",
-    "testdebug": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretestdebug": "yarn run build",
-    "testonly": "cross-env DEBUG=nofrills:scrubs:* nyc mocha --opts mocha.opts",
-    "push": "sh push.sh",
-    "start": "lerna run start",
-    "add-pkg": "lerna add",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "upgrade-packages": "lerna run upgrade-packages",
-    "travis-coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-    "travis-ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
-  },
   "workspaces": [
     "packages/*",
     "typings/*"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  }
 }

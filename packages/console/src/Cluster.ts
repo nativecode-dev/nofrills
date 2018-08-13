@@ -6,7 +6,7 @@ import { Console } from './Console'
 import { ConsoleOptions } from './ConsoleOptions'
 
 export class Cluster<T extends ConsoleOptions> extends Console<T> {
-  constructor(options: T, filepath: string, ...args: string[]) {
+  protected constructor(options: T, filepath: string, args: string[]) {
     super(options, filepath, args)
 
     const settings = {
@@ -14,6 +14,10 @@ export class Cluster<T extends ConsoleOptions> extends Console<T> {
     }
 
     cluster.setupMaster(settings)
+  }
+
+  static create<T extends ConsoleOptions>(options: T, filepath: string, ...args: string[]): Console<T> {
+    return new Cluster(options, filepath, args)
   }
 
   async spawn(filepath: string): Promise<boolean> {

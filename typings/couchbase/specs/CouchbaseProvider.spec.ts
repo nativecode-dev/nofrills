@@ -11,19 +11,20 @@ const TIMEOUT = 60000
 describe('when importing couchbase documentation', () => {
 
   const artifacts = fs.join(process.cwd(), '.artifacts')
-  const output = fs.join(process.cwd(), '.artifacts')
+  const output = fs.join(artifacts, 'couchbase')
   const templates = fs.join(process.cwd(), 'packages', 'typings', 'src', 'Templates')
 
   it('should import all references', async () => {
 
-    const sut = new CouchbaseProvider()
-    const imported = await sut.import()
-    expect(imported.name).equals('couchbase')
-
-    await fs.save(fs.join(artifacts, 'couchbase.json'), imported)
+    const provider = new CouchbaseProvider()
+    const imported = await provider.import()
+    await fs.save(fs.join(output, 'couchbase.json'), imported)
 
     const exporter = new Exporter(templates)
-    await exporter.export(imported, output)
+    const context = await exporter.export(imported, output)
+    await fs.save(fs.join(output, 'context-couchbase.json'), context)
+
+    expect(imported.name).equals('couchbase')
 
   }).timeout(TIMEOUT)
 

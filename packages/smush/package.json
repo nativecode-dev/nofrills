@@ -1,37 +1,29 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Smushes things together.",
-  "homepage": "https://github.com/nativecode-dev/nofrills#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush/#readme",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.1.6-14",
+  "version": "3.1.11",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.1.6-14",
-    "@nofrills/scrubs": "^3.1.6-14",
+    "@nofrills/fs": "^3.1.11",
+    "@nofrills/lincoln-debug": "^3.1.11",
+    "@nofrills/scrubs": "^3.1.11",
     "bluebird": "^3.5.0",
     "deepmerge": "^2.1.1",
     "shortid": "^2.2.12"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.23",
-    "@types/chai": "^4.0.5",
     "@types/deepmerge": "^2.1.0",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.5.3",
-    "@types/node-fetch": "^2.1.2",
-    "@types/shortid": "0.0.29",
-    "chai": "^4.1.2",
-    "cross-env": "^5.0.1",
-    "mocha": "^5.2.0",
-    "rimraf": "^2.6.1",
-    "ts-node": "^7.0.0",
-    "typescript": "^2.9.2"
+    "@types/node": "^10.5.8",
+    "@types/shortid": "0.0.29"
   },
   "publishConfig": {
     "access": "public"

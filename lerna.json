@@ -1,13 +1,29 @@
 {
   "command": {
+    "bootstrap": {
+      "npmClient": "yarn",
+      "npmClientArgs": [
+        "--ignore-optional",
+        "--non-interactive",
+        "--silent"
+      ]
+    },
     "exec": {
       "bail": true
     },
     "publish": {
-      "allowBranch": "master",
-      "ignore": [
+      "allowBranch": [
+        "develop",
+        "master",
+        "master-lts"
+      ],
+      "ignoreChanges": [
         "*.md",
         "LICENSE"
+      ],
+      "npmClient": "npm",
+      "npmClientArgs": [
+        "--quiet"
       ],
       "skipGit": false,
       "yes": true
@@ -20,7 +36,7 @@
   "loglevel": "error",
   "npmClient": "yarn",
   "npmClientArgs": [
-    "--quiet"
+    "--silent"
   ],
   "packages": [
     "packages/*",
@@ -28,5 +44,5 @@
   ],
   "sort": true,
   "useWorkspaces": true,
-  "version": "3.1.6-14"
+  "version": "3.1.11"
 }

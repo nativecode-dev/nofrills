@@ -3,13 +3,11 @@
 .artifacts/
 .cache/
 bin/
-couchbase-cache/
 dist/
 lib/
 node_modules/
 deploy
 deploy.pub
-package-lock.json
 
 *.log
 *.tgz

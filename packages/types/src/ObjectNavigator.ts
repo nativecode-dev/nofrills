@@ -129,11 +129,10 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
       .reduce((result, children) => [...result, ...children], [])
   }
 
-  set<T>(key: string, value: T): ObjectNavigator {
+  set<T>(key: string, value: T): void {
     const objectValue = ObjectNavigator.convert(key, value, this.pathstr())
     const navigator = new ObjectNavigator(objectValue)
     this.properties.set(key, navigator)
-    return navigator
   }
 
   toObject(instance: any = {}): any {

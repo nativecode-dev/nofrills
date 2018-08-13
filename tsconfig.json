@@ -1,10 +1,15 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.base",
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "baseUrl": "./",
     "paths": {
-      "@nofrills/*": ["./*/src"],
-      "zipcodes-regex": ["./types/src/zipcodes-regex.d.ts"]
+      "@nofrills/*": [
+        "packages/*/src",
+        "typings/*/src"
+      ],
+      "zipcodes-regex": [
+        "packages/types/src/zipcodes-regex.d.ts"
+      ]
     }
   }
 }
