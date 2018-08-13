@@ -132,6 +132,11 @@ describe('when working with Files', () => {
     expect(paths).includes(fs.join(cwd, 'packages/fs'))
   })
 
+  it('should resolve glob patterns with current working directory', async () => {
+    const paths = await fs.glob('packages/*', cwd)
+    expect(paths).includes(fs.join(cwd, 'packages/fs'))
+  })
+
   it('should error when closing invalid file descriptor', async () => {
     try {
       await fs.close(-1, true)

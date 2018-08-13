@@ -1,10 +1,9 @@
 import * as merge from 'deepmerge'
-
 import * as Promise from 'bluebird'
-import * as fs from 'fs'
 import * as shortid from 'shortid'
 
 import { Lincoln } from '@nofrills/lincoln'
+import { FileSystem as fs } from '@nofrills/fs'
 
 import { Logger } from './Logging'
 import { SmushError } from './SmushError'
@@ -13,7 +12,6 @@ export class Smush {
   public readonly identifier: string = shortid.generate()
 
   private log: Lincoln
-  private reader = Promise.promisify(fs.readFile)
   private root: any = {}
 
   constructor() {
@@ -40,11 +38,13 @@ export class Smush {
   public schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
     const transformer = transform ? transform : (obj: T) => obj
 
-    return this.reader(filename)
-      .then((buffer: Buffer) => JSON.parse(buffer.toString('utf-8')))
-      .then((object: T) => this.transform<T>(key, object, transformer))
-      .catch((error: Error) => { throw new SmushError(error) })
-      .then(() => this)
+    return Promise.resolve(
+      fs.readFile(filename)
+        .then((buffer: Buffer) => JSON.parse(buffer.toString('utf-8')))
+        .then((object: T) => this.transform<T>(key, object, transformer))
+        .catch((error: Error) => { throw new SmushError(error) })
+        .then(() => this)
+    )
   }
 
   public get<T>(key: string): T {
