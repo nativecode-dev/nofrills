@@ -12,7 +12,7 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
   - npm whoami
   - yarn global add lerna
-  - ./travis/setup-git.sh
+  - yarn run setup-git
 stages:
   - test
   - name: coverage
