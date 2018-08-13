@@ -15,7 +15,7 @@ before_install:
 stages:
   - test
   - name: deploy
-    if: (branch = "master" OR branch = "master-lts" OR branch = "develop") AND type != pull_request
+    if: (branch = "master" OR branch = "develop") AND type != pull_request
 jobs:
   include:
     - stage: deploy
@@ -28,8 +28,8 @@ jobs:
         - git config --global push.default simple
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
-        - yarn run test
-        - yarn run coveralls
         - yarn run release
 after_failure:
   - cat lerna-debug.log
+after_success:
+  - yarn run travis-deploy-once "yarn run coveralls"
