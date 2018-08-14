@@ -10,7 +10,7 @@ const TIMEOUT = 60000
 
 describe('when importing couchbase documentation', () => {
 
-  const artifacts = fs.join(process.cwd(), '.artifacts')
+  const artifacts = fs.join(process.cwd(), '.cache', '.artifacts')
   const output = fs.join(artifacts, 'couchbase')
   const templates = fs.join(process.cwd(), 'packages', 'typings', 'src', 'Templates')
 

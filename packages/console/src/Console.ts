@@ -24,6 +24,11 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
     return new Console<T>(options, exe, args)
   }
 
+  static run<T extends ConsoleOptions>(options: T, exe: string, ...args: string[]): Promise<void> {
+    const console = Console.create<T>(options, exe, ...args)
+    return console.start()
+  }
+
   async start(): Promise<void> {
     if (this.instance === undefined) {
       this.logger.info(`starting "${this.exe}":`, ...this.args)
