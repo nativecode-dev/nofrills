@@ -17,9 +17,9 @@ before_install:
 stages:
   - test
   - name: coverage
-    if: (branch = "master" OR branch = "develop") AND type != pull_request
-  - name: deploy
-    if: (branch = "master" OR branch = "develop") AND type != pull_request
+    if: branch = "master" OR branch = "develop"
+  - name: release
+    if: branch = "master" AND type != pull_request
 jobs:
   include:
     - stage: coverage
@@ -30,7 +30,7 @@ jobs:
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
         - yarn run coveralls
-    - stage: deploy
+    - stage: release
       node_js: '8'
       os: linux
       script:

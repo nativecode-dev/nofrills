@@ -13,9 +13,7 @@
     },
     "publish": {
       "allowBranch": [
-        "develop",
-        "master",
-        "master-lts"
+        "master"
       ],
       "ignoreChanges": [
         "*.md",

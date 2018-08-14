@@ -12,15 +12,16 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.1.11",
-    "@nofrills/scrubs": "^3.1.11",
+    "@nofrills/lincoln-debug": "^3.2.0",
+    "@nofrills/scrubs": "^3.2.0",
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.34"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "next"
   },
   "repository": {
     "type": "git",

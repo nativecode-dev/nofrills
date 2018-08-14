@@ -22,9 +22,24 @@ describe('when working with Files', () => {
     expect(fs.basename(path)).equals('FileSystem.spec.ts')
   })
 
+  it('should get base filename using boolean', () => {
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
+    expect(fs.basename(path, true)).equals('FileSystem.spec.ts')
+  })
+
+  it('should get base filename with extension when no extension specified', () => {
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
+    expect(fs.basename(path, '')).equals('FileSystem.spec.ts')
+  })
+
   it('should get base filename without extension', () => {
     const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
     expect(fs.basename(path, '.ts')).equals('FileSystem.spec')
+  })
+
+  it('should get base filename without extension using boolean', () => {
+    const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
+    expect(fs.basename(path, false)).equals('FileSystem.spec')
   })
 
   it('should list all files and directories', async () => {
