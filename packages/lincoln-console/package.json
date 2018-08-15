@@ -12,10 +12,11 @@
     "url": "https://github.com/nativecode-dev/nofrills-console/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^3.1.10"
+    "@nofrills/lincoln": "^3.2.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "next"
   },
   "repository": {
     "type": "git",

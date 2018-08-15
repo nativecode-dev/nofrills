@@ -1,0 +1,13 @@
+.cache
+artifacts/
+node_modules/
+specs/
+src/
+
+mocha.opts
+tsconfig.build.json
+tsconfig.json
+
+*.map
+*.log
+*.tgz

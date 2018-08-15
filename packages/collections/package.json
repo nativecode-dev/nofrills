@@ -12,7 +12,8 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "next"
   },
   "repository": {
     "type": "git",

@@ -4,6 +4,25 @@ import { expect } from 'chai'
 import { CreateLogger, Options } from '../src/index'
 
 describe('when using debug lincoln interceptor', () => {
+  const debug = console.debug
+  const error = console.error
+  const log = console.log
+  const warn = console.warn
+
+  before(() => {
+    console.debug = () => void (0)
+    console.error = () => void (0)
+    console.log = () => void (0)
+    console.warn = () => void (0)
+  })
+
+  after(() => {
+    console.debug = debug
+    console.error = error
+    console.log = log
+    console.warn = warn
+  })
+
   const NAMESPACE = 'nativecode:test'
 
   it('should create instance with default options', () => {

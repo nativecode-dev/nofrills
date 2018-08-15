@@ -30,8 +30,11 @@ export class FileSystem {
     })
   }
 
-  static basename(path: string, ext?: string): string {
-    return $path.basename(path, ext)
+  static basename(path: string, ext?: string | boolean): string {
+    if (ext === false) {
+      return $path.basename(path, $path.extname(path))
+    }
+    return $path.basename(path, ext === true ? undefined : ext)
   }
 
   static close(fd: number, throws?: boolean): Promise<boolean> {
@@ -203,6 +206,14 @@ export class FileSystem {
         resolve(buffer)
       })
     })
+  }
+
+  static relative(from: string, to: string): string {
+    return $path.relative(from, to)
+  }
+
+  static relativeFrom(to: string): string {
+    return $path.relative(process.cwd(), to)
   }
 
   static rename(original: PathLike, filename: PathLike, throws?: boolean): Promise<boolean> {

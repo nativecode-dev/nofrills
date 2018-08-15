@@ -12,29 +12,21 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^3.1.11",
-    "@nofrills/lincoln-debug": "^3.1.11",
-    "@nofrills/scrubs": "^3.1.11",
-    "@nofrills/typings": "^3.1.11",
+    "@nofrills/fs": "^3.2.0",
+    "@nofrills/lincoln-debug": "^3.2.0",
+    "@nofrills/scrubs": "^3.2.0",
+    "@nofrills/typings": "^3.2.0",
     "cheerio": "^1.0.0-rc.2",
     "isomorphic-fetch": "^2.2.1",
     "promise-parallel-throttle": "^3.1.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.5",
     "@types/cheerio": "^0.22.8",
-    "@types/isomorphic-fetch": "^0.0.34",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.5.3",
-    "chai": "^4.1.2",
-    "cross-env": "^5.0.1",
-    "mocha": "^5.2.0",
-    "rimraf": "^2.6.1",
-    "ts-node": "^7.0.0",
-    "typescript": "^3.0.1"
+    "@types/isomorphic-fetch": "^0.0.34"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "next"
   },
   "repository": {
     "type": "git",
