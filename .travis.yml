@@ -26,17 +26,13 @@ jobs:
       node_js: '8'
       os: linux
       script:
-#        - yarn run setup-ssh
-#        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
-#        - git checkout $TRAVIS_BRANCH
         - yarn run coveralls
     - stage: release
       node_js: '8'
       os: linux
       script:
-#        - yarn run setup-ssh
-#        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
-#        - git checkout $TRAVIS_BRANCH
+        - yarn run setup-ssh
+        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - yarn run release
 after_failure:
   - cat lerna-debug.log
