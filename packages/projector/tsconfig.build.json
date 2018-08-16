@@ -4,7 +4,6 @@
     "rootDir": "src",
     "outDir": "lib",
     "lib": [
-      "dom",
       "es2018"
     ],
     "typeRoots": [

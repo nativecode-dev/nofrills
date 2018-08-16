@@ -5,7 +5,7 @@ import { Project } from './Project'
 import { PluginContext } from './PluginContext'
 
 export class Pipeline {
-  public static readonly default: Pipeline = new Pipeline()
+  public static readonly instance: Pipeline = new Pipeline()
 
   protected constructor() { }
 

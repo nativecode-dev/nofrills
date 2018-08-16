@@ -1,6 +1,8 @@
 import * as chai from 'chai'
-import * as chaiAsPromised from 'chai-as-promised'
+import * as promises from 'chai-as-promised'
 
-const expect = chai.use(chaiAsPromised).expect
+const expect = chai
+  .use(promises)
+  .expect
 
 export default expect

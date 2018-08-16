@@ -43,7 +43,7 @@ export class Project extends EventEmitter {
   }
 
   execute(stages: string[]): Promise<void> {
-    return Pipeline.default.execute(this, stages, Array.from(Registry.plugins).map(plugin => new plugin(this.host)))
+    return Pipeline.instance.execute(this, stages, Array.from(Registry.plugins).map(plugin => new plugin(this.host)))
   }
 
   projects(): Project[] {
