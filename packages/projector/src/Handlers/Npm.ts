@@ -4,7 +4,7 @@ import { DictionaryOf } from '@nofrills/collections'
 
 import { Logger } from '../Logger'
 import { Project } from '../Project'
-import { PluginHost } from '../Plugin'
+import { PluginHost } from '../PluginHost'
 import { ProjectConfig } from '../ProjectConfig'
 
 export interface NpmUrl {

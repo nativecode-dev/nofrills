@@ -2,24 +2,10 @@
   "name": "nofrills",
   "private": true,
   "version": "1.0.0",
-  "scripts": {
-    "build": "lerna run build",
-    "prebuild": "lerna bootstrap && tslint --project tsconfig.json --config tslint.json",
-    "bootstrap": "lerna bootstrap",
-    "clean": "rimraf .cache && rimraf docs && lerna run clean",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "lerna bootstrap && lerna run build",
-    "start": "lerna run start",
-    "do": "lerna",
-    "commit": "git add -A . && git-cz",
-    "precommit": "yarn run test",
-    "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-    "precoveralls": "yarn run test",
-    "docs": "sh setup.sh doc",
-    "setup-git": "sh setup.sh git",
-    "setup-ssh": "sh setup.sh ssh",
-    "release": "lerna-semantic-release perform",
-    "prerelease": "yarn run build && lerna-semantic-release pre"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
@@ -71,9 +57,23 @@
     "packages/*",
     "typings/*"
   ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
-    }
+  "scripts": {
+    "build": "lerna run build",
+    "prebuild": "lerna bootstrap && tslint --project tsconfig.json --config tslint.json",
+    "bootstrap": "lerna bootstrap",
+    "clean": "rimraf .cache && rimraf docs && lerna run clean",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+    "pretest": "lerna bootstrap && lerna run build",
+    "start": "lerna run start",
+    "do": "lerna",
+    "commit": "git add -A . && git-cz",
+    "precommit": "yarn run test",
+    "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
+    "precoveralls": "yarn run test",
+    "docs": "sh setup.sh doc",
+    "setup-git": "sh setup.sh git",
+    "setup-ssh": "sh setup.sh ssh",
+    "release": "lerna-semantic-release perform",
+    "prerelease": "yarn run build && lerna-semantic-release pre"
   }
 }

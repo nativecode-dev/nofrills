@@ -1,9 +1,9 @@
+import { fs } from '@nofrills/fs'
 import { EventEmitter } from 'events'
-import { FileSystem as fs } from '@nofrills/fs'
 
 import { NotFound } from './Errors'
-import { PluginHost } from './Plugin'
 import { Pipeline } from './Pipeline'
+import { PluginHost } from './PluginHost'
 import { Lincoln, Logger } from './Logger'
 import { Registry } from './ProjectRegistry'
 import { ProjectFiles } from './ProjectFiles'
@@ -43,7 +43,7 @@ export class Project extends EventEmitter {
   }
 
   execute(stages: string[]): Promise<void> {
-    return Pipeline.default.execute(this, stages, Array.from(Registry.plugins).map(plugin => new plugin(this.host)))
+    return Pipeline.instance.execute(this, stages, Array.from(Registry.plugins).map(plugin => new plugin(this.host)))
   }
 
   projects(): Project[] {

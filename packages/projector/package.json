@@ -19,7 +19,6 @@
     "@nofrills/scrubs": "^3.2.0",
     "@nofrills/types": "^3.2.0"
   },
-  "devDependencies": {},
   "publishConfig": {
     "access": "public",
     "tag": "next"
