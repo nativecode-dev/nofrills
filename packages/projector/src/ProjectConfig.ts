@@ -1,8 +1,8 @@
-import { Registry } from '@nofrills/collections'
 import { fs } from '@nofrills/fs'
+import { Registry } from '@nofrills/collections'
 
 import { Project } from './Project'
-import { PluginHost } from './Plugin'
+import { PluginHost } from './PluginHost'
 import { Lincoln, Logger } from './Logger'
 import { ProjectSupport } from './ProjectSupport'
 

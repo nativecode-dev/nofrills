@@ -1,3 +1,4 @@
+import { PluginHost } from './PluginHost'
 import { PluginContext } from './PluginContext'
 
 export interface Plugin {
@@ -5,8 +6,6 @@ export interface Plugin {
   execute(context: PluginContext): Promise<PluginContext>
 }
 
-export interface PluginHost {
-  readonly name: string
+export interface PluginConstructor<T = Plugin> {
+  new (host: PluginHost): T
 }
-
-export type PluginConstructor<T = Plugin> = new (host: PluginHost) => T
