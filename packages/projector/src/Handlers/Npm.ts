@@ -1,10 +1,11 @@
-import { DictionaryOf } from '@nofrills/collections'
-import { Lincoln } from '@nofrills/lincoln'
 import { fs } from '@nofrills/fs'
+import { Lincoln } from '@nofrills/lincoln'
+import { DictionaryOf } from '@nofrills/collections'
 
-import { Project } from '../Project'
-import { ProjectConfig } from '../ProjectConfig'
 import { Logger } from '../Logger'
+import { Project } from '../Project'
+import { PluginHost } from '../Plugin'
+import { ProjectConfig } from '../ProjectConfig'
 
 export interface NpmUrl {
   type?: string
@@ -35,7 +36,7 @@ export const NpmFile = 'package.json'
 
 const logger: Lincoln = Logger.extend('npm')
 
-export async function NpmConfig(project: Project, filepath: string): Promise<ProjectConfig | null> {
+export async function NpmConfig(host: PluginHost, project: Project, filepath: string): Promise<ProjectConfig | null> {
   const filename = fs.basename(filepath).toLowerCase()
 
   if (filename !== NpmFile) {
@@ -57,14 +58,14 @@ export async function NpmConfig(project: Project, filepath: string): Promise<Pro
 
   if (hasWorkspaces) {
     const workspaces = data.workspaces || []
-    const promises = workspaces.map(workspace => materialize(project, workspace, log))
+    const promises = workspaces.map(workspace => materialize(host, project, workspace, log))
     await Promise.all(promises)
   }
 
   return config
 }
 
-async function materialize(project: Project, workspace: string, log: Lincoln): Promise<void> {
+async function materialize(host: PluginHost, project: Project, workspace: string, log: Lincoln): Promise<void> {
   const pattern = fs.join(project.path, workspace)
   const packages = await fs.glob(pattern)
 
@@ -72,7 +73,7 @@ async function materialize(project: Project, workspace: string, log: Lincoln): P
 
   const promises = packages.map(async path => {
     const projpath = fs.join(path, NpmFile)
-    const child = await Project.load(projpath)
+    const child = await Project.load(host, projpath)
     project.add(child)
     log.debug('child', child.name, child.path)
   })

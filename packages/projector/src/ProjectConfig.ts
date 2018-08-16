@@ -2,12 +2,13 @@ import { Registry } from '@nofrills/collections'
 import { fs } from '@nofrills/fs'
 
 import { Project } from './Project'
+import { PluginHost } from './Plugin'
 import { Lincoln, Logger } from './Logger'
 import { ProjectSupport } from './ProjectSupport'
 
 const logger = Logger.extend('config')
 
-export type ProjectConfigHandler = (project: Project, filepath: string) => Promise<ProjectConfig | null>
+export type ProjectConfigHandler = (host: PluginHost, project: Project, filepath: string) => Promise<ProjectConfig | null>
 
 export const ConfigHandlerRegistry: Registry<ProjectConfigHandler> = new Registry<ProjectConfigHandler>()
 

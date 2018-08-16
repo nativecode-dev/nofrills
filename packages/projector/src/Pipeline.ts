@@ -4,7 +4,7 @@ import { Plugin } from './Plugin'
 import { Project } from './Project'
 import { PluginContext } from './PluginContext'
 
-export default class Pipeline {
+export class Pipeline {
   public static readonly default: Pipeline = new Pipeline()
 
   protected constructor() { }
