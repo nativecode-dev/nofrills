@@ -50,7 +50,7 @@ export async function NpmConfig(host: PluginHost, project: Project, filepath: st
 
   const data = await fs.json<Npm>(filepath)
   const caps = ProjectConfig.getcaps(data)
-  const config = new ProjectConfig(filepath, data, caps)
+  const config = new ProjectConfig(project, filepath, data, caps)
 
   const log = logger.extend(fs.basename(config.name, false))
   const hasWorkspaces = !!(data && data.workspaces)
