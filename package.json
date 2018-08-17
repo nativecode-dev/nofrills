@@ -53,10 +53,7 @@
     "sourceMap": true,
     "temp-directory": ".cache/nyc"
   },
-  "workspaces": [
-    "packages/*",
-    "typings/*"
-  ],
+  "repository": {},
   "scripts": {
     "build": "lerna run build",
     "prebuild": "lerna bootstrap && tslint --project tsconfig.json --config tslint.json",
@@ -75,5 +72,9 @@
     "setup-ssh": "sh setup.sh ssh",
     "release": "lerna-semantic-release perform",
     "prerelease": "yarn run build && lerna-semantic-release pre"
-  }
+  },
+  "workspaces": [
+    "packages/*",
+    "typings/*"
+  ]
 }
