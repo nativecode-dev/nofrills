@@ -1,10 +1,10 @@
-import { DictionaryOf } from '@nofrills/collections'
-import { Lincoln } from '@nofrills/lincoln'
 import { fs } from '@nofrills/fs'
+import { Lincoln } from '@nofrills/lincoln'
+import { DictionaryOf } from '@nofrills/collections'
 
+import { Logger } from '../Logger'
 import { Project } from '../Project'
 import { ProjectConfig } from '../ProjectConfig'
-import { Logger } from '../Logger'
 
 export interface NpmUrl {
   type?: string
@@ -49,7 +49,7 @@ export async function NpmConfig(project: Project, filepath: string): Promise<Pro
 
   const data = await fs.json<Npm>(filepath)
   const caps = ProjectConfig.getcaps(data)
-  const config = new ProjectConfig(filepath, data, caps)
+  const config = new ProjectConfig(project, filepath, data, caps)
 
   const log = logger.extend(fs.basename(config.name, false))
   const hasWorkspaces = !!(data && data.workspaces)

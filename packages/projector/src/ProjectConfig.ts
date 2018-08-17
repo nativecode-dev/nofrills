@@ -15,9 +15,10 @@ export class ProjectConfig {
   protected readonly log: Lincoln
 
   constructor(
+    private readonly parent: Project,
     private readonly filepath: string,
     private readonly config: any,
-    private readonly caps: ProjectSupport[]
+    private readonly caps: ProjectSupport[] = [],
   ) {
     this.log = logger.extend(fs.basename(this.path))
     this.log.debug('filepath', fs.relativeFrom(filepath))
@@ -30,6 +31,10 @@ export class ProjectConfig {
 
   get path(): string {
     return this.filepath
+  }
+
+  get project(): Project {
+    return this.parent
   }
 
   static getcaps(config: any): ProjectSupport[] {
@@ -60,5 +65,4 @@ export class ProjectConfig {
   supports(support: ProjectSupport): boolean {
     return this.caps.indexOf(support) > -1
   }
-
 }

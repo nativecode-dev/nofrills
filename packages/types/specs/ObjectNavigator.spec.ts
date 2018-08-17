@@ -65,6 +65,11 @@ describe('when using ObjectNavigator', () => {
     expect(properties).to.deep.equal(['address', 'contacts', 'name', 'profile'])
   })
 
+  it('should create instance over an object with a path', () => {
+    const sut = ObjectNavigator.from(person, 'profile.favorites.links')
+    expect(sut.value).to.be.instanceOf(Array)
+  })
+
   it('should navigate to immediate child property value', () => {
     const sut = ObjectNavigator.from(person)
     const name = sut.getValue<Name>('name')

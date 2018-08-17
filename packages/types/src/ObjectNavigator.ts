@@ -25,14 +25,20 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     this.inspect(this.proxy)
   }
 
-  static from(value: object): ObjectNavigator {
+  static from(value: object, path?: string): ObjectNavigator {
     const instance = ObjectNavigator.convert('#', value, '')
 
     if (instance.type !== 'object') {
       throw new Error(`instance was not an object, got: ${instance.type}`)
     }
 
-    return new ObjectNavigator(instance)
+    const navigator = new ObjectNavigator(instance)
+
+    if (path) {
+      return navigator.get(path)
+    }
+
+    return navigator
   }
 
   get key(): string {
