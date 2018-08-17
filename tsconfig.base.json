@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "sourceMap": true,
-    "strict": true,
+    "module": "commonjs",
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types",
       "**/node_modules/@types"

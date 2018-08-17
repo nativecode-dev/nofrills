@@ -1,22 +1,32 @@
 import { Registry as RegistryMap } from '@nofrills/collections'
 
-import { Plugin } from './Plugin'
+import { Plugin, PluginConstructor } from './Plugin'
 
 export class ProjectRegistry {
-  private readonly pluginRegistry: RegistryMap<Plugin> = new RegistryMap<Plugin>()
+  private static readonly registry: ProjectRegistry = new ProjectRegistry()
 
-  get plugins(): Iterable<Plugin> {
-    return this.pluginRegistry.values
+  private readonly types: RegistryMap<PluginConstructor<Plugin>> = new RegistryMap<PluginConstructor<Plugin>>()
+
+  private constructor() { }
+
+  static create(): ProjectRegistry {
+    return new ProjectRegistry()
   }
 
-  plugin(key: string, plugin?: Plugin): Plugin | undefined {
+  static get instance(): ProjectRegistry {
+    return ProjectRegistry.registry
+  }
+
+  get plugins(): Iterable<PluginConstructor<Plugin>> {
+    return this.types.values
+  }
+
+  plugin<T extends Plugin>(key: string, plugin?: PluginConstructor<T>): PluginConstructor<Plugin> | undefined {
     if (plugin) {
-      this.pluginRegistry.register(key, plugin)
+      this.types.register(key, plugin)
     }
-    return this.pluginRegistry.resolve(key)
+    return this.types.resolve(key)
   }
 }
 
-const Registry: ProjectRegistry = new ProjectRegistry()
-
-export default Registry
+export const Registry: ProjectRegistry = ProjectRegistry.instance

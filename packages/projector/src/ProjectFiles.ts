@@ -1,4 +1,4 @@
-import { FileSystem as fs } from '@nofrills/fs'
+import { fs } from '@nofrills/fs'
 
 import { Project } from './Project'
 

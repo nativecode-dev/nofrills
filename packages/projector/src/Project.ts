@@ -1,13 +1,13 @@
+import { fs } from '@nofrills/fs'
 import { EventEmitter } from 'events'
-import { FileSystem as fs } from '@nofrills/fs'
 
 import { NotFound } from './Errors'
+import { Pipeline } from './Pipeline'
+import { PluginHost } from './PluginHost'
 import { Lincoln, Logger } from './Logger'
+import { Registry } from './ProjectRegistry'
 import { ProjectFiles } from './ProjectFiles'
 import { ConfigHandlerRegistry, ProjectConfig } from './ProjectConfig'
-
-import Registry from './ProjectRegistry'
-import Pipeline from './Pipeline'
 
 const logger = Logger.extend('project')
 
@@ -24,7 +24,7 @@ export class Project extends EventEmitter {
 
   protected readonly log: Lincoln
 
-  private constructor(private readonly root: string) {
+  private constructor(private readonly root: string, private readonly host: PluginHost) {
     super()
     this.log = logger.extend(this.name)
     this.emit(ProjectEvents.Create, this)
@@ -43,7 +43,7 @@ export class Project extends EventEmitter {
   }
 
   execute(stages: string[]): Promise<void> {
-    return Pipeline.default.execute(this,stages, Array.from(Registry.plugins))
+    return Pipeline.instance.execute(this, stages, Array.from(Registry.plugins).map(plugin => new plugin(this.host)))
   }
 
   projects(): Project[] {
@@ -65,7 +65,7 @@ export class Project extends EventEmitter {
     throw new NotFound(key)
   }
 
-  static async load(filepath: string): Promise<Project> {
+  static async load(host: PluginHost, filepath: string): Promise<Project> {
     if (await fs.exists(filepath) === false) {
       throw new NotFound(filepath)
     }
@@ -75,14 +75,14 @@ export class Project extends EventEmitter {
     const root = fs.dirname(filepath)
     const filename = fs.basename(filepath)
 
-    const project = new Project(root)
+    const project = new Project(root, host)
     project.log.debug('load-project', fs.relativeFrom(filepath))
 
     const handler = ConfigHandlerRegistry.resolve(filename)
     project.log.debug('load-handler', filename, !!handler)
 
     if (handler) {
-      const config = await handler(project, filepath)
+      const config = await handler(host, project, filepath)
       project.log.debug('load-config', !!config)
 
       if (config) {
