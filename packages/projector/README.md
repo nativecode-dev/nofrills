@@ -1,10 +1,6 @@
 # @nofrills/projector
 
 [![npm](https://img.shields.io/npm/v/@nofrills/projector.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/projector)
-[![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-projector.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-projector)
-[![David](https://img.shields.io/david/nativecode-dev/nofrills-projector.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/projector)
-[![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-projector.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/projector)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-projector/master.svg?style=flat-square)](https://coveralls.io/r/nativecode-dev/nofrills-projector?branch=master)
 
 # Install
 

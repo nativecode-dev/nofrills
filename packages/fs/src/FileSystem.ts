@@ -70,10 +70,8 @@ export class FileSystem {
       $fs.access(path, mode, error => {
         if (error && throws) {
           reject(error)
-        } else if (error) {
-          resolve(false)
         }
-        resolve(true)
+        resolve(error ? false : true)
       })
     })
   }

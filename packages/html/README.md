@@ -1,10 +1,6 @@
 # @nofrills/html
 
 [![npm](https://img.shields.io/npm/v/@nofrills/html.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/html)
-[![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-html.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-html)
-[![David](https://img.shields.io/david/nativecode-dev/nofrills-html.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/html)
-[![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-html.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/html)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-html/master.svg?style=flat-square)](https://coveralls.io/r/nativecode-dev/nofrills-html?branch=master)
 
 # Install
 

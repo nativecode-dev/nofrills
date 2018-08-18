@@ -1,11 +1,11 @@
-# @nofrills/console
+# @nofrills/typings
 
-[![npm](https://img.shields.io/npm/v/@nofrills/console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/console)
+[![npm](https://img.shields.io/npm/v/@nofrills/typings.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/typings)
 
 # Install
 
 ```bash
-npm install --save @nofrills/console
+npm install --save @nofrills/typings
 ```
 
 # License

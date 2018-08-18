@@ -1,10 +1,6 @@
 # @nofrills/fs
 
 [![npm](https://img.shields.io/npm/v/@nofrills/fs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/fs)
-[![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-fs.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-fs)
-[![David](https://img.shields.io/david/nativecode-dev/nofrills-fs.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/fs)
-[![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-fs.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/fs)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-fs/master.svg?style=flat-square)](https://coveralls.io/r/nativecode-dev/nofrills-fs?branch=master)
 
 # Install
 

@@ -37,7 +37,11 @@ export async function TypeScriptConfig(project: Project, filepath: string): Prom
   const ts = config.as<TypeScript>()
 
   const navigator = ObjectNavigator.from(ts)
-  logger.debug(navigator.toObject())
+  const compilerOptions = navigator.getValue<CompilerOptions>('compilerOptions')
+
+  if (compilerOptions) {
+    logger.debug(compilerOptions.baseUrl)
+  }
 
   return Promise.resolve(config)
 }

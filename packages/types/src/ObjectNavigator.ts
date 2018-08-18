@@ -2,6 +2,7 @@ import { EventEmitter } from 'events'
 
 import { Types } from './Types'
 import { ObjectValue } from './ObjectValue'
+import { PropertyNotFound } from './Errors'
 import { ObjectParentIterator } from './ObjectParentIterator'
 
 export enum ObjectNavigatorEvents {
@@ -73,10 +74,12 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
     return key.split('.').reduce((current: ObjectNavigator, key) => {
 
       const property = current.properties.get(key)
+
       if (property) {
         return property
       }
-      throw new Error(`could not find property: ${key}`)
+
+      throw new PropertyNotFound(`could not find property: ${key}`)
 
     }, this)
   }
@@ -84,6 +87,22 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
   getIndex(index: number): ObjectNavigator {
     const values = Array.from(this.properties.values())
     return values[index]
+  }
+
+  getPath(path: string): ObjectNavigator | null {
+    return path.split('.').reduce((current: ObjectNavigator | null, key) => {
+
+      if (current) {
+        const property = current.properties.get(key)
+
+        if (property) {
+          return property
+        }
+      }
+
+      return null
+
+    }, this)
   }
 
   getValue<T>(key: string): T {

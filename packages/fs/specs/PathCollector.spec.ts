@@ -17,7 +17,7 @@ describe('when using PathCollector', () => {
     const patterns = ['packages/fs/specs', 'packages/fs/src']
     const collector = new PathCollector(cwd)
     const results = await collector.collect(patterns, true)
-    expect(results.length).to.equal(8)
+    expect(results.length).to.equal(9)
   })
 
 })
