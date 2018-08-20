@@ -7,15 +7,15 @@ export class RegistryMap<T> {
     this.map = new Map<string, T[]>(entries)
   }
 
-  public get keys(): string[] {
+  get keys(): string[] {
     return Array.from(this.map.keys())
   }
 
-  public clear(): void {
+  clear(): void {
     this.map.clear()
   }
 
-  public register(key: string, value: T): void {
+  register(key: string, value: T): void {
     if (this.map.has(key) === false) {
       this.map.set(key, [])
     }
@@ -24,7 +24,7 @@ export class RegistryMap<T> {
     this.map.set(key, collection)
   }
 
-  public remove(key: string, value: T): void {
+  remove(key: string, value: T): void {
     if (this.map.has(key)) {
       const collection = this.resolve(key)
       const index: number = collection.indexOf(value)
@@ -32,13 +32,13 @@ export class RegistryMap<T> {
     }
   }
 
-  public reset(key: string): void {
+  reset(key: string): void {
     if (this.map.has(key)) {
       this.map.set(key, [])
     }
   }
 
-  public resolve(key: string): T[] {
+  resolve(key: string): T[] {
     return this.map.get(key) || []
   }
 }

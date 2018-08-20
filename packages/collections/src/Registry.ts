@@ -7,36 +7,36 @@ export class Registry<T> {
     this.map = new Map<string, T>(entries)
   }
 
-  public get keys(): IterableIterator<string> {
+  get keys(): IterableIterator<string> {
     return this.map.keys()
   }
 
-  public get values(): IterableIterator<T> {
+  get values(): IterableIterator<T> {
     return this.map.values()
   }
 
-  public clear(): void {
+  clear(): void {
     this.map.clear()
   }
 
-  public containsKey(key: string): boolean {
+  containsKey(key: string): boolean {
     return Array.from(this.map.keys()).indexOf(key) > -1
   }
 
-  public register(key: string, value: T): void {
+  register(key: string, value: T): void {
     if (this.map.has(key) === false) {
       this.map.set(key, value)
     }
   }
 
-  public resolve(key: string): T | undefined {
+  resolve(key: string): T | undefined {
     if (this.map.has(key)) {
       return this.map.get(key) as T
     }
     return undefined
   }
 
-  public unregister(key: string): void {
+  unregister(key: string): void {
     if (this.map.has(key)) {
       this.map.delete(key)
     }

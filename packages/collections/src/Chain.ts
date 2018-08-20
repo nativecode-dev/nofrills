@@ -10,17 +10,14 @@ type Link<T, R> = ChainHandlerLink<T, R>
  * @deprecated since version 3.5.0
  */
 export class Chain<T, R> {
-  constructor(
-    private readonly handlers: ChainHandlers<T, R> = []
-  ) {
-  }
+  constructor(private readonly handlers: ChainHandlers<T, R> = []) { }
 
-  public add(handler: ChainHandler<T, R>): Chain<T, R> {
+  add(handler: ChainHandler<T, R>): Chain<T, R> {
     this.handlers.push(handler)
     return this
   }
 
-  public execute(object: T, reverse?: boolean, initializer?: () => R): R {
+  execute(object: T, reverse?: boolean, initializer?: () => R): R {
     const initiator: Link<T, R> = (obj: T): R => initializer ? initializer() : {} as R
     const proxy: Link<T, R> = this.proxy(reverse || false, initiator)
     return proxy(object)
