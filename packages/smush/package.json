@@ -15,12 +15,10 @@
     "@nofrills/fs": "^3.2.0",
     "@nofrills/lincoln-debug": "^3.2.0",
     "@nofrills/scrubs": "^3.2.0",
-    "bluebird": "^3.5.0",
     "deepmerge": "^2.1.1",
     "shortid": "^2.2.12"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.23",
     "@types/deepmerge": "^2.1.0",
     "@types/node": "^10.5.8",
     "@types/shortid": "0.0.29"
