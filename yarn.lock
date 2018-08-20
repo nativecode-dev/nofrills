@@ -119,10 +119,6 @@
     conventional-changelog "0.0.17"
     github-url-from-git "^1.4.0"
 
-"@types/bluebird@^3.5.23":
-  version "3.5.23"
-  resolved "https://registry.npmjs.org/@types/bluebird/-/bluebird-3.5.23.tgz#e805da976b76892b2b2e50eec29e84914c730670"
-
 "@types/chai-as-promised@^7.1.0":
   version "7.1.0"
   resolved "https://registry.npmjs.org/@types/chai-as-promised/-/chai-as-promised-7.1.0.tgz#010b04cde78eacfb6e72bfddb3e58fe23c2e78b9"

@@ -1,6 +1,6 @@
 import { URL } from 'url'
+import { fs } from '@nofrills/fs'
 import { load } from 'cheerio'
-import { FileSystem as fs } from '@nofrills/fs'
 
 import { Logger } from './Logger'
 

@@ -56,7 +56,7 @@
   "repository": {},
   "scripts": {
     "build": "lerna run build",
-    "prebuild": "lerna bootstrap && tslint --project tsconfig.json --config tslint.json",
+    "prebuild": "tslint --project tsconfig.json --config tslint.json",
     "bootstrap": "lerna bootstrap",
     "clean": "rimraf .cache && rimraf docs && lerna run clean",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",

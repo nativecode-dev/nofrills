@@ -1,7 +1,7 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { FileSystem as fs } from '@nofrills/fs'
+import { fs } from '@nofrills/fs'
 import { Exporter } from '@nofrills/typings'
 
 import { CouchbaseProvider } from '../src/CouchbaseProvider'

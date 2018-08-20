@@ -1,6 +1,6 @@
+import { fs } from '@nofrills/fs'
 import { render } from 'mustache'
 import { Is, ObjectNavigator } from '@nofrills/types'
-import { FileSystem as fs } from '@nofrills/fs'
 
 import { Logger } from './Logger'
 import { Package } from './Packages'
