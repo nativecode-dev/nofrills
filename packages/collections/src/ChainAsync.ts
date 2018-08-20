@@ -5,7 +5,8 @@ export type ChainAsyncHandlers<T, R> = Array<ChainAsyncHandler<T, R>>
 type Link<T, R> = ChainAsyncHandlerLink<T, R>
 
 /**
- * @deprecated Please see @nofrills/patterns as all pattern abstractions have moved there.
+ * Please see @nofrills/patterns as all pattern abstractions have moved there.
+ * @deprecated since version 3.5.0
  */
 export class ChainAsync<T, R> {
   private readonly handlers: ChainAsyncHandlers<T, R> = []

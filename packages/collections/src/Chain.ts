@@ -6,7 +6,8 @@ type Handler<T, R> = ChainHandler<T, R>
 type Link<T, R> = ChainHandlerLink<T, R>
 
 /**
- * @deprecated Please see @nofrills/patterns as all pattern abstractions have moved there.
+ * Please see @nofrills/patterns as all pattern abstractions have moved there.
+ * @deprecated since version 3.5.0
  */
 export class Chain<T, R> {
   constructor(

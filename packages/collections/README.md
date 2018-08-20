@@ -8,6 +8,9 @@
 npm install --save @nofrills/collections
 ```
 
+### Deprecations
+`Chain` and `ChainAsync` have been deprecated in [3.5.0](https://www.npmjs.com/package/@nofrills/collections/v/3.5.0). A new package, [@nofrills/patterns](https://www.npmjs.com/package/@nofrills/patterns) was created in order to consolidate the various abstract patterns in use throughout the libraries.
+
 # License
 Copyright 2018 NativeCode Development <opensource@nativecode.com>
 
