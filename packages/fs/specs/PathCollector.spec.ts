@@ -10,14 +10,14 @@ describe('when using PathCollector', () => {
     const pattern = 'packages/*'
     const collector = new PathCollector(cwd)
     const results = await collector.collect([pattern])
-    expect(results.length).to.equal(14)
+    expect(results.length).to.equal(15)
   })
 
   it('should collect single pattern recursively', async () => {
     const patterns = ['packages/fs/specs', 'packages/fs/src']
     const collector = new PathCollector(cwd)
     const results = await collector.collect(patterns, true)
-    expect(results.length).to.equal(8)
+    expect(results.length).to.equal(9)
   })
 
 })

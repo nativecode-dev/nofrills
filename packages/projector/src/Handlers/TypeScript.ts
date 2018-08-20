@@ -32,12 +32,16 @@ export async function TypeScriptConfig(project: Project, filepath: string): Prom
   }
 
   const data = await fs.json<TypeScript>(filepath)
-  const caps = ProjectConfig.getcaps(data)
+  const caps = ProjectConfig.caps(data)
   const config = new ProjectConfig(project, filepath, data, caps)
   const ts = config.as<TypeScript>()
 
   const navigator = ObjectNavigator.from(ts)
-  logger.debug(navigator.toObject())
+  const compilerOptions = navigator.getValue<CompilerOptions>('compilerOptions')
+
+  if (compilerOptions) {
+    logger.debug(compilerOptions.baseUrl)
+  }
 
   return Promise.resolve(config)
 }

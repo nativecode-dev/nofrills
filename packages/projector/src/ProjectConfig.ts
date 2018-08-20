@@ -38,7 +38,7 @@ export class ProjectConfig {
     return this.parent
   }
 
-  static getcaps(config: any): ProjectSupport[] {
+  static caps(config: any): ProjectSupport[] {
     const caps: ProjectSupport[] = []
 
     for (const key in ProjectSupport) {

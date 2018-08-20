@@ -1,10 +1,6 @@
 # @nofrills/scrubs
 
 [![npm](https://img.shields.io/npm/v/@nofrills/scrubs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/scrubs)
-[![Travis](https://img.shields.io/travis/nativecode-dev/nofrills-scrubs.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/nofrills-scrubs)
-[![David](https://img.shields.io/david/nativecode-dev/nofrills-scrubs.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/@nofrills/scrubs)
-[![David](https://img.shields.io/david/dev/nativecode-dev/nofrills-scrubs.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/@nofrills/scrubs)
-[![Coveralls branch](https://img.shields.io/coveralls/nativecode-dev/nofrills-scrubs/master.svg?style=flat-square)](https://coveralls.io/github/nativecode-dev/nofrills-scrubs?branch=master)
 
 No frills data scrubbing to help remove sensitive data from object properties and strings.
 

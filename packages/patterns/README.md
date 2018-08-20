@@ -1,11 +1,21 @@
-# @nofrills/console
+# @nofrills/patterns
 
-[![npm](https://img.shields.io/npm/v/@nofrills/console.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/console)
+[![npm](https://img.shields.io/npm/v/@nofrills/patterns.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/patterns)
 
 # Install
 
 ```bash
-npm install --save @nofrills/console
+npm install --save @nofrills/patterns
+```
+
+# Patterns
+Library to implement some common abstract patterns that occasionally useful in your day to day tasks.
+There are some design patterns as well as just general abstract patterns not associated with the 23
+well-known design patterns.
+
+## [DESIGN] Chain of Responsiblity
+```javascript
+
 ```
 
 # License

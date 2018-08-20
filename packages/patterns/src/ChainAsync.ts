@@ -2,16 +2,14 @@ export type ChainAsyncHandler<T, R> = (value: T, next: ChainAsyncHandlerLink<T, 
 export type ChainAsyncHandlerLink<T, R> = (value: T) => Promise<R>
 export type ChainAsyncHandlers<T, R> = Array<ChainAsyncHandler<T, R>>
 
-type Link<T, R> = ChainAsyncHandlerLink<T, R>
+export type ChainsAsync<T> = ChainAsync<T, T>
+export type LinkAsync<T, R> = ChainAsyncHandlerLink<T, R>
 
-/**
- * @deprecated Please see @nofrills/patterns as all pattern abstractions have moved there.
- */
 export class ChainAsync<T, R> {
-  private readonly handlers: ChainAsyncHandlers<T, R> = []
+  private constructor(private readonly handlers: ChainAsyncHandlers<T, R>) { }
 
-  constructor(...handlers: ChainAsyncHandlers<T, R>) {
-    this.handlers = handlers
+  static from<T, R>(handlers: ChainAsyncHandlers<T, R> = []): ChainAsync<T, R> {
+    return new ChainAsync(handlers)
   }
 
   public add(handler: ChainAsyncHandler<T, R>): ChainAsync<T, R> {
@@ -23,16 +21,16 @@ export class ChainAsync<T, R> {
     return this.proxy(reverse, initializer)(value)
   }
 
-  private proxy(reverse: boolean, initiator: Link<T, R>): Link<T, R> {
+  private proxy(reverse: boolean, initiator: LinkAsync<T, R>): LinkAsync<T, R> {
     const handlers = (reverse ? this.handlers.reverse() : this.handlers)
 
     const proxy = handlers.reduce(
-      (previous, current) => (innerValue, innerNext): Promise<R> => current(innerValue, outerValue => previous(outerValue, innerNext)),
+      (previous, current) =>
+        (value, next): Promise<R> =>
+          current(value, outerValue => previous(outerValue, next)),
       initiator
     )
 
     return (object: T) => proxy(object, initiator)
   }
 }
-
-export class ChainsAsync<T> extends ChainAsync<T, T> { }

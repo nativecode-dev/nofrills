@@ -6,11 +6,11 @@ import { TypeProperties } from './TypeProperties'
 import { Types } from './Types'
 
 export class TypeParser {
-  public static deserialize(typestr: string): Type {
+  static deserialize(typestr: string): Type {
     return TypeParser.parse(typestr)
   }
 
-  public static serialize(type: Partial<Type>, full: boolean = false): string {
+  static serialize(type: Partial<Type>, full: boolean = false): string {
     const typedef: Type = TypeParser.materialize(type)
     const keys: string[] = Object.keys(typedef.properties)
     const props = typedef.properties
