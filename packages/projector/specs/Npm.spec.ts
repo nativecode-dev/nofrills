@@ -1,6 +1,6 @@
 import 'mocha'
 
-import { FileSystem as fs } from '@nofrills/fs'
+import { fs } from '@nofrills/fs'
 
 import expect from './expect'
 import { NpmConfig, NpmFile, Project } from '../src'
