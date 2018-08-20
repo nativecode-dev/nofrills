@@ -3589,9 +3589,9 @@ progress@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/progress/-/progress-2.0.0.tgz#8a1be366bf8fc23db2bd23f10c6fe920b4389d1f"
 
-promise-parallel-throttle@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/promise-parallel-throttle/-/promise-parallel-throttle-3.1.0.tgz#0fd4179e944cf94430582e632efde13b8b7bb43d"
+promise-parallel-throttle@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/promise-parallel-throttle/-/promise-parallel-throttle-3.2.0.tgz#6557a103b61e81bf76ca685c441345f91431c2c8"
 
 promise@^7.1.1:
   version "7.3.1"
