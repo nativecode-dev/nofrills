@@ -10,16 +10,17 @@ export class Pipeline {
   protected constructor() { }
 
   async execute(project: Project, stages: string[], plugins: Plugin[]): Promise<void> {
-    await Promise.all(
-      stages.map(stage => stage.toLowerCase())
-        .map<PluginContext>(stage => ({ data: {}, project, stage }))
-        .map(context => this.delegate(context, plugins))
-    )
+    const promises = stages.map(stage => stage.toLowerCase())
+      .map<PluginContext>(stage => ({ data: {}, project, stage }))
+      .map(context => this.delegate(context, plugins))
+
+    await Promise.all(promises)
   }
 
   private delegate(context: PluginContext, plugins: Plugin[]): Promise<PluginContext> {
     const delegates = plugins.map(plugin => plugin.execute)
     const chains = new ChainsAsync<PluginContext>(...delegates)
+
     return chains.execute(context, () => Promise.resolve(context))
   }
 }

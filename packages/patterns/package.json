@@ -1,0 +1,27 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "Provides some common pattern abstractions.",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/collections/#readme",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/patterns",
+  "private": false,
+  "types": "./lib/index.d.ts",
+  "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills.git"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "yarn run clean",
+    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+  }
+}

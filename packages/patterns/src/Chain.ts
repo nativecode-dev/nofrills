@@ -2,16 +2,15 @@ export type ChainHandler<T, R> = (object: T, next: ChainHandlerLink<T, R>) => R
 export type ChainHandlerLink<T, R> = (object: T) => R
 export type ChainHandlers<T, R> = Array<ChainHandler<T, R>>
 
-type Handler<T, R> = ChainHandler<T, R>
-type Link<T, R> = ChainHandlerLink<T, R>
+export type Chains<T> = Chain<T, T>
+export type Handler<T, R> = ChainHandler<T, R>
+export type Link<T, R> = ChainHandlerLink<T, R>
 
-/**
- * @deprecated Please see @nofrills/patterns as all pattern abstractions have moved there.
- */
 export class Chain<T, R> {
-  constructor(
-    private readonly handlers: ChainHandlers<T, R> = []
-  ) {
+  private constructor(private readonly handlers: ChainHandlers<T, R> = []) { }
+
+  static from<T, R>(handlers: ChainHandlers<T, R> = []): Chain<T, R> {
+    return new Chain(handlers)
   }
 
   public add(handler: ChainHandler<T, R>): Chain<T, R> {
@@ -39,5 +38,3 @@ export class Chain<T, R> {
     return (object: T) => proxy(object, initiator)
   }
 }
-
-export type Chains<T> = Chain<T, T>
