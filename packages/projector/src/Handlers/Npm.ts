@@ -57,6 +57,7 @@ export async function NpmConfig(host: PluginHost, project: Project, filepath: st
   log.debug('workspaces', hasWorkspaces)
 
   if (hasWorkspaces) {
+    /* istanbul ignore next */
     const workspaces = data.workspaces || []
     const promises = workspaces.map(workspace => materialize(host, project, workspace, log))
     await Promise.all(promises)
