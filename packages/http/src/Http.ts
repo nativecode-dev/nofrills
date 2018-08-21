@@ -69,6 +69,7 @@ export abstract class HTTP {
 
     if (response.ok) {
       this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)
+
       try {
         return await response.json()
       } catch (error) {
