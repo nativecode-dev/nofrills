@@ -31,9 +31,11 @@ describe('when using global TypeRegistry', () => {
     it('should return type date', () => expect(Types.from(new Date())).to.equal('date'))
     it('should return type error', () => expect(Types.from(new TypeError())).to.equal('error'))
     it('should return type function', () => expect(Types.from(() => void (0))).to.equal('function'))
+    it('should return type null', () => expect(Types.from(null)).to.equal('null'))
     it('should return type number', () => expect(Types.from(123)).to.equal('number'))
     it('should return type object', () => expect(Types.from({})).to.equal('object'))
     it('should return type string', () => expect(Types.from('string')).to.equal('string'))
+    it('should return type undefined', () => expect(Types.from(undefined)).to.equal('undefined'))
 
   })
 
