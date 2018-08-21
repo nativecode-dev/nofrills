@@ -18,7 +18,7 @@
     "@nofrills/typings": "^3.2.0",
     "cheerio": "^1.0.0-rc.2",
     "isomorphic-fetch": "^2.2.1",
-    "promise-parallel-throttle": "^3.1.0"
+    "promise-parallel-throttle": "^3.2.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.8",

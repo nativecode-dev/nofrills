@@ -9,11 +9,9 @@ export const Constants = $fs.constants
 
 export type PathLike = $fs.PathLike | string
 
-export type Stats = $fs.Stats
-
 export interface Descriptor {
   path: string
-  stats: Stats
+  stats: $fs.Stats
 }
 
 export class FileSystem {
@@ -48,10 +46,6 @@ export class FileSystem {
     })
   }
 
-  dirname(filepath: string): string {
-    return $path.dirname(filepath)
-  }
-
   delete(path: PathLike, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.fs.unlink(path, (error: Error) => {
@@ -63,6 +57,10 @@ export class FileSystem {
         resolve(true)
       })
     })
+  }
+
+  dirname(filepath: string): string {
+    return $path.dirname(filepath)
   }
 
   exists(path: PathLike, throws?: boolean, mode?: number): Promise<boolean> {

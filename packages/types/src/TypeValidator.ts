@@ -1,3 +1,5 @@
 import { TypeProperties } from './TypeProperties'
 
-export type TypeValidator = (value: any, props?: TypeProperties, ...args: any[]) => boolean
+export interface TypeValidator {
+  (value: any, props?: TypeProperties, ...args: any[]): boolean
+}

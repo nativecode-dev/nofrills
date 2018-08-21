@@ -2,8 +2,8 @@ import * as validator from 'validator'
 import * as zipcodes from 'zipcodes-regex'
 
 import { Is } from './Is'
-import { TypeProperties } from './TypeProperties'
 import { Types } from './Types'
+import { TypeProperties } from './TypeProperties'
 
 class $ {
   public static readonly MaxDate: Date = new Date('2038-01-19 03:14:07')

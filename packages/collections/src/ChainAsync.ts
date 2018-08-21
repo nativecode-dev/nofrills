@@ -15,12 +15,12 @@ export class ChainAsync<T, R> {
     this.handlers = handlers
   }
 
-  public add(handler: ChainAsyncHandler<T, R>): ChainAsync<T, R> {
+  add(handler: ChainAsyncHandler<T, R>): ChainAsync<T, R> {
     this.handlers.push(handler)
     return this
   }
 
-  public execute(value: T, initializer: () => Promise<R>, reverse: boolean = false): Promise<R> {
+  execute(value: T, initializer: () => Promise<R>, reverse: boolean = false): Promise<R> {
     return this.proxy(reverse, initializer)(value)
   }
 

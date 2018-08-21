@@ -1,1 +1,3 @@
-export type IsTypeHandler = (value: any, type?: string) => boolean
+export interface IsTypeHandler {
+  (value: any, type?: string): boolean
+}

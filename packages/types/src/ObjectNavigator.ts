@@ -9,7 +9,9 @@ export enum ObjectNavigatorEvents {
   Property = 'property',
 }
 
-export type OnProperty = (name: string, value: ObjectNavigator) => void
+export interface OnProperty {
+  (name: string, value: ObjectNavigator): void
+}
 
 export class ObjectNavigator extends EventEmitter implements ObjectValue, IterableIterator<ObjectNavigator> {
   private readonly properties: Map<string, ObjectNavigator>
@@ -28,11 +30,6 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
 
   static from(value: object, path?: string): ObjectNavigator {
     const instance = ObjectNavigator.convert('#', value, '')
-
-    if (instance.type !== 'object') {
-      throw new Error(`instance was not an object, got: ${instance.type}`)
-    }
-
     const navigator = new ObjectNavigator(instance)
 
     if (path) {

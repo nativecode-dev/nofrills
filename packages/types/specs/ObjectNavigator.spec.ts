@@ -77,6 +77,11 @@ describe('when using ObjectNavigator', () => {
 
   describe('to navigate an object', () => {
 
+    it('should get ObjectNavigator instance key', () => {
+      const sut = ObjectNavigator.from(person)
+      expect(sut.key).to.equal('#')
+    })
+
     it('should navigate to immediate child property value', () => {
       const sut = ObjectNavigator.from(person)
       const name = sut.getValue<Name>('name')
@@ -126,6 +131,24 @@ describe('when using ObjectNavigator', () => {
       const navigators: ObjectNavigator[] = []
       sut.recurse((_, nav) => navigators.push(nav))
       expect(navigators.length).equals(13)
+    })
+
+    it('should set property value', () => {
+      const sut = ObjectNavigator.from(Object.assign({}, person))
+      sut.value = 'test'
+      expect(sut.value).eq('test')
+    })
+
+    it('should set property value to null', () => {
+      const sut = ObjectNavigator.from(Object.assign({}, person))
+      sut.set('address', null)
+      expect(sut.getValue('address')).to.be.null
+    })
+
+    it('should set property value to undefined', () => {
+      const sut = ObjectNavigator.from(Object.assign({}, person))
+      sut.set('address', undefined)
+      expect(sut.getValue('address')).to.be.undefined
     })
 
   })

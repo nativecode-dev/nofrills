@@ -14,6 +14,12 @@ describe('when using Lincoln', () => {
       expect(sut).to.be.instanceOf(Lincoln)
     })
 
+    it('should get now as tring', () => {
+      const sut: Lincoln = new Lincoln()
+      const regex = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/
+      expect(regex.test(sut.now())).to.be.true
+    })
+
     it('should create log object', (done) => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:debug`)

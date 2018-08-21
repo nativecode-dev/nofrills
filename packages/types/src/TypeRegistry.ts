@@ -18,7 +18,7 @@ export class TypeRegistry {
     this.registry = new Map<string, Type>()
   }
 
-  public from(value: any): string {
+  from(value: any): string {
     if (value === undefined) {
       return 'undefined'
     }
@@ -42,19 +42,19 @@ export class TypeRegistry {
     throw new TypeError(`Could not parse for type: ${value}.`)
   }
 
-  public register(type: Partial<Type>): TypeRegistry {
+  register(type: Partial<Type>): TypeRegistry {
     const baseType: Type = this.resolve(type.typebase || 'any')
     const merged: Type = merge.all([baseType, type])
     this.registry.set(merged.type, merged)
     return this
   }
 
-  public resolve(name: string): Type {
+  resolve(name: string): Type {
     const type = this.registry.get(name)
     return type ? type : Any
   }
 
-  public validate(value: any, type: string): boolean {
+  validate(value: any, type: string): boolean {
     const typedef = this.resolve(type)
     return typedef.validator(value, typedef.properties)
   }
