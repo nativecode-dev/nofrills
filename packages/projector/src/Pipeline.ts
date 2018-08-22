@@ -1,4 +1,4 @@
-import { ChainsAsync } from '@nofrills/collections'
+import { ChainAsync } from '@nofrills/patterns'
 
 import { Plugin } from './Plugin'
 import { Project } from './Project'
@@ -19,7 +19,7 @@ export class Pipeline {
 
   private delegate(context: PluginContext, plugins: Plugin[]): Promise<PluginContext> {
     const delegates = plugins.map(plugin => plugin.execute)
-    const chains = new ChainsAsync<PluginContext>(...delegates)
+    const chains = ChainAsync.from<PluginContext, PluginContext>(delegates)
 
     return chains.execute(context, () => Promise.resolve(context))
   }
