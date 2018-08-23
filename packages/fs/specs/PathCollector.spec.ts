@@ -1,23 +1,22 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { PathCollector } from '../src/index'
+import { PathCollector, fs } from '../src/index'
 
 describe('when using PathCollector', () => {
-  const cwd = process.cwd()
-
-  it('should collect single pattern', async () => {
+  it('should collect paths from pattern', async () => {
     const pattern = 'packages/*'
-    const collector = new PathCollector(cwd)
+    const collector = PathCollector.from()
     const results = await collector.collect([pattern])
-    expect(results.length).to.equal(15)
+    expect(results.length).to.equal(16)
   })
 
-  it('should collect single pattern recursively', async () => {
-    const patterns = ['packages/fs/specs', 'packages/fs/src']
-    const collector = new PathCollector(cwd)
+  it('should collect paths from multiple patterns', async () => {
+    const patterns = ['packages/html/src', 'packages/types/src']
+    const collector = PathCollector.from(process.cwd())
     const results = await collector.collect(patterns, true)
-    expect(results.length).to.equal(14)
+    const listing = await fs.globs(patterns.map(pattern => `${pattern}/**`))
+    expect(results.length).to.equal(listing.length)
   })
 
 })

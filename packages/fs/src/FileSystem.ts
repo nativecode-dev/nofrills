@@ -98,13 +98,18 @@ export class FileSystem {
     const patternstr = cwd ? this.join(cwd, pattern) : pattern
     return new Promise<string[]>((resolve, reject) => {
       $glob(patternstr, (error, matches) => {
-        /** istanbul ignore next */
         if (error) {
           reject(error)
         }
         resolve(matches)
       })
     })
+  }
+
+  async globs(patterns: string[], cwd?: string): Promise<string[]> {
+    const resolved = await Promise.all(patterns.map(pattern => this.glob(pattern, cwd)))
+
+    return resolved.reduce((results, current) => results.concat(current), [])
   }
 
   list(path: PathLike): Promise<string[]> {
