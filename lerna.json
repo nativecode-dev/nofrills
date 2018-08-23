@@ -37,8 +37,7 @@
     "--silent"
   ],
   "packages": [
-    "packages/*",
-    "typings/*"
+    "packages/*"
   ],
   "sort": true,
   "useWorkspaces": true,

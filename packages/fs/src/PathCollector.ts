@@ -5,8 +5,12 @@ import { Logger } from './Logger'
 export class PathCollector extends EventEmitter {
   private readonly log = Logger.extend('path-collector')
 
-  constructor(private readonly path: string) {
+  protected constructor(private readonly path: string) {
     super()
+  }
+
+  static from(cwd?: string): PathCollector {
+    return new PathCollector(cwd || process.cwd())
   }
 
   async collect(patterns: string[], recursive?: boolean): Promise<Descriptor[]> {
