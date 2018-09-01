@@ -8,6 +8,43 @@
 npm install --save @nofrills/types
 ```
 
+# Introduction
+
+`@nofrills/types` is a library that provides a consistent runtime type checking for JavaScript instances. In addition to basic types, such as `string`, `boolean`, etc, `types` also supports more complex type definitions, such as custom types. You can register your own types and ensure that your runtime instances truly match definitions you specify.
+
+## Is
+
+Use the `Is` helper to validate basic types, such as `string`, `boolean`, `Date`, etc.
+
+```javascript
+const isDate = Is.date(Date.now()) // false
+const isNumber = Is.number(Date.now()) // true
+const isString = Is.string('this is a string') // true
+```
+
+```typescript
+const isDate: boolean = Is.date(Date.now()) // false
+const isNumber: number = Is.number(Date.now()) // true
+const isString: boolean = Is.string('this is a string') // true
+```
+
+## Types
+
+Use the `Types` registry to retrieve or add type definitions for the runtime to validate.
+
+```javascript
+
+```
+
+```typescript
+```
+
+# FAQ
+
+## Q: What is the difference between `Is` and `Types`?
+
+### A: The `Is` helper is meant to be a basic type checker for primitives while `Types` is meant to be used as a custom type validator.
+
 # License
 Copyright 2018 NativeCode Development <opensource@nativecode.com>
 

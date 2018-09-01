@@ -12,7 +12,15 @@ export interface ScrubsOptions {
 }
 
 const defaults: Partial<ScrubsOptions> = {
-  properties: ['apikey', 'api-key', 'api_key', 'password', 'x-api-key'],
+  properties: [
+    'apikey',
+    'api-key',
+    'api_key',
+    'pass',
+    'password',
+    'secret',
+    'x-api-key',
+  ],
   text: '<secured>'
 }
 
@@ -23,21 +31,25 @@ export class Scrubs {
 
   constructor(options: Partial<ScrubsOptions> = {}) {
     this.log = Logger
-    this.options = merge.all<ScrubsOptions>([options, defaults])
+    this.options = merge.all<ScrubsOptions>([defaults, options])
     this.registry = new Map<string, Scrubbers>()
   }
 
-  public clear(type: string): Scrubs {
+  clear(type: string): Scrubs {
     this.registry.set(type, [])
     return this
   }
 
-  public get(type: string): Scrubbers | undefined {
+  get(type: string): Scrubbers | undefined {
     this.log.debug('get', type)
     return this.registry.get(type)
   }
 
-  public register<T>(type: string, scrubber: Scrubber<T>): Scrubs {
+  properties(names: string[]) {
+    this.options.properties = this.options.properties.slice().concat(names)
+  }
+
+  register<T>(type: string, scrubber: Scrubber<T>): Scrubs {
     this.log.debug('register', type)
     const scrubbers: Scrubbers | undefined = this.registry.get(type)
     if (scrubbers) {
@@ -49,7 +61,7 @@ export class Scrubs {
     return this
   }
 
-  public async scrub<T>(value: T, type?: string): Promise<T> {
+  async scrub<T>(value: T, type?: string): Promise<T> {
     if (value) {
       const typedef: string = type || Types.from(value)
       this.log.debug(`scrub.pre:${typedef}`, value)
