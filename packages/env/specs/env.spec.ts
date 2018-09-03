@@ -2,30 +2,106 @@ import 'mocha'
 
 import expect from './expect'
 
-import { EnvOptions, Env } from '../src/env'
+import { Env, EnvOverrideType } from '../src/env'
+
+interface ConfigOptions {
+  runtime: {
+    data: {
+      database: string
+      host?: string
+      credentials: {
+        username?: string
+        password?: string
+      }
+    }
+    server: {
+      port: number
+    }
+  }
+  version: string
+}
 
 describe('when using env', () => {
-  const createConfig = () => ({
-    ENVIRONMENT: 'testing',
-    NAME: 'app'
+  const Defaults = (): Partial<ConfigOptions> => ({
+    runtime: {
+      data: {
+        database: ':memory:',
+        credentials: {},
+      },
+      server: {
+        port: 3000,
+      },
+    },
+    version: '1.0.0',
   })
 
-  const options: EnvOptions = {
-    env: {},
-    prefix: 'env'
+  const Overrides = (): Partial<ConfigOptions> => ({
+    runtime: {
+      data: {
+        database: 'test',
+        host: 'localhost',
+        credentials: {
+          username: 'root',
+          password: 'root-password',
+        },
+      },
+      server: {
+        port: 80,
+      },
+    },
+  })
+
+  const ENV = {
+    APP_VERSION: '2.0.0',
   }
 
-  it('should convert object key to environment variable', () => {
-    const config = createConfig()
-    const env = new Env(config, options)
-    expect(env.key('environment')).to.equal('ENV_ENVIRONMENT')
+  it('should return merged configuration', () => {
+    const env = Env.merge([Defaults(), Overrides()])
+    const config = env.toObject()
+    expect(config.version).to.equal('1.0.0')
   })
 
-  it('should get environment value', () => {
-    const config = createConfig()
-    const env = new Env(config, options)
-    const value = env.value('NAME')
-    expect(value).to.equal(config.NAME)
-    expect(config.NAME).to.equal(value)
+  it('should return environment variable name', () => {
+    const env = new Env(Overrides)
+    expect(env.key('runtime.data.database')).to.equal(
+      'APP_RUNTIME_DATA_DATABASE',
+    )
+  })
+
+  it('should return empty string for variables that do not exist', () => {
+    const env = Env.merge([Defaults(), Overrides()], { env: ENV })
+    expect(env.value('runtime.etcd.host')).to.equal('')
+  })
+
+  it('should return default value for variables that do not exist', () => {
+    const env = Env.merge([Defaults(), Overrides()], { env: ENV })
+    expect(env.value('runtime.etcd.host', 'devbox')).to.equal('devbox')
+  })
+
+  it('should return default value for variables that do not exist using environment first', () => {
+    const env = Env.merge([Defaults(), Overrides()], {
+      env: ENV,
+      override: EnvOverrideType.EnvironmentFirst,
+    })
+    expect(env.value('runtime.etcd.host', 'devbox')).to.equal('devbox')
+  })
+
+  it('should get nested configuration object value', () => {
+    const env = Env.merge([Defaults(), Overrides()], { env: ENV })
+    expect(env.value('runtime.data.database')).to.equal('test')
+  })
+
+  it('should return config variable first', () => {
+    const env = Env.merge([Defaults(), Overrides()], { env: ENV })
+    expect(env.value('version')).to.equal('1.0.0')
+  })
+
+  it('should return environment variable first', () => {
+    const env = Env.merge([Defaults(), Overrides()], {
+      env: ENV,
+      override: EnvOverrideType.EnvironmentFirst,
+    })
+
+    expect(env.value('version')).to.equal('2.0.0')
   })
 })

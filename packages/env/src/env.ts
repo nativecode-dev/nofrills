@@ -1,20 +1,24 @@
+import * as merge from 'deepmerge'
+
 import { Is, ObjectNavigator } from '@nofrills/types'
 
 export enum EnvOverrideType {
-  ConfigValueFirst = 'config-first',
-  EnvironmentVariableFirst = 'environment-first',
+  ConfigFirst = 'config-first',
+  EnvironmentFirst = 'environment-first',
 }
 
 export interface EnvOptions {
   env: { [key: string]: string | undefined }
   override?: EnvOverrideType
   prefix: string
+  sync: boolean
 }
 
-const Defaults: EnvOptions = {
+const Defaults: Partial<EnvOptions> = {
   env: process.env,
-  override: EnvOverrideType.ConfigValueFirst,
-  prefix: 'app'
+  override: EnvOverrideType.ConfigFirst,
+  prefix: 'app',
+  sync: false,
 }
 
 export class Env {
@@ -23,7 +27,12 @@ export class Env {
 
   constructor(config: object, options?: Partial<EnvOptions>) {
     this.navigator = ObjectNavigator.from(config)
-    this.options = Object.assign({}, Defaults, options || {})
+    this.options = merge.all<EnvOptions>([Defaults, options || {}])
+  }
+
+  static merge(configs: object[], options?: Partial<EnvOptions>): Env {
+    const config = merge.all<EnvOptions>(configs)
+    return new Env(config, options)
   }
 
   get prefix(): string {
@@ -34,22 +43,39 @@ export class Env {
     return [this.prefix, ...key.split('.')].join('_').toUpperCase()
   }
 
-  value(key: string): string {
-    const envFirst = this.options.override === EnvOverrideType.EnvironmentVariableFirst
-    const child = this.navigator.getPath(key)
-
-    if (child && Is.string(child.value) && envFirst === false) {
-      return child.value
-    }
-
+  env(key: string, defaultValue?: string): string {
     const env = this.key(key)
     const value = this.options.env[env]
 
     if (value && Is.string(value)) {
-      this.navigator.set(key, value)
+      if (this.options.sync) {
+        this.navigator.set(key, value)
+      }
       return value
     }
 
-    return ''
+    return defaultValue ? defaultValue : ''
+  }
+
+  value(key: string, defaultValue?: string): string {
+    const configFirst = this.options.override === EnvOverrideType.ConfigFirst
+
+    if (configFirst) {
+      const child = this.navigator.getPath(key)
+
+      if (child && Is.string(child.value)) {
+        return child.value
+      }
+
+      if (defaultValue) {
+        return defaultValue
+      }
+    }
+
+    return this.env(key, defaultValue)
+  }
+
+  toObject(): any {
+    return this.navigator.toObject()
   }
 }
