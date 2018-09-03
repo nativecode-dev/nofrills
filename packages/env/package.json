@@ -1,0 +1,31 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "Provides a simple conversion from config object to environment variable.",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/env/#readme",
+  "license": "MIT",
+  "main": "./lib/env.js",
+  "name": "@nofrills/env",
+  "private": false,
+  "types": "./lib/env.d.ts",
+  "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {
+    "@nofrills/types": "^3.3.0"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "yarn run clean",
+    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+  }
+}

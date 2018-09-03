@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "deepmerge": "^2.1.1",
-    "validator": "^10.4.0",
+    "validator": "^10.7.1",
     "zipcodes-regex": "^1.0.1"
   },
   "devDependencies": {
