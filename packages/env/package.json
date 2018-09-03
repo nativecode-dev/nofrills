@@ -12,6 +12,7 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
+    "@nofrills/collections": "^3.6.1",
     "@nofrills/types": "^3.3.0",
     "deepmerge": "^2.1.1"
   },

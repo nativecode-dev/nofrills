@@ -1,5 +1,6 @@
-import * as merge from 'deepmerge'
+import { all } from 'deepmerge'
 
+import { DictionaryOf } from '@nofrills/collections'
 import { Is, ObjectNavigator } from '@nofrills/types'
 
 export enum EnvOverrideType {
@@ -8,7 +9,7 @@ export enum EnvOverrideType {
 }
 
 export interface EnvOptions {
-  env: { [key: string]: string | undefined }
+  env: DictionaryOf<string | undefined>
   override?: EnvOverrideType
   prefix: string
   sync: boolean
@@ -27,11 +28,11 @@ export class Env {
 
   constructor(config: object, options?: Partial<EnvOptions>) {
     this.navigator = ObjectNavigator.from(config)
-    this.options = merge.all<EnvOptions>([Defaults, options || {}])
+    this.options = all<EnvOptions>([Defaults, options || {}])
   }
 
   static merge(configs: object[], options?: Partial<EnvOptions>): Env {
-    const config = merge.all<EnvOptions>(configs)
+    const config = all<EnvOptions>(configs)
     return new Env(config, options)
   }
 
