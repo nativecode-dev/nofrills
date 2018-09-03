@@ -1,11 +1,36 @@
-# @nofrills/fs
+# @nofrills/env
 
-[![npm](https://img.shields.io/npm/v/@nofrills/fs.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/fs)
+[![npm](https://img.shields.io/npm/v/@nofrills/env.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/env)
+
+# Instructions
+
+```typescript
+// APP_DATABASE=mssql
+import { Env } from '@nofrills/env'
+
+const defaultConfigFile = {
+  database: 'sqlite',
+  runtime: 'default.file',
+}
+
+const configFromFile = {
+  database: 'mysql',
+  runtime: 'overrides.file',
+}
+
+const env = Env.merge([defaultConfigFile, configFromFile])
+
+env.key('database') // APP_DATABASE
+env.key('runtime') // APP_RUNTIME
+
+env.value('database') // 'mssql'
+env.value('runtime') // 'overrides.file'
+```
 
 # Install
 
 ```bash
-npm install --save @nofrills/fs
+npm install --save @nofrills/env
 ```
 
 # License
