@@ -4,7 +4,7 @@
 
 # Install
 
-```bash
+```
 yarn add @nofrills/env
 
 npm install --save @nofrills/env
@@ -41,9 +41,9 @@ Note that we always will emit environment variables as upper cased names, prepen
 
 Next, let's export our environment variables and use them with our configuration.
 
-```
-export APP_DATABASE_USERNAME=test
-export APP_DATABASE_PASSWORD=test-password
+```bash
+export APP_DATABASE_USERNAME="test"
+export APP_DATABASE_PASSWORD="test-password"
 ```
 ```typescript
 const env = Env.merge([ConfigurationInstance])
@@ -61,7 +61,7 @@ const env = Env.merge([ConfigurationInstance], { override: EnvOverrideType.Envir
 
 Now, when we wrap the configuration instance, we will use overrides from the environment.
 
-```
+```bash
 export APP_DATABASE_HOST=my.example.com
 ```
 ```typescript
@@ -74,10 +74,10 @@ We can also import and create a configuration object from environment variables,
 
 Also note how we are able to control the casing of the object by the casing of the environment variable. However, this behavior may change in the future, as it presents a consistency issue when used across machines.
 
-```
-export APP_RUNTIME_DATABASE=mssql
-export APP_RUNTIME_HOST=localhost
-export APP_version=1.0
+```bash
+export APP_RUNTIME_DATABASE="mssql"
+export APP_RUNTIME_HOST="localhost"
+export APP_version="1.0"
 ```
 ```typescript
 const env = Env.from()

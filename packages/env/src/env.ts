@@ -22,6 +22,14 @@ const Defaults: Partial<EnvOptions> = {
   sync: false,
 }
 
+export interface EnvFilter {
+  (path: string): boolean
+}
+
+export interface EnvTransform {
+  (path: string): string
+}
+
 export class Env {
   private readonly navigator: ObjectNavigator
   private readonly options: EnvOptions
@@ -31,19 +39,29 @@ export class Env {
     this.options = all<EnvOptions>([Defaults, options || {}])
   }
 
-  static from(options: Partial<EnvOptions> = {}): Env {
+  static from(
+    options: Partial<EnvOptions> = {},
+    filter?: EnvFilter,
+    transform?: EnvTransform,
+  ): Env {
     const opts = all<EnvOptions>([Defaults, options])
     const root = ObjectNavigator.from({})
+
+    const localFilter = filter ? filter : () => true
+    const localTransform = transform ? transform : (path: string) => path
+
     Object.keys(opts.env)
       .filter(key => key.toLowerCase().startsWith(`${opts.prefix}_`))
       .map(key => ({
+        env: key,
         path: key
           .split('_')
           .slice(1)
           .join('.'),
-        env: key,
       }))
-      .map(ctx => root.set(ctx.path, opts.env[ctx.env]))
+      .filter(ctx => localFilter(ctx.path))
+      .map(ctx => ({ env: ctx.env, path: localTransform(ctx.path) }))
+      .forEach(ctx => root.set(ctx.path, opts.env[ctx.env]))
 
     return Env.merge([root.toObject()], options)
   }
