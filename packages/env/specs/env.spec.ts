@@ -52,6 +52,8 @@ describe('when using env', () => {
   })
 
   const ENV = {
+    APP_CONFIG_PROJECT: 'package.json',
+    APP_CONFIG_TYPESCRIPT: 'tsconfig.json',
     APP_VERSION: '2.0.0',
   }
 
@@ -103,5 +105,13 @@ describe('when using env', () => {
     })
 
     expect(env.value('version')).to.equal('2.0.0')
+  })
+
+  it('should convert environment variables to object', () => {
+    const env = Env.from({ env: ENV })
+    const config = env.toObject()
+    console.log(config)
+    expect(config.CONFIG.PROJECT).to.equal('package.json')
+    expect(config.CONFIG.TYPESCRIPT).to.equal('tsconfig.json')
   })
 })

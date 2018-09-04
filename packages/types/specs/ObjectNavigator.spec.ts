@@ -42,41 +42,45 @@ const person: Person = {
     state: 'Florida',
     zip: '99004',
   },
-  contacts: [{
-    email: 'joshua.tree@holyshit.com',
-  }, {
-    email: 'josuha.tree@gmail.com'
-  }],
+  contacts: [
+    {
+      email: 'joshua.tree@holyshit.com',
+    },
+    {
+      email: 'josuha.tree@gmail.com',
+    },
+  ],
   name: {
     first: 'Joshua',
     last: 'Tree',
   },
   profile: {
     favorites: {
-      links: ['google.com', 'news.google.com', 'mail.google.com']
-    }
-  }
+      links: ['google.com', 'news.google.com', 'mail.google.com'],
+    },
+  },
 }
 
 describe('when using ObjectNavigator', () => {
-
   describe('to inspect an object', () => {
-
     it('should create instance over an object', () => {
       const sut = ObjectNavigator.from(person)
       const properties = Array.from(sut).map(x => x.property)
-      expect(properties).to.deep.equal(['address', 'contacts', 'name', 'profile'])
+      expect(properties).to.deep.equal([
+        'address',
+        'contacts',
+        'name',
+        'profile',
+      ])
     })
 
     it('should create instance over an object with a path', () => {
       const sut = ObjectNavigator.from(person, 'profile.favorites.links')
       expect(sut.value).to.be.instanceOf(Array)
     })
-
   })
 
   describe('to navigate an object', () => {
-
     it('should get ObjectNavigator instance key', () => {
       const sut = ObjectNavigator.from(person)
       expect(sut.key).to.equal('#')
@@ -92,6 +96,12 @@ describe('when using ObjectNavigator', () => {
       const sut = ObjectNavigator.from(person)
       const profile = sut.get('profile')
       expect(profile).instanceof(ObjectNavigator)
+    })
+
+    it('should return empty object for proeprties that do not exist', () => {
+      const parent = ObjectNavigator.from({})
+      const sut = parent.get('something.other', true)
+      expect(sut.toObject()).to.be.empty
     })
 
     it('should throw when trying to get non-existent property', () => {
@@ -151,16 +161,18 @@ describe('when using ObjectNavigator', () => {
       expect(sut.getValue('address')).to.be.undefined
     })
 
+    it('should set value by path', () => {
+      const sut = ObjectNavigator.from({})
+      sut.set('config.database.host', 'localhost')
+      expect(sut.toObject().config.database.host).to.equals('localhost')
+    })
   })
 
   describe('to materialize an object', () => {
-
     it('should re-create object structure', () => {
       const sut = ObjectNavigator.from(person)
       const result = sut.toObject()
       expect(person).to.deep.equal(result)
     })
-
   })
-
 })

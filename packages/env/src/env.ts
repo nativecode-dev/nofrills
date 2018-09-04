@@ -31,6 +31,23 @@ export class Env {
     this.options = all<EnvOptions>([Defaults, options || {}])
   }
 
+  static from(options: Partial<EnvOptions>): Env {
+    const opts = all<EnvOptions>([Defaults, options])
+    const root = ObjectNavigator.from({})
+    Object.keys(opts.env)
+      .filter(key => key.toLowerCase().startsWith(`${opts.prefix}_`))
+      .map(key => ({
+        path: key
+          .split('_')
+          .slice(1)
+          .join('.'),
+        env: key,
+      }))
+      .map(ctx => root.set(ctx.path, opts.env[ctx.env]))
+
+    return Env.merge([root.toObject()], options)
+  }
+
   static merge(configs: object[], options?: Partial<EnvOptions>): Env {
     const config = all<EnvOptions>(configs)
     return new Env(config, options)
