@@ -127,6 +127,17 @@ Specifies whether or not to sync environment variables with the underlying confi
 
 For further use cases, please see the unit tests.
 
+# FAQ
+
+### Q: Why is sync not the default option?
+Syncing doesn't truly mean anything except that it keeps track of the underling configuration object values as they are read from the environment (when a configuration value does not exist).
+
+### Q: Why is `EnvironmentFirst` not the default option?
+Currently, using `EnvironmentFirst` will skip checking the configuration object. Why would you want to do this? Because you might have an environment only configuration that you want to materialize as a JS object.
+
+### Q: Why can't I add configuration variables at runtime?
+Your configuration object should be immutable once you've materialized it (however that is done).
+
 # License
 Copyright 2018 NativeCode Development <opensource@nativecode.com>
 
