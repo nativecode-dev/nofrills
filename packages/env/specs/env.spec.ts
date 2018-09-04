@@ -112,5 +112,18 @@ describe('when using env', () => {
     const config = env.toObject()
     expect(config.CONFIG.PROJECT).to.equal('package.json')
     expect(config.CONFIG.TYPESCRIPT).to.equal('tsconfig.json')
+    expect(config.VERSION).to.equal('2.0.0')
+  })
+
+  it('should filter environment variables', () => {
+    const env = Env.from({ env: ENV }, name => !name.startsWith('VERSION'))
+    const config = env.toObject()
+    expect(config.VERSION).to.be.undefined
+  })
+
+  it('should transform environment variables', () => {
+    const env = Env.from({ env: ENV }, undefined, name => name.toLowerCase())
+    const config = env.toObject()
+    expect(config.version).to.equal('2.0.0')
   })
 })
