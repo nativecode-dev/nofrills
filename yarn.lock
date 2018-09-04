@@ -3639,9 +3639,9 @@ rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-rxjs@^6.3.1:
-  version "6.3.1"
-  resolved "https://registry.npmjs.org/rxjs/-/rxjs-6.3.1.tgz#878a1a8c64b8a5da11dcf74b5033fe944cdafb84"
+rxjs@^6.3.2:
+  version "6.3.2"
+  resolved "https://registry.npmjs.org/rxjs/-/rxjs-6.3.2.tgz#6a688b16c4e6e980e62ea805ec30648e1c60907f"
   dependencies:
     tslib "^1.9.0"
 
@@ -4129,9 +4129,9 @@ tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
-tslint-config-standard@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.npmjs.org/tslint-config-standard/-/tslint-config-standard-8.0.0.tgz#6f96071b52b81044198344ad12b910750dabc16e"
+tslint-config-standard@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npmjs.org/tslint-config-standard/-/tslint-config-standard-8.0.1.tgz#e4dd3128e84b0e34b51990b68715a641f2b417e4"
   dependencies:
     tslint-eslint-rules "^5.3.1"
 
