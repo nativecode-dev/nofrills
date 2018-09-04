@@ -31,7 +31,7 @@ export class Env {
     this.options = all<EnvOptions>([Defaults, options || {}])
   }
 
-  static from(options: Partial<EnvOptions>): Env {
+  static from(options: Partial<EnvOptions> = {}): Env {
     const opts = all<EnvOptions>([Defaults, options])
     const root = ObjectNavigator.from({})
     Object.keys(opts.env)

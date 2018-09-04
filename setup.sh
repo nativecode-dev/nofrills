@@ -6,7 +6,7 @@ while test $# -gt 0
 do
   case "$1" in
     doc) echo "Generating documentation"
-      typedoc --mode modules --out ./doc ./packages/*/src/
+      typedoc --mode modules --out ./docs ./packages/*/src/
       ;;
     git) echo "Configuring Git options"
       git config --global user.email "opensource+nofrills@nativecode.com"

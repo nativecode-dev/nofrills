@@ -110,7 +110,6 @@ describe('when using env', () => {
   it('should convert environment variables to object', () => {
     const env = Env.from({ env: ENV })
     const config = env.toObject()
-    console.log(config)
     expect(config.CONFIG.PROJECT).to.equal('package.json')
     expect(config.CONFIG.TYPESCRIPT).to.equal('tsconfig.json')
   })
