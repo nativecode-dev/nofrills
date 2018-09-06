@@ -3,21 +3,26 @@ import { all } from 'deepmerge'
 import { DictionaryOf } from '@nofrills/collections'
 import { Is, ObjectNavigator } from '@nofrills/types'
 
-export enum EnvOverrideType {
+export enum EnvOverride {
   ConfigFirst = 'config-first',
   EnvironmentFirst = 'environment-first',
 }
 
+/**
+ * @deprecated Use EnvOverride, will be removed in a future version.
+ */
+export type EnvOverrideType = EnvOverride
+
 export interface EnvOptions {
   env: DictionaryOf<string | undefined>
-  override?: EnvOverrideType
+  override?: EnvOverride
   prefix: string
   sync: boolean
 }
 
 const Defaults: Partial<EnvOptions> = {
   env: process.env,
-  override: EnvOverrideType.ConfigFirst,
+  override: EnvOverride.ConfigFirst,
   prefix: 'app',
   sync: false,
 }
@@ -47,8 +52,8 @@ export class Env {
     const opts = all<EnvOptions>([Defaults, options])
     const root = ObjectNavigator.from({})
 
-    const localFilter = filter ? filter : () => true
-    const localTransform = transform ? transform : (path: string) => path
+    const _filter = filter ? filter : () => true
+    const _transform = transform ? transform : (path: string) => path
 
     Object.keys(opts.env)
       .filter(key => key.toLowerCase().startsWith(`${opts.prefix}_`))
@@ -59,8 +64,8 @@ export class Env {
           .slice(1)
           .join('.'),
       }))
-      .filter(ctx => localFilter(ctx.path))
-      .map(ctx => ({ env: ctx.env, path: localTransform(ctx.path) }))
+      .filter(ctx => _filter(ctx.path))
+      .map(ctx => ({ env: ctx.env, path: _transform(ctx.path) }))
       .forEach(ctx => root.set(ctx.path, opts.env[ctx.env]))
 
     return Env.merge([root.toObject()], options)
@@ -75,8 +80,8 @@ export class Env {
     return this.options.prefix
   }
 
-  key(key: string): string {
-    return [this.prefix, ...key.split('.')].join('_').toUpperCase()
+  get sync(): boolean {
+    return this.options.sync
   }
 
   env(key: string, defaultValue?: string): string {
@@ -93,8 +98,12 @@ export class Env {
     return defaultValue ? defaultValue : ''
   }
 
+  key(key: string): string {
+    return [this.prefix, ...key.split('.')].join('_').toUpperCase()
+  }
+
   value(key: string, defaultValue?: string): string {
-    const configFirst = this.options.override === EnvOverrideType.ConfigFirst
+    const configFirst = this.options.override === EnvOverride.ConfigFirst
 
     if (configFirst) {
       const child = this.navigator.getPath(key)
