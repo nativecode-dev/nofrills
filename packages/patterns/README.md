@@ -6,16 +6,22 @@
 
 ```bash
 npm install --save @nofrills/patterns
+
+yarn add @nofrills/patterns
 ```
 
 # Patterns
-Library to implement some common abstract patterns that occasionally useful in your day to day tasks.
-There are some design patterns as well as just general abstract patterns not associated with the 23
-well-known design patterns.
+Library to implement some common abstract patterns that occasionally useful in your day to day tasks. There are some design patterns as well as just general abstract patterns not associated with the 23 well-known design patterns.
 
 ## [DESIGN] Chain of Responsiblity
-```javascript
+`Chain<T>` and `ChainAsync<T>` are implementations of the chain of responsibility pattern. You can add as many handlers as you want before calling `execute`, which can either execute inside-out or outside-in order.
 
+```typescript
+const handlers = [
+  (input: string, next) => next()
+]
+const chains = Chains.from<string, string>(handlers)
+chains.execute({})
 ```
 
 # License
