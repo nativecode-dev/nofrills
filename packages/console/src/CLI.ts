@@ -11,7 +11,7 @@ export class CLI<T extends ConsoleOptions> extends Console<T> {
   }
 
   static run<T extends ConsoleOptions>(options: T, exe: string, ...args: string[]): Promise<void> {
-    const console = CLI.create<T>(options, exe, ...args)
-    return console.start()
+    const cli = CLI.create<T>(options, exe, ...args)
+    return cli.start()
   }
 }

@@ -1,6 +1,7 @@
 import './DefaultTypes'
 
-export * from './Errors'
+export * from './Errors/index'
+export * from './Interfaces/index'
 
 export * from './Is'
 export * from './IsType'

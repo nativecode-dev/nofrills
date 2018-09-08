@@ -1,5 +1,9 @@
 export { Lincoln } from '@nofrills/lincoln-debug'
 
-import { CreateLogger, Lincoln } from '@nofrills/lincoln-debug'
+import { CreateLogger, CreateOptions, Lincoln, Options } from '@nofrills/lincoln-debug'
+import { ScrubsInterceptor } from '@nofrills/scrubs'
 
-export const Logger: Lincoln = CreateLogger('typings:couchbase')
+const options: Options = CreateOptions('nofrills:typings-couchbase')
+options.interceptors.register('scrubs', ScrubsInterceptor)
+
+export const Logger: Lincoln = CreateLogger(options)

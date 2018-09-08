@@ -8,7 +8,7 @@ export class FileResolver {
   private readonly log: Lincoln = Logger.extend('file-resolver')
 
   constructor(
-    private readonly cwd: string,
+    public readonly cwd: string,
     private readonly strategies: FileResolverStrategy[],
   ) {}
 

@@ -1,0 +1,25 @@
+{
+  "tasks": {
+    "build": [
+      "[clean]",
+      {
+        "arguments": [
+          "--project",
+          "tsconfig.json"
+        ],
+        "command": "tsc",
+        "name": "tsc"
+      },
+      "cp somefile somefile-other"
+    ],
+    "clean": [
+      "rimraf bin",
+      "rimraf dist",
+      "rimraf lib"
+    ],
+    "test": [
+      "[build]",
+      "run tests --reporter=html"
+    ]
+  }
+}

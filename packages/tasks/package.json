@@ -1,0 +1,41 @@
+{
+  "author": "opensource@nativecode.com",
+  "bin": {
+    "cli-shabang": "./bin/cli-shabang.js",
+    "cli-tasks": "./bin/cli-tasks.js"
+  },
+  "description": "Simple NPM package task builder.",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/tasks/#readme",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "name": "@nofrills/tasks",
+  "private": false,
+  "types": "./bin/index.d.ts",
+  "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {
+    "@nofrills/console": "^3.3.2",
+    "@nofrills/fs": "^3.4.2",
+    "@nofrills/lincoln-debug": "^3.3.1",
+    "@nofrills/types": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "*"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "rimraf .cache && rimraf docs && rimraf bin",
+    "postbuild": "node ./bin/cli-shabang.js",
+    "clean": "rimraf .cache && rimraf docs && rimraf bin"
+  }
+}

@@ -8,7 +8,7 @@ export class SshParser {
     this.resolver = new FileResolver(cwd, [RecursiveStrategy])
   }
 
-  async parser(): Promise<Parser> {
+  async generate(): Promise<Parser> {
     const grammars = await this.resolver.find(this.grammar)
 
     if (grammars.length) {
@@ -22,6 +22,6 @@ export class SshParser {
       return parser
     }
 
-    throw new Error(`could not find grammar: ${this.grammar}`)
+    throw new Error(`could not find grammar: ${this.resolver.cwd} ${this.grammar}`)
   }
 }

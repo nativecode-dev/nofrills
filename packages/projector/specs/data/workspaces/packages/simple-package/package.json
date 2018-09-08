@@ -5,7 +5,7 @@
   "description": "project with workspaces",
   "devDependencies": {
     "@types/chalk": "^2.2.0",
-    "@types/node": "^8.0.52"
+    "@types/node": "*"
   },
   "name": "simple-package",
   "version": "1.0.0"
