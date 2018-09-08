@@ -1,0 +1,38 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "Simple SSH functions for CI builds.",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/ssh/#readme",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/ssh",
+  "private": false,
+  "types": "./lib/index.d.ts",
+  "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {
+    "@nofrills/console": "^3.3.2",
+    "@nofrills/env": "^1.1.0",
+    "@nofrills/fs": "^3.4.2",
+    "@nofrills/lincoln-debug": "^3.3.1",
+    "pegjs": "^0.10.0",
+    "ts-pegjs": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/pegjs": "^0.10.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "yarn run clean",
+    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+  }
+}
