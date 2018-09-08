@@ -2,7 +2,7 @@ import 'mocha'
 
 import expect from './expect'
 
-import { Env, EnvOverrideType } from '../src/env'
+import { Env, EnvOverride } from '../src/env'
 
 interface ConfigOptions {
   runtime: {
@@ -64,7 +64,7 @@ describe('when using env', () => {
   })
 
   it('should return environment variable name', () => {
-    const env = new Env(Overrides)
+    const env = new Env(Overrides())
     expect(env.key('runtime.data.database')).to.equal(
       'APP_RUNTIME_DATA_DATABASE',
     )
@@ -83,7 +83,7 @@ describe('when using env', () => {
   it('should return default value for variables that do not exist using environment first', () => {
     const env = Env.merge([Defaults(), Overrides()], {
       env: ENV,
-      override: EnvOverrideType.EnvironmentFirst,
+      override: EnvOverride.EnvironmentFirst,
     })
     expect(env.value('runtime.etcd.host', 'devbox')).to.equal('devbox')
   })
@@ -101,7 +101,7 @@ describe('when using env', () => {
   it('should return environment variable first', () => {
     const env = Env.merge([Defaults(), Overrides()], {
       env: ENV,
-      override: EnvOverrideType.EnvironmentFirst,
+      override: EnvOverride.EnvironmentFirst,
     })
 
     expect(env.value('version')).to.equal('2.0.0')
