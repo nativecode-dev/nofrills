@@ -205,6 +205,10 @@
   version "10.9.4"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.9.4.tgz#0f4cb2dc7c1de6096055357f70179043c33e9897"
 
+"@types/pegjs@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.npmjs.org/@types/pegjs/-/pegjs-0.10.1.tgz#9a2f3961dc62430fdb21061eb0ddbd890f9e3b94"
+
 "@types/shelljs@^0.8.0":
   version "0.8.0"
   resolved "https://registry.npmjs.org/@types/shelljs/-/shelljs-0.8.0.tgz#0caa56b68baae4f68f44e0dd666ab30b098e3632"
@@ -3245,6 +3249,10 @@ pause-stream@0.0.11:
   dependencies:
     through "~2.3"
 
+pegjs@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.npmjs.org/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -4120,6 +4128,12 @@ ts-node@^7.0.0:
     mkdirp "^0.5.1"
     source-map-support "^0.5.6"
     yn "^2.0.0"
+
+ts-pegjs@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.npmjs.org/ts-pegjs/-/ts-pegjs-0.2.2.tgz#f4ae6cc277133083858033badf6991a12a400f7c"
+  dependencies:
+    pegjs "^0.10.0"
 
 tslib@1.9.0:
   version "1.9.0"

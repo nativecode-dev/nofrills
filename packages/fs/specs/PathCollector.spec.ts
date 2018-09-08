@@ -8,7 +8,7 @@ describe('when using PathCollector', () => {
     const pattern = 'packages/*'
     const collector = PathCollector.from()
     const results = await collector.collect([pattern])
-    expect(results.length).to.equal(17)
+    expect(results.length).to.equal(18)
   })
 
   it('should collect paths from multiple patterns', async () => {
