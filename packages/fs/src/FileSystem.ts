@@ -26,8 +26,9 @@ export class FileSystem {
       this.fs.writeFile(path, data, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -56,8 +57,9 @@ export class FileSystem {
       this.fs.close(fd, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -69,8 +71,9 @@ export class FileSystem {
           reject(error)
         } else if (error) {
           resolve(false)
+        } else {
+          resolve(true)
         }
-        resolve(true)
       })
     })
   }
@@ -84,8 +87,9 @@ export class FileSystem {
       this.fs.access(path, mode, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -108,8 +112,9 @@ export class FileSystem {
       this.fs.writeFile(path, content, (error: Error) => {
         if (error && throws) {
           reject(false)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -120,8 +125,9 @@ export class FileSystem {
       $glob(patternstr, (error, matches) => {
         if (error) {
           reject(error)
+        } else {
+          resolve(matches)
         }
-        resolve(matches)
       })
     })
   }
@@ -140,8 +146,9 @@ export class FileSystem {
         /** istanbul ignore next */
         if (error) {
           reject(error)
+        } else {
+          resolve(files)
         }
-        resolve(files)
       })
     })
   }
@@ -173,8 +180,9 @@ export class FileSystem {
       this.fs.mkdir(path, mode, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -198,8 +206,9 @@ export class FileSystem {
       $mkdirp(path, error => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -223,8 +232,9 @@ export class FileSystem {
       this.fs.open(path, flags, mode, (error: Error, fd: number) => {
         if (error) {
           reject(error)
+        } else {
+          resolve(fd)
         }
-        resolve(fd)
       })
     })
   }
@@ -246,8 +256,9 @@ export class FileSystem {
         (error: Error, data: number) => {
           if (error) {
             reject(error)
+          } else {
+            resolve(data)
           }
-          resolve(data)
         },
       )
     })
@@ -258,8 +269,9 @@ export class FileSystem {
       this.fs.readFile(path, (error: Error, buffer: Buffer) => {
         if (error) {
           reject(error)
+        } else {
+          resolve(buffer)
         }
-        resolve(buffer)
       })
     })
   }
@@ -281,8 +293,9 @@ export class FileSystem {
       this.fs.rename(original, filename, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -301,8 +314,9 @@ export class FileSystem {
       this.fs.writeFile(path, JSON.stringify(object), (error: Error) => {
         if (error && throws) {
           reject(false)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -312,8 +326,9 @@ export class FileSystem {
       this.fs.stat(path, (error: Error, stats: $fs.Stats) => {
         if (error) {
           reject(error)
+        } else {
+          resolve({ path: String(path), stats })
         }
-        resolve({ path: String(path), stats })
       })
     })
   }
@@ -327,13 +342,11 @@ export class FileSystem {
       this.fs.readFile(path, (error: Error, data: $fs.Stats) => {
         if (error) {
           reject(error)
-        }
-
-        if (data) {
+        } else if (data) {
           resolve(data.toString())
+        } else {
+          resolve(undefined)
         }
-
-        resolve(undefined)
       })
     })
   }
@@ -355,8 +368,9 @@ export class FileSystem {
         (error: Error, written: number) => {
           if (error) {
             reject(error)
+          } else {
+            resolve(written)
           }
-          resolve(written)
         },
       )
     })
@@ -367,8 +381,9 @@ export class FileSystem {
       this.fs.writeFile(path, data, (error: Error) => {
         if (error) {
           reject(error)
+        } else {
+          resolve()
         }
-        resolve()
       })
     })
   }
