@@ -35,8 +35,7 @@
   },
   "scripts": {
     "build": "ts-node ./src/cli-tasks.ts build",
-    "clean": "ts-node ./src/cli-tasks.ts clean",
-    "shabang": "ts-node ./src/cli-shabang.ts"
+    "clean": "ts-node ./src/cli-tasks.ts clean"
   },
   "tasks": {
     "build": [

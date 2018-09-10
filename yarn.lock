@@ -4506,6 +4506,6 @@ yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
-zipcodes-regex@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/zipcodes-regex/-/zipcodes-regex-1.0.1.tgz#18763d814245094ace277666b7a805bc7f9db74d"
+zipcodes-regex@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/zipcodes-regex/-/zipcodes-regex-1.0.2.tgz#cdbe2cd96b4aeaba69bc587a52096caece825bed"
