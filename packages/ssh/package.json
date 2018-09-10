@@ -22,7 +22,6 @@
     "ts-pegjs": "^0.2.2"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^0.0.0",
     "@types/node": "*",
     "@types/pegjs": "^0.10.1"
   },
@@ -35,17 +34,8 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "ts-node ../tasks/src/cli-tasks.ts build",
-    "clean": "ts-node ../tasks/src/cli-tasks.ts clean"
-  },
-  "tasks": {
-    "build": [
-      "[clean]",
-      "tsc --project tsconfig.build.json",
-      "node ../tasks/bin/cli-shabang.js"
-    ],
-    "clean": [
-      "rimraf bin"
-    ]
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "rimraf bin",
+    "clean": "rimraf bin"
   }
 }
