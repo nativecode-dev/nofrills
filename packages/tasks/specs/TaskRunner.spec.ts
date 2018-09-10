@@ -18,13 +18,13 @@ const assets = fs.join(__dirname, 'assets')
 describe('when using TaskRunner', () => {
   const builder = new TaskBuilder(assets, 'tasks.json')
 
-  const TaskListDir: TaskConfig = {
+  const TestTask: TaskConfig = {
     tasks: {
-      ls: [
+      which: [
         {
-          arguments: ['-lah', '--color=auto'],
-          command: 'ls',
-          name: 'ls',
+          arguments: ['node'],
+          command: 'which',
+          name: 'which',
         },
       ],
     },
@@ -46,8 +46,8 @@ describe('when using TaskRunner', () => {
   })
 
   it('should execute real tasks', async () => {
-    const runner = new TaskRunner(TaskListDir)
-    const results = await runner.run(['ls'])
+    const runner = new TaskRunner(TestTask)
+    const results = await runner.run(['which'])
     expect(results).to.be.lengthOf(1)
   })
 })
