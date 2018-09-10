@@ -40,7 +40,8 @@
   "tasks": {
     "build": [
       "[clean]",
-      "tsc --project tsconfig.build.json"
+      "tsc --project tsconfig.build.json",
+      "ts-node ./src/cli-shabang.ts"
     ],
     "clean": [
       "rimraf bin"
