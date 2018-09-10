@@ -35,13 +35,13 @@
   },
   "scripts": {
     "build": "ts-node ./src/cli-tasks.ts build",
-    "clean": "ts-node ./src/cli-tasks.ts clean"
+    "clean": "ts-node ./src/cli-tasks.ts clean",
+    "shabang": "ts-node ./src/cli-shabang.ts"
   },
   "tasks": {
     "build": [
       "[clean]",
-      "tsc --project tsconfig.build.json",
-      "node ./bin/cli-shabang.js"
+      "tsc --project tsconfig.build.json"
     ],
     "clean": [
       "rimraf bin"

@@ -38,7 +38,8 @@
       "node_modules",
       "packages/*/src/**/*.spec.ts",
       "packages/*/src/Logger.ts",
-      "packages/*/src/Logging.ts"
+      "packages/*/src/Logging.ts",
+      "packages/*/src/cli-*.ts"
     ],
     "extension": [
       ".ts"
@@ -56,10 +57,11 @@
   "scripts": {
     "build": "lerna run build",
     "prebuild": "tslint --project tsconfig.json --config tslint.json",
+    "postbuild": "lerna run shabang",
     "bootstrap": "lerna bootstrap",
     "clean": "rimraf .cache && rimraf docs && lerna run clean",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "lerna bootstrap && lerna run build",
+    "pretest": "lerna bootstrap && lerna run build && lerna run shabang",
     "start": "lerna run start",
     "do": "lerna",
     "commit": "git add -A . && git-cz",
