@@ -45,7 +45,7 @@ describe('when using TaskRunner', () => {
     expect(results).to.be.lengthOf(5)
   })
 
-  it('should execute real tasks', async () => {
+  it.skip('should execute real tasks', async () => {
     const runner = new TaskRunner(TestTask)
     const results = await runner.run(['which'])
     expect(results).to.be.lengthOf(1)
