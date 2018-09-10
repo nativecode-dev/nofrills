@@ -41,7 +41,6 @@
   "tasks": {
     "build": [
       "[clean]",
-      "which cli-shabang",
       "tsc --project tsconfig.build.json",
       "node ../tasks/bin/cli-shabang.js"
     ],
