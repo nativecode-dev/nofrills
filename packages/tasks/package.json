@@ -1,9 +1,5 @@
 {
   "author": "opensource@nativecode.com",
-  "bin": {
-    "cli-shabang": "./bin/cli-shabang.js",
-    "cli-tasks": "./bin/cli-tasks.js"
-  },
   "description": "Simple NPM package task builder.",
   "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/tasks/#readme",
   "license": "MIT",
@@ -12,6 +8,10 @@
   "private": false,
   "types": "./bin/index.d.ts",
   "version": "0.0.0",
+  "bin": {
+    "cli-shabang": "./bin/cli-shabang.js",
+    "cli-tasks": "./bin/cli-tasks.js"
+  },
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },

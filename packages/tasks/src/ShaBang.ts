@@ -47,7 +47,11 @@ export class ShaBang {
     }
 
     if (Is.string(buffer)) {
-      await fs.chmod(buffer, 755)
+      try {
+        await fs.chmod(buffer, 755)
+      } catch {
+        console.log(`failed to set executable flag: ${buffer}`)
+      }
     }
 
     return transformed
