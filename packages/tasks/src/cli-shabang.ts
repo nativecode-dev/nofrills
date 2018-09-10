@@ -14,6 +14,7 @@ const options: ConsoleOptions = {
       Logger.debug('shabang', cwd)
 
       if (resolved.length > 0) {
+        console.log(`using ${resolved[0]}`)
         const shabang = new ShaBang(resolved[0])
         await shabang.shabang()
         return
