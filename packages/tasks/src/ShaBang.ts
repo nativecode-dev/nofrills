@@ -21,10 +21,17 @@ export class ShaBang {
       await ShaBang.shabangify(npm.bin as string, true)
     } else if (npm.bin) {
       const hash: DictionaryOf<string> = npm.bin as DictionaryOf<string>
+
       await Promise.all(
-        Object.keys(hash).map(key => {
+        Object.keys(hash).map(async key => {
           this.log.debug('bin', key)
-          return ShaBang.shabangify(hash[key])
+          const bin = hash[key]
+          try {
+            return await ShaBang.shabangify(bin)
+          } catch (error) {
+            console.log(bin, error)
+            return Promise.resolve()
+          }
         }),
       )
     }
