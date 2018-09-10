@@ -50,11 +50,17 @@ export class ShaBang {
     const transformed = Buffer.concat([shabang, file])
 
     if (overwrite && Is.string(buffer)) {
-      await fs.writeFile(buffer, transformed)
+      try {
+        console.log('shabanged', buffer)
+        await fs.writeFile(buffer, transformed)
+      } catch {
+        console.log(`failed to write file: ${buffer}`)
+      }
     }
 
     if (Is.string(buffer)) {
       try {
+        console.log('chmod', buffer)
         await fs.chmod(buffer, 755)
       } catch {
         console.log(`failed to set executable flag: ${buffer}`)
