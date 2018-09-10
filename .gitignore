@@ -1,14 +1,24 @@
-!.gitkeep
-!.vscode/launch.json
+**/.artifacts/
+**/.cache/
+**/bin/*
+**/dist/*
+**/lib/*
+**/node_modules/
 
-.artifacts/
-.cache/
-bin/
-dist/
-lib/
-node_modules/
+**/specs/**/*.js
+**/specs/**/*.map
+**/specs/**/*.d.ts
+
+**/src/**/*.js
+**/src/**/*.map
+**/src/**/*.d.ts
+
 deploy
 deploy.pub
 
 *.log
 *.tgz
+
+!.gitkeep
+!.vscode/launch.json
+!packages/ssh/lib/config.pegjs

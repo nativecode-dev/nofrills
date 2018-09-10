@@ -15,15 +15,20 @@ export interface Descriptor {
 }
 
 export class FileSystem {
-  constructor(private readonly fs: any) { }
+  constructor(private readonly fs: any) {}
 
-  append(path: string | number | Buffer | URL, data: any, throws?: boolean): Promise<boolean> {
+  append(
+    path: string | number | Buffer | URL,
+    data: any,
+    throws?: boolean,
+  ): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.fs.writeFile(path, data, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -35,13 +40,26 @@ export class FileSystem {
     return $path.basename(path, ext === true ? undefined : ext)
   }
 
+  chmod(path: PathLike, mode: number | string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      $fs.chmod(path, mode, error => {
+        if (error) {
+          reject(error)
+        } else {
+          resolve()
+        }
+      })
+    })
+  }
+
   close(fd: number, throws?: boolean): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.fs.close(fd, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -53,8 +71,9 @@ export class FileSystem {
           reject(error)
         } else if (error) {
           resolve(false)
+        } else {
+          resolve(true)
         }
-        resolve(true)
       })
     })
   }
@@ -68,8 +87,9 @@ export class FileSystem {
       this.fs.access(path, mode, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -78,9 +98,13 @@ export class FileSystem {
     return $path.extname(filename)
   }
 
-  async file(path: string, content: string, throws?: boolean): Promise<boolean> {
+  async file(
+    path: string,
+    content: string,
+    throws?: boolean,
+  ): Promise<boolean> {
     const dirname = this.dirname(path)
-    if (await this.exists(dirname, throws) === false) {
+    if ((await this.exists(dirname, throws)) === false) {
       await this.mkdirp(dirname)
     }
 
@@ -88,8 +112,9 @@ export class FileSystem {
       this.fs.writeFile(path, content, (error: Error) => {
         if (error && throws) {
           reject(false)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -100,14 +125,17 @@ export class FileSystem {
       $glob(patternstr, (error, matches) => {
         if (error) {
           reject(error)
+        } else {
+          resolve(matches)
         }
-        resolve(matches)
       })
     })
   }
 
   async globs(patterns: string[], cwd?: string): Promise<string[]> {
-    const resolved = await Promise.all(patterns.map(pattern => this.glob(pattern, cwd)))
+    const resolved = await Promise.all(
+      patterns.map(pattern => this.glob(pattern, cwd)),
+    )
 
     return resolved.reduce((results, current) => results.concat(current), [])
   }
@@ -118,8 +146,9 @@ export class FileSystem {
         /** istanbul ignore next */
         if (error) {
           reject(error)
+        } else {
+          resolve(files)
         }
-        resolve(files)
       })
     })
   }
@@ -142,20 +171,34 @@ export class FileSystem {
     return Promise.reject(text)
   }
 
-  mkdir(path: PathLike, mode?: number | string, throws?: boolean): Promise<boolean> {
+  mkdir(
+    path: PathLike,
+    mode?: number | string,
+    throws?: boolean,
+  ): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.fs.mkdir(path, mode, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
 
-  mkdirs(paths: string[], mode?: number | string, throws?: boolean): Promise<boolean> {
-    return Promise.all(paths.map(path => this.mkdir(path, mode, throws)))
-      .then(promises => promises.reduce((result, current) => result ? result : current, false))
+  mkdirs(
+    paths: string[],
+    mode?: number | string,
+    throws?: boolean,
+  ): Promise<boolean> {
+    return Promise.all(paths.map(path => this.mkdir(path, mode, throws))).then(
+      promises =>
+        promises.reduce(
+          (result, current) => (result ? result : current),
+          false,
+        ),
+    )
   }
 
   mkdirp(path: string, throws?: boolean): Promise<boolean> {
@@ -164,37 +207,60 @@ export class FileSystem {
         if (error && throws) {
           reject(error)
         } else {
-          resolve(false)
+          resolve(error ? false : true)
         }
-        resolve(true)
       })
     })
   }
 
   mkdirps(paths: string[], throws?: boolean): Promise<boolean> {
-    return Promise.all(paths.map(path => this.mkdirp(path, throws)))
-      .then(promises => promises.reduce((result, current) => result ? result : current, false))
+    return Promise.all(paths.map(path => this.mkdirp(path, throws))).then(
+      promises =>
+        promises.reduce(
+          (result, current) => (result ? result : current),
+          false,
+        ),
+    )
   }
 
-  open(path: PathLike, flags: string | number, mode?: string | number): Promise<number> {
+  open(
+    path: PathLike,
+    flags: string | number,
+    mode?: string | number,
+  ): Promise<number> {
     return new Promise<number>((resolve, reject) => {
       this.fs.open(path, flags, mode, (error: Error, fd: number) => {
         if (error) {
           reject(error)
+        } else {
+          resolve(fd)
         }
-        resolve(fd)
       })
     })
   }
 
-  read<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset: number, length: number, position: number): Promise<number> {
+  read<T extends Buffer | Uint8Array>(
+    fd: number,
+    buffer: T,
+    offset: number,
+    length: number,
+    position: number,
+  ): Promise<number> {
     return new Promise<number>((resolve, reject) => {
-      this.fs.read(fd, buffer, offset, length, position, (error: Error, data: number) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(data)
-      })
+      this.fs.read(
+        fd,
+        buffer,
+        offset,
+        length,
+        position,
+        (error: Error, data: number) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve(data)
+          }
+        },
+      )
     })
   }
 
@@ -203,8 +269,9 @@ export class FileSystem {
       this.fs.readFile(path, (error: Error, buffer: Buffer) => {
         if (error) {
           reject(error)
+        } else {
+          resolve(buffer)
         }
-        resolve(buffer)
       })
     })
   }
@@ -217,13 +284,18 @@ export class FileSystem {
     return $path.relative(process.cwd(), to)
   }
 
-  rename(original: PathLike, filename: PathLike, throws?: boolean): Promise<boolean> {
+  rename(
+    original: PathLike,
+    filename: PathLike,
+    throws?: boolean,
+  ): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.fs.rename(original, filename, (error: Error) => {
         if (error && throws) {
           reject(error)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -234,7 +306,7 @@ export class FileSystem {
 
   async save<T>(path: string, object: T, throws?: boolean): Promise<boolean> {
     const dirname = this.dirname(path)
-    if (await this.exists(dirname, throws) === false) {
+    if ((await this.exists(dirname, throws)) === false) {
       await this.mkdirp(dirname)
     }
 
@@ -242,8 +314,9 @@ export class FileSystem {
       this.fs.writeFile(path, JSON.stringify(object), (error: Error) => {
         if (error && throws) {
           reject(false)
+        } else {
+          resolve(error ? false : true)
         }
-        resolve(error ? false : true)
       })
     })
   }
@@ -253,8 +326,9 @@ export class FileSystem {
       this.fs.stat(path, (error: Error, stats: $fs.Stats) => {
         if (error) {
           reject(error)
+        } else {
+          resolve({ path: String(path), stats })
         }
-        resolve({ path: String(path), stats })
       })
     })
   }
@@ -268,25 +342,37 @@ export class FileSystem {
       this.fs.readFile(path, (error: Error, data: $fs.Stats) => {
         if (error) {
           reject(error)
-        }
-
-        if (data) {
+        } else if (data) {
           resolve(data.toString())
+        } else {
+          resolve(undefined)
         }
-
-        resolve(undefined)
       })
     })
   }
 
-  write<T extends Buffer | Uint8Array>(fd: number, buffer: T, offset?: number, length?: number, position?: number): Promise<number> {
+  write<T extends Buffer | Uint8Array>(
+    fd: number,
+    buffer: T,
+    offset?: number,
+    length?: number,
+    position?: number,
+  ): Promise<number> {
     return new Promise<number>((resolve, reject) => {
-      this.fs.write(fd, buffer, offset, length, position, (error: Error, written: number) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(written)
-      })
+      this.fs.write(
+        fd,
+        buffer,
+        offset,
+        length,
+        position,
+        (error: Error, written: number) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve(written)
+          }
+        },
+      )
     })
   }
 
@@ -295,8 +381,9 @@ export class FileSystem {
       this.fs.writeFile(path, data, (error: Error) => {
         if (error) {
           reject(error)
+        } else {
+          resolve()
         }
-        resolve()
       })
     })
   }

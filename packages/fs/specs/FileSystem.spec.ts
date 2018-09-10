@@ -45,9 +45,10 @@ describe('when working with Files', () => {
     expect(fs.basename(path, false)).equals('FileSystem.spec')
   })
 
-  it('should list all files and directories', () => {
+  it('should list all files and directories', async () => {
     const path = fs.join(cwd, 'packages/fs/specs')
-    expect(fs.list(path)).to.eventually.contain('FileSystem.spec.ts')
+    const result = await fs.list(path)
+    expect(result).to.contain('FileSystem.spec.ts')
   })
 
   it('should fail to list all files and directories', () => {
@@ -66,14 +67,16 @@ describe('when working with Files', () => {
     expect(fs.info(path)).to.be.rejected
   })
 
-  it('should check if file exists', () => {
+  it('should check if file exists', async () => {
     const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts')
-    expect(fs.exists(path)).to.eventually.be.true
+    const result = await fs.exists(path)
+    expect(result).to.be.true
   })
 
-  it('should check if file does not exist', () => {
+  it('should check if file does not exist', async () => {
     const path = fs.join(cwd, 'packages/fs/specs/FileSystem.spec.ts.nope')
-    expect(fs.exists(path)).to.eventually.be.false
+    const result = await fs.exists(path)
+    expect(result).to.be.false
   })
 
   it('should throw if file does not exist', () => {
@@ -81,16 +84,18 @@ describe('when working with Files', () => {
     expect(fs.exists(path, true)).to.be.rejected
   })
 
-  it('should write json file to disk', () => {
+  it('should write json file to disk', async () => {
     const path = fs.join(cwd, '.cache', '.artifacts', 'test.json')
     const json = { test: true }
-    expect(fs.save(path, json)).to.eventually.be.true
+    const result = await fs.save(path, json)
+    expect(result).to.be.true
   })
 
-  it('should fail to write json file to disk', () => {
+  it('should fail to write json file to disk', async () => {
     const path = fs.join(cwd, '.cache', '.artifacts')
     const json = { test: true }
-    expect(fs.save(path, json)).to.eventually.be.false
+    const result = await fs.save(path, json)
+    expect(result).to.be.false
   })
 
   it('should fail to write json file to disk with error', () => {
@@ -143,9 +148,10 @@ describe('when working with Files', () => {
     expect(fs.close(-1, true)).to.be.rejected
   })
 
-  it('should create deeply nested directory', () => {
+  it('should create deeply nested directory', async () => {
     const path = fs.join(artifacts, 'level-1/level-2/level-3')
-    expect(fs.exists(path)).to.eventually.be.true
+    const result = await fs.mkdirps([path])
+    expect(result).to.be.true
   })
 
   it('should stat multiple paths', async () => {
@@ -164,20 +170,21 @@ describe('when working with Files', () => {
     await fs.write(fd, buffer, 0, buffer.length, 0)
     await fs.close(fd)
     const exists = await fs.exists(path)
-    expect(exists).to.equal(true)
+    expect(exists).to.be.true
   })
 
   it('should rename file', async () => {
     const path = fs.join(artifacts, 'artifacts.json')
     const renamed = fs.join(artifacts, 'manifest.json')
     const result = await fs.rename(path, renamed)
-    expect(result).to.equal(true)
+    expect(result).to.be.true
   })
 
-  it('should fail to rename file', () => {
+  it('should fail to rename file', async () => {
     const path = fs.join(artifacts, '.cache', '.artifacts.json')
     const renamed = fs.join(artifacts, 'manifest.json')
-    expect(fs.rename(path, renamed)).to.eventually.be.false
+    const result = await fs.rename(path, renamed)
+    expect(result).to.be.false
   })
 
   it('should fail to rename file and throw', () => {

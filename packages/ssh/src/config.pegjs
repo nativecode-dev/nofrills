@@ -2,18 +2,32 @@ Start
   = (Comment / Host / Config / WS? EOL)+ EOF
 
 Comment
-  = WS* '#' (!EOL .)* EOL
+  = WS* '#' comment:(!EOL .)* EOL
 
 Host
-  = WS* 'Host' WS* Value
-  / WS* 'Match' WS* Value
+  = WS* left:'Host' WS* right:Value {
+      return { left, right }
+    }
+  / WS* left:'Match' WS* right:Value {
+      return { left, right }
+    }
 
 Config
-  = WS* Identifier WS* Value
-  / WS* AddKeysToAgent WS* AddKeysToAgentValue
-  / WS* AddressFamily WS* AddressFamilyValue
-  / WS* BatchMode WS* BatchModeValue
-  / WS* BindAddress WS* BindAddressValue
+  = WS* identifier:Identifier WS* value:Value {
+      return { identifier, value }
+    }
+  / WS* identifier:AddKeysToAgent WS* value:AddKeysToAgentValue {
+      return { identifier, value }
+    }
+  / WS* identifier:AddressFamily WS* value:AddressFamilyValue {
+      return { identifier, value }
+    }
+  / WS* identifier:BatchMode WS* value:BatchModeValue {
+      return { identifier, value }
+    }
+  / WS* identifier:BindAddress WS* value:BindAddressValue {
+      return { identifier, value }
+    }
 
 IPAddress
   = Octet '.' Octet '.' Octet '.' Octet

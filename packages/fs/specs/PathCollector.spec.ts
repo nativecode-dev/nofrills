@@ -1,6 +1,8 @@
 import 'mocha'
 
-import { expect } from 'chai'
+import * as $fs from 'fs'
+
+import expect from './expect'
 import { PathCollector, fs } from '../src/index'
 
 describe('when using PathCollector', () => {
@@ -8,7 +10,17 @@ describe('when using PathCollector', () => {
     const pattern = 'packages/*'
     const collector = PathCollector.from()
     const results = await collector.collect([pattern])
-    expect(results.length).to.equal(18)
+
+    const files = await new Promise<string[]>((resolve, reject) => {
+      $fs.readdir(fs.join(process.cwd(), 'packages'), (error, files) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(files)
+      })
+    })
+
+    expect(results.length).to.equal(files.length)
   })
 
   it('should collect paths from multiple patterns', async () => {
@@ -18,5 +30,4 @@ describe('when using PathCollector', () => {
     const listing = await fs.globs(patterns.map(pattern => `${pattern}/**`))
     expect(results.length).to.equal(listing.length)
   })
-
 })

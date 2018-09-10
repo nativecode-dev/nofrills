@@ -1,0 +1,30 @@
+Host bitbucket.org
+  IdentityFile ~/.ssh/bitbucket_rsa
+
+Host github.com
+  IdentityFile ~/.ssh/github_rsa
+
+Host qnap
+  HostName qnap.in.nativecode.com
+  IdentityFile ~/.ssh/qnap_rsa
+
+Host storage
+  HostName storage.in.nativecode.com
+  IdentityFile ~/.ssh/nopasswd_rsa
+
+# Development
+
+Host rancher
+  HostName rancher.in.nativecode.com
+  IdentityFile ~/.ssh/nopasswd_rsa
+
+# Production
+
+Host prod-control
+  HostName master-control.nativecode.com
+  IdentityFile ~/.ssh/nopasswd_rsa
+
+# PropLogix
+
+Host amazonaws.com
+  IdentityFile ~/.ssh/plsos2_rsa

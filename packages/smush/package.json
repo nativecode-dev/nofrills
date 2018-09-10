@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/deepmerge": "^2.1.0",
-    "@types/node": "^10.5.8",
+    "@types/node": "*",
     "@types/shortid": "0.0.29"
   },
   "publishConfig": {
