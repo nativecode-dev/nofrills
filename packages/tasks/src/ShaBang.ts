@@ -1,4 +1,3 @@
-import { URL } from 'url'
 import { fs } from '@nofrills/fs'
 import { Is, Npm, DictionaryOf } from '@nofrills/types'
 
@@ -18,7 +17,7 @@ export class ShaBang {
 
     if (Is.string(npm.bin)) {
       this.log.debug('bin', npm.bin)
-      await ShaBang.shabangify(npm.bin as string, true)
+      await ShaBang.shabangify(npm.bin as string)
     } else if (npm.bin) {
       const hash: DictionaryOf<string> = npm.bin as DictionaryOf<string>
 
@@ -37,36 +36,25 @@ export class ShaBang {
     }
   }
 
-  static async shabangify(
-    buffer: string | Buffer | URL,
-    overwrite: boolean = true,
-  ): Promise<Buffer> {
+  static async shabangify(filename: string): Promise<Buffer> {
     const shabang = Buffer.from('#!/usr/bin/env node\n')
+    const file = await fs.text(filename)
+    const combined = Buffer.concat([shabang, Buffer.from(file)])
 
-    const file = Is.string(buffer)
-      ? await fs.readFile(buffer)
-      : (buffer as Buffer)
-
-    const transformed = Buffer.concat([shabang, file])
-
-    if (overwrite && Is.string(buffer)) {
-      try {
-        console.log('shabanged', buffer)
-        await fs.writeFile(buffer, transformed)
-      } catch {
-        console.log(`failed to write file: ${buffer}`)
-      }
+    try {
+      console.log('shabanged', filename)
+      await fs.writeFile(filename, combined)
+    } catch {
+      console.log(`failed to write file: ${filename}`)
     }
 
-    if (Is.string(buffer)) {
-      try {
-        console.log('chmod', buffer)
-        await fs.chmod(buffer, 755)
-      } catch {
-        console.log(`failed to set executable flag: ${buffer}`)
-      }
+    try {
+      console.log('chmod', filename)
+      await fs.chmod(filename, 755)
+    } catch {
+      console.log(`failed to set executable flag: ${filename}`)
     }
 
-    return transformed
+    return combined
   }
 }

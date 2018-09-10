@@ -61,7 +61,7 @@
     "bootstrap": "lerna bootstrap",
     "clean": "rimraf .cache && rimraf docs && lerna run clean",
     "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "lerna bootstrap && lerna run build && lerna run shabang",
+    "pretest": "lerna bootstrap && lerna run build",
     "start": "lerna run start",
     "do": "lerna",
     "commit": "git add -A . && git-cz",
