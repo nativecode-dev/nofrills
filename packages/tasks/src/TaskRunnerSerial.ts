@@ -1,5 +1,5 @@
 import { ExecOptions } from 'shelljs'
-import { exec, spawn, ChildProcess } from 'child_process'
+import { exec, ChildProcess } from 'child_process'
 
 import { Task } from './Task'
 import { Lincoln } from './Logging'
@@ -22,17 +22,32 @@ export const TaskRunnerSerial: TaskRunnerAdapter = (
   return task.jobs.reduce(
     (results, job) =>
       results
-        .then(() => execute({ job, log, task, stdout: out, stderr: err }))
+        .then(() =>
+          execute({
+            job,
+            log: log.extend(job.command),
+            task,
+            stdout: out,
+            stderr: err,
+          }),
+        )
         .then(async result => [...(await results), result]),
     Promise.resolve([] as TaskJobResult[]),
   )
 }
 
-export function executor(
-  context: TaskContext,
-  options: ExecOptions,
-  messages: string[],
-): ChildProcess {
+function executor(context: TaskContext, messages: string[]): ChildProcess {
+  const env = {
+    ...process.env,
+    PATH: `./node_modules/.bin:./node_modules/@nofrills/tasks/bin:${process.env.PATH}`,
+  }
+
+  const options: ExecOptions = {
+    cwd: context.task.cwd,
+    env,
+    windowsHide: true,
+  }
+
   const args = (args?: string[]): string => (args ? args : []).join(' ')
   const command = `${context.job.command} ${args(context.job.arguments)}`
 
@@ -55,26 +70,6 @@ export function executor(
   return proc
 }
 
-export function spawner(
-  context: TaskContext,
-  options: ExecOptions,
-  messages: string[],
-): ChildProcess {
-  const proc = spawn(context.job.command, context.job.arguments, options)
-
-  proc.stderr.on('error', error => {
-    context.log.error(context.job.name, error)
-    messages.push(error.message)
-  })
-
-  proc.stdout.on('data', data => {
-    context.log.debug(context.job.name, data)
-    messages.push(data)
-  })
-
-  return proc
-}
-
 function execute(context: TaskContext): Promise<TaskJobResult> {
   if (context.job.command.startsWith('#')) {
     context.log.debug('skip', context.job.name, context.job.command)
@@ -90,19 +85,7 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
   return new Promise<TaskJobResult>((resolve, reject) => {
     const messages: string[] = []
 
-    const env = {
-      ...process.env,
-      PATH: `./node_modules/.bin:${process.env.PATH}`,
-    }
-
-    const options: ExecOptions = {
-      cwd: context.task.cwd,
-      env,
-      windowsHide: true,
-    }
-
-    // const proc = spawner(context, options, messages)
-    const proc = executor(context, options, messages)
+    const proc = executor(context, messages)
 
     context.log.debug(
       'serial-task',
@@ -116,7 +99,7 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
     proc.stderr.pipe(context.stderr)
 
     proc.on('uncaughtException', (error: Error) => {
-      context.log.error(context.job.name, error)
+      context.log.error('uncaught-exception', context.job.name, error)
       reject(error)
     })
 

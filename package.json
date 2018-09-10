@@ -13,7 +13,6 @@
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.5",
     "@types/node": "*",
-    "bin-shebang": "^1.0.11",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "commitizen": "^2.10.1",

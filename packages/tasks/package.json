@@ -22,7 +22,8 @@
     "@nofrills/types": "^3.3.3"
   },
   "devDependencies": {
-    "@types/node": "*"
+    "@types/node": "*",
+    "ts-node": "^7.0.0"
   },
   "publishConfig": {
     "access": "public",
@@ -33,9 +34,17 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "rimraf .cache && rimraf docs && rimraf bin",
-    "postbuild": "node ./bin/cli-shabang.js",
-    "clean": "rimraf .cache && rimraf docs && rimraf bin"
+    "build": "ts-node ./src/cli-tasks.ts build",
+    "clean": "ts-node ./src/cli-tasks.ts clean"
+  },
+  "tasks": {
+    "build": [
+      "[clean]",
+      "tsc --project tsconfig.build.json",
+      "node ./bin/cli-shabang.js"
+    ],
+    "clean": [
+      "rimraf bin"
+    ]
   }
 }

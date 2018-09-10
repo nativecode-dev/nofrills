@@ -24,7 +24,7 @@ export type TaskRunnerAdapter = (
 ) => Promise<TaskJobResult[]>
 
 export class TaskRunner {
-  private readonly log: Lincoln = Logger.extend('runner')
+  private readonly log: Lincoln = Logger.extend('run')
 
   constructor(
     private readonly config: TaskConfig,
@@ -44,7 +44,7 @@ export class TaskRunner {
         jobs: (this.config.tasks[task] as Task[]) || [],
       }))
       .map(task => {
-        this.log.debug(task.name)
+        this.log.debug('task-map', task.name)
         return this.execute(task, out, err)
       })
 
@@ -61,7 +61,7 @@ export class TaskRunner {
     out: NodeJS.WriteStream,
     err: NodeJS.WriteStream,
   ): Promise<TaskJobResult[]> {
-    this.log.debug(task.name, task.jobs)
+    this.log.debug('task-exec', task.name, task.jobs)
     return this.adapter(task, this.log.extend(task.name), out, err)
   }
 }

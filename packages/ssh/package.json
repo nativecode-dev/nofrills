@@ -35,14 +35,15 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../tasks/src/cli-tasks.ts build",
+    "clean": "ts-node ../tasks/src/cli-tasks.ts clean"
   },
   "tasks": {
     "build": [
       "[clean]",
+      "which cli-shabang",
       "tsc --project tsconfig.build.json",
-      "cli-shabang"
+      "node ../tasks/bin/cli-shabang.js"
     ],
     "clean": [
       "rimraf bin"
