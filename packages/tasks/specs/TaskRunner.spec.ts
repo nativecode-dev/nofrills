@@ -4,19 +4,12 @@ import { fs } from '@nofrills/fs'
 
 import expect from './expect'
 
-import {
-  TaskConfig,
-  TaskBuilder,
-  TaskRunner,
-  TaskJobs,
-  TaskJobResult,
-  TaskRunnerAdapter,
-} from '../src/index'
+import { TaskConfig, TaskBuilder, TaskRunner, TaskJobs, TaskJobResult, TaskRunnerAdapter } from '../src/index'
 
 const assets = fs.join(__dirname, 'assets')
 
 describe('when using TaskRunner', () => {
-  const builder = new TaskBuilder(assets, 'tasks.json')
+  const builder = TaskBuilder.from(assets)
 
   const TestTask: TaskConfig = {
     tasks: {
@@ -30,12 +23,8 @@ describe('when using TaskRunner', () => {
     },
   }
 
-  const adapter: TaskRunnerAdapter = (
-    task: TaskJobs,
-  ): Promise<TaskJobResult[]> => {
-    return Promise.all(
-      task.jobs.map(job => ({ code: 0, job, messages: [], signal: null })),
-    )
+  const adapter: TaskRunnerAdapter = (task: TaskJobs): Promise<TaskJobResult[]> => {
+    return Promise.all(task.jobs.map(job => ({ code: 0, job, messages: [], signal: null })))
   }
 
   it('should execute tasks', async () => {

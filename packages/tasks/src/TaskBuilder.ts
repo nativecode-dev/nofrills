@@ -18,11 +18,11 @@ export class TaskBuilder {
   private readonly log: Lincoln = Logger.extend('builder')
   private readonly resolver: FileResolver
 
-  constructor(public readonly cwd: string, private readonly definitions: string = 'package.json') {
+  constructor(public readonly cwd: string, private readonly definitions: string[]) {
     this.resolver = CreateResolver(cwd)
   }
 
-  static from(cwd: string, definitions: string = 'package.json'): TaskBuilder {
+  static from(cwd: string, definitions: string[] = ['tasks.json', 'package.json']): TaskBuilder {
     return new TaskBuilder(cwd, definitions)
   }
 
@@ -85,8 +85,9 @@ export class TaskBuilder {
     return context
   }
 
-  protected resolve(): Promise<string[]> {
-    return this.resolver.find(this.definitions)
+  protected async resolve(): Promise<string[]> {
+    const found = await Promise.all(this.definitions.map(definition => this.resolver.find(definition)))
+    return found.reduce((results, current) => results.concat(...current), [])
   }
 
   protected transform(config: TaskConfig): TaskConfig {
