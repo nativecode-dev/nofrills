@@ -1,33 +1,31 @@
 export interface ProcessArgsFilter {
-  (argument: string): boolean
+  (argument: string, index: number): boolean
 }
 
-const ExcludeCurrentProcess: ProcessArgsFilter = argument => process.execPath !== argument
-
 export class ProcessArgs {
-  private readonly arguments: string[]
+  private readonly filtered: string[]
 
-  constructor(args: string[]) {
-    this.arguments = this.process(args)
+  private constructor(args: string[], node: boolean) {
+    this.filtered = this.filter(args, node)
   }
 
-  static from(args: string[]): ProcessArgs {
-    return new ProcessArgs(args)
+  static from(args: string[], node: boolean = true): ProcessArgs {
+    return new ProcessArgs(args, node)
   }
 
   get args(): string[] {
-    return this.arguments
+    return this.filtered
   }
 
   get exe(): string {
-    return this.arguments[0]
+    return this.filtered[0]
   }
 
   get normalized(): string[] {
-    return this.arguments.slice(1)
+    return this.filtered.slice(1)
   }
 
-  private process(args: string[], filter: ProcessArgsFilter = ExcludeCurrentProcess): string[] {
-    return args.filter(filter)
+  private filter(args: string[], node: boolean): string[] {
+    return node ? args.slice(1) : args
   }
 }
