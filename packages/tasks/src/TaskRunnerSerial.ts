@@ -1,5 +1,4 @@
-import { ExecOptions } from 'shelljs'
-import { exec, ChildProcess } from 'child_process'
+import { ChildProcess, spawn, SpawnOptions } from 'child_process'
 
 import { Task } from './Task'
 import { Lincoln } from './Logging'
@@ -36,38 +35,21 @@ export const TaskRunnerSerial: TaskRunnerAdapter = (
   )
 }
 
-function executor(context: TaskContext, messages: string[]): ChildProcess {
+function run(context: TaskContext, messages: string[]): ChildProcess {
   const env = {
     ...process.env,
     PATH: `./node_modules/.bin:./node_modules/@nofrills/tasks/bin:${process.env.PATH}`,
   }
 
-  const options: ExecOptions = {
+  const options: SpawnOptions = {
     cwd: context.task.cwd,
     env,
+    shell: true,
+    stdio: 'inherit',
     windowsHide: true,
   }
 
-  const args = (args?: string[]): string => (args ? args : []).join(' ')
-  const command = `${context.job.command} ${args(context.job.arguments)}`
-
-  const proc = exec(command, options, (error, stdout, stderr) => {
-    if (error) {
-      return
-    }
-
-    if (stderr) {
-      context.log.error(context.job.name, error, stderr)
-      messages.push(stderr)
-    }
-
-    if (stdout) {
-      context.log.debug(context.job.name, stdout)
-      messages.push(stdout)
-    }
-  })
-
-  return proc
+  return spawn(context.job.command, context.job.arguments, options)
 }
 
 function execute(context: TaskContext): Promise<TaskJobResult> {
@@ -85,18 +67,9 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
   return new Promise<TaskJobResult>((resolve, reject) => {
     const messages: string[] = []
 
-    const proc = executor(context, messages)
+    const proc = run(context, messages)
 
-    context.log.debug(
-      'serial-task',
-      context.task.cwd,
-      context.job.name,
-      context.job.command,
-      context.job.arguments,
-    )
-
-    proc.stdout.pipe(context.stdout)
-    proc.stderr.pipe(context.stderr)
+    context.log.debug('serial-task', context.task.cwd, context.job.name, context.job.command, context.job.arguments)
 
     proc.on('uncaughtException', (error: Error) => {
       context.log.error('uncaught-exception', context.job.name, error)
