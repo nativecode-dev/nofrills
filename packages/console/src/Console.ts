@@ -25,8 +25,7 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
   }
 
   static run<T extends ConsoleOptions>(options: T, exe: string, ...args: string[]): Promise<void> {
-    const console = Console.create<T>(options, exe, ...args)
-    return console.start()
+    return Console.create<T>(options, exe, ...args).start()
   }
 
   async start(): Promise<void> {

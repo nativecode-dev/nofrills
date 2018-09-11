@@ -35,7 +35,7 @@ export const TaskRunnerSerial: TaskRunnerAdapter = (
   )
 }
 
-function run(context: TaskContext, messages: string[]): ChildProcess {
+function run(context: TaskContext): ChildProcess {
   const env = {
     ...process.env,
     PATH: `./node_modules/.bin:./node_modules/@nofrills/tasks/bin:${process.env.PATH}`,
@@ -67,7 +67,7 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
   return new Promise<TaskJobResult>((resolve, reject) => {
     const messages: string[] = []
 
-    const proc = run(context, messages)
+    const proc = run(context)
 
     context.log.debug('serial-task', context.task.cwd, context.job.name, context.job.command, context.job.arguments)
 
