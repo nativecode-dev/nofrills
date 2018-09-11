@@ -9,15 +9,15 @@ const assets = fs.join(__dirname, 'assets')
 
 describe('when using TaskBuilder', () => {
   it('should create builder', () => {
-    expect(() => new TaskBuilder(assets, 'tasks.json')).to.not.throw
+    expect(() => TaskBuilder.from(assets)).to.not.throw
   })
 
   it('should fail to create when tasks not found', () => {
-    expect(() => new TaskBuilder(assets, 'undefined.json')).to.throw
+    expect(() => new TaskBuilder(assets, ['undefined.json'])).to.throw
   })
 
   describe('to compile tasks', () => {
-    const builder = new TaskBuilder(assets, 'tasks.json')
+    const builder = TaskBuilder.from(assets)
 
     it('should compile tasks', async () => {
       const config = await builder.build()
