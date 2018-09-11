@@ -18,10 +18,7 @@ export class TaskBuilder {
   private readonly log: Lincoln = Logger.extend('builder')
   private readonly resolver: FileResolver
 
-  constructor(
-    public readonly cwd: string,
-    private readonly definitions: string = 'package.json',
-  ) {
+  constructor(public readonly cwd: string, private readonly definitions: string = 'package.json') {
     this.resolver = CreateResolver(cwd)
   }
 
@@ -95,6 +92,13 @@ export class TaskBuilder {
   protected transform(config: TaskConfig): TaskConfig {
     return Object.keys(config.tasks)
       .map(key => ({ config, name: key, tasks: config.tasks[key] }))
+      .filter(context => {
+        if (context.tasks) {
+          return true
+        }
+        console.log(`failed to find task: ${context.name}`)
+        return false
+      })
       .map(context => this.expand(context))
       .reduce((result, context) => {
         this.log.debug('transform', result.tasks[context.name], context.tasks)
