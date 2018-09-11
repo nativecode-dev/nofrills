@@ -12,12 +12,12 @@ const options: ConsoleOptions = {
       Logger.debug(args, results)
 
       if (results.some(result => result.code !== 0)) {
-        const filtered = results.map(result => ({
-          code: result.code,
-          job: result.job,
-        }))
-
-        console.log(...filtered)
+        results
+          .map(result => ({
+            code: result.code,
+            job: result.job,
+          }))
+          .map(result => console.log(`${result.job}: ${result.code}`))
 
         process.exit(5)
       }
