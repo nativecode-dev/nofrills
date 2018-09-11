@@ -26,10 +26,7 @@ export type TaskRunnerAdapter = (
 export class TaskRunner {
   private readonly log: Lincoln = Logger.extend('run')
 
-  constructor(
-    private readonly config: TaskConfig,
-    private readonly adapter: TaskRunnerAdapter = TaskRunnerSerial,
-  ) {}
+  constructor(private readonly config: TaskConfig, private readonly adapter: TaskRunnerAdapter = TaskRunnerSerial) {}
 
   async run(
     names: string[],
@@ -50,17 +47,10 @@ export class TaskRunner {
 
     const results = await Promise.all(promises)
 
-    return results.reduce<TaskJobResult[]>(
-      (result, current) => result.concat(...current),
-      [],
-    )
+    return results.reduce<TaskJobResult[]>((result, current) => result.concat(...current), [])
   }
 
-  private execute(
-    task: TaskJobs,
-    out: NodeJS.WriteStream,
-    err: NodeJS.WriteStream,
-  ): Promise<TaskJobResult[]> {
+  private execute(task: TaskJobs, out: NodeJS.WriteStream, err: NodeJS.WriteStream): Promise<TaskJobResult[]> {
     this.log.debug('task-exec', task.name, task.jobs)
     return this.adapter(task, this.log.extend(task.name), out, err)
   }
