@@ -1,13 +1,4 @@
-import {
-  Class,
-  Constructor,
-  Method,
-  Methods,
-  Namespace,
-  Parameters,
-  Properties,
-  Type,
-} from '@nofrills/typings'
+import { Class, Constructor, Method, Methods, Namespace, Parameters, Properties, Type } from '@nofrills/typings'
 
 import { Parser } from './Parser'
 import { Lincoln } from './Logger'
@@ -33,7 +24,9 @@ export class ClassParser extends Parser<Class> {
 
     const $class: Class = {
       constructors: [],
-      description: $('div#main > section > header > div.class-description > p').text().trim(),
+      description: $('div#main > section > header > div.class-description > p')
+        .text()
+        .trim(),
       methods: {},
       name: this.name,
       properties: {},
@@ -85,10 +78,17 @@ export class ClassParser extends Parser<Class> {
       const $method = $(dt)
 
       const id = $method.find('h4.name').attr('id')
-      const returns = this.type($method.next().find('dl dd span.param-type a').text().trim())
+      const returns = this.type(
+        $method
+          .next()
+          .find('dl dd span.param-type a')
+          .text()
+          .trim(),
+      )
       const method: Method = { name: id, parameters: {}, return: returns }
 
-      $method.next()
+      $method
+        .next()
         .find('> table.params > tbody > tr')
         .each((_, tr) => this.parameter(method.parameters, $, $(tr)))
 
@@ -97,13 +97,28 @@ export class ClassParser extends Parser<Class> {
   }
 
   private parameter(parameters: Parameters, $: CheerioStatic, $param: Cheerio): void {
-    const optional = $param.find('> td.attributes').text().trim() === '<optional>'
-    const description = $param.find('> td.description > p').text().trim()
-    const name = $param.find('> td.name > code').text().trim()
+    const optional =
+      $param
+        .find('> td.attributes')
+        .text()
+        .trim() === '<optional>'
+    const description = $param
+      .find('> td.description > p')
+      .text()
+      .trim()
+    const name = $param
+      .find('> td.name > code')
+      .text()
+      .trim()
     const types: string[] = []
 
-    $param.find('> td.type > span.param-type')
-      .each((_, t) => types.push($(t).text().trim()))
+    $param.find('> td.type > span.param-type').each((_, t) =>
+      types.push(
+        $(t)
+          .text()
+          .trim(),
+      ),
+    )
 
     const type = this.resolve(...types)
     parameters[name] = { description, name, optional, type }
@@ -116,15 +131,21 @@ export class ClassParser extends Parser<Class> {
       const name = $property.attr('id')
       const types: string[] = []
 
-      $types.find('ul li span.param-type')
-        .each((_, span) => types.push($(span).text().trim()))
+      $types.find('ul li span.param-type').each((_, span) =>
+        types.push(
+          $(span)
+            .text()
+            .trim(),
+        ),
+      )
 
       properties[name] = { name, readonly: false, type: this.resolve(...types) }
     })
   }
 
   private resolve(...types: string[]): Type {
-    const filtered = types.map(name => this.typename(name))
+    const filtered = types
+      .map(name => this.typename(name))
       .filter((name, index, array) => array.indexOf(name) === index)
 
     const key = filtered.join('|')
