@@ -1,4 +1,4 @@
-import { CLI, ConsoleOptions, IConsole } from '@nofrills/console'
+import { CLI, ConsoleOptions, IConsole, ProcessArgs } from '@nofrills/console'
 
 import { TaskBuilder } from './TaskBuilder'
 import { Logger } from './Logging'
@@ -8,13 +8,24 @@ const options: ConsoleOptions = {
     try {
       const builder = TaskBuilder.from(process.cwd())
       const results = await builder.run(args)
+
       Logger.debug(args, results)
+
+      if (results.some(result => result.code !== 0)) {
+        const filtered = results.map(result => ({
+          code: result.code,
+          job: result.job,
+        }))
+
+        console.log(...filtered)
+
+        process.exit(5)
+      }
     } catch (error) {
       console.log(error)
     }
   },
 }
 
-const exe = process.argv[1]
-const args = process.argv.slice(2)
-CLI.run(options, exe, ...args).catch(console.log)
+const args = ProcessArgs.from(process.argv)
+CLI.run(options, args.exe, ...args.normalized).catch(console.log)
