@@ -36,28 +36,16 @@ export class ShaBang {
     }
   }
 
-  static async shabangify(
-    filename: string,
-    chmod: boolean = false,
-  ): Promise<Buffer> {
+  static async shabangify(filename: string): Promise<Buffer> {
     const shabang = Buffer.from('#!/usr/bin/env node\n')
-    const file = await fs.text(filename)
-    const combined = Buffer.concat([shabang, Buffer.from(file)])
+    const original = await fs.readFile(filename)
+    const combined = Buffer.concat([shabang, original])
 
     try {
       console.log('shabanged', filename)
       await fs.writeFile(filename, combined)
     } catch {
       console.log(`failed to write file: ${filename}`)
-    }
-
-    if (chmod) {
-      try {
-        console.log('chmod', filename)
-        await fs.chmod(filename, 755)
-      } catch {
-        console.log(`failed to set executable flag: ${filename}`)
-      }
     }
 
     return combined
