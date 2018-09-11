@@ -36,15 +36,19 @@ export class NamespaceParser extends Parser<Namespace> {
     const dl = $('div#main section article dl:not([class])')
     const list = Array.from($('dt a', dl[0]))
 
-    const classes = await throttle(list.map(a => {
-      const page = a.attribs['href']
-      const name = $(a).text().trim()
+    const classes = await throttle(
+      list.map(a => {
+        const page = a.attribs['href']
+        const name = $(a)
+          .text()
+          .trim()
 
-      this.log.debug('class', name, page)
+        this.log.debug('class', name, page)
 
-      const parser = new ClassParser(this.couchbase, namespace, name, page)
-      return () => parser.parse()
-    }))
+        const parser = new ClassParser(this.couchbase, namespace, name, page)
+        return () => parser.parse()
+      }),
+    )
 
     return classes.reduce((container, $class) => {
       container[$class.name] = $class

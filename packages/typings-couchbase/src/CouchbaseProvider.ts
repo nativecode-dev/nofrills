@@ -22,7 +22,7 @@ function Create(version: string): Couchbase {
     url(name?: string): URL {
       const pagename = name ? `/${name}` : ''
       return new URL(`http://docs.couchbase.com/sdk-api/couchbase-node-client-${version}${pagename}`)
-    }
+    },
   }
 }
 
