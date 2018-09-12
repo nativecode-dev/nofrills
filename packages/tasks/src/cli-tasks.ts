@@ -17,7 +17,7 @@ const options: ConsoleOptions = {
             code: result.code,
             job: result.job,
           }))
-          .map(result => ConsoleLog.info(`${result.job}: ${result.code}`))
+          .map(result => ConsoleLog.info(`${result.job.command}: ${result.code}`))
 
         process.exit(5)
       }
