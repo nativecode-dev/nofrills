@@ -1,11 +1,17 @@
 import { fs, FileResolver, RecursiveStrategy } from '@nofrills/fs'
 import { generate, Parser, ParserBuildOptions } from 'pegjs'
 
+import { GrammarError } from './errors/GrammarError'
+
 export class SshParser {
   private readonly resolver: FileResolver
 
-  constructor(cwd: string, private readonly grammar: string) {
-    this.resolver = new FileResolver(cwd, [RecursiveStrategy])
+  protected constructor(cwd: string, private readonly grammar: string) {
+    this.resolver = FileResolver.from(cwd, [RecursiveStrategy])
+  }
+
+  static from(cwd: string, grammar: string = 'config.pegjs'): SshParser {
+    return new SshParser(cwd, grammar)
   }
 
   async generate(): Promise<Parser> {
@@ -22,6 +28,6 @@ export class SshParser {
       return parser
     }
 
-    throw new Error(`could not find grammar: ${this.resolver.cwd} ${this.grammar}`)
+    throw new GrammarError(`could not find grammar: ${this.resolver.cwd} ${this.grammar}`)
   }
 }
