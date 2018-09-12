@@ -21,15 +21,7 @@ export const TaskRunnerSerial: TaskRunnerAdapter = (
   return task.jobs.reduce(
     (results, job) =>
       results
-        .then(() =>
-          execute({
-            job,
-            log: log.extend(job.command),
-            task,
-            stdout: out,
-            stderr: err,
-          }),
-        )
+        .then(() => execute({ job, log: log.extend(job.command), task, stdout: out, stderr: err }))
         .then(async result => [...(await results), result]),
     Promise.resolve([] as TaskJobResult[]),
   )
@@ -57,17 +49,11 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
   if (context.job.command.startsWith('#')) {
     context.log.debug('skip', context.job.name, context.job.command)
 
-    return Promise.resolve({
-      code: 0,
-      job: context.job,
-      messages: [],
-      signal: null,
-    })
+    return Promise.resolve({ code: 0, job: context.job, messages: [], signal: null })
   }
 
   return new Promise<TaskJobResult>((resolve, reject) => {
     const messages: string[] = []
-
     const proc = run(context)
 
     context.log.debug('serial-task', context.task.cwd, context.job.name, context.job.command, context.job.arguments)

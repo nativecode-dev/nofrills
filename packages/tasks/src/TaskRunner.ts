@@ -35,11 +35,7 @@ export class TaskRunner {
     err: NodeJS.WriteStream = process.stderr,
   ): Promise<TaskJobResult[]> {
     const promises = names
-      .map<TaskJobs>(task => ({
-        cwd,
-        name: task,
-        jobs: (this.config.tasks[task] as Task[]) || [],
-      }))
+      .map<TaskJobs>(task => ({ cwd, name: task, jobs: this.config.tasks[task] as Task[] }))
       .map(task => {
         this.log.debug('task-map', task.name)
         return this.execute(task, out, err)
