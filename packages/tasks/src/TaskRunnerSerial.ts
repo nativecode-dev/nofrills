@@ -30,7 +30,6 @@ export const TaskRunnerSerial: TaskRunnerAdapter = (
 function run(context: TaskContext): ChildProcess {
   const env = {
     ...process.env,
-    DEBUG: process.env.DEBUG ? `${process.env.DEBUG},tasks:*` : 'DEBUG=tasks:*',
     PATH: `./node_modules/.bin:./node_modules/@nofrills/tasks/bin:${process.env.PATH}`,
   }
 

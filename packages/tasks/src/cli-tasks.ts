@@ -27,5 +27,11 @@ const options: ConsoleOptions = {
   },
 }
 
+if (process.env.DEBUG) {
+  process.env.DEBUG = `${process.env.DEBUG},tasks:*`
+} else {
+  process.env.DEBUG = 'tasks:*'
+}
+
 const args = ProcessArgs.from(process.argv)
 CLI.run(options, args.exe, ...args.normalized).catch(ConsoleLog.info)
