@@ -14,7 +14,7 @@
   "dependencies": {
     "@nofrills/collections": "^3.2.0",
     "@nofrills/lincoln": "^3.2.0",
-    "debug": "^3.1.0"
+    "debug": "^4.0.1"
   },
   "devDependencies": {
     "@types/debug": "0.0.30"
