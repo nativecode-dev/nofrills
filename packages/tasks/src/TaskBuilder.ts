@@ -5,7 +5,7 @@ import { Task } from './Task'
 import { TaskConfig } from './TaskConfig'
 import { TaskDefinition } from './TaskDefinitions'
 
-import { Lincoln, Logger } from './Logging'
+import { Lincoln, Logger, ConsoleLog } from './Logging'
 import { TaskRunner, TaskJobResult } from './TaskRunner'
 
 export interface TaskContext {
@@ -58,6 +58,8 @@ export class TaskBuilder {
         tasks: config.tasks[key],
       }
 
+      this.log.debug('convert', key, context.tasks)
+
       return this.expand(context).tasks as Task[]
     }
 
@@ -73,6 +75,8 @@ export class TaskBuilder {
   }
 
   protected expand(context: TaskContext): TaskContext {
+    this.log.debug('expand', context.tasks)
+
     context.tasks = context.tasks
       .map(task => {
         if (Is.string(task)) {
@@ -86,8 +90,9 @@ export class TaskBuilder {
   }
 
   protected async resolve(): Promise<string[]> {
-    const found = await Promise.all(this.definitions.map(definition => this.resolver.find(definition)))
-    return found.reduce((results, current) => results.concat(...current), [])
+    const resolved = await Promise.all(this.definitions.map(definition => this.resolver.find(definition)))
+    this.log.debug('resolve', resolved)
+    return resolved.reduce((results, current) => results.concat(...current), [])
   }
 
   protected transform(config: TaskConfig): TaskConfig {
@@ -97,7 +102,7 @@ export class TaskBuilder {
         if (context.tasks) {
           return true
         }
-        console.log(`failed to find task: ${context.name}`)
+        ConsoleLog.error(`failed to find task: ${context.name}`)
         return false
       })
       .map(context => this.expand(context))

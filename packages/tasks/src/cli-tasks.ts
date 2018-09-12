@@ -1,7 +1,7 @@
 import { CLI, ConsoleOptions, IConsole, ProcessArgs } from '@nofrills/console'
 
 import { TaskBuilder } from './TaskBuilder'
-import { Logger } from './Logging'
+import { Logger, ConsoleLog } from './Logging'
 
 const options: ConsoleOptions = {
   initializer: async (_: IConsole, ...args: string[]) => {
@@ -17,15 +17,15 @@ const options: ConsoleOptions = {
             code: result.code,
             job: result.job,
           }))
-          .map(result => console.log(`${result.job}: ${result.code}`))
+          .map(result => ConsoleLog.info(`${result.job}: ${result.code}`))
 
         process.exit(5)
       }
     } catch (error) {
-      console.log(error)
+      ConsoleLog.info(error)
     }
   },
 }
 
 const args = ProcessArgs.from(process.argv)
-CLI.run(options, args.exe, ...args.normalized).catch(console.log)
+CLI.run(options, args.exe, ...args.normalized).catch(ConsoleLog.info)

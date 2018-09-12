@@ -6,4 +6,5 @@ import { ScrubsInterceptor } from '@nofrills/scrubs'
 const options: Options = CreateOptions('nofrills:tasks')
 options.interceptors.register('scrubs', ScrubsInterceptor)
 
+export const ConsoleLog: Lincoln = CreateLogger({ ...options, namespace: 'tasks' })
 export const Logger: Lincoln = CreateLogger(options)
