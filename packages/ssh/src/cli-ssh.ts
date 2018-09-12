@@ -4,7 +4,7 @@ import { SshParser } from './SshParser'
 
 const options: ConsoleOptions = {
   initializer: async () => {
-    const ssh = new SshParser(process.cwd(), 'config.pegjs')
+    const ssh = SshParser.from(process.cwd(), 'config.pegjs')
     const parser = await ssh.generate()
     parser.parse('')
     return Promise.resolve()

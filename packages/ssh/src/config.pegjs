@@ -153,7 +153,6 @@ Identifier
   / 'VisualHostKey'i
   / 'XAuthLocation'i
 
-
 Value
   = (!EOL .)*
 
