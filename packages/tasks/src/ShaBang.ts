@@ -1,15 +1,19 @@
 import { fs } from '@nofrills/fs'
 import { Is, Npm, DictionaryOf } from '@nofrills/types'
 
-import { Lincoln, Logger } from './Logging'
+import { ConsoleLog, Lincoln, Logger } from './Logging'
 
 export class ShaBang {
   private readonly log: Lincoln = Logger.extend('shabang')
   private readonly npm: Promise<Npm>
 
-  constructor(npm: string) {
+  protected constructor(npm: string) {
     this.log.debug('npm', npm)
     this.npm = fs.json<Npm>(npm)
+  }
+
+  static from(npm: string): ShaBang {
+    return new ShaBang(npm)
   }
 
   async shabang(): Promise<void> {
@@ -28,7 +32,7 @@ export class ShaBang {
           try {
             return await ShaBang.shabangify(bin)
           } catch (error) {
-            console.log(bin, error)
+            ConsoleLog.info(bin, error)
             return Promise.resolve()
           }
         }),
@@ -42,10 +46,10 @@ export class ShaBang {
     const combined = Buffer.concat([shabang, original])
 
     try {
-      console.log('shabanged', filename)
+      ConsoleLog.info('shabanged', filename)
       await fs.writeFile(filename, combined)
     } catch {
-      console.log(`failed to write file: ${filename}`)
+      ConsoleLog.error(`failed to write file: ${filename}`)
     }
 
     return combined
