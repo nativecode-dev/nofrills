@@ -6,9 +6,7 @@ import { Lincoln, Log, Options, LogMessageType } from '../src'
 import { EXTENSION, MESSAGE, NAMESPACE, Context } from './Context'
 
 describe('when using Lincoln', () => {
-
   describe('to log messages', () => {
-
     it('should create Lincoln with no options', () => {
       const sut: Lincoln = new Lincoln()
       expect(sut).to.be.instanceOf(Lincoln)
@@ -20,7 +18,7 @@ describe('when using Lincoln', () => {
       expect(regex.test(sut.now())).to.be.true
     })
 
-    it('should create log object', (done) => {
+    it('should create log object', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
         expect(log.parameters[0]).to.equal(MESSAGE)
@@ -37,7 +35,35 @@ describe('when using Lincoln', () => {
       expect(sut.namespace).to.equal(NAMESPACE)
     })
 
-    it('should act as emitter', (done) => {
+    it('should create log with no namespace', done => {
+      const sut: Lincoln = new Lincoln(
+        Context.intercept(
+          async (log: Log) => {
+            expect(log.namespace).to.equal('debug')
+            done()
+            return log
+          },
+          { emitNamespace: false },
+        ),
+      )
+      sut.debug(MESSAGE)
+    })
+
+    it('should create log with no tag', done => {
+      const sut: Lincoln = new Lincoln(
+        Context.intercept(
+          async (log: Log) => {
+            expect(log.namespace).to.equal('nativecode:lincoln:test')
+            done()
+            return log
+          },
+          { emitTag: false },
+        ),
+      )
+      sut.debug(MESSAGE)
+    })
+
+    it('should act as emitter', done => {
       const sut: Lincoln = new Lincoln(NAMESPACE)
       sut.on('log-message', (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
@@ -47,7 +73,7 @@ describe('when using Lincoln', () => {
       sut.debug(MESSAGE)
     })
 
-    it('should extend instance', (done) => {
+    it('should extend instance', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:${EXTENSION}:debug`)
         expect(log.parameters[0]).to.equal(MESSAGE)
@@ -60,7 +86,7 @@ describe('when using Lincoln', () => {
       sut.debug(MESSAGE)
     })
 
-    it('should log object', (done) => {
+    it('should log object', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.parameters[0].message).to.equal(MESSAGE)
         done()
@@ -70,7 +96,17 @@ describe('when using Lincoln', () => {
       sut.debug({ message: MESSAGE })
     })
 
-    it('should log empty parameters', (done) => {
+    it('should log object with no namespace', done => {
+      const options: Options = Context.intercept(async (log: Log) => {
+        expect(log.parameters[0].message).to.equal(MESSAGE)
+        done()
+        return log
+      })
+      const sut: Lincoln = new Lincoln(options)
+      sut.debug({ message: MESSAGE })
+    })
+
+    it('should log empty parameters', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.parameters.length).to.equal(0)
         done()
@@ -79,12 +115,10 @@ describe('when using Lincoln', () => {
       const sut: Lincoln = new Lincoln(options)
       sut.debug()
     })
-
   })
 
   describe('to log different types of messages', () => {
-
-    it('should call debug', (done) => {
+    it('should call debug', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
         done()
@@ -94,7 +128,7 @@ describe('when using Lincoln', () => {
       sut.debug(MESSAGE)
     })
 
-    it('should call error', (done) => {
+    it('should call error', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:error`)
         done()
@@ -104,7 +138,7 @@ describe('when using Lincoln', () => {
       sut.error(MESSAGE)
     })
 
-    it('should call fatal', (done) => {
+    it('should call fatal', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:fatal`)
         done()
@@ -114,7 +148,7 @@ describe('when using Lincoln', () => {
       sut.fatal(MESSAGE)
     })
 
-    it('should call info', (done) => {
+    it('should call info', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:info`)
         done()
@@ -124,7 +158,7 @@ describe('when using Lincoln', () => {
       sut.info(MESSAGE)
     })
 
-    it('should call silly', (done) => {
+    it('should call silly', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:silly`)
         done()
@@ -134,7 +168,7 @@ describe('when using Lincoln', () => {
       sut.silly(MESSAGE)
     })
 
-    it('should call trace', (done) => {
+    it('should call trace', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:trace`)
         done()
@@ -144,7 +178,7 @@ describe('when using Lincoln', () => {
       sut.trace(MESSAGE)
     })
 
-    it('should call warn', (done) => {
+    it('should call warn', done => {
       const options: Options = Context.intercept(async (log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:warn`)
         done()
@@ -153,12 +187,10 @@ describe('when using Lincoln', () => {
       const sut: Lincoln = new Lincoln(options)
       sut.warn(MESSAGE)
     })
-
   })
 
   describe('to filter messages', () => {
-
-    it('should filter message', (done) => {
+    it('should filter message', done => {
       const filter = (log: Log) => {
         const filtered = log.type === LogMessageType.debug
         if (filtered) {
@@ -173,7 +205,7 @@ describe('when using Lincoln', () => {
       sut.warn(MESSAGE)
     })
 
-    it('should not filter message', (done) => {
+    it('should not filter message', done => {
       const filter = (log: Log) => {
         if (log.type === LogMessageType.warn) {
           done()
@@ -186,12 +218,10 @@ describe('when using Lincoln', () => {
       sut.debug(MESSAGE)
       sut.warn(MESSAGE)
     })
-
   })
 
   describe('to intercept messages', () => {
-
-    it('should intercept message', (done) => {
+    it('should intercept message', done => {
       const interceptor = async (log: Log) => {
         done()
         return log
@@ -201,7 +231,5 @@ describe('when using Lincoln', () => {
       const sut: Lincoln = new Lincoln(options)
       sut.debug(MESSAGE)
     })
-
   })
-
 })

@@ -13,6 +13,8 @@ export const ConsoleInterceptor: Interceptor = (log: Log): Promise<Log> => {
 
 export const CreateOptions = (namespace: string): Options => {
   const options: Options = {
+    emitNamespace: true,
+    emitTag: true,
     filters: new LincolnRegistry<Filter>(),
     interceptors: new LincolnRegistry<Interceptor>(),
     namespace,

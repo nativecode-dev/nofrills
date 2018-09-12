@@ -24,8 +24,14 @@ export const DebugInterceptor: Interceptor = (log: Log): Promise<Log> => {
   return Promise.resolve(log)
 }
 
-export const CreateOptions = (namespace: string, filters?: RegistryEntries<Filter>, interceptors?: RegistryEntries<Interceptor>): Options => {
+export const CreateOptions = (
+  namespace: string,
+  filters?: RegistryEntries<Filter>,
+  interceptors?: RegistryEntries<Interceptor>,
+): Options => {
   const options: Options = {
+    emitNamespace: true,
+    emitTag: true,
     filters: new LincolnRegistry<Filter>(filters),
     interceptors: new LincolnRegistry<Interceptor>(interceptors),
     namespace,

@@ -10,10 +10,12 @@ import { Filter, Interceptor } from './LincolnRegistry'
 import { Options } from './Options'
 
 const defaults: Options = {
+  emitNamespace: true,
+  emitTag: true,
   filters: new Registry<Filter>(),
   interceptors: new Registry<Interceptor>(),
   namespace: 'app',
-  separator: ':'
+  separator: ':',
 }
 
 export enum LincolnEvents {
@@ -27,10 +29,7 @@ export class Lincoln extends EventEmitter {
 
   private readonly options: Options
 
-  constructor(
-    logOptions?: Partial<Options> | string,
-    private readonly loggers: LincolnLog[] = [],
-  ) {
+  constructor(logOptions?: Partial<Options> | string, private readonly loggers: LincolnLog[] = []) {
     super()
     this.id = uuid()
 
@@ -77,7 +76,7 @@ export class Lincoln extends EventEmitter {
   extend(tag: string): Lincoln {
     return new Lincoln({
       ...this.options,
-      ...{ namespace: this.normalize(tag) }
+      ...{ namespace: this.normalize(tag) },
     })
   }
 
@@ -86,7 +85,13 @@ export class Lincoln extends EventEmitter {
   }
 
   private normalize(tag: string): string {
-    return `${this.options.namespace}${this.options.separator}${tag}`
+    if (this.options.emitNamespace && this.options.emitTag) {
+      return `${this.options.namespace}${this.options.separator}${tag}`
+    } else if (this.options.emitNamespace && !this.options.emitTag) {
+      return `${this.options.namespace}`
+    } else {
+      return tag
+    }
   }
 
   private async write(tag: LogMessageType, parameters: any[]) {
@@ -98,12 +103,14 @@ export class Lincoln extends EventEmitter {
       type: tag,
     }
 
-    const log = await Array.from(this.options.interceptors.values)
-      .reduce(async (result, interceptor) => interceptor(await result), Promise.resolve(original))
+    const log = await Array.from(this.options.interceptors.values).reduce(
+      async (result, interceptor) => interceptor(await result),
+      Promise.resolve(original),
+    )
 
     const filtered: boolean = await Array.from(this.options.filters.values)
       .map(filter => filter(log))
-      .reduce(async (result, current) => await result ? result : current, Promise.resolve(false))
+      .reduce(async (result, current) => ((await result) ? result : current), Promise.resolve(false))
 
     if (filtered === true) {
       this.emit(LincolnEvents.Filtered, log)
