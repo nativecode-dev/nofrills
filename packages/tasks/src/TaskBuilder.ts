@@ -7,6 +7,7 @@ import { TaskDefinition } from './TaskDefinitions'
 
 import { Lincoln, Logger, ConsoleLog } from './Logging'
 import { TaskRunner, TaskJobResult } from './TaskRunner'
+import { TaskConfigError } from './errors/TaskConfigError'
 
 export interface TaskContext {
   config: TaskConfig
@@ -36,7 +37,7 @@ export class TaskBuilder {
       return this.transform(config)
     }
 
-    throw new Error(`failed to find configuration: ${this.definitions} in ${this.cwd}`)
+    throw new TaskConfigError(`failed to find configuration: ${this.definitions} in ${this.cwd}`)
   }
 
   async run(names: string[]): Promise<TaskJobResult[]> {
@@ -64,14 +65,9 @@ export class TaskBuilder {
     }
 
     const parts = command.split(' ')
+    const result = { arguments: parts.slice(1), command: parts[0], name: parts[0] }
 
-    return [
-      {
-        arguments: parts.slice(1),
-        command: parts[0],
-        name: parts[0],
-      },
-    ]
+    return [result]
   }
 
   protected expand(context: TaskContext): TaskContext {
@@ -91,7 +87,7 @@ export class TaskBuilder {
 
   protected async resolve(): Promise<string[]> {
     const resolved = await Promise.all(this.definitions.map(definition => this.resolver.find(definition)))
-    this.log.debug('resolve', resolved)
+    this.log.debug('resolve', ...resolved)
     return resolved.reduce((results, current) => results.concat(...current), [])
   }
 
