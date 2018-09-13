@@ -13,7 +13,6 @@
 **/src/**/*.map
 **/src/**/*.d.ts
 
-.yarnrc
 deploy
 deploy.pub
 
