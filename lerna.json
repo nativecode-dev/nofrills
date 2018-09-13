@@ -37,6 +37,7 @@
     "--silent"
   ],
   "packages": [
+    "core/*",
     "packages/*"
   ],
   "sort": true,

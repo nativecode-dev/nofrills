@@ -4,11 +4,11 @@
     "baseUrl": "./",
     "paths": {
       "@nofrills/*": [
-        "packages/*/src",
-        "typings/*/src"
+        "core/*/src",
+        "packages/*/src"
       ],
       "zipcodes-regex": [
-        "packages/types/src/zipcodes-regex.d.ts"
+        "core/types/src/zipcodes-regex.d.ts"
       ]
     }
   }
