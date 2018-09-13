@@ -35,6 +35,8 @@ jobs:
         - yarn run setup-ssh
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
+        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+        - npm whoami
         - yarn run release
 after_failure:
   - cat lerna-debug.log
