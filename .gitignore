@@ -7,11 +7,9 @@
 
 **/specs/**/*.js
 **/specs/**/*.map
-**/specs/**/*.d.ts
 
 **/src/**/*.js
 **/src/**/*.map
-**/src/**/*.d.ts
 
 deploy
 deploy.pub
