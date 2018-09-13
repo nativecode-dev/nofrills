@@ -66,9 +66,7 @@
     "precommit": "yarn run test",
     "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
     "precoveralls": "yarn run test",
-    "docs": "sh setup.sh doc",
-    "setup-git": "sh setup.sh git",
-    "setup-ssh": "sh setup.sh ssh",
+    "setup": "sh setup.sh",
     "release": "lerna-semantic-release perform",
     "prerelease": "yarn run build && lerna-semantic-release pre"
   },
