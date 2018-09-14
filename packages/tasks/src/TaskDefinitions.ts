@@ -1,7 +1,8 @@
 import { Task } from './Task'
+import { TaskEntry } from './TaskEntry'
 
-export type TaskDefinition = string | Task
+export type TaskDefinition = string | TaskEntry
 
 export interface TaskDefinitions {
-  [name: string]: Array<TaskDefinition>
+  [name: string]: TaskDefinition[] | Task
 }

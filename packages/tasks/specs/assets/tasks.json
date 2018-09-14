@@ -19,7 +19,11 @@
     ],
     "test": [
       "[build]",
-      "run tests --reporter=html"
+      {
+        "entries": [
+          "run tests --reporter=html"
+        ]
+      }
     ]
   }
 }
