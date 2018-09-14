@@ -12,17 +12,22 @@
       },
       "cp somefile somefile-other"
     ],
-    "clean": [
-      "rimraf bin",
-      "rimraf dist",
-      "rimraf lib"
-    ],
+    "clean": {
+      "entries": [
+        "rimraf bin",
+        "rimraf dist",
+        "rimraf lib"
+      ]
+    },
     "test": [
       "[build]",
       {
-        "entries": [
-          "run tests --reporter=html"
-        ]
+        "arguments": [
+          "tests",
+          "--reporter=html"
+        ],
+        "command": "run",
+        "name": "run"
       }
     ]
   }

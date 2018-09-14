@@ -52,34 +52,27 @@ export class TaskBuilder {
     this.log.debug('expand', value)
 
     if (Is.array(value)) {
-      const definitions = value as TaskDefinition[]
-      const entries = definitions
-        .map(task => {
-          if (Is.string(task)) {
-            return this.fromString(config, String(task))
-          } else if (Is.array(task)) {
-            return this.fromArray(config, Array(task))
-          }
-
-          return [task as TaskEntry]
-        })
-        .reduce((previous, current) => previous.concat(current))
-
-      return { entries }
+      return this.fromArray(config, value as TaskDefinition[])
+    } else if (Is.string(value)) {
+      return { entries: this.fromString(config, String(value)) }
+    } else if (Is.object(value)) {
+      const task = value as Task
+      return this.expand(config, task.entries)
     }
-
     return value as Task
   }
 
-  protected fromArray(config: TaskConfig, definitions: TaskDefinition[]): TaskEntry[] {
-    return definitions
-      .map(definition => {
-        if (Is.string(definition)) {
-          return this.fromString(config, String(definition))
+  protected fromArray(config: TaskConfig, definitions: TaskDefinition[]): Task {
+    const entries = definitions
+      .map(task => {
+        if (Is.string(task)) {
+          return this.fromString(config, String(task))
         }
-        return [definition as TaskEntry]
+        return [task as TaskEntry]
       })
       .reduce((previous, current) => previous.concat(current))
+
+    return { entries }
   }
 
   protected fromString(config: TaskConfig, command: string): TaskEntry[] {
@@ -87,17 +80,15 @@ export class TaskBuilder {
     const matches = regex.exec(command)
 
     if (matches) {
-      const key = matches[1]
+      const name = matches[1]
       const context: TaskContext = {
         config,
-        name: key,
-        task: {
-          entries: this.fromArray(config, config.tasks[key] as TaskDefinition[]),
-        },
+        name,
+        task: this.expand(config, config.tasks[name]),
       }
 
-      this.log.debug('convert', key, context.task)
-      return this.expand(context.config, context.task).entries
+      this.log.debug('task->entry', name, context.task)
+      return this.expand(context.config, context.task.entries).entries
     }
 
     const parts = command.split(' ')

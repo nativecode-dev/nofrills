@@ -1,7 +1,7 @@
 import { ChildProcess, spawn, SpawnOptions } from 'child_process'
 
 import { TaskEntry } from './TaskEntry'
-import { Lincoln } from './Logging'
+import { ConsoleLog, Lincoln } from './Logging'
 import { TaskRunnerAdapter, TaskJob, TaskJobResult } from './TaskRunner'
 
 export interface TaskContext {
@@ -47,7 +47,6 @@ function run(context: TaskContext): ChildProcess {
 function execute(context: TaskContext): Promise<TaskJobResult> {
   if (context.job.command.startsWith('#')) {
     context.log.debug('skip', context.job.name, context.job.command)
-
     return Promise.resolve({ code: 0, job: context.job, messages: [], signal: null })
   }
 
@@ -57,8 +56,11 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
 
     context.log.debug('serial-task', context.task.cwd, context.job.name, context.job.command, context.job.arguments)
 
+    ConsoleLog.info(context.job.command)
+
     proc.on('uncaughtException', (error: Error) => {
       context.log.error('uncaught-exception', context.job.name, error)
+      ConsoleLog.error(error)
       reject(error)
     })
 
