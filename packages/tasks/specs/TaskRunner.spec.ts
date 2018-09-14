@@ -3,7 +3,6 @@ import 'mocha'
 import { fs } from '@nofrills/fs'
 
 import expect from './expect'
-
 import { TaskConfig, TaskBuilder, TaskRunner, TaskJob, TaskJobResult, TaskRunnerAdapter } from '../src/index'
 
 const assets = fs.join(__dirname, 'assets')
@@ -31,6 +30,7 @@ describe('when using TaskRunner', () => {
     const config = await builder.build()
     const runner = new TaskRunner(config, adapter)
     const results = await runner.run(['test'])
+    await fs.save(fs.join(__dirname, 'assets/tasks-expanded.json'), config)
     expect(results).to.be.lengthOf(6)
   })
 
