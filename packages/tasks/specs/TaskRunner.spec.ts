@@ -4,7 +4,7 @@ import { fs } from '@nofrills/fs'
 
 import expect from './expect'
 
-import { TaskConfig, TaskBuilder, TaskRunner, TaskJobs, TaskJobResult, TaskRunnerAdapter } from '../src/index'
+import { TaskConfig, TaskBuilder, TaskRunner, TaskJob, TaskJobResult, TaskRunnerAdapter } from '../src/index'
 
 const assets = fs.join(__dirname, 'assets')
 
@@ -23,15 +23,15 @@ describe('when using TaskRunner', () => {
     },
   }
 
-  const adapter: TaskRunnerAdapter = (task: TaskJobs): Promise<TaskJobResult[]> => {
-    return Promise.all(task.jobs.map(job => ({ code: 0, job, messages: [], signal: null })))
+  const adapter: TaskRunnerAdapter = (task: TaskJob): Promise<TaskJobResult[]> => {
+    return Promise.all(task.task.entries.map(job => ({ code: 0, job, messages: [], signal: null })))
   }
 
   it('should execute tasks', async () => {
     const config = await builder.build()
     const runner = new TaskRunner(config, adapter)
-    const results = await runner.run(['build'])
-    expect(results).to.be.lengthOf(5)
+    const results = await runner.run(['test'])
+    expect(results).to.be.lengthOf(6)
   })
 
   it('should execute real tasks', async () => {

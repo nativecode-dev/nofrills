@@ -1,5 +1,6 @@
+import { TaskEntry } from './TaskEntry'
+
 export interface Task {
-  arguments?: string[]
-  command: string
-  name?: string
+  entries: TaskEntry[]
+  shell?: boolean | string
 }

@@ -57,8 +57,8 @@
     "build": "lerna run build",
     "prebuild": "tslint --project tsconfig.json --config tslint.json",
     "bootstrap": "lerna bootstrap",
-    "clean": "rimraf .cache && rimraf docs && lerna run clean",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+    "clean": "rimraf .cache && lerna run clean",
+    "test": "cross-env DEBUG=nofrills:tasks:* nyc mocha --opts mocha.opts",
     "pretest": "lerna bootstrap && lerna run build",
     "start": "lerna run start",
     "do": "lerna",
@@ -71,6 +71,7 @@
     "prerelease": "yarn run build && lerna-semantic-release pre"
   },
   "workspaces": [
+    "core/*",
     "packages/*"
   ]
 }

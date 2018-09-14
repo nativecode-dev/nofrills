@@ -8,11 +8,12 @@ import { TaskDefinition } from './TaskDefinitions'
 import { Lincoln, Logger, ConsoleLog } from './Logging'
 import { TaskRunner, TaskJobResult } from './TaskRunner'
 import { TaskConfigError } from './errors/TaskConfigError'
+import { TaskEntry } from './TaskEntry'
 
 export interface TaskContext {
   config: TaskConfig
   name: string
-  tasks: TaskDefinition[]
+  task: Task
 }
 
 export class TaskBuilder {
@@ -47,7 +48,41 @@ export class TaskBuilder {
     return runner.run(names, this.cwd)
   }
 
-  protected convert(command: string, config: TaskConfig): Task[] {
+  protected expand(config: TaskConfig, value: Task | TaskDefinition[]): Task {
+    this.log.debug('expand', value)
+
+    if (Is.array(value)) {
+      const definitions = value as TaskDefinition[]
+      const entries = definitions
+        .map(task => {
+          if (Is.string(task)) {
+            return this.fromString(config, String(task))
+          } else if (Is.array(task)) {
+            return this.fromArray(config, Array(task))
+          }
+
+          return [task as TaskEntry]
+        })
+        .reduce((previous, current) => previous.concat(current))
+
+      return { entries }
+    }
+
+    return value as Task
+  }
+
+  protected fromArray(config: TaskConfig, definitions: TaskDefinition[]): TaskEntry[] {
+    return definitions
+      .map(definition => {
+        if (Is.string(definition)) {
+          return this.fromString(config, String(definition))
+        }
+        return [definition as TaskEntry]
+      })
+      .reduce((previous, current) => previous.concat(current))
+  }
+
+  protected fromString(config: TaskConfig, command: string): TaskEntry[] {
     const regex = /\[(.*)\]/g
     const matches = regex.exec(command)
 
@@ -56,33 +91,18 @@ export class TaskBuilder {
       const context: TaskContext = {
         config,
         name: key,
-        tasks: config.tasks[key],
+        task: {
+          entries: this.fromArray(config, config.tasks[key] as TaskDefinition[]),
+        },
       }
 
-      this.log.debug('convert', key, context.tasks)
-
-      return this.expand(context).tasks as Task[]
+      this.log.debug('convert', key, context.task)
+      return this.expand(context.config, context.task).entries
     }
 
     const parts = command.split(' ')
-    const result = { arguments: parts.slice(1), command: parts[0], name: parts[0] }
-
-    return [result]
-  }
-
-  protected expand(context: TaskContext): TaskContext {
-    this.log.debug('expand', context.tasks)
-
-    context.tasks = context.tasks
-      .map(task => {
-        if (Is.string(task)) {
-          return this.convert(String(task), context.config)
-        }
-        return [task]
-      })
-      .reduce((previous, current) => previous.concat(current))
-
-    return context
+    const entry = { arguments: parts.slice(1), command: parts[0], name: parts[0] }
+    return [entry]
   }
 
   protected async resolve(): Promise<string[]> {
@@ -93,18 +113,21 @@ export class TaskBuilder {
 
   protected transform(config: TaskConfig): TaskConfig {
     return Object.keys(config.tasks)
-      .map(key => ({ config, name: key, tasks: config.tasks[key] }))
+      .map(key => ({ config, name: key, task: config.tasks[key] }))
       .filter(context => {
-        if (context.tasks) {
+        if (context.task) {
           return true
         }
         ConsoleLog.error(`failed to find task: ${context.name}`)
         return false
       })
-      .map(context => this.expand(context))
+      .map(context => {
+        context.task = this.expand(context.config, context.task)
+        return context
+      })
       .reduce((result, context) => {
-        this.log.debug('transform', result.tasks[context.name], context.tasks)
-        result.tasks[context.name] = context.tasks
+        this.log.debug('transform', result.tasks[context.name], context.task)
+        result.tasks[context.name] = context.task
         return result
       }, config)
   }

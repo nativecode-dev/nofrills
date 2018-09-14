@@ -1,23 +1,26 @@
+import { Is } from '@nofrills/types'
+
 import { Task } from './Task'
+import { TaskEntry } from './TaskEntry'
 import { TaskConfig } from './TaskConfig'
 import { Lincoln, Logger } from './Logging'
 import { TaskRunnerSerial } from './TaskRunnerSerial'
 
-export interface TaskJobs {
+export interface TaskJob {
   cwd: string
   name: string
-  jobs: Task[]
+  task: Task
 }
 
 export interface TaskJobResult {
   code: number
-  job: Task
+  job: TaskEntry
   messages: string[]
   signal: string | null
 }
 
 export type TaskRunnerAdapter = (
-  task: TaskJobs,
+  task: TaskJob,
   log: Lincoln,
   out: NodeJS.WriteStream,
   err: NodeJS.WriteStream,
@@ -35,10 +38,16 @@ export class TaskRunner {
     err: NodeJS.WriteStream = process.stderr,
   ): Promise<TaskJobResult[]> {
     const promises = names
-      .map<TaskJobs>(task => ({ cwd, name: task, jobs: this.config.tasks[task] as Task[] }))
-      .map(task => {
-        this.log.debug('task-map', task.name)
-        return this.execute(task, out, err)
+      .map(name => ({
+        cwd,
+        name,
+        task: Is.array(this.config.tasks[name])
+          ? ({ entries: this.config.tasks[name] } as Task)
+          : (this.config.tasks[name] as Task),
+      }))
+      .map(job => {
+        this.log.debug('task-map', job)
+        return this.execute(job, out, err)
       })
 
     const results = await Promise.all(promises)
@@ -46,8 +55,8 @@ export class TaskRunner {
     return results.reduce<TaskJobResult[]>((result, current) => result.concat(...current), [])
   }
 
-  private execute(task: TaskJobs, out: NodeJS.WriteStream, err: NodeJS.WriteStream): Promise<TaskJobResult[]> {
-    this.log.debug('task-exec', task.name, task.jobs)
-    return this.adapter(task, this.log.extend(task.name), out, err)
+  private execute(jobs: TaskJob, out: NodeJS.WriteStream, err: NodeJS.WriteStream): Promise<TaskJobResult[]> {
+    this.log.debug('task-exec', jobs)
+    return this.adapter(jobs, this.log.extend(jobs.name), out, err)
   }
 }

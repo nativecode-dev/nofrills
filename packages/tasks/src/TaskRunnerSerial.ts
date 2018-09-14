@@ -1,28 +1,28 @@
 import { ChildProcess, spawn, SpawnOptions } from 'child_process'
 
-import { Task } from './Task'
+import { TaskEntry } from './TaskEntry'
 import { Lincoln } from './Logging'
-import { TaskRunnerAdapter, TaskJobs, TaskJobResult } from './TaskRunner'
+import { TaskRunnerAdapter, TaskJob, TaskJobResult } from './TaskRunner'
 
 export interface TaskContext {
-  job: Task
+  job: TaskEntry
   log: Lincoln
-  task: TaskJobs
+  task: TaskJob
   stderr: NodeJS.WriteStream
   stdout: NodeJS.WriteStream
 }
 
 export const TaskRunnerSerial: TaskRunnerAdapter = (
-  task: TaskJobs,
+  task: TaskJob,
   log: Lincoln,
   out: NodeJS.WriteStream,
   err: NodeJS.WriteStream,
 ): Promise<TaskJobResult[]> => {
-  return task.jobs.reduce(
+  return task.task.entries.reduce(
     (results, job) =>
       results
         .then(() => execute({ job, log: log.extend(job.command), task, stdout: out, stderr: err }))
-        .then(async result => [...(await results), result]),
+        .then(async (result: TaskJobResult) => [...(await results), result]),
     Promise.resolve([] as TaskJobResult[]),
   )
 }
@@ -36,7 +36,7 @@ function run(context: TaskContext): ChildProcess {
   const options: SpawnOptions = {
     cwd: context.task.cwd,
     env,
-    shell: true,
+    shell: context.task.task.shell || true,
     stdio: 'inherit',
     windowsHide: true,
   }

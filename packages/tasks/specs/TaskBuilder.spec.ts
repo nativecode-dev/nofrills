@@ -8,13 +8,10 @@ import { TaskBuilder } from '../src/index'
 const assets = fs.join(__dirname, 'assets')
 
 describe('when using TaskBuilder', () => {
-  it('should create builder', () => {
-    expect(() => TaskBuilder.from(assets)).to.not.throw
-  })
+  it('should create builder', () => expect(() => TaskBuilder.from(assets)).to.not.throw)
 
-  it('should fail to create when tasks not found', () => {
-    expect(() => new TaskBuilder(assets, ['undefined.json'])).to.throw
-  })
+  it('should fail to create when tasks not found', () =>
+    expect(() => new TaskBuilder(assets, ['undefined.json'])).to.throw)
 
   describe('to compile tasks', () => {
     const builder = TaskBuilder.from(assets)
@@ -26,7 +23,7 @@ describe('when using TaskBuilder', () => {
 
     it('should expand task targets', async () => {
       const config = await builder.build()
-      expect(config.tasks['build']).to.be.lengthOf(5)
+      expect(config.tasks['build'].entries).to.be.lengthOf(5)
     })
   })
 })
