@@ -58,7 +58,7 @@
     "prebuild": "tslint --project tsconfig.json --config tslint.json",
     "bootstrap": "lerna bootstrap",
     "clean": "rimraf .cache && lerna run clean",
-    "test": "cross-env DEBUG=nofrills:tasks:* nyc mocha --opts mocha.opts",
+    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
     "pretest": "lerna bootstrap && lerna run build",
     "start": "lerna run start",
     "do": "lerna",

@@ -1,4 +1,5 @@
 export * from './Lincoln'
+export * from './LincolnEvents'
 export * from './LincolnLog'
 export * from './LincolnRegistry'
 export * from './Log'

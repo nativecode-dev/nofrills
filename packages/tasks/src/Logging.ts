@@ -1,16 +1,20 @@
 export { Lincoln } from '@nofrills/lincoln-debug'
 
-import { CreateLogger, CreateOptions, Lincoln, Options } from '@nofrills/lincoln-debug'
+import { CreateLogger, CreateOptions, Lincoln, Options, Log } from '@nofrills/lincoln-debug'
 import { ScrubsInterceptor } from '@nofrills/scrubs'
 
-const options: Options = CreateOptions('nofrills:tasks')
-options.interceptors.register('scrubs', ScrubsInterceptor)
+const LoggerOptions: Options = CreateOptions('nofrills:tasks')
+LoggerOptions.interceptors.register('scrubs', ScrubsInterceptor)
+export const Logger: Lincoln = CreateLogger(LoggerOptions)
 
-export const ConsoleLog: Lincoln = CreateLogger({
-  ...options,
-  emitNamespace: false,
-  emitTag: false,
-  namespace: 'tasks',
-})
-
-export const Logger: Lincoln = CreateLogger(options)
+const ConsoleLogOptions: Options = CreateOptions('[tasks]', undefined, [
+  [
+    'console-log',
+    (log: Log) => {
+      console.log(log.namespace, ...log.parameters)
+      return Promise.resolve(log)
+    },
+  ],
+])
+ConsoleLogOptions.emitTag = false
+export const ConsoleLog: Lincoln = CreateLogger(ConsoleLogOptions)

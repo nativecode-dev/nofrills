@@ -1,6 +1,5 @@
-import { generate as uuid } from 'uuidjs'
-
 import { EventEmitter } from 'events'
+import { generate as uuid } from 'uuidjs'
 import { Registry } from '@nofrills/collections'
 
 import { Log } from './Log'
@@ -8,20 +7,15 @@ import { LogMessageType } from './LogMessageType'
 import { LincolnLog } from './LincolnLog'
 import { Filter, Interceptor } from './LincolnRegistry'
 import { Options } from './Options'
+import { LincolnEvents } from './LincolnEvents'
 
-const defaults: Options = {
+const DefaultOptions: Options = {
   emitNamespace: true,
   emitTag: true,
   filters: new Registry<Filter>(),
   interceptors: new Registry<Interceptor>(),
   namespace: 'app',
   separator: ':',
-}
-
-export enum LincolnEvents {
-  Filtered = 'log-message-filtered',
-  Log = 'log-message',
-  Written = 'log-written',
 }
 
 export class Lincoln extends EventEmitter {
@@ -37,8 +31,8 @@ export class Lincoln extends EventEmitter {
       logOptions = { namespace: logOptions }
     }
 
-    const current: any = logOptions || defaults
-    this.options = { ...defaults, ...current }
+    const current: any = logOptions || DefaultOptions
+    this.options = { ...DefaultOptions, ...current }
   }
 
   get namespace(): string {
@@ -86,11 +80,11 @@ export class Lincoln extends EventEmitter {
 
   private normalize(tag: string): string {
     if (this.options.emitNamespace && this.options.emitTag) {
-      return `${this.options.namespace}${this.options.separator}${tag}`
-    } else if (this.options.emitNamespace && !this.options.emitTag) {
-      return `${this.options.namespace}`
-    } else {
+      return `${this.namespace}${this.options.separator}${tag}`
+    } else if (this.options.emitNamespace === false && this.options.emitTag) {
       return tag
+    } else {
+      return this.namespace
     }
   }
 
