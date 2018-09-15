@@ -6,7 +6,7 @@ import { Logger, ConsoleLog } from './Logging'
 const options: ConsoleOptions = {
   initializer: async (_: IConsole, ...args: string[]) => {
     try {
-      ConsoleLog.info('run', ...args)
+      ConsoleLog.info(...args)
 
       const builder = TaskBuilder.from(process.cwd())
       const results = await builder.run(args)
@@ -27,12 +27,6 @@ const options: ConsoleOptions = {
       ConsoleLog.info(error)
     }
   },
-}
-
-if (process.env.DEBUG) {
-  process.env.DEBUG = `${process.env.DEBUG},tasks:*`
-} else {
-  process.env.DEBUG = 'tasks:*'
 }
 
 const args = ProcessArgs.from(process.argv)
