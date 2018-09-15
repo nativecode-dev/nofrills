@@ -35,6 +35,7 @@ export class TaskBuilder {
       const filename = configs[0]
       const config = await fs.json<TaskConfig>(filename)
       this.log.debug('found', filename, config.tasks)
+      ConsoleLog.debug('task-config', filename)
       return this.transform(config)
     }
 
@@ -52,17 +53,17 @@ export class TaskBuilder {
     this.log.debug('expand', value)
 
     if (Is.array(value)) {
-      return this.fromArray(config, value as TaskDefinition[])
+      return { entries: this.fromArray(config, value as TaskDefinition[]) }
     } else if (Is.string(value)) {
       return { entries: this.fromString(config, String(value)) }
     } else if (Is.object(value)) {
       const task = value as Task
-      return this.expand(config, task.entries)
+      return Object.assign({}, task, this.expand(config, task.entries))
     }
     return value as Task
   }
 
-  protected fromArray(config: TaskConfig, definitions: TaskDefinition[]): Task {
+  protected fromArray(config: TaskConfig, definitions: TaskDefinition[]): TaskEntry[] {
     const entries = definitions
       .map(task => {
         if (Is.string(task)) {
@@ -72,7 +73,7 @@ export class TaskBuilder {
       })
       .reduce((previous, current) => previous.concat(current))
 
-    return { entries }
+    return entries
   }
 
   protected fromString(config: TaskConfig, command: string): TaskEntry[] {
@@ -88,7 +89,7 @@ export class TaskBuilder {
       }
 
       this.log.debug('task->entry', name, context.task)
-      return this.expand(context.config, context.task.entries).entries
+      return this.fromArray(context.config, context.task.entries)
     }
 
     const parts = command.split(' ')

@@ -17,7 +17,8 @@
         "rimraf bin",
         "rimraf dist",
         "rimraf lib"
-      ]
+      ],
+      "shell": "/bin/bash"
     },
     "test": [
       "[build]",

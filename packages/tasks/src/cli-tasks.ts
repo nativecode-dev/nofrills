@@ -6,7 +6,7 @@ import { Logger, ConsoleLog } from './Logging'
 const options: ConsoleOptions = {
   initializer: async (_: IConsole, ...args: string[]) => {
     try {
-      ConsoleLog.info(...args)
+      ConsoleLog.trace(args)
 
       const builder = TaskBuilder.from(process.cwd())
       const results = await builder.run(args)
@@ -21,10 +21,10 @@ const options: ConsoleOptions = {
           }))
           .map(result => ConsoleLog.error(`${result.job.command}: ${result.code}`))
 
-        process.exit(5)
+        process.exit(0)
       }
     } catch (error) {
-      ConsoleLog.info(error)
+      ConsoleLog.error(error)
     }
   },
 }

@@ -70,8 +70,10 @@
     "release": "lerna-semantic-release perform",
     "prerelease": "yarn run build && lerna-semantic-release pre"
   },
-  "workspaces": [
-    "core/*",
-    "packages/*"
-  ]
+  "workspaces": {
+    "packages": [
+      "core/*",
+      "packages/*"
+    ]
+  }
 }
