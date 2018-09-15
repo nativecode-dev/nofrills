@@ -1,4 +1,4 @@
-export { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
+export { Filter, Interceptor, Lincoln, LincolnRegistry, Log, LogMessageType, Options } from '@nofrills/lincoln'
 
 import * as debug from 'debug'
 

@@ -46,7 +46,7 @@ export class ShaBang {
     const combined = Buffer.concat([shabang, original])
 
     try {
-      ConsoleLog.info('shabanged', filename)
+      ConsoleLog.info('<cli-shabang>', filename)
       await fs.writeFile(filename, combined)
     } catch {
       ConsoleLog.error(`failed to write file: ${filename}`)

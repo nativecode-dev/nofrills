@@ -3,7 +3,7 @@ import 'mocha'
 import { fs } from '@nofrills/fs'
 
 import expect from './expect'
-import { TaskBuilder } from '../src/index'
+import { Task, TaskBuilder } from '../src/index'
 
 const assets = fs.join(__dirname, 'assets')
 
@@ -23,7 +23,13 @@ describe('when using TaskBuilder', () => {
 
     it('should expand task targets', async () => {
       const config = await builder.build()
-      expect(config.tasks['build'].entries).to.be.lengthOf(5)
+      expect(config.tasks.build.entries).to.be.lengthOf(5)
+    })
+
+    it('should allow shell property', async () => {
+      const config = await builder.build()
+      const task = config.tasks.clean as Task
+      expect(task.shell).to.be.equal('/bin/bash')
     })
   })
 })

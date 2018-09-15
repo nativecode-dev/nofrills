@@ -14,15 +14,16 @@ const options: ConsoleOptions = {
       Logger.debug('shabang', cwd)
 
       if (resolved.length > 0) {
-        ConsoleLog.info(`using ${resolved[0]}`)
-        const shabang = ShaBang.from(resolved[0])
+        const filename = resolved[0]
+        ConsoleLog.trace('package-json', filename)
+        const shabang = ShaBang.from(filename)
         await shabang.shabang()
         return
       }
 
       throw new Error('could not find package.json')
     } catch (error) {
-      ConsoleLog.info(error)
+      ConsoleLog.error(error)
     }
   },
 }
