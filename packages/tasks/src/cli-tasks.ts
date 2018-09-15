@@ -13,14 +13,17 @@ const options: ConsoleOptions = {
 
       Logger.debug(args, results)
 
-      if (results.some(result => result.code !== 0)) {
-        results
-          .map(result => ({
-            code: result.code,
-            job: result.job,
-          }))
-          .map(result => ConsoleLog.error(`${result.job.command}: ${result.code}`))
-      }
+      const exitCode = Math.max(
+        ...results
+          .map(result => ({ code: result.code, job: result.job }))
+          .map(result => {
+            ConsoleLog.error(`${result.job.command}: ${result.code}`)
+            return result
+          })
+          .map(result => result.code),
+      )
+
+      process.exit(exitCode)
     } catch (error) {
       ConsoleLog.error(error)
     }
