@@ -81,12 +81,10 @@ export class Lincoln extends EventEmitter {
   private normalize(tag: string): string {
     if (this.options.emitNamespace && this.options.emitTag) {
       return `${this.namespace}${this.options.separator}${tag}`
-    } else if (this.options.emitNamespace && this.options.emitTag === false) {
-      return `${this.namespace}`
     } else if (this.options.emitNamespace === false && this.options.emitTag) {
       return tag
     } else {
-      return ''
+      return this.namespace
     }
   }
 
