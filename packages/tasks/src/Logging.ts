@@ -42,7 +42,15 @@ const namespace = '[TASK]'
 const ConsoleLogOptions: Options = CreateOptions(
   namespace,
   [['task-filter', (log: Log) => Promise.resolve(log.namespace === namespace)]],
-  [['console-log', (log: Log) => Promise.resolve(console.log(...colorize(log))).then(() => log)]],
+  [
+    [
+      'console-log',
+      (log: Log) => {
+        console.log(...colorize(log))
+        return Promise.resolve(log)
+      },
+    ],
+  ],
 )
 ConsoleLogOptions.emitTag = false
 export const ConsoleLog: Lincoln = CreateLogger(ConsoleLogOptions)
