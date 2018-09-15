@@ -55,7 +55,10 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
     const proc = run(context)
 
     context.log.debug('serial-task', context.task.cwd, context.job.name, context.job.command, context.job.arguments)
-    ConsoleLog.info(`<${context.job.command}>`, context.job.arguments)
+    ConsoleLog.info(
+      `<${context.job.command}>`,
+      context.job.arguments ? context.job.arguments.join(' ') : context.job.arguments,
+    )
 
     proc.on('uncaughtException', (error: Error) => {
       context.log.error('uncaught-exception', context.job.name, error)

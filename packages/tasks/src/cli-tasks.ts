@@ -20,8 +20,6 @@ const options: ConsoleOptions = {
             job: result.job,
           }))
           .map(result => ConsoleLog.error(`${result.job.command}: ${result.code}`))
-
-        process.exit(0)
       }
     } catch (error) {
       ConsoleLog.error(error)
