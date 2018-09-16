@@ -56,8 +56,6 @@ export class TaskBuilder {
 
     if (Is.array(value)) {
       return { entries: this.fromArray(config, value as TaskDefinition[]) }
-    } else if (Is.string(value)) {
-      return { entries: this.fromString(config, String(value)) }
     } else if (Is.object(value)) {
       const task = value as Task
       return Object.assign({}, task, this.expand(config, task.entries))

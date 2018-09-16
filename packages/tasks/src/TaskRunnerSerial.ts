@@ -54,7 +54,7 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
     const messages: string[] = []
     const proc = run(context)
 
-    context.log.debug('serial-task', context.task.cwd, context.job.name, context.job.command, context.job.arguments)
+    context.log.debug('execute', context.task.cwd, context.job.name, context.job.command, context.job.arguments)
 
     ConsoleLog.info(
       `<${context.job.command}>`,

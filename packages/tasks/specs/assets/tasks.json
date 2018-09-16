@@ -14,12 +14,21 @@
     ],
     "clean": {
       "entries": [
-        "rimraf bin",
-        "rimraf dist",
-        "rimraf lib"
+        "[clean:bin]",
+        "[clean:dist]",
+        "[clean:lib]"
       ],
       "shell": "/bin/bash"
     },
+    "clean:bin": [
+      "rimraf bin"
+    ],
+    "clean:dist": [
+      "rimraf dist"
+    ],
+    "clean:lib": [
+      "rimraf lib"
+    ],
     "test": [
       "[build]",
       {
