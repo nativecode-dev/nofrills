@@ -10,10 +10,9 @@ const options: ConsoleOptions = {
 
       const builder = TaskBuilder.from(process.cwd())
       const config = await builder.build()
-      Logger.debug(args, JSON.stringify(config, null, 2))
+      Logger.debug(args, config)
 
       const results = await builder.run(args, config)
-
       Logger.debug(args, results)
 
       const exitCode = Math.max(
