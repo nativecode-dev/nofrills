@@ -42,10 +42,10 @@ export class TaskBuilder {
     throw new TaskConfigError(`failed to find configuration: ${this.definitions} in ${this.cwd}`)
   }
 
-  async run(names: string[]): Promise<TaskJobResult[]> {
-    const config = await this.build()
+  async run(names: string[], config?: TaskConfig): Promise<TaskJobResult[]> {
+    config = config || await this.build()
     const runner = new TaskRunner(config)
-    this.log.debug('run', names)
+    this.log.debug('run', names, config)
     return runner.run(names, this.cwd)
   }
 
