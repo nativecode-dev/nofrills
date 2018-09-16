@@ -41,11 +41,17 @@
   "tasks": {
     "build": [
       "[clean]",
-      "tsc --project tsconfig.build.json",
-      "ts-node ./src/cli-shabang.ts"
+      "[build:ts]",
+      "[shabang]"
+    ],
+    "build:ts": [
+      "tsc --project tsconfig.build.json"
     ],
     "clean": [
       "rimraf bin"
+    ],
+    "shabang": [
+      "ts-node ./src/cli-shabang.ts"
     ]
   }
 }

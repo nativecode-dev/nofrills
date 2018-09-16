@@ -34,7 +34,6 @@ export class TaskBuilder {
     if (configs.length > 0) {
       const filename = configs[0]
       const config = await fs.json<TaskConfig>(filename)
-      this.log.debug('found', filename, JSON.stringify(config.tasks, null, 2))
       ConsoleLog.debug('task-config', filename)
       const transformed = this.transform(config)
       ConsoleLog.debug('task-config', JSON.stringify(transformed, null, 2))
@@ -56,8 +55,6 @@ export class TaskBuilder {
 
     if (Is.array(value)) {
       return { entries: this.fromArray(config, value as TaskDefinition[]) }
-    } else if (Is.string(value)) {
-      return { entries: this.fromString(config, String(value)) }
     } else if (Is.object(value)) {
       const task = value as Task
       return Object.assign({}, task, this.expand(config, task.entries))
