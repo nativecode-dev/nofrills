@@ -34,16 +34,18 @@ export class TaskBuilder {
     if (configs.length > 0) {
       const filename = configs[0]
       const config = await fs.json<TaskConfig>(filename)
-      this.log.debug('found', filename, config.tasks)
+      this.log.debug('found', filename, JSON.stringify(config.tasks, null, 2))
       ConsoleLog.debug('task-config', filename)
-      return this.transform(config)
+      const transformed = this.transform(config)
+      ConsoleLog.debug('task-config', JSON.stringify(transformed, null, 2))
+      return transformed
     }
 
     throw new TaskConfigError(`failed to find configuration: ${this.definitions} in ${this.cwd}`)
   }
 
   async run(names: string[], config?: TaskConfig): Promise<TaskJobResult[]> {
-    config = config || await this.build()
+    config = config || (await this.build())
     const runner = new TaskRunner(config)
     this.log.debug('run', names, config)
     return runner.run(names, this.cwd)
