@@ -36,7 +36,7 @@ export class TaskBuilder {
       const config = await fs.json<TaskConfig>(filename)
       ConsoleLog.debug('task-config', filename)
       const transformed = this.transform(config)
-      ConsoleLog.debug('task-config', JSON.stringify(transformed, null, 2))
+      this.log.debug('task-config', JSON.stringify(transformed.tasks, null, 2))
       return transformed
     }
 
