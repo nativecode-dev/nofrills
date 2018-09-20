@@ -37,7 +37,7 @@ function run(context: TaskContext): ChildProcess {
     cwd: context.task.cwd,
     env,
     shell: context.task.task.shell || true,
-    stdio: 'inherit',
+    stdio: 'pipe',
     windowsHide: true,
   }
 
@@ -47,10 +47,11 @@ function run(context: TaskContext): ChildProcess {
 function execute(context: TaskContext): Promise<TaskJobResult> {
   if (context.job.command.startsWith('#')) {
     context.log.debug('skip', context.job.name, context.job.command)
-    return Promise.resolve({ code: 0, job: context.job, messages: [], signal: null })
+    return Promise.resolve({ code: 0, errors: [], job: context.job, messages: [], signal: null })
   }
 
   return new Promise<TaskJobResult>((resolve, reject) => {
+    const errors: string[] = []
     const messages: string[] = []
     const proc = run(context)
 
@@ -61,6 +62,23 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
       context.job.arguments ? context.job.arguments.join(' ') : context.job.arguments,
     )
 
+    proc.stdout.on('error', error => {
+      errors.push(error.name)
+      errors.push(error.message)
+      if (error.stack) {
+        errors.push(error.stack)
+      }
+    })
+
+    proc.stdout.on('data', data =>
+      messages.push(
+        data
+          .toString()
+          .replace('\n', '')
+          .replace('\r', ''),
+      ),
+    )
+
     proc.on('uncaughtException', (error: Error) => {
       context.log.error('uncaught-exception', context.job.name, error)
       ConsoleLog.error(error)
@@ -68,7 +86,7 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
     })
 
     proc.on('exit', (code, signal) => {
-      const results = { code, job: context.job, messages, signal }
+      const results = { code, errors, job: context.job, messages, signal }
       context.log.debug(context.job.name, results)
       resolve(results)
     })
