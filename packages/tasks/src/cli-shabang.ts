@@ -16,6 +16,7 @@ const options: ConsoleOptions = {
       if (resolved.length > 0) {
         const filename = resolved[0]
         ConsoleLog.trace('package-json', filename)
+
         const shabang = ShaBang.from(filename)
         await shabang.shabang()
         return
@@ -28,5 +29,4 @@ const options: ConsoleOptions = {
   },
 }
 
-const args = ProcessArgs.from(process.argv)
-CLI.run(options, args.exe, ...args.normalized).catch(ConsoleLog.info)
+CLI.run(options, ProcessArgs.from(process.argv)).catch(ConsoleLog.info)

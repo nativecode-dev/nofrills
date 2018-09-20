@@ -1,5 +1,7 @@
 export * from './CLI'
 export * from './Cluster'
+export * from './Command'
+export * from './CommandGroup'
 export * from './Console'
 export * from './ConsoleOptions'
 export * from './IConsole'

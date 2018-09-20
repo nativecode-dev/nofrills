@@ -1,4 +1,9 @@
+import { ProcessArgs } from './ProcessArgs'
+
 export interface IConsole {
-  start(exe: string, ...args: string[]): Promise<void>
+  readonly args: ProcessArgs
+
+  start(): Promise<void>
+
   stop(): void
 }

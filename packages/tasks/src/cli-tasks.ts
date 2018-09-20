@@ -4,16 +4,16 @@ import { TaskBuilder } from './TaskBuilder'
 import { Logger, ConsoleLog } from './Logging'
 
 const options: ConsoleOptions = {
-  initializer: async (_: IConsole, ...args: string[]) => {
+  initializer: async (console: IConsole) => {
     try {
-      ConsoleLog.trace(args)
+      ConsoleLog.trace(console.args.normalized)
 
       const builder = TaskBuilder.from(process.cwd())
       const config = await builder.build()
-      Logger.debug(args, config.tasks)
+      Logger.debug(config.tasks)
 
-      const results = await builder.run(args, config)
-      Logger.debug(args, results)
+      const results = await builder.run(console.args.normalized, config)
+      Logger.debug(results)
 
       const exitCode = Math.max(
         ...results
@@ -32,5 +32,4 @@ const options: ConsoleOptions = {
   },
 }
 
-const args = ProcessArgs.from(process.argv)
-CLI.run(options, args.exe, ...args.normalized).catch(ConsoleLog.info)
+CLI.run(options, ProcessArgs.from(process.argv)).catch(ConsoleLog.info)
