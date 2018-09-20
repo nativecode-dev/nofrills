@@ -1,4 +1,4 @@
-import { CLI, ConsoleOptions } from '@nofrills/console'
+import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
 import { SshParser } from './SshParser'
 
@@ -11,6 +11,4 @@ const options: ConsoleOptions = {
   },
 }
 
-const exe = process.argv[0]
-const args = process.argv.slice(1)
-CLI.run(options, exe, ...args).catch(console.log)
+CLI.run(options, ProcessArgs.from(process.argv)).catch(console.log)

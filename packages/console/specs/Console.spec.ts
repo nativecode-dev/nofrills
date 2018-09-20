@@ -1,13 +1,9 @@
 import expect from './expect'
-import { Console, ConsoleOptions } from '../src'
+import { Console, ConsoleOptions, ProcessArgs } from '../src'
 
 describe('when creating consoles', () => {
-
   const options: ConsoleOptions = {}
+  const args: string[] = ['executable.exe']
 
-  it('should create instance', () => {
-    const sut = Console.create(options, 'executable.exe')
-    expect(sut).to.not.be.undefined
-  })
-
+  it('should create instance', () => expect(Console.run(options, ProcessArgs.from(args))).to.not.be.undefined)
 })
