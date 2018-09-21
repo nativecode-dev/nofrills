@@ -1,18 +1,20 @@
-import { CLI, ConsoleOptions, IConsole, ProcessArgs } from '@nofrills/console'
+import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
 import { TaskBuilder } from './TaskBuilder'
 import { Logger, ConsoleLog } from './Logging'
 
+const args = ProcessArgs.from(process.argv)
+
 const options: ConsoleOptions = {
-  initializer: async (console: IConsole) => {
+  initializer: async () => {
     try {
-      ConsoleLog.trace(console.args.normalized)
+      ConsoleLog.trace(args.normalized)
 
       const builder = TaskBuilder.from(process.cwd())
       const config = await builder.build()
       Logger.debug(config.tasks)
 
-      const results = await builder.run(console.args.normalized, config)
+      const results = await builder.run(args.normalized, config)
       Logger.debug(results)
 
       const resultCodes: number[] = results
@@ -32,4 +34,4 @@ const options: ConsoleOptions = {
   },
 }
 
-CLI.run(options, ProcessArgs.from(process.argv)).catch(ConsoleLog.info)
+CLI.run(options, args).catch(ConsoleLog.info)

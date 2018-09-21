@@ -1,11 +1,13 @@
 import { CreateResolver } from '@nofrills/fs'
-import { CLI, ConsoleOptions, IConsole, ProcessArgs } from '@nofrills/console'
+import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
 import { ShaBang } from './ShaBang'
 import { Logger, ConsoleLog } from './Logging'
 
+const args = ProcessArgs.from(process.argv)
+
 const options: ConsoleOptions = {
-  initializer: async (_: IConsole) => {
+  initializer: async () => {
     try {
       const cwd = process.cwd()
       const resolver = CreateResolver(cwd)
@@ -29,4 +31,4 @@ const options: ConsoleOptions = {
   },
 }
 
-CLI.run(options, ProcessArgs.from(process.argv)).catch(ConsoleLog.info)
+CLI.run(options, args).catch(ConsoleLog.info)
