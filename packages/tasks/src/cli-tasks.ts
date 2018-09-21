@@ -15,15 +15,15 @@ const options: ConsoleOptions = {
       const results = await builder.run(console.args.normalized, config)
       Logger.debug(results)
 
-      const exitCode = Math.max(
-        ...results
-          .map(result => ({ code: result.code, job: result.job }))
-          .map(result => {
-            ConsoleLog.error(`${result.job.command}: ${result.code}`)
-            return result
-          })
-          .map(result => result.code),
-      )
+      const resultCodes: number[] = results
+        .map(result => ({ code: result.code, job: result.job }))
+        .map(result => {
+          ConsoleLog.error(`${result.job.command}: ${result.code}`)
+          return result
+        })
+        .map(result => result.code)
+
+      const exitCode = Math.max(...resultCodes)
 
       process.exit(exitCode)
     } catch (error) {
