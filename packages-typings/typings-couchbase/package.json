@@ -21,6 +21,7 @@
     "promise-parallel-throttle": "^3.2.0"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^5.4.2",
     "@types/cheerio": "^0.22.8",
     "@types/isomorphic-fetch": "^0.0.34"
   },
@@ -33,8 +34,7 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean"
   }
 }

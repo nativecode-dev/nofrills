@@ -38,21 +38,5 @@
   "scripts": {
     "build": "ts-node ./src/cli-tasks.ts build",
     "clean": "ts-node ./src/cli-tasks.ts clean"
-  },
-  "tasks": {
-    "build": [
-      "[clean]",
-      "[build:ts]",
-      "[shabang]"
-    ],
-    "build:ts": [
-      "tsc --project tsconfig.build.json"
-    ],
-    "clean": [
-      "rimraf bin"
-    ],
-    "shabang": [
-      "ts-node ./src/cli-shabang.ts"
-    ]
   }
 }

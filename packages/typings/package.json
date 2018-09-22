@@ -18,6 +18,7 @@
     "mustache": "^3.0.0"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^5.4.2",
     "@types/mustache": "^0.8.31"
   },
   "publishConfig": {
@@ -29,8 +30,7 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean"
   }
 }
