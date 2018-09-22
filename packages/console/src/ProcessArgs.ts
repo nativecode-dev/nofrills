@@ -5,12 +5,12 @@ export interface ProcessArgsFilter {
 }
 
 export class ProcessArgs {
-  private readonly filtered: string[]
+  private readonly arguments: string[]
   private readonly log: Lincoln = Logger.extend('process-args')
 
   private constructor(args: string[], node: boolean) {
     this.log.debug(node, ...args)
-    this.filtered = this.filter(args, node)
+    this.arguments = this.filter(args, node)
     this.log.debug(this.exe, this.args, this.normalized)
   }
 
@@ -19,18 +19,35 @@ export class ProcessArgs {
   }
 
   get args(): string[] {
-    return this.filtered
+    return this.arguments
+  }
+
+  get argsOnly(): string[] {
+    return this.normalized.filter(arg => !arg.startsWith('-'))
   }
 
   get exe(): string {
-    return this.filtered[0]
+    return this.arguments[0]
   }
 
   get normalized(): string[] {
-    return this.filtered.slice(1)
+    return this.arguments.slice(1)
+  }
+
+  get switches(): string[] {
+    return this.normalized.filter(arg => arg.startsWith('-'))
+  }
+
+  has(name: string): boolean {
+    return this.switches.some(x => this.normalize(x) === this.normalize(name))
   }
 
   private filter(args: string[], node: boolean): string[] {
     return node ? args.slice(1) : args
+  }
+
+  private normalize(name: string): string {
+    const argument = name.startsWith('--') ? name.substring(2) : name.startsWith('-') ? name.substring(1) : name
+    return argument.trim().toLowerCase()
   }
 }

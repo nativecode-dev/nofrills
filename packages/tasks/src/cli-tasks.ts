@@ -9,13 +9,13 @@ const args = ProcessArgs.from(process.argv)
 const options: ConsoleOptions = {
   initializer: async () => {
     try {
-      ConsoleLog.trace(args.normalized)
+      ConsoleLog.trace(args.argsOnly)
 
       const builder = TaskBuilder.from(process.cwd())
       const config = await builder.build()
       Logger.debug(config.tasks)
 
-      const results = await builder.run(args.normalized, config)
+      const results = await builder.run(args.argsOnly, config)
       Logger.debug(results)
 
       const resultCodes: number[] = results

@@ -2,10 +2,79 @@
 
 [![npm](https://img.shields.io/npm/v/@nofrills/tasks.svg?style=flat-square)](https://www.npmjs.com/package/@nofrills/tasks)
 
+# Introduction
+
+`tasks` is a simple to use task executor that can work stand-alone using a `tasks.json` or in a `package.json` file. Tasks allows you to specify a set of commands that form a script.
+
 # Install
 
 ```bash
 npm install --save @nofrills/tasks
+```
+
+# Specifying Tasks
+
+## Simple
+
+A task can be as simple as a command to call an executable.
+
+```json
+{
+  "tasks": {
+    "echo": ["echo $0"]
+  }
+}
+```
+
+After saving to `tasks.json`, you can execute the command by running `cli-tasks echo`.
+
+You can also specify multiple commands to run for any give task.
+
+```json
+{
+  "tasks": {
+    "build": [
+      "rm -rf lib",
+      "tslint --project tsconfig.json --config tslint.json",
+      "tsc --project tsconfig.json"
+    ]
+  }
+}
+```
+
+When you run the task, it will execute the commands in order. Hopefully, you can quickly see how by using just this construct, it allows you go string together any common operating system task.
+
+## Injection
+
+We can take it a step further by supporting injecting other tasks together.
+
+```json
+{
+  "tasks": {
+    "build": [
+      "[clean]",
+      "[lint]",
+      "[build:tsc]"
+    ],
+    "build:tsc": [
+      "tsc --project tsconfig.json"
+    ],
+    "clean": [
+      "rimraf lib"
+    ],
+    "lint": [
+      "tslint --project tsconfig.json --config tslint.json"
+    ]
+  }
+}
+```
+
+By using the `[]` syntax, we can inject another task's entries into the current location. When we run `cli-tasks build`, we expect it to run the tasks in order.
+
+```sh
+rimraf lib
+tslint --project tsconfig.json --config tslint.json
+tsc --project tsconfig.json
 ```
 
 # License
