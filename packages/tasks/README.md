@@ -77,6 +77,44 @@ tslint --project tsconfig.json --config tslint.json
 tsc --project tsconfig.json
 ```
 
+# Advanced Tasks
+
+So far, we've been using the short-hand for defining tasks. However, the underlying library supports a more descriptive structure.
+
+```typescript
+export interface Task {
+  entries: TaskEntry[]
+  shell?: boolean | string
+}
+```
+
+The `Task` type defines a list of entries in addition to allowing you to specify the shell to use when executing the task.
+
+```typescript
+export interface TaskEntry {
+  arguments?: string[]
+  command: string
+  name?: string
+}
+```
+
+A `TaskEntry` specifies the command to run.
+
+```json
+{
+  "tasks": {
+    "build": {
+      "entries": [{
+        "arguments": ["$0"],
+        "command": "echo",
+        "name": "current-shell"
+      }],
+      "shell": "/bin/bash"
+    }
+  }
+}
+```
+
 # License
 Copyright 2018 NativeCode Development <opensource@nativecode.com>
 
