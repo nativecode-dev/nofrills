@@ -73,7 +73,9 @@
   "workspaces": {
     "packages": [
       "core/*",
-      "packages/*"
+      "packages/*",
+      "packages-cli/*",
+      "packages-typings/*"
     ]
   }
 }
