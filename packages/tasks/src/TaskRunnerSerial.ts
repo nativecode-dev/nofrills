@@ -70,7 +70,10 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
       }
     })
 
-    proc.stdout.on('data', data =>
+    proc.stdout.pipe(context.stdout)
+    proc.stderr.pipe(context.stderr)
+
+    proc.stdout.on('data', (data: Buffer) =>
       messages.push(
         data
           .toString()
