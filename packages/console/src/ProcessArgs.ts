@@ -5,12 +5,12 @@ export interface ProcessArgsFilter {
 }
 
 export class ProcessArgs {
-  private readonly arguments: string[]
+  private readonly filtered: string[]
   private readonly log: Lincoln = Logger.extend('args')
 
-  private constructor(args: string[], node: boolean) {
+  protected constructor(args: string[], node: boolean) {
     this.log.debug(node, ...args)
-    this.arguments = this.filter(args, node)
+    this.filtered = this.filter(args, node)
     this.log.debug(this.exe, this.args, this.normalized)
   }
 
@@ -19,7 +19,7 @@ export class ProcessArgs {
   }
 
   get args(): string[] {
-    return this.arguments
+    return this.filtered
   }
 
   get argsOnly(): string[] {
@@ -27,11 +27,11 @@ export class ProcessArgs {
   }
 
   get exe(): string {
-    return this.arguments[0]
+    return this.filtered[0]
   }
 
   get normalized(): string[] {
-    return this.arguments.slice(1)
+    return this.filtered.slice(1)
   }
 
   get switches(): string[] {
