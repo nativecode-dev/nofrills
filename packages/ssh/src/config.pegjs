@@ -1,36 +1,38 @@
 Start
-  = (Comment / Host / Config / WS? EOL)+ EOF
+  = (Comment / Config / Host / EOL)+
 
 Comment
-  = WS* '#' comment:(!EOL .)* EOL
+  = WS* '#' text:(AlphaNumericSymbols*) EOL {
+      return { comment: text.join(''), type: 'comment' }
+    }
 
 Host
-  = WS* left:'Host' WS* right:Value {
-      return { left, right }
+  = WS* keyword:'Host' WS* right:Value {
+      return { keyword, value: right, type: 'host' }
     }
-  / WS* left:'Match' WS* right:Value {
-      return { left, right }
+  / WS* keyword:'Match' WS* right:Value {
+      return { keyword, value: right, type: 'match' }
     }
 
 Config
-  = WS* identifier:Identifier WS* value:Value {
-      return { identifier, value }
+  = WS* keyword:Identifier WS* value:Value {
+      return { keyword, value, type: 'identifier' }
     }
-  / WS* identifier:AddKeysToAgent WS* value:AddKeysToAgentValue {
-      return { identifier, value }
+  / WS* keyword:AddKeysToAgent WS* value:AddKeysToAgentValue {
+      return { keyword, value, type: 'AddKeysToAgent' }
     }
-  / WS* identifier:AddressFamily WS* value:AddressFamilyValue {
-      return { identifier, value }
+  / WS* keyword:AddressFamily WS* value:AddressFamilyValue {
+      return { keyword, value, type: 'AddressFamily' }
     }
-  / WS* identifier:BatchMode WS* value:BatchModeValue {
-      return { identifier, value }
+  / WS* keyword:BatchMode WS* value:BatchModeValue {
+      return { keyword, value, type: 'BatchMode' }
     }
-  / WS* identifier:BindAddress WS* value:BindAddressValue {
-      return { identifier, value }
+  / WS* keyword:BindAddress WS* value:BindAddressValue {
+      return { keyword, value, type: 'BindAddress' }
     }
 
 IPAddress
-  = Octet '.' Octet '.' Octet '.' Octet
+  = first:Octet '.' second:Octet '.' third:Octet '.' fourth:Octet
 
 Octet
   = [0-9]{1,3}
@@ -153,13 +155,59 @@ Identifier
   / 'VisualHostKey'i
   / 'XAuthLocation'i
 
+AlphaNumericSymbols
+  = Alpha
+  / Numeric
+  / Symbol
+  / WS
+
+Alpha
+  = [a-zA-Z]
+
+Numeric
+  = [0-9]
+
+Symbol
+  = '~'
+  / '!'
+  / '@'
+  / '#'
+  / '$'
+  / '%'
+  / '^'
+  / '&'
+  / '*'
+  / '('
+  / ')'
+  / '_'
+  / '+'
+  / '`'
+  / '-'
+  / '='
+  / '['
+  / ']'
+  / '{'
+  / '}'
+  / ':'
+  / '"'
+  / ';'
+  / '\''
+  / ','
+  / '.'
+  / '/'
+  / '<'
+  / '>'
+  / '?'
+
 Value
-  = (!EOL .)*
+  = text:(AlphaNumericSymbols*) EOL {
+    return text.join('')
+    }
 
 EOL
-  = '\r\n'
-  / '\r'
-  / '\n'
+  = '\r\n' { return { type: 'newline' } }
+  / '\r' { return { type: 'newline' } }
+  / '\n' { return { type: 'newline' } }
 
 EOF
   = !.

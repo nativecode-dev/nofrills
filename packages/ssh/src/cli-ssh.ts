@@ -2,6 +2,8 @@ import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
 import { SshParser } from './SshParser'
 
+const args = ProcessArgs.from(process.argv)
+
 const options: ConsoleOptions = {
   initializer: async () => {
     const ssh = SshParser.from(process.cwd(), 'config.pegjs')
@@ -11,4 +13,4 @@ const options: ConsoleOptions = {
   },
 }
 
-CLI.run(options, ProcessArgs.from(process.argv)).catch(console.log)
+CLI.run(options, args).catch(console.log)
