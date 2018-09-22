@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@nofrills/console": "^3.5.0",
-    "@nofrills/fs": "^3.4.2",
-    "@nofrills/lincoln-debug": "^3.3.1",
+    "@nofrills/fs": "^3.5.1",
+    "@nofrills/lincoln-debug": "^3.6.0",
     "pegjs": "^0.10.0",
     "ts-pegjs": "^0.2.2"
   },

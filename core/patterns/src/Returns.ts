@@ -1,5 +1,5 @@
 export interface ReturnsAfter<T> {
-  after: (callback: Function) => T
+  after(callback: Function): T
 }
 
 export function Returns<T>(value: T): ReturnsAfter<T> {

@@ -6,7 +6,7 @@ export interface ProcessArgsFilter {
 
 export class ProcessArgs {
   private readonly arguments: string[]
-  private readonly log: Lincoln = Logger.extend('process-args')
+  private readonly log: Lincoln = Logger.extend('args')
 
   private constructor(args: string[], node: boolean) {
     this.log.debug(node, ...args)
