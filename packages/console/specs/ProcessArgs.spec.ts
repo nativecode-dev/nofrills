@@ -22,6 +22,42 @@ describe('when using ProcessArgs', () => {
     })
   })
 
+  describe('switches', () => {
+    const argsNodeWithSwitches = [node, exe, '--switch', '-s']
+    const argsNoNodeWithSwitches = [node, exe, '--switch', '-s']
+
+    it('should parse arguments when called from node', () => {
+      const sut = ProcessArgs.from(argsNodeWithSwitches)
+      expect(sut.argsOnly).to.deep.equal([])
+    })
+
+    it('should parse switches when not called from node', () => {
+      const sut = ProcessArgs.from(argsNoNodeWithSwitches)
+      expect(sut.argsOnly).to.deep.equal([])
+    })
+
+    it('should parse arguments when called from node', () => {
+      const sut = ProcessArgs.from(argsNodeWithSwitches)
+      expect(sut.has('switch')).to.be.true
+    })
+
+    it('should parse switches when not called from node', () => {
+      const sut = ProcessArgs.from(argsNoNodeWithSwitches)
+      expect(sut.has('switch')).to.be.true
+    })
+
+    it('should parse short switches when called from node', () => {
+      const sut = ProcessArgs.from(argsNodeWithSwitches)
+      console.log(sut.switches)
+      expect(sut.has('s')).to.be.true
+    })
+
+    it('should parse short switches when not called from node', () => {
+      const sut = ProcessArgs.from(argsNoNodeWithSwitches)
+      expect(sut.has('s')).to.be.true
+    })
+  })
+
   describe('exe', () => {
     const argsNode = [node, exe]
     const argsNoNode = [exe]
