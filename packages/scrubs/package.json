@@ -17,6 +17,7 @@
     "deepmerge": "^2.1.1"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^5.4.2",
     "@types/deepmerge": "^2.1.0"
   },
   "publishConfig": {
@@ -28,8 +29,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean"
   }
 }

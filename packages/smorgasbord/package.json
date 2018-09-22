@@ -16,6 +16,9 @@
     "@nofrills/types": "^3.4.1",
     "moment": "^2.18.1"
   },
+  "devDependencies": {
+    "@nofrills/tasks": "^5.4.2"
+  },
   "publishConfig": {
     "access": "public",
     "tag": "latest"
@@ -25,8 +28,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean"
   }
 }

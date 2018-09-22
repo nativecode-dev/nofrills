@@ -38,7 +38,9 @@
   ],
   "packages": [
     "core/*",
-    "packages/*"
+    "packages/*",
+    "packages-cli/*",
+    "packages-typings/*"
   ],
   "sort": true,
   "useWorkspaces": true,

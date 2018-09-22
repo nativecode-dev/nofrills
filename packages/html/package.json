@@ -11,6 +11,9 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
+  "devDependencies": {
+    "@nofrills/tasks": "^5.4.2"
+  },
   "publishConfig": {
     "access": "public",
     "tag": "latest"
@@ -20,8 +23,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean"
   }
 }

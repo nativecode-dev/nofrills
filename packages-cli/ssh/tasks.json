@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "build": [
+      "[clean]",
+      "tsc --project tsconfig.build.json",
+      "cli-shabang"
+    ],
+    "clean": [
+      "rimraf bin"
+    ]
+  }
+}
