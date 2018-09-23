@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@nofrills/fs": "^3.5.1",
-    "@nofrills/lincoln-debug": "^3.6.0",
-    "@nofrills/scrubs": "^3.5.0"
+    "@nofrills/lincoln-debug": "^3.6.2",
+    "@nofrills/scrubs": "^3.5.2"
   },
   "publishConfig": {
     "access": "public",
