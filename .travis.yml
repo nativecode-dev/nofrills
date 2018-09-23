@@ -13,6 +13,7 @@ before_install:
   - export PATH="$HOME/.yarn/bin:./node_modules/.bin:$PATH"
   - yarn global add lerna@2.11.0 @nofrills/tasks@^4.0.0
   - cli-tasks configure:git
+  - yarn run ssh
 stages:
   - test
   - name: coverage
@@ -30,7 +31,6 @@ jobs:
       node_js: '8'
       os: linux
       script:
-        - yarn run ssh
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
         - npm whoami
