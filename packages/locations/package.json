@@ -1,0 +1,32 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "Provides some common pattern abstractions.",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/locations",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/locations",
+  "private": false,
+  "types": "./lib/index.d.ts",
+  "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {
+    "@nofrills/fs": "^3.5.1"
+  },
+  "devDependencies": {
+    "@nofrills/tasks": "^5.4.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills.git"
+  },
+  "scripts": {
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
+  }
+}
