@@ -35,7 +35,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node src/cli-tasks build",
+    "clean": "ts-node src/cli-tasks clean"
   }
 }

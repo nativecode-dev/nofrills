@@ -80,4 +80,25 @@ describe('when using TaskRunner', () => {
     const results = await runner.run(['echo'])
     expect(results[0].messages).to.contain('/bin/bash')
   })
+
+  it('should change shell to bash', async () => {
+    const BashTask: TaskConfig = {
+      tasks: {
+        echo: {
+          entries: [
+            {
+              arguments: ['$0'],
+              command: 'echo',
+              name: 'echo',
+            },
+          ],
+          shell: '/bin/bash',
+        },
+      },
+    }
+
+    const runner = new TaskRunner(BashTask)
+    const results = await runner.run(['echo'])
+    expect(results[0].messages).to.contain('/bin/bash')
+  })
 })

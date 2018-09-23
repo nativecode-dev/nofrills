@@ -1,4 +1,4 @@
-import { ChildProcess, spawn, SpawnOptions } from 'child_process'
+import { ExecOptions, SpawnOptions, exec, spawn } from 'child_process'
 
 import { TaskEntry } from './TaskEntry'
 import { TaskEntryType } from './TaskEntryType'
@@ -33,42 +33,62 @@ export const TaskRunnerSerial: TaskRunnerAdapter = (
   )
 }
 
-function run(context: TaskContext): ChildProcess {
-  const env = {
+function createEnv() {
+  return {
     ...process.env,
     FORCE_COLOR: 'true',
     PATH: `./node_modules/.bin:./node_modules/@nofrills/tasks/bin:${process.env.PATH}`,
   }
+}
 
+function execContext(context: TaskContext): Promise<TaskJobResult> {
+  const options: ExecOptions = {
+    cwd: context.task.cwd,
+    env: createEnv(),
+    windowsHide: true,
+  }
+
+  const command = [context.job.command, ...(context.job.arguments || [])].join(' ')
+
+  return new Promise<TaskJobResult>((resolve, reject) => {
+    exec(command, options, (error, stdout, stderr) => {
+      if (error) {
+        resolve({
+          code: error.code || 255,
+          errors: [error.message, ...createMultiline(stderr)],
+          job: context.job,
+          messages: [],
+          signal: error.signal || null,
+        })
+      } else {
+        resolve({
+          code: 0,
+          errors: [],
+          job: context.job,
+          messages: createMultiline(stdout),
+          signal: null,
+        })
+      }
+    })
+  })
+}
+
+function spawnContext(context: TaskContext): Promise<TaskJobResult> {
   const options: SpawnOptions = {
     cwd: context.task.cwd,
-    env,
+    env: createEnv(),
     shell: context.task.task.shell || true,
     stdio: [context.stdin, 'pipe', 'pipe'],
     windowsHide: true,
   }
 
-  return spawn(context.job.command, context.job.arguments, options)
-}
-
-function execute(context: TaskContext): Promise<TaskJobResult> {
-  if (context.job.type === TaskEntryType.skip) {
-    context.log.debug('skip', context.job.name, context.job.command)
-    return Promise.resolve({ code: 0, errors: [], job: context.job, messages: [], signal: null })
-  }
-
-  const errors: string[] = []
-  const messages: string[] = []
-
-  context.log.debug('execute', context.task.cwd, context.job)
-
-  ConsoleLog.info(
-    `<${context.job.command}>`,
-    context.job.arguments ? context.job.arguments.join(' ') : context.job.arguments,
-  )
+  const proc = spawn(context.job.command, context.job.arguments, options)
 
   return new Promise<TaskJobResult>((resolve, reject) => {
-    const proc = run(context)
+    const errors: string[] = []
+    const messages: string[] = []
+
+    proc
       .on('uncaughtException', (error: Error) => {
         context.log.error('uncaught-exception', context.job.name, error)
         ConsoleLog.error(error)
@@ -103,4 +123,23 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
       })
       .pipe(context.stdout)
   })
+}
+
+function execute(context: TaskContext): Promise<TaskJobResult> {
+  if (context.job.type === TaskEntryType.skip) {
+    context.log.debug('skip', context.job.name, context.job.command)
+    return Promise.resolve({ code: 0, errors: [], job: context.job, messages: [], signal: null })
+  }
+  context.log.debug('execute', context.task.cwd, context.job)
+
+  ConsoleLog.info(
+    `<${context.job.command}>`,
+    context.job.arguments ? context.job.arguments.join(' ') : context.job.arguments,
+  )
+
+  return context.job.type === TaskEntryType.exec ? execContext(context) : spawnContext(context)
+}
+
+function createMultiline(value: string): string[] {
+  return value.replace('\r', '').split('\n')
 }
