@@ -21,7 +21,7 @@
       "git config --global push.default simple"
     ],
     "configure:ssh": [
-      "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+      "./node_modules/@alrra/travis-scripts/bin/util/set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
     ],
     "commit": [
       "[test]",
