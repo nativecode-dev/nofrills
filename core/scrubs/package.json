@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Scrubs an object of sensitive data.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/scrubs/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/scrubs",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/scrubs",
@@ -17,7 +17,6 @@
     "deepmerge": "^2.1.1"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^5.4.2",
     "@types/deepmerge": "^2.1.0"
   },
   "publishConfig": {
@@ -29,7 +28,8 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "tsc --project tsconfig.build.json",
+    "prebuild": "rimraf lib",
+    "clean": "rimraf lib"
   }
 }

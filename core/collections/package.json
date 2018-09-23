@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Set of useful (maybe) collection types.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/collections/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/collections",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/collections",

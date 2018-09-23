@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a simple abstraction for console application lifecycle management.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/console/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/console",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/console",

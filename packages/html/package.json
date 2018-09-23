@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides some HTML utility functions.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/html/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/html",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/html",
@@ -23,7 +23,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }

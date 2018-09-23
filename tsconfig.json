@@ -5,7 +5,9 @@
     "paths": {
       "@nofrills/*": [
         "core/*/src",
-        "packages/*/src"
+        "packages/*/src",
+        "packages-cli/*/src",
+        "packages-typings/*/src"
       ],
       "zipcodes-regex": [
         "core/types/src/zipcodes-regex.d.ts"

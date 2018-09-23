@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a unified API for generation TypeScript declaration files.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/typings/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/typings",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/typings",
@@ -30,7 +30,7 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }

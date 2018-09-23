@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Simple NPM package task builder.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/tasks/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages-cli/tasks",
   "license": "MIT",
   "main": "./src/index.ts",
   "name": "@nofrills/tasks",

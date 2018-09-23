@@ -1,13 +1,5 @@
 {
   "command": {
-    "bootstrap": {
-      "npmClient": "yarn",
-      "npmClientArgs": [
-        "--ignore-optional",
-        "--non-interactive",
-        "--silent"
-      ]
-    },
     "exec": {
       "bail": true
     },

@@ -2,11 +2,11 @@ import 'mocha'
 
 import { fs } from '@nofrills/fs'
 
-import { Exporter, Package } from '../src'
+import { Exporter, Package } from '../src/index'
 
 describe('when using exporter', async () => {
 
-  const typings = fs.join(process.cwd(), 'packages', 'typings')
+  const typings = fs.join(process.cwd(), 'packages-typings', 'typings')
   const templates = fs.join(typings, 'src', 'Templates')
   const filename = fs.join(typings, 'specs', 'couchbase.json')
   const output = fs.join(process.cwd(), '.cache', '.artifacts', 'couchbase')

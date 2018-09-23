@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a simple, Promise-based interface to the file system.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/fs/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/fs",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/fs",
