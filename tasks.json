@@ -21,8 +21,6 @@
       "git config --global push.default simple"
     ],
     "configure:ssh": [
-      "pwd",
-      "ls -R ./node_modules/@alrra/travis-scripts/bin",
       "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
     ],
     "commit": [
