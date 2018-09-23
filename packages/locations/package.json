@@ -14,6 +14,9 @@
   "dependencies": {
     "@nofrills/fs": "^3.5.1"
   },
+  "devDependencies": {
+    "@nofrills/tasks": "^5.4.2"
+  },
   "publishConfig": {
     "access": "public",
     "tag": "latest"
@@ -23,7 +26,7 @@
     "url": "https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "ts-node ../../packages-cli/tasks/cli-tasks build",
-    "clean": "ts-node ../../packages-cli/tasks/cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }
