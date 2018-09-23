@@ -3,7 +3,15 @@ import 'mocha'
 import { fs } from '@nofrills/fs'
 
 import expect from './expect'
-import { TaskConfig, TaskBuilder, TaskRunner, TaskJob, TaskJobResult, TaskRunnerAdapter } from '../src/index'
+import {
+  TaskConfig,
+  TaskBuilder,
+  TaskRunner,
+  TaskJob,
+  TaskJobResult,
+  TaskRunnerAdapter,
+  TaskEntryType,
+} from '../src/index'
 
 const assets = fs.join(__dirname, 'assets')
 
@@ -81,24 +89,24 @@ describe('when using TaskRunner', () => {
     expect(results[0].messages).to.contain('/bin/bash')
   })
 
-  it('should change shell to bash', async () => {
-    const BashTask: TaskConfig = {
+  it('should execute tasks rather than spawn', async () => {
+    const ExecTask: TaskConfig = {
       tasks: {
         echo: {
           entries: [
             {
               arguments: ['$0'],
-              command: 'echo',
+              command: '@echo',
               name: 'echo',
+              type: TaskEntryType.exec,
             },
           ],
-          shell: '/bin/bash',
         },
       },
     }
 
-    const runner = new TaskRunner(BashTask)
+    const runner = new TaskRunner(ExecTask)
     const results = await runner.run(['echo'])
-    expect(results[0].messages).to.contain('/bin/bash')
+    expect(results).to.be.lengthOf(1)
   })
 })

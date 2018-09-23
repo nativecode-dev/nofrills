@@ -64,7 +64,8 @@
     "coveralls": "cli-tasks coveralls",
     "release": "cli-tasks release",
     "start": "cli-tasks start",
-    "test": "cli-tasks test"
+    "test": "cli-tasks test",
+    "ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
   },
   "workspaces": {
     "packages": [
