@@ -1,0 +1,55 @@
+{
+  "tasks": {
+    "build": [
+      "[clean]",
+      "[format]",
+      "lerna run build"
+    ],
+    "clean": [
+      "rimraf .cache"
+    ],
+    "configure": [
+      "[configure:git]",
+      "[configure:ssh]"
+    ],
+    "configure:docs": [
+      "typedoc --mode modules --out ./docs ./packages/*/src/"
+    ],
+    "configure:git": [
+      "git config --global user.email \"opensource+nofrills@nativecode.com\"",
+      "git config --global user.name \"Native Open Source\"",
+      "git config --global push.default simple"
+    ],
+    "configure:ssh": [
+      "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+    ],
+    "commit": [
+      "[test]",
+      "git add -A . && git-cz"
+    ],
+    "coveralls": [
+      "[test]",
+      "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"
+    ],
+    "format": [
+      "prettier --write \"**/specs/**/*.ts\"",
+      "prettier --write \"**/src/**/*.ts\""
+    ],
+    "lint": [
+      "tslint --project tsconfig.json --config tslint.json"
+    ],
+    "release": [
+      "[build]",
+      "lerna-semantic-release pre",
+      "lerna-semantic-release perform"
+    ],
+    "start": [
+      "[build]",
+      "lerna run start"
+    ],
+    "test": [
+      "[build]",
+      "cross-env DEBUG= nyc mocha --opts mocha.opts"
+    ]
+  }
+}

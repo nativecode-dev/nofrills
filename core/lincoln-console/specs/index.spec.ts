@@ -10,10 +10,10 @@ describe('when using debug lincoln interceptor', () => {
   const warn = console.warn
 
   before(() => {
-    console.debug = () => void (0)
-    console.error = () => void (0)
-    console.log = () => void (0)
-    console.warn = () => void (0)
+    console.debug = () => void 0
+    console.error = () => void 0
+    console.log = () => void 0
+    console.warn = () => void 0
   })
 
   after(() => {
@@ -39,5 +39,4 @@ describe('when using debug lincoln interceptor', () => {
   it('should log parameterless calls', () => {
     expect(() => CreateLogger(NAMESPACE).debug()).to.not.throw()
   })
-
 })

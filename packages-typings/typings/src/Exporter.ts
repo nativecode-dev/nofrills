@@ -6,26 +6,14 @@ import { Logger } from './Logger'
 import { Package } from './Packages'
 import { PackageError } from './Errors'
 
-const Properties: string[] = [
-  'constructors',
-  'enums',
-  'functions',
-  'methods',
-  'namespaces',
-  'properties',
-  'types',
-]
+const Properties: string[] = ['constructors', 'enums', 'functions', 'methods', 'namespaces', 'properties', 'types']
 
 export class Exporter {
   private readonly log = Logger.extend('exporter')
 
   constructor(private readonly templates: string) {}
 
-  async export(
-    source: Package,
-    outpath: string,
-    separate: boolean = false,
-  ): Promise<any> {
+  async export(source: Package, outpath: string, separate: boolean = false): Promise<any> {
     this.log.debug('templates', this.templates)
     this.log.debug('outpath', outpath)
 
@@ -61,14 +49,9 @@ export class Exporter {
     this.log.info('exported', output)
   }
 
-  private onPropertyConverter = (
-    name: string,
-    navigator: ObjectNavigator,
-  ): void => {
+  private onPropertyConverter = (name: string, navigator: ObjectNavigator): void => {
     if (Properties.indexOf(name) >= 0 && Is.object(navigator.value)) {
-      const value = Object.keys(navigator.value).map(
-        key => navigator.value[key],
-      )
+      const value = Object.keys(navigator.value).map(key => navigator.value[key])
       navigator.set(name, value)
     }
   }

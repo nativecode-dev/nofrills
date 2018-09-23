@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^3.6.0",
-    "@nofrills/types": "^3.4.1",
     "moment": "^2.18.1"
   },
   "devDependencies": {
@@ -28,7 +27,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
-    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean"
   }
 }

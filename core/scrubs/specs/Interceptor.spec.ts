@@ -8,7 +8,6 @@ import { data } from './data'
 import { ScrubsInterceptor } from '../src/ScrubsInterceptor'
 
 describe('when using lincoln interceptor', () => {
-
   it('should scrub data object', async () => {
     const expectedUrl = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
 
@@ -36,5 +35,4 @@ describe('when using lincoln interceptor', () => {
     const sut: Log = await ScrubsInterceptor(log)
     expect(sut.parameters[0]).to.equal(expectedUrl)
   })
-
 })

@@ -17,9 +17,7 @@ export class PathCollector extends EventEmitter {
     this.log.debug('collect', recursive, ...patterns)
 
     const descriptors = await Promise.all(
-      patterns
-        .map(pattern => fs.resolve(this.path, pattern))
-        .map(pattern => this.resolve(pattern))
+      patterns.map(pattern => fs.resolve(this.path, pattern)).map(pattern => this.resolve(pattern)),
     )
 
     const collected = descriptors.reduce((array, current) => array.concat(current), [])

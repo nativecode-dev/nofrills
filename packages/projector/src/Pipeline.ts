@@ -7,10 +7,11 @@ import { PluginContext } from './PluginContext'
 export class Pipeline {
   public static readonly instance: Pipeline = new Pipeline()
 
-  protected constructor() { }
+  protected constructor() {}
 
   async execute(project: Project, stages: string[], plugins: Plugin[]): Promise<void> {
-    const promises = stages.map(stage => stage.toLowerCase())
+    const promises = stages
+      .map(stage => stage.toLowerCase())
       .map<PluginContext>(stage => ({ data: {}, project, stage }))
       .map(context => this.delegate(context, plugins))
 

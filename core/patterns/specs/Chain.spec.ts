@@ -12,30 +12,21 @@ describe('when using Chain of Responsibilty pattern', () => {
 
   it('should call all registered handlers', () => {
     // Arrange
-    const first: ChainHandler<any, Response> = (
-      object: any,
-      next: ChainHandlerLink<any, Response>,
-    ): Response => {
+    const first: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Response => {
       const response: Response = next(object)
       expect(response.text).to.be.undefined
       response.text = 'first'
       return response
     }
 
-    const second: ChainHandler<any, Response> = (
-      object: any,
-      next: ChainHandlerLink<any, Response>,
-    ): Response => {
+    const second: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Response => {
       const response: Response = next(object)
       expect(response.text).to.be.equal('first')
       response.text = 'second'
       return response
     }
 
-    const third: ChainHandler<any, Response> = (
-      object: any,
-      next: ChainHandlerLink<any, Response>,
-    ): Response => {
+    const third: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Response => {
       const response: Response = next(object)
       expect(response.text).to.be.equal('second')
       response.text = 'third'
@@ -57,30 +48,21 @@ describe('when using Chain of Responsibilty pattern', () => {
 
   it('should call all registered handlers in reverse', () => {
     // Arrange
-    const first: ChainHandler<any, Response> = (
-      object: any,
-      next: ChainHandlerLink<any, Response>,
-    ): Response => {
+    const first: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Response => {
       const response: Response = next(object)
       expect(response.text).to.be.equal('second')
       response.text = 'first'
       return response
     }
 
-    const second: ChainHandler<any, Response> = (
-      object: any,
-      next: ChainHandlerLink<any, Response>,
-    ): Response => {
+    const second: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Response => {
       const response: Response = next(object)
       expect(response.text).to.be.equal('third')
       response.text = 'second'
       return response
     }
 
-    const third: ChainHandler<any, Response> = (
-      object: any,
-      next: ChainHandlerLink<any, Response>,
-    ): Response => {
+    const third: ChainHandler<any, Response> = (object: any, next: ChainHandlerLink<any, Response>): Response => {
       const response: Response = next(object)
       expect(response.text).to.be.undefined
       response.text = 'third'
@@ -88,11 +70,7 @@ describe('when using Chain of Responsibilty pattern', () => {
     }
 
     // Act
-    const result: Response = Chain.from<any, Response>([
-      first,
-      second,
-      third,
-    ]).execute({}, true)
+    const result: Response = Chain.from<any, Response>([first, second, third]).execute({}, true)
 
     // Assert
     expect(result.text).to.be.equal('first')
@@ -104,8 +82,7 @@ describe('when using Chain of Responsibilty pattern', () => {
       return `PREFIX:${next(value)}`
     }
 
-    const rename = (value: string, next: ChainHandlerLink<string, string>) =>
-      next(value).replace('OBJECT', 'OBJ')
+    const rename = (value: string, next: ChainHandlerLink<string, string>) => next(value).replace('OBJECT', 'OBJ')
 
     const postfix = (value: string, next: ChainHandlerLink<string, string>) => {
       return `${next(value)}:POSTFIX`

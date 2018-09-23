@@ -44,11 +44,7 @@ export class Env {
     this.options = all<EnvOptions>([Defaults, options || {}])
   }
 
-  static from(
-    options: Partial<EnvOptions> = {},
-    filter?: EnvFilter,
-    transform?: EnvTransform,
-  ): Env {
+  static from(options: Partial<EnvOptions> = {}, filter?: EnvFilter, transform?: EnvTransform): Env {
     const opts = all<EnvOptions>([Defaults, options])
     const root = ObjectNavigator.from({})
 

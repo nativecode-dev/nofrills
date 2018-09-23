@@ -5,14 +5,12 @@ import { expect } from 'chai'
 import { Is } from '../src/Is'
 
 describe('when using type library', () => {
-
   describe('"Is" module', () => {
-
     describe('to validate types', () => {
-
       it('should validate array type', () => expect(Is.array([])).to.equal(true))
       it('should validate arrayOf type', () => expect(Is.arrayOf([1, 2, 3, 4, 5], 'number')).to.equal(true))
-      it('should validate arrayOf are not expected type', () => expect(Is.arrayOf([1, 2, 3, 4, '5'], 'number')).to.equal(false))
+      it('should validate arrayOf are not expected type', () =>
+        expect(Is.arrayOf([1, 2, 3, 4, '5'], 'number')).to.equal(false))
       it('should validate arrayOf any', () => expect(Is.arrayOf([1])).to.equal(true))
       it('should validate string is not array', () => expect(Is.array('string')).to.equal(false))
       it('should validate boolean type', () => expect(Is.boolean(true)).to.equal(true))
@@ -21,7 +19,7 @@ describe('when using type library', () => {
       it('should validate date is not string', () => expect(Is.date('yes')).to.equal(false))
       it('should validate error type', () => expect(Is.error(new Error())).to.equal(true))
       it('should validate error is not valid', () => expect(Is.error(null)).to.equal(false))
-      it('should validate function', () => expect(Is.function(() => void (0))).to.equal(true))
+      it('should validate function', () => expect(Is.function(() => void 0)).to.equal(true))
       it('should validate function is not a string', () => expect(Is.function('function')).to.equal(false))
       it('should validate number type', () => expect(Is.number(123)).to.equal(true))
       it('should validate number is not string', () => expect(Is.number('123')).to.equal(false))
@@ -38,7 +36,5 @@ describe('when using type library', () => {
       expect(Is.any({})).to.equal(true)
       expect(Is.any('string')).to.equal(true)
     })
-
   })
-
 })

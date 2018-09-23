@@ -1,4 +1,5 @@
 import { Is } from '@nofrills/types'
+import { Returns } from '@nofrills/patterns'
 import { fs, CreateResolver, FileResolver } from '@nofrills/fs'
 
 import { Task } from './Task'
@@ -6,9 +7,11 @@ import { TaskConfig } from './TaskConfig'
 import { TaskDefinition } from './TaskDefinitions'
 
 import { Lincoln, Logger, ConsoleLog } from './Logging'
-import { TaskRunner, TaskJobResult } from './TaskRunner'
+import { TaskRunner } from './TaskRunner'
+import { TaskJobResult } from './TaskJobResult'
 import { TaskConfigError } from './errors/TaskConfigError'
 import { TaskEntry } from './TaskEntry'
+import { TaskEntryType } from './TaskEntryType'
 
 export interface TaskContext {
   config: TaskConfig
@@ -88,12 +91,35 @@ export class TaskBuilder {
       }
 
       this.log.debug('task->entry', name, context.task)
-      return this.fromArray(context.config, context.task.entries)
+      return this.fromArray(context.config, context.task.entries).map(entry =>
+        Returns(entry).after(() => (entry.origin = name)),
+      )
     }
 
+    return [this.createEntry(command)]
+  }
+
+  protected createEntry(command: string): TaskEntry {
     const parts = command.split(' ')
-    const entry = { arguments: parts.slice(1), command: parts[0], name: parts[0] }
-    return [entry]
+    const type = this.type(parts[0])
+
+    return {
+      arguments: parts.slice(1),
+      command: type === TaskEntryType.exec ? parts[0] : parts[0].substring(1),
+      name: parts[0],
+      type,
+    }
+  }
+
+  protected type(type: string): TaskEntryType {
+    switch (type) {
+      case TaskEntryType.bail:
+        return TaskEntryType.bail
+      case TaskEntryType.skip:
+        return TaskEntryType.skip
+      default:
+        return TaskEntryType.exec
+    }
   }
 
   protected async resolve(): Promise<string[]> {

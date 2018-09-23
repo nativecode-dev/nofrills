@@ -8,7 +8,11 @@ import { ProjectSupport } from './ProjectSupport'
 
 const logger = Logger.extend('config')
 
-export type ProjectConfigHandler = (host: PluginHost, project: Project, filepath: string) => Promise<ProjectConfig | null>
+export type ProjectConfigHandler = (
+  host: PluginHost,
+  project: Project,
+  filepath: string,
+) => Promise<ProjectConfig | null>
 
 export const ConfigHandlerRegistry: Registry<ProjectConfigHandler> = new Registry<ProjectConfigHandler>()
 

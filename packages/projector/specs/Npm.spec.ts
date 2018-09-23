@@ -27,5 +27,4 @@ describe('when using the NpmConfig handler', () => {
   it('should return null when configuration does not exist', () => {
     expect(NpmConfig(host, project, invalidConfigLocation)).to.eventually.be.null
   })
-
 })

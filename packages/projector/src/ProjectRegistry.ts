@@ -7,7 +7,7 @@ export class ProjectRegistry {
 
   private readonly types: RegistryMap<PluginConstructor<Plugin>> = new RegistryMap<PluginConstructor<Plugin>>()
 
-  private constructor() { }
+  private constructor() {}
 
   static create(): ProjectRegistry {
     return new ProjectRegistry()

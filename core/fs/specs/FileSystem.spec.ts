@@ -12,10 +12,7 @@ describe('when working with Files', () => {
       await fs.delete(artifacts)
     }
     await fs.mkdir(artifacts)
-    await fs.save(
-      fs.join(artifacts, 'artifacts.json'),
-      JSON.stringify({ path: artifacts }),
-    )
+    await fs.save(fs.join(artifacts, 'artifacts.json'), JSON.stringify({ path: artifacts }))
   })
 
   after(() => fs.delete(artifacts))
@@ -155,10 +152,7 @@ describe('when working with Files', () => {
   })
 
   it('should stat multiple paths', async () => {
-    const paths = [
-      fs.join(cwd, 'core/fs', 'specs'),
-      fs.join(cwd, 'core/fs', 'src'),
-    ]
+    const paths = [fs.join(cwd, 'core/fs', 'specs'), fs.join(cwd, 'core/fs', 'src')]
     const stats = await fs.stats(...paths)
     expect(stats.length).to.equal(2)
   })

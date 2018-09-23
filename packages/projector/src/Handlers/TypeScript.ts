@@ -26,7 +26,7 @@ export async function TypeScriptConfig(project: Project, filepath: string): Prom
     return null
   }
 
-  if (await fs.exists(filepath) === false) {
+  if ((await fs.exists(filepath)) === false) {
     logger.warn('config', filepath)
     return null
   }

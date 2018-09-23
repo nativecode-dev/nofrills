@@ -27,9 +27,11 @@ const options: ConsoleOptions = {
 
       const exitCode = Math.max(...resultCodes)
       Logger.debug(exitCode)
+      ConsoleLog.trace('exit-code:', exitCode)
       process.exit(exitCode)
     } catch (error) {
       ConsoleLog.error(error)
+      console.log(error)
       process.exit(1)
     }
   },

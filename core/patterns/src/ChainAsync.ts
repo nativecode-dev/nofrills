@@ -1,7 +1,4 @@
-export type ChainAsyncHandler<T, R> = (
-  value: T,
-  next: ChainAsyncHandlerLink<T, R>,
-) => Promise<R>
+export type ChainAsyncHandler<T, R> = (value: T, next: ChainAsyncHandlerLink<T, R>) => Promise<R>
 export type ChainAsyncHandlerLink<T, R> = (value: T) => Promise<R>
 export type ChainAsyncHandlers<T, R> = Array<ChainAsyncHandler<T, R>>
 
@@ -20,11 +17,7 @@ export class ChainAsync<T, R> {
     return this
   }
 
-  public execute(
-    value: T,
-    initializer: () => Promise<R>,
-    reverse: boolean = false,
-  ): Promise<R> {
+  public execute(value: T, initializer: () => Promise<R>, reverse: boolean = false): Promise<R> {
     return this.proxy(reverse, initializer)(value)
   }
 
@@ -32,8 +25,7 @@ export class ChainAsync<T, R> {
     const handlers = reverse ? this.handlers.reverse() : this.handlers
 
     const proxy = handlers.reduce(
-      (previous, current) => (value, next): Promise<R> =>
-        current(value, outerValue => previous(outerValue, next)),
+      (previous, current) => (value, next): Promise<R> => current(value, outerValue => previous(outerValue, next)),
       initiator,
     )
 

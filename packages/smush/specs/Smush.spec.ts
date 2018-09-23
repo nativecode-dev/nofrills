@@ -16,20 +16,19 @@ describe('smush', () => {
     return JSON.parse(json)
   }
 
-  beforeEach(() => $S = new Smush())
+  beforeEach(() => ($S = new Smush()))
 
   describe('when smushing', () => {
     const KEY: string = 'smushit'
 
-    it('should throw SmushError when file not found.', (done) => {
-      $S.json(KEY, 'fake.file.json')
-        .catch((error: SmushError) => {
-          expect(error).to.be.instanceof(Error)
-          done()
-        })
+    it('should throw SmushError when file not found.', done => {
+      $S.json(KEY, 'fake.file.json').catch((error: SmushError) => {
+        expect(error).to.be.instanceof(Error)
+        done()
+      })
     })
 
-    it('should convert string to json and smush', (done) => {
+    it('should convert string to json and smush', done => {
       $S.string(KEY, JSON.stringify({}))
         .then((config: any) => {
           expect(config).to.be.instanceof(Object)
@@ -38,18 +37,17 @@ describe('smush', () => {
         .catch((error: SmushError) => done(error))
     })
 
-    it('should throw error if transformer throws', (done) => {
+    it('should throw error if transformer throws', done => {
       const transformer = () => {
         throw new Error()
       }
-      $S.string(KEY, JSON.stringify({}), transformer)
-        .catch((error: SmushError) => {
-          expect(error).to.be.instanceof(SmushError)
-          done()
-        })
+      $S.string(KEY, JSON.stringify({}), transformer).catch((error: SmushError) => {
+        expect(error).to.be.instanceof(SmushError)
+        done()
+      })
     })
 
-    it('should throw error for invalid JSON string', (done) => {
+    it('should throw error for invalid JSON string', done => {
       $S.string(KEY, 'invalid')
         .then((config: any) => {
           done(config)
@@ -101,8 +99,8 @@ describe('smush', () => {
         id: 'sourceB',
         numbers: [2, 3, 4, 5, 6],
         payload: {
-          key: 'sourceB.payload'
-        }
+          key: 'sourceB.payload',
+        },
       }
 
       const expected: any = {
@@ -116,7 +114,7 @@ describe('smush', () => {
         numbers: [1, 7, 8, 9, 2, 3, 4, 5, 6],
         payload: {
           key: 'sourceB.payload',
-        }
+        },
       }
 
       it('merges deeply nested properties', () => {
@@ -129,7 +127,7 @@ describe('smush', () => {
         $S.set(KEY, sourceA, sourceB)
         const sut: any = $S.toObject(`${KEY}.payload`)
         expect(sut).to.deep.equal({
-          key: 'sourceB.payload'
+          key: 'sourceB.payload',
         })
       })
 
@@ -142,7 +140,7 @@ describe('smush', () => {
       describe('should allow using dotted-paths', () => {
         it('setting and getting value', () => {
           const merged: any = $S.set(PATH, {
-            id: 'dotted-path'
+            id: 'dotted-path',
           })
 
           expect($S.get(PATH)).to.deep.equal(merged)
@@ -151,7 +149,7 @@ describe('smush', () => {
       })
 
       describe('should load .json files', () => {
-        it('contents', (done) => {
+        it('contents', done => {
           $S.json('config', path.join(__dirname, '../artifacts/test.simple.base.json'))
             .then((smush: Smush) => smush.toObject().config)
             .then((config: any) => {
@@ -162,7 +160,7 @@ describe('smush', () => {
             .catch(done)
         })
 
-        it('multiple instances', (done) => {
+        it('multiple instances', done => {
           $S.json('config', path.join(__dirname, '../artifacts/test.simple.base.json'))
             .then((smush: Smush) => smush.json('config', path.join(__dirname, '../artifacts/test.simple.derived.json')))
             .then((smush: Smush) => smush.toObject().config)
@@ -174,7 +172,7 @@ describe('smush', () => {
             .catch(done)
         })
 
-        it('transforms properties', (done) => {
+        it('transforms properties', done => {
           const transformer = (object: any) => {
             object.id = 'transformed'
             object.schema.name = 'transformed'

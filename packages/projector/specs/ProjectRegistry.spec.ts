@@ -18,7 +18,6 @@ interface ProjectRegistryTest {
 }
 
 describe('when using the project registry', () => {
-
   const context: ProjectRegistryTest = {
     host: new TestPluginHost(),
     registry: ProjectRegistry.create(),
@@ -41,5 +40,4 @@ describe('when using the project registry', () => {
     }
     expect(SUT).to.not.be.undefined
   })
-
 })

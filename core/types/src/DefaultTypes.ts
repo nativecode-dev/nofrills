@@ -38,7 +38,8 @@ class $ {
   }
 }
 
-const phone = (): RegExp => /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
+const phone = (): RegExp =>
+  /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
 
 Types.register({
   default: 'max',
@@ -66,7 +67,8 @@ Types.register({
   },
   type: 'email',
   typebase: 'string',
-  validator: (value: any, props?: TypeProperties) => Is.string(value) && $.consumed(value, props) ? validator.isEmail(value) : false,
+  validator: (value: any, props?: TypeProperties) =>
+    Is.string(value) && $.consumed(value, props) ? validator.isEmail(value) : false,
 })
 
 Types.register({
@@ -79,7 +81,8 @@ Types.register({
   default: 'max',
   type: 'number',
   typebase: 'Number',
-  validator: (value: any, props?: TypeProperties) => Is.number(value) && $.consumed(value, props) && $.bounded(value, props),
+  validator: (value: any, props?: TypeProperties) =>
+    Is.number(value) && $.consumed(value, props) && $.bounded(value, props),
 })
 
 Types.register({

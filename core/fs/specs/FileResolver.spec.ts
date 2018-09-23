@@ -3,10 +3,7 @@ import 'mocha'
 import expect from './expect'
 import { RecursiveStrategy } from '../src/Resolver/RecursiveStrategy'
 
-import {
-  FileResolver,
-  FileResolverStrategy,
-} from '../src/Resolver/FileResolver'
+import { FileResolver, FileResolverStrategy } from '../src/Resolver/FileResolver'
 
 describe('when working with Files', () => {
   const strategies: FileResolverStrategy[] = [RecursiveStrategy]

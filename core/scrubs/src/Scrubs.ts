@@ -12,16 +12,8 @@ export interface ScrubsOptions {
 }
 
 const defaults: Partial<ScrubsOptions> = {
-  properties: [
-    'apikey',
-    'api-key',
-    'api_key',
-    'pass',
-    'password',
-    'secret',
-    'x-api-key',
-  ],
-  text: '<secured>'
+  properties: ['apikey', 'api-key', 'api_key', 'pass', 'password', 'secret', 'x-api-key'],
+  text: '<secured>',
 }
 
 export class Scrubs {
@@ -66,7 +58,8 @@ export class Scrubs {
       const typedef: string = type || Types.from(value)
       this.log.debug(`scrub.pre:${typedef}`, value)
 
-      return (this.registry.get(typedef) || []).reverse()
+      return (this.registry.get(typedef) || [])
+        .reverse()
         .reduce(async (previous, scrubber) => scrubber(await previous, this.options, this), Promise.resolve(value))
     }
     return value

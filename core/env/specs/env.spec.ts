@@ -65,9 +65,7 @@ describe('when using env', () => {
 
   it('should return environment variable name', () => {
     const env = new Env(Overrides())
-    expect(env.key('runtime.data.database')).to.equal(
-      'APP_RUNTIME_DATA_DATABASE',
-    )
+    expect(env.key('runtime.data.database')).to.equal('APP_RUNTIME_DATA_DATABASE')
   })
 
   it('should return empty string for variables that do not exist', () => {
