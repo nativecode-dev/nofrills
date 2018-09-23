@@ -2,6 +2,7 @@ import { Returns } from '@nofrills/patterns'
 import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
 import { TaskBuilder } from './TaskBuilder'
+import { ErrorCode } from './errors/ErrorCode'
 import { Logger, ConsoleLog } from './Logging'
 
 const pargs = ProcessArgs.from(process.argv)
@@ -28,11 +29,11 @@ const options: ConsoleOptions = {
       const exitCode = Math.max(...resultCodes)
       Logger.debug(exitCode)
       ConsoleLog.trace('exit-code:', exitCode)
-      process.exit(exitCode)
+      process.exitCode = exitCode
     } catch (error) {
       ConsoleLog.error(error)
       console.log(error)
-      process.exit(1)
+      process.exitCode = ErrorCode.UncaughtException
     }
   },
 }

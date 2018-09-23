@@ -105,7 +105,7 @@ export class TaskBuilder {
 
     return {
       arguments: parts.slice(1),
-      command: type === TaskEntryType.exec ? parts[0] : parts[0].substring(1),
+      command: type === TaskEntryType.spawn ? parts[0] : parts[0].substring(1),
       name: parts[0],
       type,
     }
@@ -115,10 +115,12 @@ export class TaskBuilder {
     switch (type) {
       case TaskEntryType.bail:
         return TaskEntryType.bail
+      case TaskEntryType.exec:
+        return TaskEntryType.exec
       case TaskEntryType.skip:
         return TaskEntryType.skip
       default:
-        return TaskEntryType.exec
+        return TaskEntryType.spawn
     }
   }
 

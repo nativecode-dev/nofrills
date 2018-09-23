@@ -7,6 +7,7 @@ import { TaskResultError } from './errors/TaskResultError'
 import { TaskJob } from './TaskJob'
 import { TaskJobResult } from './TaskJobResult'
 import { TaskRunnerAdapter } from './TaskRunnerAdapter'
+import { ErrorCode } from './errors'
 
 export interface TaskContext {
   job: TaskEntry
@@ -53,21 +54,28 @@ function execContext(context: TaskContext): Promise<TaskJobResult> {
   return new Promise<TaskJobResult>((resolve, reject) => {
     exec(command, options, (error, stdout, stderr) => {
       if (error) {
-        resolve({
-          code: error.code || 255,
+        const result = {
+          code: error.code || ErrorCode.UncaughtException,
           errors: [error.message, ...createMultiline(stderr)],
           job: context.job,
           messages: [],
           signal: error.signal || null,
-        })
+        }
+
+        if (context.job.type === TaskEntryType.bail) {
+          reject(new TaskResultError(result))
+        } else {
+          resolve(result)
+        }
       } else {
-        resolve({
+        const result = {
           code: 0,
           errors: [],
           job: context.job,
           messages: createMultiline(stdout),
           signal: null,
-        })
+        }
+        resolve(result)
       }
     })
   })
