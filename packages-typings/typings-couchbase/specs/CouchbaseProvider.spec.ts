@@ -12,7 +12,7 @@ describe('when importing couchbase documentation', () => {
 
   const artifacts = fs.join(process.cwd(), '.cache', '.artifacts')
   const output = fs.join(artifacts, 'couchbase')
-  const templates = fs.join(process.cwd(), 'packages', 'typings', 'src', 'Templates')
+  const templates = fs.join(process.cwd(), 'packages-typings', 'typings', 'src', 'Templates')
 
   it('should import all references', async () => {
 

@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Smushes things together.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smush",
@@ -33,7 +33,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }

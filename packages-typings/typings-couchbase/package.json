@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Implements an importer to convert Couchbase documentation into TypeScript declarations.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/typings/couchbase/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages-typings/typings-couchbase",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/typings-couchbase",
@@ -34,7 +34,7 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }

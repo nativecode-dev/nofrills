@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Smattering of useful (sometimes) code.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smorgasbord/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smorgasbord",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/smorgasbord",
@@ -28,7 +28,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }

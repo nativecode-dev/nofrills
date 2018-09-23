@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a simple, Fetch-based HTTP client.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/http/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/http",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/http",
@@ -29,7 +29,7 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "build": "ts-node ../../packages-cli/tasks/src/cli-tasks build",
+    "clean": "ts-node ../../packages-cli/tasks/src/cli-tasks clean"
   }
 }

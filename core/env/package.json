@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a simple conversion from config object to environment variable.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/env/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/env",
   "license": "MIT",
   "main": "./lib/env.js",
   "name": "@nofrills/env",

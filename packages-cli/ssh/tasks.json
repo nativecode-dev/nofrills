@@ -3,7 +3,7 @@
     "build": [
       "[clean]",
       "tsc --project tsconfig.build.json",
-      "cli-shabang"
+      "ts-node ../../packages-cli/tasks/src/cli-shabang"
     ],
     "clean": [
       "rimraf bin"

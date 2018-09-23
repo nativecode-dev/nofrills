@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Provides a simple logger to the console.",
-  "homepage": "https://github.com/nativecode-dev/nofrills-console/tree/master/packages/lincoln-console/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/lincoln-console",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/lincoln-console",

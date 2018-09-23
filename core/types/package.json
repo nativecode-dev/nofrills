@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "description": "Library for runtime type helpers.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/types/#readme",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/types",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@nofrills/types",
