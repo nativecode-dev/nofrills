@@ -8,7 +8,6 @@ import { NotFound, Npm, NpmFile, Project } from '../src'
 import { TestPluginHost } from './harness/plugin-host'
 
 describe('when using Project', () => {
-
   const cwd = fs.join(process.cwd(), 'packages', 'projector', 'specs', 'data')
   const single = fs.join(cwd, 'single', NpmFile)
   const workspaces = fs.join(cwd, 'workspaces', NpmFile)
@@ -21,7 +20,6 @@ describe('when using Project', () => {
   })
 
   describe('to load an existing package.json file', () => {
-
     it('should fail to load non-existant configuration', async () => {
       const sut = await Project.load(host, single)
       expect(() => sut.as('config-not-exist.json')).to.throw(NotFound)
@@ -37,7 +35,6 @@ describe('when using Project', () => {
       const sut = await Project.load(host, workspaces)
       expect(sut.projects()).to.be.length(2)
     })
-
   })
 
   describe('working with workspaces', () => {
@@ -56,7 +53,5 @@ describe('when using Project', () => {
       })
       expect(children).to.be.length(2)
     })
-
   })
-
 })

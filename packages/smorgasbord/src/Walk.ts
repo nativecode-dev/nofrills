@@ -12,7 +12,6 @@ export enum WalkType {
 export type WalkInterceptor = (type: WalkType, value: any, path: string[]) => any
 
 class ATAT {
-
   public static WalkArray(value: any[], interceptor?: WalkInterceptor): any[] {
     return value.map((element: any, index: number) => {
       logger.debug('WalkArray', element, index)
@@ -52,7 +51,6 @@ class ATAT {
     })
     return value
   }
-
 }
 
 export const Walk = (value: any, interceptor?: WalkInterceptor): any => {

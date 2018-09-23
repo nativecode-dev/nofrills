@@ -9,8 +9,8 @@ export type ValueCallback<T> = (value: T) => T
 export type ValueProvider<T> = () => T
 export type VoidCallback<T> = (value: T) => void
 
-export const $also = <T>(value: T, ...callbacks: VoidCallback<T>[]): T => callbacks
-  .reduce((result, callback) => callback(result) || result, value)
+export const $also = <T>(value: T, ...callbacks: VoidCallback<T>[]): T =>
+  callbacks.reduce((result, callback) => callback(result) || result, value)
 
 export class Html {
   private readonly cache: Dictionary<HTMLElement[]>
@@ -29,10 +29,7 @@ export class Html {
   }
 
   public click(id: string | HTMLButtonElement, callback?: ElementCallback): HTMLButtonElement {
-    return $also(this.convert(id),
-      x => x.click(),
-      x => callback ? callback(x) : void (0),
-    )
+    return $also(this.convert(id), x => x.click(), x => (callback ? callback(x) : void 0))
   }
 
   public element<T extends HTMLElement>(id: string, selector?: string, callback?: ElementCallback): T {
@@ -42,7 +39,7 @@ export class Html {
     }
 
     const created = document.getElementById(id) as T
-    const selected = this.cache[key] = [(selector ? created.querySelector<T>(selector) : created) as T]
+    const selected = (this.cache[key] = [(selector ? created.querySelector<T>(selector) : created) as T])
     return (callback ? callback(selected[0]) || selected[0] : selected[0]) as T
   }
 
@@ -70,15 +67,18 @@ export class Html {
 
   public select(id: string | HTMLSelectElement, value: string): HTMLOptionElement {
     const options = Array.from(this.convert(id).querySelectorAll('option'))
-    return options.reduce((previous, current) =>
-      current.value === value
-        ? $also(current, x => x.setAttribute('selected', ''))
-        : $also(previous, x => x.removeAttribute('selected'))
+    return options.reduce(
+      (previous, current) =>
+        current.value === value
+          ? $also(current, x => x.setAttribute('selected', ''))
+          : $also(previous, x => x.removeAttribute('selected')),
     )
   }
 
   public selected(id: string, selector?: string): HTMLOptionElement {
-    return this.options(id, selector).reduce((previous, current) => current.hasAttribute('selected') ? current : previous)
+    return this.options(id, selector).reduce(
+      (previous, current) => (current.hasAttribute('selected') ? current : previous),
+    )
   }
 
   public visible(id: string): boolean {
@@ -86,7 +86,7 @@ export class Html {
   }
 
   private convert<T extends HTMLElement>(id: string | T): T {
-    return (typeof (id) === 'string' ? this.element(id) : id)
+    return typeof id === 'string' ? this.element(id) : id
   }
 }
 

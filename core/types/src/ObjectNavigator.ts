@@ -13,16 +13,12 @@ export interface OnProperty {
   (name: string, value: ObjectNavigator): void
 }
 
-export class ObjectNavigator extends EventEmitter
-  implements ObjectValue, IterableIterator<ObjectNavigator> {
+export class ObjectNavigator extends EventEmitter implements ObjectValue, IterableIterator<ObjectNavigator> {
   private readonly properties: Map<string, ObjectNavigator>
 
   private current = 0
 
-  private constructor(
-    private readonly proxy: ObjectValue,
-    public readonly parent?: ObjectNavigator,
-  ) {
+  private constructor(private readonly proxy: ObjectValue, public readonly parent?: ObjectNavigator) {
     super()
     this.properties = new Map<string, ObjectNavigator>()
 
@@ -177,26 +173,19 @@ export class ObjectNavigator extends EventEmitter
   }
 
   toObject(instance: any = {}): any {
-    return Array.from(this.properties.entries()).reduce(
-      (object, kvp: [string, ObjectNavigator]) => {
-        const key = kvp[0]
-        const property = kvp[1]
-        if (property.type === 'object') {
-          object[key] = property.toObject()
-        } else {
-          object[key] = property.value
-        }
-        return object
-      },
-      instance,
-    )
+    return Array.from(this.properties.entries()).reduce((object, kvp: [string, ObjectNavigator]) => {
+      const key = kvp[0]
+      const property = kvp[1]
+      if (property.type === 'object') {
+        object[key] = property.toObject()
+      } else {
+        object[key] = property.value
+      }
+      return object
+    }, instance)
   }
 
-  private static create(
-    key: string,
-    value: any,
-    parent: ObjectNavigator,
-  ): ObjectNavigator {
+  private static create(key: string, value: any, parent: ObjectNavigator): ObjectNavigator {
     const objectValue = ObjectNavigator.value(key, value, parent.pathstr())
     return new ObjectNavigator(objectValue, parent)
   }

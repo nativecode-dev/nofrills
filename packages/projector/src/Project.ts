@@ -47,7 +47,7 @@ export class Project extends EventEmitter {
   }
 
   projects(): Project[] {
-    return this.children.slice().sort((a, b) => a.name >= b.name ? 1 : 0)
+    return this.children.slice().sort((a, b) => (a.name >= b.name ? 1 : 0))
   }
 
   reference(key: string, files?: ProjectFiles): ProjectFiles {
@@ -66,7 +66,7 @@ export class Project extends EventEmitter {
   }
 
   static async load(host: PluginHost, filepath: string): Promise<Project> {
-    if (await fs.exists(filepath) === false) {
+    if ((await fs.exists(filepath)) === false) {
       throw new NotFound(filepath)
     }
 

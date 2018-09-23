@@ -19,8 +19,7 @@ export class Chain<T, R> {
   }
 
   public execute(value: T, reverse?: boolean, initializer?: () => R): R {
-    const initiator: Link<T, R> = (): R =>
-      initializer ? initializer() : ({} as R)
+    const initiator: Link<T, R> = (): R => (initializer ? initializer() : ({} as R))
 
     const proxy: Link<T, R> = this.proxy(reverse || false, initiator)
 
@@ -28,18 +27,13 @@ export class Chain<T, R> {
   }
 
   private proxy(reverse: boolean, initiator: Link<T, R>): Link<T, R> {
-    const handlers: Handler<T, R>[] = reverse
-      ? this.handlers.reverse()
-      : this.handlers
+    const handlers: Handler<T, R>[] = reverse ? this.handlers.reverse() : this.handlers
 
-    const proxy: Handler<T, R> = handlers.reduce(
-      (previous: Handler<T, R>, handler: Handler<T, R>): Handler<T, R> => {
-        return (outer: T, next: Link<T, R>): R => {
-          return handler(outer, (inner: T): R => previous(inner, next))
-        }
-      },
-      initiator,
-    )
+    const proxy: Handler<T, R> = handlers.reduce((previous: Handler<T, R>, handler: Handler<T, R>): Handler<T, R> => {
+      return (outer: T, next: Link<T, R>): R => {
+        return handler(outer, (inner: T): R => previous(inner, next))
+      }
+    }, initiator)
 
     return (value: T) => proxy(value, initiator)
   }

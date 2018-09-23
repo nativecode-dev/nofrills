@@ -18,8 +18,7 @@ export class Smush {
   }
 
   json(key: string, filename: string, transform?: (object: any) => any): Promise<Smush> {
-    return this.schema<any>(key, filename, transform)
-      .then(() => this)
+    return this.schema<any>(key, filename, transform).then(() => this)
   }
 
   string(key: string, value: string, transform?: (object: any) => any): Promise<Smush> {
@@ -27,7 +26,9 @@ export class Smush {
       const callback = transform ? transform : (obj: any) => obj
       const json: string = JSON.parse(value)
       return this.transform<any>(key, json, callback)
-        .catch((error: Error) => { throw new SmushError(error) })
+        .catch((error: Error) => {
+          throw new SmushError(error)
+        })
         .then(() => this)
     } catch (error) {
       return Promise.reject(new SmushError(error))
@@ -37,10 +38,13 @@ export class Smush {
   schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
     const transformer = transform ? transform : (obj: T) => obj
 
-    return fs.readFile(filename)
+    return fs
+      .readFile(filename)
       .then((buffer: Buffer) => JSON.parse(buffer.toString('utf-8')))
       .then((object: T) => this.transform<T>(key, object, transformer))
-      .catch((error: Error) => { throw new SmushError(error) })
+      .catch((error: Error) => {
+        throw new SmushError(error)
+      })
       .then(() => this)
   }
 
@@ -57,8 +61,7 @@ export class Smush {
   toObject(key?: string): any {
     const exported: any = {}
 
-    Object.keys(this.root)
-      .forEach((property: string) => exported[property] = this.root[property])
+    Object.keys(this.root).forEach((property: string) => (exported[property] = this.root[property]))
 
     return key ? this.config<any>(key) : exported
   }
@@ -83,7 +86,7 @@ export class Smush {
 
   private path(parts: string[]): any {
     let current: any = this.root
-    parts.forEach((part: string) => current = current[part] || {})
+    parts.forEach((part: string) => (current = current[part] || {}))
     return current
   }
 }

@@ -17,6 +17,11 @@ function colorize(log: Log): string[] {
         chalk.dim.gray(...log.parameters.slice(1)),
       ]
     case 'error':
+      return [
+        chalk.dim.blue(log.namespace),
+        chalk.red(...log.parameters.slice(0, 1)),
+        chalk.bgRed.white(...log.parameters.slice(1)),
+      ]
     case 'fatal':
       return [
         chalk.dim.blue(log.namespace),

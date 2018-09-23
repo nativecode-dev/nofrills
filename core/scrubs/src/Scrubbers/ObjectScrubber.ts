@@ -20,8 +20,7 @@ async function transform(property: ObjectNavigator, options: ScrubsOptions, scru
 
 export async function ObjectScrubber(value: any, options: ScrubsOptions, scrubs: Scrubs): Promise<any> {
   const navigator = ObjectNavigator.from(value)
-  const transformations = Array.from(navigator)
-    .map(property => transform(property, options, scrubs))
+  const transformations = Array.from(navigator).map(property => transform(property, options, scrubs))
 
   await Promise.all(transformations)
 

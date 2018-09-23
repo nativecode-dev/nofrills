@@ -3,7 +3,7 @@ import { ObjectNavigator } from './ObjectNavigator'
 export class ObjectParentIterator implements IterableIterator<ObjectNavigator> {
   private current: ObjectNavigator = this.object
 
-  private constructor(private readonly object: ObjectNavigator) { }
+  private constructor(private readonly object: ObjectNavigator) {}
 
   [Symbol.iterator](): IterableIterator<ObjectNavigator> {
     return this

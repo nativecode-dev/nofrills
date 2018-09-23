@@ -23,6 +23,7 @@
     "lerna-semantic-release": "^9.1.0",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
+    "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.9",
     "ts-node": "^7.0.0",
@@ -45,7 +46,10 @@
       ".ts"
     ],
     "include": [
-      "packages/*/src/**/*.ts"
+      "core/*/src/**/*.ts",
+      "packages/*/src/**/*.ts",
+      "packages-cli/*/src/**/*.ts",
+      "packages-typings/*/src/**/*.ts"
     ],
     "instrument": true,
     "report-dir": ".cache/coverage",
@@ -54,21 +58,13 @@
     "temp-directory": ".cache/nyc"
   },
   "scripts": {
-    "build": "lerna run build",
-    "prebuild": "tslint --project tsconfig.json --config tslint.json",
-    "bootstrap": "lerna bootstrap",
-    "clean": "rimraf .cache && lerna run clean",
-    "test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
-    "pretest": "lerna bootstrap && lerna run build",
-    "start": "lerna run start",
-    "do": "lerna",
-    "commit": "git add -A . && git-cz",
-    "precommit": "yarn run test",
-    "coveralls": "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls",
-    "precoveralls": "yarn run test",
-    "setup": "sh setup.sh",
-    "release": "lerna-semantic-release perform",
-    "prerelease": "yarn run build && lerna-semantic-release pre"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "commit": "cli-tasks commit",
+    "coveralls": "cli-tasks coveralls",
+    "release": "cli-tasks release",
+    "start": "cli-tasks start",
+    "test": "cli-tasks test"
   },
   "workspaces": {
     "packages": [

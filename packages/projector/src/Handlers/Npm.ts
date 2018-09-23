@@ -25,7 +25,7 @@ export interface Npm {
   private?: boolean
   repository?: string | NpmUrl
   scripts?: DictionaryOf<string>
-  types?: string,
+  types?: string
   typeScriptVersion: string
   typings?: string
   version: string
@@ -43,7 +43,7 @@ export async function NpmConfig(host: PluginHost, project: Project, filepath: st
     return null
   }
 
-  if (await fs.exists(filepath) === false) {
+  if ((await fs.exists(filepath)) === false) {
     logger.warn('config', filepath)
     return null
   }

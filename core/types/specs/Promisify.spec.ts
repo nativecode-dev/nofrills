@@ -5,7 +5,6 @@ import { expect } from 'chai'
 import { Promisify } from '../src/index'
 
 describe('when turning node callback into promises', () => {
-
   function NodeLikeFunction(success: boolean, callback: (error?: Error) => void) {
     callback(success ? undefined : new Error('error'))
   }
@@ -21,20 +20,16 @@ describe('when turning node callback into promises', () => {
   })
 
   it('should fulfill callback with resolver', () => {
-    const promise = Promisify<boolean>(
-      handler => NodeLikeFunction(true, handler),
-      resolve => resolve(true)
-    )
+    const promise = Promisify<boolean>(handler => NodeLikeFunction(true, handler), resolve => resolve(true))
     expect(promise).to.eventually.be.fulfilled
   })
 
   it('should reject errors with resolver', () => {
     const promise = Promisify<boolean>(
       handler => NodeLikeFunction(false, handler),
-      (_, reject) => reject(new Error('error'))
+      (_, reject) => reject(new Error('error')),
     )
 
     expect(promise).to.eventually.be.rejected
   })
-
 })

@@ -4,14 +4,13 @@ import { expect } from 'chai'
 import { Dates } from '../src/index'
 
 describe('when using Dates helping', () => {
-
-  it('should return today\'s date', () => {
+  it("should return today's date", () => {
     const expected = new Date(2017, 6, 30)
     const today = Dates.today(expected)
     expect(today.toISOString()).to.equal(expected.toISOString())
   })
 
-  it('should return yesterday\'s date', () => {
+  it("should return yesterday's date", () => {
     // TODO: For some reason, moment is setting month to the current month, rather than
     // using the expected one. MUST FIX (at some point).
     const expected = new Date(2017, 6, 30)
@@ -33,5 +32,4 @@ describe('when using Dates helping', () => {
     expect(nextWeek.getDate()).to.equal(6)
     expect(nextWeek.getMonth()).to.equal(7)
   })
-
 })

@@ -8,7 +8,7 @@ import { data } from './data'
 describe('when using scrubs registry', () => {
   const message = 'test'
 
-  it('should register type handler', (done) => {
+  it('should register type handler', done => {
     const scrubs = new Scrubs()
 
     scrubs.register('string', (value: any) => {
@@ -34,7 +34,7 @@ describe('when using scrubs registry', () => {
     expect(result).to.equal('s4p3rs3cr3t-test')
   })
 
-  it('should clear type handlers', (done) => {
+  it('should clear type handlers', done => {
     const scrubs = new Scrubs()
 
     scrubs.register('string', (value: any) => {

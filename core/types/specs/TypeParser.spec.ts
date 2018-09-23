@@ -10,7 +10,6 @@ describe('when using type parser', () => {
   })
 
   describe('parsing type strings', () => {
-
     it('should resolve type', () => {
       const typedef: Type = TypeParser.deserialize('string')
       expect(typedef.typebase).to.equal('String')
@@ -62,7 +61,6 @@ describe('when using type parser', () => {
       expect(typedef.validator(6, typedef.properties)).to.equal(false)
       expect(typedef.validator(5, typedef.properties)).to.equal(true)
     })
-
   })
 
   describe('serialization', () => {
@@ -113,7 +111,7 @@ describe('when using type parser', () => {
         properties: {
           max: 2,
         },
-        type: 'custom'
+        type: 'custom',
       }
       const serialized = TypeParser.serialize(typedef)
       expect(serialized).to.equal('custom')
@@ -125,7 +123,7 @@ describe('when using type parser', () => {
           max: 2,
           min: 2,
         },
-        type: 'custom'
+        type: 'custom',
       }
       const serialized = TypeParser.serialize(typedef, true)
       expect(serialized).to.equal('custom:max=2,min=2')

@@ -1,31 +1,12 @@
 import { Is } from '@nofrills/types'
 
 import { Task } from './Task'
-import { TaskEntry } from './TaskEntry'
+import { TaskJob } from './TaskJob'
+import { TaskJobResult } from './TaskJobResult'
 import { TaskConfig } from './TaskConfig'
 import { Lincoln, Logger } from './Logging'
 import { TaskRunnerSerial } from './TaskRunnerSerial'
-
-export interface TaskJob {
-  cwd: string
-  name: string
-  task: Task
-}
-
-export interface TaskJobResult {
-  code: number
-  errors: string[]
-  job: TaskEntry
-  messages: string[]
-  signal: string | null
-}
-
-export type TaskRunnerAdapter = (
-  task: TaskJob,
-  log: Lincoln,
-  out: NodeJS.WriteStream,
-  err: NodeJS.WriteStream,
-) => Promise<TaskJobResult[]>
+import { TaskRunnerAdapter } from './TaskRunnerAdapter'
 
 export class TaskRunner {
   private readonly log: Lincoln = Logger.extend('run')
@@ -37,6 +18,7 @@ export class TaskRunner {
     cwd: string = process.cwd(),
     out: NodeJS.WriteStream = process.stdout,
     err: NodeJS.WriteStream = process.stderr,
+    ins: NodeJS.ReadStream = process.stdin,
   ): Promise<TaskJobResult[]> {
     const promises = names
       .map(name => ({
@@ -48,7 +30,7 @@ export class TaskRunner {
       }))
       .map(job => {
         this.log.debug('task-map', job)
-        return this.execute(job, out, err)
+        return this.execute(job, out, err, ins)
       })
 
     const results = await Promise.all(promises)
@@ -56,8 +38,13 @@ export class TaskRunner {
     return results.reduce<TaskJobResult[]>((result, current) => result.concat(...current), [])
   }
 
-  private execute(jobs: TaskJob, out: NodeJS.WriteStream, err: NodeJS.WriteStream): Promise<TaskJobResult[]> {
+  private execute(
+    jobs: TaskJob,
+    out: NodeJS.WriteStream,
+    err: NodeJS.WriteStream,
+    ins: NodeJS.ReadStream,
+  ): Promise<TaskJobResult[]> {
     this.log.debug('task-exec', jobs)
-    return this.adapter(jobs, this.log.extend(jobs.name), out, err)
+    return this.adapter(jobs, this.log.extend(jobs.name), out, err, ins)
   }
 }

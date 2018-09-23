@@ -5,7 +5,6 @@ import { expect } from 'chai'
 import { LincolnLog, Lincoln, Log, LincolnEvents } from '../src'
 
 describe('when working with multiple log writers', () => {
-
   let logs: Log[] = []
 
   const options = 'test'
@@ -14,16 +13,12 @@ describe('when working with multiple log writers', () => {
     write: (log: Log): Promise<boolean> => {
       logs.push(log)
       return Promise.resolve(true)
-    }
+    },
   })
 
-  const Loggers: LincolnLog[] = [
-    CreateLogger(),
-    CreateLogger(),
-    CreateLogger(),
-  ]
+  const Loggers: LincolnLog[] = [CreateLogger(), CreateLogger(), CreateLogger()]
 
-  beforeEach(() => logs = [])
+  beforeEach(() => (logs = []))
 
   it('should write to all debug loggers', done => {
     const sut = new Lincoln(options, Loggers)
@@ -87,5 +82,4 @@ describe('when working with multiple log writers', () => {
     })
     sut.warn('test')
   })
-
 })

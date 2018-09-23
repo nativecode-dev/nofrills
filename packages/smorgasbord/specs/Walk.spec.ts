@@ -28,11 +28,11 @@ describe('when using Walk', () => {
   describe('to walk arrays', () => {
     const elements = {
       today: {
-        date: Dates.today()
+        date: Dates.today(),
       },
       tomorrow: {
-        date: Dates.tomorrow()
-      }
+        date: Dates.tomorrow(),
+      },
     }
 
     describe('of objects', () => {
@@ -50,10 +50,7 @@ describe('when using Walk', () => {
       })
 
       it('should walk array elements', () => {
-        const array = [
-          [elements.today],
-          [elements.tomorrow]
-        ]
+        const array = [[elements.today], [elements.tomorrow]]
         let count = 0
         const interceptor = (type: WalkType, value: any) => {
           if (type === WalkType.Array && Is.array(value)) {
@@ -67,7 +64,6 @@ describe('when using Walk', () => {
   })
 
   describe('to walk other types', () => {
-
     it('should not walk array', () => {
       expect(Walk(context.array)).to.deep.equal(context.expected.array)
     })
@@ -87,7 +83,5 @@ describe('when using Walk', () => {
     it('should not walk string', () => {
       expect(Walk(context.string)).to.equal(context.expected.string)
     })
-
   })
-
 })

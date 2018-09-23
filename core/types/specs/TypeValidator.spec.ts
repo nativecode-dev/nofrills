@@ -13,13 +13,12 @@ describe('when using types library for validation', () => {
     },
     type: 'test',
     typebase: 'string',
-    validator: (value) => Types.resolve('string').validator(value, testtype.properties)
+    validator: value => Types.resolve('string').validator(value, testtype.properties),
   }
 
   Types.register(testtype)
 
   describe('to validate primitive values', () => {
-
     it('should validate value is a any', () => {
       expect(Types.validate([], 'any')).to.equal(true)
       expect(Types.validate(true, 'any')).to.equal(true)
@@ -135,14 +134,15 @@ describe('when using types library for validation', () => {
 
     it('should validate timestamp is null', () => expect(Types.validate(null, 'timestamp')).to.equal(false))
     it('should validate timestamp is undefined', () => expect(Types.validate(undefined, 'timestamp')).to.equal(false))
-    it('should validate timestamp is within range', () => expect(Types.validate(Date.now(), 'timestamp')).to.equal(true))
-    it('should validate timestamp is larger than lower bounds', () => expect(Types.validate(-8640000000000001, 'timestamp')).to.equal(false))
-    it('should validate timestamp is larger than upper bounds', () => expect(Types.validate(8640000000000001, 'timestamp')).to.equal(false))
-
+    it('should validate timestamp is within range', () =>
+      expect(Types.validate(Date.now(), 'timestamp')).to.equal(true))
+    it('should validate timestamp is larger than lower bounds', () =>
+      expect(Types.validate(-8640000000000001, 'timestamp')).to.equal(false))
+    it('should validate timestamp is larger than upper bounds', () =>
+      expect(Types.validate(8640000000000001, 'timestamp')).to.equal(false))
   })
 
   describe('to validate custom type values', () => {
-
     it('should validate value is an email', () => expect(Types.validate('nobody@nowhere.com', 'email')).to.equal(true))
 
     it('should validate value is NOT an email', () => {
@@ -153,7 +153,8 @@ describe('when using types library for validation', () => {
       expect(Types.validate(undefined, 'email')).to.equal(false)
     })
 
-    it('should validate value is a postal code', () => expect(Types.validate('12345-1234', 'postalcode')).to.equal(true))
+    it('should validate value is a postal code', () =>
+      expect(Types.validate('12345-1234', 'postalcode')).to.equal(true))
 
     it('should validate value is NOT a postal code', () => {
       expect(Types.validate(new Date(), 'postalcode')).to.equal(false)
@@ -168,7 +169,5 @@ describe('when using types library for validation', () => {
       expect(Types.validate('a', 'test')).to.equal(false)
       expect(Types.validate('aaaaaa', 'test')).to.equal(false)
     })
-
   })
-
 })

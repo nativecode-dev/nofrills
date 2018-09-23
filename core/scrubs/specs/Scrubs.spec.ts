@@ -6,20 +6,16 @@ import { data } from './data'
 import { scrub, Scrubs } from '../src/index'
 
 describe('when using scrubs', () => {
-
   describe('creating a new Scrubs instance', () => {
-
     it('should call scrub with unknown type', async () => {
       const type: string = 'unknown-type-asshole'
       const scrubs: Scrubs = new Scrubs()
       const result = await scrubs.scrub(type, type)
       expect(result).to.equal(type)
     })
-
   })
 
   describe('the "scrub" function', () => {
-
     it('should echo null', async () => {
       const sut: any = await scrub(null)
       expect(sut).to.equal(null)
@@ -79,11 +75,9 @@ describe('when using scrubs', () => {
       const sut: any = await scrub(url)
       expect(sut).to.equal('https://nowhere.com?password=<secured>')
     })
-
   })
 
   describe('that has protected properties', () => {
-
     it('should replace property with secured option', async () => {
       const expectedUrl: string = 'https://nobody:<secured>@nowhere.com/?apikey=<secured>&password=<secured>'
       const sut: any = await scrub(data)
@@ -91,7 +85,5 @@ describe('when using scrubs', () => {
       // expect(sut.user.password).to.equal('<secured>')
       expect(sut.strings).to.deep.equal([expectedUrl])
     })
-
   })
-
 })
