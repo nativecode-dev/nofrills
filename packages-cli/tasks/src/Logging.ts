@@ -12,38 +12,46 @@ function colorize(log: Log): string[] {
   switch (log.type) {
     case 'debug':
       return [
-        chalk.dim.blue(log.namespace),
+        chalk.dim.cyan(log.namespace),
+        chalk.dim.yellow('🠶'),
+        '',
         chalk.bold.gray(...log.parameters.slice(0, 1)),
         chalk.dim.gray(...log.parameters.slice(1)),
       ]
     case 'error':
       return [
-        chalk.dim.blue(log.namespace),
+        chalk.dim.cyan(log.namespace),
+        chalk.bold.red('🛇'),
+        '',
         chalk.red(...log.parameters.slice(0, 1)),
         chalk.bgRed.white(...log.parameters.slice(1)),
       ]
     case 'fatal':
       return [
-        chalk.dim.blue(log.namespace),
+        chalk.dim.cyan(log.namespace),
+        chalk.bold.red('🚭'),
+        '',
         chalk.red(...log.parameters.slice(0, 1)),
         chalk.bgRed.white(...log.parameters.slice(1)),
       ]
     case 'info':
       return [
-        chalk.dim.blue(log.namespace),
-        chalk.dim.yellow(...log.parameters.slice(0, 1)),
+        chalk.dim.cyan(log.namespace),
+        chalk.bold.blue('🛈'),
+        '',
+        chalk.dim.green(...log.parameters.slice(0, 1)),
         chalk.dim.white(...log.parameters.slice(1)),
       ]
     case 'trace':
-      return [chalk.dim.blue(log.namespace), chalk.bold.gray(...log.parameters)]
+      return [chalk.dim.cyan(log.namespace), chalk.bold.gray('🞲'), '', chalk.bold.gray(...log.parameters)]
     case 'warn':
-      return [chalk.dim.blue(log.namespace), chalk.bold.yellow(...log.parameters)]
+      return [chalk.dim.cyan(log.namespace), chalk.bold.yellow('🛆'), '', chalk.bold.yellow(...log.parameters)]
     default:
-      return [chalk.dim.blue(log.namespace), chalk.bold.white(...log.parameters)]
+      return [chalk.dim.cyan(log.namespace), chalk.bold.blue('🛈'), '', chalk.bold.white(...log.parameters)]
   }
 }
 
-const namespace = '[TASK]'
+const namespace = '🛠 '
 const ConsoleLogOptions: Options = CreateOptions(
   namespace,
   [['task-filter', (log: Log) => Promise.resolve(log.namespace === namespace)]],

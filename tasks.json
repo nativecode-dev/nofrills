@@ -28,7 +28,7 @@
       "[test]",
       "git add -A . && git-cz"
     ],
-    "coveralls": [
+    "coverage": [
       "[test]",
       "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"
     ],

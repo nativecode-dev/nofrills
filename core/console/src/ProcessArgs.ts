@@ -38,7 +38,11 @@ export class ProcessArgs {
     return this.normalized.filter(arg => arg.startsWith('-'))
   }
 
-  has(name: string): boolean {
+  has(...names: string[]): boolean {
+    return names.some(name => this.hasOne(name))
+  }
+
+  hasOne(name: string): boolean {
     return this.switches.some(x => this.normalize(x) === this.normalize(name))
   }
 
