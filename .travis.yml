@@ -11,13 +11,13 @@ os:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
   - export PATH="$HOME/.yarn/bin:./node_modules/.bin:$PATH"
-  - yarn global add lerna@2.11.0 @nofrills/tasks@^4.0.0
+  - yarn global add lerna@2.11.0 @nofrills/tasks@5.5.0
   - cli-tasks configure:git
   - yarn run ssh
 stages:
   - test
   - name: coverage
-    if: branch = "master" OR branch = "develop"
+    if: branch = "master1" OR branch = "develop"
   - name: release
     if: branch = "master" AND type != pull_request
 jobs:
