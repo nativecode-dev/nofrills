@@ -86,7 +86,7 @@ function spawnContext(context: TaskContext): Promise<TaskJobResult> {
     cwd: context.task.cwd,
     env: createEnv(),
     shell: context.task.task.shell || true,
-    stdio: [context.stdin, 'pipe', 'pipe'],
+    stdio: context.job.type === TaskEntryType.capture ? [context.stdin, 'pipe', 'pipe'] : 'inherit',
     windowsHide: true,
   }
 
@@ -113,22 +113,26 @@ function spawnContext(context: TaskContext): Promise<TaskJobResult> {
         }
       })
 
-    proc.stderr
-      .on('error', (error: Error) => {
-        errors.push(...multiline(error.message))
-        errors.push(...(error.stack ? multiline(error.stack) : [error.name]))
-      })
-      .pipe(context.stderr)
+    if (proc.stderr) {
+      proc.stderr
+        .on('error', (error: Error) => {
+          errors.push(...multiline(error.message))
+          errors.push(...(error.stack ? multiline(error.stack) : [error.name]))
+        })
+        .pipe(context.stderr)
+    }
 
-    proc.stdout
-      .on('data', (data: Buffer) => {
-        const message = multiline(data.toString())
+    if (proc.stdout) {
+      proc.stdout
+        .on('data', (data: Buffer) => {
+          const message = multiline(data.toString())
 
-        if (message.length > 0) {
-          messages.push(...message)
-        }
-      })
-      .pipe(context.stdout)
+          if (message.length > 0) {
+            messages.push(...message)
+          }
+        })
+        .pipe(context.stdout)
+    }
   })
 }
 
