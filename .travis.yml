@@ -17,7 +17,7 @@ before_install:
 stages:
   - test
   - name: coverage
-    if: branch = "master1" OR branch = "develop"
+    if: branch = "master" OR branch = "develop"
   - name: release
     if: branch = "master" AND type != pull_request
 jobs:
@@ -32,7 +32,7 @@ jobs:
       os: linux
       script:
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
-        - git checkout $TRAVIS_BRANCH --depth=5
+        - git checkout $TRAVIS_BRANCH
         - npm whoami
         - cli-tasks release
 after_failure:

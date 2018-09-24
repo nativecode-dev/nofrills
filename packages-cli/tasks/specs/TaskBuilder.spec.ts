@@ -33,37 +33,51 @@ describe('when using TaskBuilder', () => {
     })
   })
 
-  describe('when using shorthand syntax', () => {
-    it('should exec tasks rather than spawn', async () => {
-      const ExecTask: TaskConfig = { tasks: { echo: [':echo $0'] } }
-      const config = await TaskBuilder.from(ExecTask).build()
-      const echo = config.tasks.echo as Task
-      expect(echo.entries[0].type).to.be.equal(TaskEntryType.exec)
-    })
-
-    it('should bail on command when it fails', async () => {
+  describe('when using prefixes', () => {
+    it('should set type to bail', async () => {
       const ExecTask: TaskConfig = { tasks: { echo: ['!echo $0'] } }
       const config = await TaskBuilder.from(ExecTask).build()
       const echo = config.tasks.echo as Task
       expect(echo.entries[0].type).to.be.equal(TaskEntryType.bail)
     })
 
-    it('should skip on command when it fails', async () => {
-      const ExecTask: TaskConfig = { tasks: { echo: ['#echo $0'] } }
-      const config = await TaskBuilder.from(ExecTask).build()
-      const echo = config.tasks.echo as Task
-      expect(echo.entries[0].type).to.be.equal(TaskEntryType.skip)
-    })
-
-    it('should capture output', async () => {
+    it('should set type to capture', async () => {
       const ExecTask: TaskConfig = { tasks: { echo: ['@echo $0'] } }
       const config = await TaskBuilder.from(ExecTask).build()
       const echo = config.tasks.echo as Task
       expect(echo.entries[0].type).to.be.equal(TaskEntryType.capture)
     })
 
+    it('should set type to exec', async () => {
+      const ExecTask: TaskConfig = { tasks: { echo: [':echo $0'] } }
+      const config = await TaskBuilder.from(ExecTask).build()
+      const echo = config.tasks.echo as Task
+      expect(echo.entries[0].type).to.be.equal(TaskEntryType.exec)
+    })
+
+    it('should set type to spawn', async () => {
+      const ExecTask: TaskConfig = { tasks: { echo: ['echo $0'] } }
+      const config = await TaskBuilder.from(ExecTask).build()
+      const echo = config.tasks.echo as Task
+      expect(echo.entries[0].type).to.be.equal(TaskEntryType.spawn)
+    })
+
+    it('should set type to spawn explicit', async () => {
+      const ExecTask: TaskConfig = { tasks: { echo: ['>echo $0'] } }
+      const config = await TaskBuilder.from(ExecTask).build()
+      const echo = config.tasks.echo as Task
+      expect(echo.entries[0].type).to.be.equal(TaskEntryType.spawn)
+    })
+
+    it('should set type to skip', async () => {
+      const ExecTask: TaskConfig = { tasks: { echo: ['#echo $0'] } }
+      const config = await TaskBuilder.from(ExecTask).build()
+      const echo = config.tasks.echo as Task
+      expect(echo.entries[0].type).to.be.equal(TaskEntryType.skip)
+    })
+
     it('should ignore commented injects', async () => {
-      const ExecTask: TaskConfig = { tasks: { echo: ['#[inject]', '@echo $0'], inject: ['pwd'] } }
+      const ExecTask: TaskConfig = { tasks: { echo: ['#[inject]', 'echo $0'], inject: ['pwd'] } }
       const config = await TaskBuilder.from(ExecTask).build()
       const echo = config.tasks.echo as Task
       expect(echo.entries[0].type).to.be.equal(TaskEntryType.skip)

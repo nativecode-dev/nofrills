@@ -77,6 +77,28 @@ tslint --project tsconfig.json --config tslint.json
 tsc --project tsconfig.json
 ```
 
+# Prefixes
+
+You can use prefixes before a command to let the runner know you want to do something special with this particular entry.
+
+|prefix|meaning   |
+|------|----------|
+| !    | bail     |
+| @    | capture  |
+| :    | exec     |
+| >    | spawn    |
+| #    | skip     |
+
+When the `bail` [`!`] prefix is encountered when the command fails, all processing from further entries wiill be stopped.
+
+When the `capture` [`@`] prefix is encountered, it will capture rather than inherit `stdio` streams, save for `stdin`.
+
+When then `exec` [`:`] prefix is encountered, it will use `exec` rather than `spawn`.
+
+When the `spawn` [`>`] prefix is encountered, it will use `spawn`, which is the `default`.
+
+When the `skip` [`#`] prefix is encountered, the command will not be executed.
+
 # Advanced Tasks
 
 So far, we've been using the short-hand for defining tasks. However, the underlying library supports a more descriptive structure.
