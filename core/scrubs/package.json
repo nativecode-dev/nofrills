@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^3.6.0",
+    "@nofrills/types": "^3.4.2",
     "deepmerge": "^2.1.1"
   },
   "devDependencies": {

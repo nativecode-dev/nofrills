@@ -122,12 +122,14 @@ function spawnContext(context: TaskContext): Promise<TaskJobResult> {
 
     proc.stdout
       .on('data', (data: Buffer) => {
-        messages.push(
-          data
-            .toString()
-            .replace('\r', '')
-            .replace('\n', ''),
-        )
+        const message = data
+          .toString()
+          .replace('\r', '')
+          .replace('\n', '')
+
+        if (message.length > 0) {
+          messages.push(message)
+        }
       })
       .pipe(context.stdout)
   })
