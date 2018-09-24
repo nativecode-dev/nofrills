@@ -34,7 +34,7 @@ const options: ConsoleOptions = {
           .map(name => ConsoleLog.trace(' :', name))
       } else {
         const args = pargs.argsOnly
-        ConsoleLog.trace('args:', ...args)
+        ConsoleLog.info('[tasks]', ...args)
 
         const results = await builder.run(args, config)
         Logger.debug(results)

@@ -51,7 +51,7 @@ export class TaskBuilder {
     if (configs.length > 0) {
       const filename = configs[0]
       const config = await fs.json<TaskConfig>(filename)
-      ConsoleLog.debug('task-config', filename)
+      ConsoleLog.trace('task-config', filename)
       const transformed = this.transform(config)
       this.log.debug('task-config', JSON.stringify(transformed.tasks, null, 2))
       return transformed
