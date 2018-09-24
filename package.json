@@ -61,7 +61,7 @@
     "build": "cli-tasks build",
     "clean": "cli-tasks clean",
     "commit": "cli-tasks commit",
-    "coveralls": "cli-tasks coverage",
+    "coverage": "cli-tasks coverage",
     "release": "cli-tasks release",
     "start": "cli-tasks start",
     "test": "cli-tasks test",
