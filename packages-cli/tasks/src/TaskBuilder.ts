@@ -79,7 +79,7 @@ export class TaskBuilder {
   }
 
   protected fromString(config: TaskConfig, command: string): TaskEntry[] {
-    const regex = /\[(.*)\]/g
+    const regex = /^\[(.*)\]/g
     const matches = regex.exec(command)
 
     if (matches) {
@@ -111,7 +111,9 @@ export class TaskBuilder {
     }
   }
 
-  protected type(type: string): TaskEntryType {
+  protected type(command: string): TaskEntryType {
+    const type = command[0]
+
     switch (type) {
       case TaskEntryType.bail:
         return TaskEntryType.bail

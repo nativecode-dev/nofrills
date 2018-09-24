@@ -40,5 +40,4 @@ const options: ConsoleOptions = {
 }
 
 Logger.debug(process.argv)
-
 CLI.run(options, pargs).catch(ConsoleLog.info)

@@ -90,44 +90,23 @@ describe('when using TaskRunner', () => {
   })
 
   it('should execute tasks rather than spawn', async () => {
-    const ExecTask: TaskConfig = {
-      tasks: {
-        echo: {
-          entries: [
-            {
-              arguments: ['$0'],
-              command: '@echo',
-              name: 'echo',
-              type: TaskEntryType.exec,
-            },
-          ],
-        },
-      },
-    }
-
+    const ExecTask: TaskConfig = { tasks: { echo: ['@echo $0'] } }
     const runner = new TaskRunner(ExecTask)
     const results = await runner.run(['echo'])
     expect(results).to.be.lengthOf(1)
   })
 
   it('should bail on command when it fails', async () => {
-    const ExecTask: TaskConfig = {
-      tasks: {
-        echo: {
-          entries: [
-            {
-              arguments: ['$0'],
-              command: '@echo',
-              name: 'echo',
-              type: TaskEntryType.bail,
-            },
-          ],
-        },
-      },
-    }
-
+    const ExecTask: TaskConfig = { tasks: { echo: ['!echo $0'] } }
     const runner = new TaskRunner(ExecTask)
     const results = await runner.run(['echo'])
     expect(results).to.be.lengthOf(1)
+  })
+
+  it('should skip on command when it fails', async () => {
+    const ExecTask: TaskConfig = { tasks: { echo: ['#echo $0'] } }
+    const runner = new TaskRunner(ExecTask)
+    const results = await runner.run(['echo'])
+    expect(results).to.be.lengthOf(0)
   })
 })

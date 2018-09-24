@@ -56,7 +56,7 @@ function execContext(context: TaskContext): Promise<TaskJobResult> {
       if (error) {
         const result = {
           code: error.code || ErrorCode.UncaughtException,
-          errors: [error.message, ...createMultiline(stderr)],
+          errors: [error.message, ...multiline(stderr)],
           job: context.job,
           messages: [],
           signal: error.signal || null,
@@ -72,7 +72,7 @@ function execContext(context: TaskContext): Promise<TaskJobResult> {
           code: 0,
           errors: [],
           job: context.job,
-          messages: createMultiline(stdout),
+          messages: multiline(stdout),
           signal: null,
         }
         resolve(result)
@@ -115,20 +115,17 @@ function spawnContext(context: TaskContext): Promise<TaskJobResult> {
 
     proc.stderr
       .on('error', (error: Error) => {
-        errors.push(error.message)
-        errors.push(error.stack || error.name)
+        errors.push(...multiline(error.message))
+        errors.push(...(error.stack ? multiline(error.stack) : [error.name]))
       })
       .pipe(context.stderr)
 
     proc.stdout
       .on('data', (data: Buffer) => {
-        const message = data
-          .toString()
-          .replace('\r', '')
-          .replace('\n', '')
+        const message = multiline(data.toString())
 
         if (message.length > 0) {
-          messages.push(message)
+          messages.push(...message)
         }
       })
       .pipe(context.stdout)
@@ -140,16 +137,20 @@ function execute(context: TaskContext): Promise<TaskJobResult> {
     context.log.debug('skip', context.job.name, context.job.command)
     return Promise.resolve({ code: 0, errors: [], job: context.job, messages: [], signal: null })
   }
-  context.log.debug('execute', context.task.cwd, context.job)
 
   ConsoleLog.info(
     `<${context.job.command}>`,
     context.job.arguments ? context.job.arguments.join(' ') : context.job.arguments,
   )
 
+  context.log.debug('execute', context.task.cwd, context.job)
+
   return context.job.type === TaskEntryType.exec ? execContext(context) : spawnContext(context)
 }
 
-function createMultiline(value: string): string[] {
-  return value.replace('\r', '').split('\n')
+function multiline(value: string): string[] {
+  return value
+    .replace('\r', '')
+    .split('\n')
+    .filter(line => line.length > 0)
 }
