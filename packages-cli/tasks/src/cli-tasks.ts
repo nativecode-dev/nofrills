@@ -1,3 +1,4 @@
+import { fs } from '@nofrills/fs'
 import { Returns } from '@nofrills/patterns'
 import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
@@ -8,38 +9,56 @@ import { TaskEntryType } from './TaskEntryType'
 
 const pargs = ProcessArgs.from(process.argv)
 
+interface NPM {
+  name: string
+  version: string
+}
+
 const options: ConsoleOptions = {
   initializer: async () => {
     try {
-      const args = pargs.argsOnly
-      ConsoleLog.trace('args:', ...args)
+      const npm = await fs.json<NPM>(fs.join(__dirname, '..', 'package.json'))
+      ConsoleLog.trace(npm.name, npm.version)
 
       const builder = TaskBuilder.file(process.cwd())
       const config = await builder.build()
       Logger.debug(config.tasks)
 
-      const results = await builder.run(args, config)
-      Logger.debug(results)
+      if (pargs.has('visualize') || pargs.has('viz') || pargs.has('v')) {
+        ConsoleLog.info('[visualize]')
+        ConsoleLog.trace(JSON.stringify(config, null, 2))
+      } else if (pargs.has('list') || pargs.has('ls')) {
+        ConsoleLog.info('[list]')
+        Object.keys(config.tasks)
+          .sort()
+          .map(name => ConsoleLog.trace(' :', name))
+      } else {
+        const args = pargs.argsOnly
+        ConsoleLog.trace('args:', ...args)
 
-      const resultCodes: number[] = results
-        .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.job }))
-        .map(result =>
-          Returns(result).after(() => (result.errors.length > 0 ? ConsoleLog.error(...result.errors) : void 0)),
-        )
-        .map(result =>
-          Returns(result).after(
-            () =>
-              result.job.type === TaskEntryType.exec && result.messages.length > 0
-                ? ConsoleLog.error(...result.errors)
-                : void 0,
-          ),
-        )
-        .map(result => result.code)
+        const results = await builder.run(args, config)
+        Logger.debug(results)
 
-      const exitCode = Math.max(...resultCodes)
-      Logger.debug(exitCode)
-      ConsoleLog.trace('exit-code:', exitCode)
-      process.exitCode = exitCode
+        const resultCodes: number[] = results
+          .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.job }))
+          .map(result =>
+            Returns(result).after(() => (result.errors.length > 0 ? ConsoleLog.error(...result.errors) : void 0)),
+          )
+          .map(result =>
+            Returns(result).after(
+              () =>
+                result.job.type === TaskEntryType.exec && result.messages.length > 0
+                  ? ConsoleLog.error(...result.errors)
+                  : void 0,
+            ),
+          )
+          .map(result => result.code)
+
+        const exitCode = Math.max(...resultCodes)
+        Logger.debug(exitCode)
+        ConsoleLog.trace('exit-code:', exitCode)
+        process.exitCode = exitCode
+      }
     } catch (error) {
       ConsoleLog.error(error)
       console.log(error)
