@@ -56,7 +56,7 @@ function execContext(context: TaskContext): Promise<TaskJobResult> {
       if (error) {
         const result = {
           code: error.code || ErrorCode.UncaughtException,
-          errors: [error.message, ...multiline(stderr)],
+          errors: [...multiline(error.message), ...multiline(stderr)],
           job: context.job,
           messages: [],
           signal: error.signal || null,

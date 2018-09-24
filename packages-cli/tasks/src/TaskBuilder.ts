@@ -23,15 +23,29 @@ export class TaskBuilder {
   private readonly log: Lincoln = Logger.extend('builder')
   private readonly resolver: FileResolver
 
-  constructor(public readonly cwd: string, private readonly definitions: string[]) {
+  constructor(
+    public readonly cwd: string,
+    private readonly definitions: string[],
+    private readonly config?: TaskConfig,
+  ) {
     this.resolver = CreateResolver(cwd)
   }
 
-  static from(cwd: string, definitions: string[] = ['tasks.json', 'package.json']): TaskBuilder {
+  static file(cwd: string, definitions: string[] = ['tasks.json', 'package.json']): TaskBuilder {
     return new TaskBuilder(cwd, definitions)
   }
 
+  static from(config: TaskConfig): TaskBuilder {
+    return new TaskBuilder(process.cwd(), [], config)
+  }
+
   async build(): Promise<TaskConfig> {
+    if (this.config) {
+      const transformed = this.transform(this.config)
+      this.log.debug('task-config', JSON.stringify(transformed.tasks, null, 2))
+      return transformed
+    }
+
     const configs = await this.resolve()
 
     if (configs.length > 0) {
@@ -112,15 +126,21 @@ export class TaskBuilder {
   }
 
   protected type(command: string): TaskEntryType {
-    const type = command[0]
+    const prefix = command[0]
 
-    switch (type) {
+    switch (prefix) {
       case TaskEntryType.bail:
         return TaskEntryType.bail
+
+      case TaskEntryType.capture:
+        return TaskEntryType.capture
+
       case TaskEntryType.exec:
         return TaskEntryType.exec
+
       case TaskEntryType.skip:
         return TaskEntryType.skip
+
       default:
         return TaskEntryType.spawn
     }

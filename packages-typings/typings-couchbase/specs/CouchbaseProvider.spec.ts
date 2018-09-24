@@ -13,7 +13,7 @@ describe('when importing couchbase documentation', () => {
   const output = fs.join(artifacts, 'couchbase')
   const templates = fs.join(process.cwd(), 'packages-typings', 'typings', 'src', 'Templates')
 
-  it('should import all references', async () => {
+  it.skip('should import all references', async () => {
     const provider = new CouchbaseProvider()
     const imported = await provider.import()
     await fs.save(fs.join(output, 'couchbase.json'), imported)
