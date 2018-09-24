@@ -60,7 +60,7 @@
   "scripts": {
     "build": "cli-tasks build",
     "clean": "cli-tasks clean",
-    "commit": "cli-tasks commit",
+    "commit": "git-cz",
     "coveralls": "cli-tasks coveralls",
     "release": "cli-tasks release",
     "start": "cli-tasks start",

@@ -21,9 +21,10 @@ const options: ConsoleOptions = {
       Logger.debug(results)
 
       const resultCodes: number[] = results
-        .map(result => ({ code: result.code, errors: result.errors, job: result.job }))
+        .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.job }))
         .map(result => Returns(result).after(() => ConsoleLog.info(`${result.job.command}: ${result.code}`)))
-        .map(result => Returns(result).after(() => ConsoleLog.info(...result.errors)))
+        .map(result => Returns(result).after(() => ConsoleLog.error(...result.errors)))
+        .map(result => Returns(result).after(() => ConsoleLog.info(...result.messages)))
         .map(result => result.code)
 
       const exitCode = Math.max(...resultCodes)
