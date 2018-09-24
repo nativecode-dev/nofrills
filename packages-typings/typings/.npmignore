@@ -5,6 +5,7 @@ specs/
 src/
 
 mocha.opts
+tasks.json
 tsconfig.build.json
 tsconfig.json
 
