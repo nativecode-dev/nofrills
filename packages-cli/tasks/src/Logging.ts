@@ -14,7 +14,6 @@ function colorize(log: Log): string[] {
       return [
         chalk.dim.cyan(log.namespace),
         chalk.dim.yellow('🠶'),
-        '',
         chalk.bold.gray(...log.parameters.slice(0, 1)),
         chalk.dim.gray(...log.parameters.slice(1)),
       ]
@@ -22,7 +21,6 @@ function colorize(log: Log): string[] {
       return [
         chalk.dim.cyan(log.namespace),
         chalk.bold.red('🛇'),
-        '',
         chalk.red(...log.parameters.slice(0, 1)),
         chalk.bgRed.white(...log.parameters.slice(1)),
       ]
@@ -30,7 +28,6 @@ function colorize(log: Log): string[] {
       return [
         chalk.dim.cyan(log.namespace),
         chalk.bold.red('🚭'),
-        '',
         chalk.red(...log.parameters.slice(0, 1)),
         chalk.bgRed.white(...log.parameters.slice(1)),
       ]
@@ -38,20 +35,26 @@ function colorize(log: Log): string[] {
       return [
         chalk.dim.cyan(log.namespace),
         chalk.bold.blue('🛈'),
-        '',
         chalk.dim.green(...log.parameters.slice(0, 1)),
         chalk.dim.white(...log.parameters.slice(1)),
       ]
+    case 'silly':
+      return [
+        chalk.dim.cyan(log.namespace),
+        chalk.bold.blue('🆃'),
+        chalk.dim.blue(...log.parameters.slice(0, 1)),
+        chalk.dim.white(...log.parameters.slice(1)),
+      ]
     case 'trace':
-      return [chalk.dim.cyan(log.namespace), chalk.bold.gray('🞲'), '', chalk.bold.gray(...log.parameters)]
+      return [chalk.dim.cyan(log.namespace), chalk.bold.gray('🞲'), chalk.bold.gray(...log.parameters)]
     case 'warn':
-      return [chalk.dim.cyan(log.namespace), chalk.bold.yellow('🛆'), '', chalk.bold.yellow(...log.parameters)]
+      return [chalk.dim.cyan(log.namespace), chalk.bold.yellow('🛆'), chalk.bold.yellow(...log.parameters)]
     default:
-      return [chalk.dim.cyan(log.namespace), chalk.bold.blue('🛈'), '', chalk.bold.white(...log.parameters)]
+      return [chalk.dim.cyan(log.namespace), chalk.bold.blue('🛈'), chalk.bold.white(...log.parameters)]
   }
 }
 
-const namespace = '🛠 '
+const namespace = '⚙'
 const ConsoleLogOptions: Options = CreateOptions(
   namespace,
   [['task-filter', (log: Log) => Promise.resolve(log.namespace === namespace)]],
