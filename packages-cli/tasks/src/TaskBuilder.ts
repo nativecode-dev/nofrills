@@ -81,16 +81,14 @@ export class TaskBuilder {
   }
 
   protected fromArray(config: TaskConfig, definitions: TaskDefinition[]): TaskEntry[] {
-    const entries = definitions
+    return definitions
       .map(task => {
         if (Is.string(task)) {
           return this.fromString(config, String(task))
         }
         return [task as TaskEntry]
       })
-      .reduce((previous, current) => previous.concat(current))
-
-    return entries
+      .reduce<TaskEntry[]>((previous, current) => previous.concat(current), [])
   }
 
   protected fromString(config: TaskConfig, command: string): TaskEntry[] {
