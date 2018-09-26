@@ -1,11 +1,9 @@
-import { Lincoln } from './Logging'
 import { TaskJob } from './TaskJob'
 import { TaskJobResult } from './TaskJobResult'
 
-export type TaskRunnerAdapter = (
-  task: TaskJob,
-  log: Lincoln,
-  out: NodeJS.WriteStream,
-  err: NodeJS.WriteStream,
-  ins: NodeJS.ReadStream,
-) => Promise<TaskJobResult[]>
+export interface TaskRunnerAdapter {
+  readonly stdin: NodeJS.ReadStream
+  readonly stdout: NodeJS.WriteStream
+  readonly stderr: NodeJS.WriteStream
+  execute(job: TaskJob): Promise<TaskJobResult[]>
+}
