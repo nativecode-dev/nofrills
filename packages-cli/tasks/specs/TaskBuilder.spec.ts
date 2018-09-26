@@ -48,8 +48,15 @@ describe('when using TaskBuilder', () => {
       expect(echo.entries[0].type).to.be.equal(TaskEntryType.capture)
     })
 
+    it('should set type to env', async () => {
+      const ExecTask: TaskConfig = { tasks: { env: ['$SIMPLE test'] } }
+      const config = await TaskBuilder.from(ExecTask).build()
+      const env = config.tasks.env as Task
+      expect(env.entries[0].type).to.be.equal(TaskEntryType.env)
+    })
+
     it('should set type to exec', async () => {
-      const ExecTask: TaskConfig = { tasks: { echo: [':echo $0'] } }
+      const ExecTask: TaskConfig = { tasks: { echo: ['+echo $0'] } }
       const config = await TaskBuilder.from(ExecTask).build()
       const echo = config.tasks.echo as Task
       expect(echo.entries[0].type).to.be.equal(TaskEntryType.exec)
@@ -63,7 +70,7 @@ describe('when using TaskBuilder', () => {
     })
 
     it('should set type to spawn explicit', async () => {
-      const ExecTask: TaskConfig = { tasks: { echo: ['>echo $0'] } }
+      const ExecTask: TaskConfig = { tasks: { echo: [':echo $0'] } }
       const config = await TaskBuilder.from(ExecTask).build()
       const echo = config.tasks.echo as Task
       expect(echo.entries[0].type).to.be.equal(TaskEntryType.spawn)

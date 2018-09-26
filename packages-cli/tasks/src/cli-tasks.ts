@@ -48,13 +48,12 @@ const options: ConsoleOptions = {
   initializer: async () => {
     try {
       const npm = await fs.json<NPM>(fs.join(__dirname, '..', 'package.json'))
-      ConsoleLog.silly(npm.name, `[${npm.version}]`, '\u00A9 2018 NativeCode')
-
       const builder = TaskBuilder.file(process.cwd())
       const config = await builder.build()
       Logger.debug(config.tasks)
 
       if (pargs.has('help') || pargs.has('h')) {
+        ConsoleLog.silly(npm.name, `[${npm.version}]`, '\u00A9 2018 NativeCode')
         console.log('-h, --help')
         console.log('-ls, --list')
         console.log('-v, -viz, --visualize')

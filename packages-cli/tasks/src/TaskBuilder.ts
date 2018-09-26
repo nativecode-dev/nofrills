@@ -134,6 +134,9 @@ export class TaskBuilder {
       case TaskEntryType.capture:
         return TaskEntryType.capture
 
+      case TaskEntryType.env:
+        return TaskEntryType.env
+
       case TaskEntryType.exec:
         return TaskEntryType.exec
 

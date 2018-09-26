@@ -2,8 +2,8 @@ export enum TaskEntryType {
   bail = '!',
   capture = '@',
   env = '$',
-  exec = ':',
+  exec = '+',
   ignore = '~',
   skip = '#',
-  spawn = '>',
+  spawn = ':',
 }

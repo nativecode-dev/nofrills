@@ -12,17 +12,25 @@ export class TaskRunner {
 
   constructor(private readonly config: TaskConfig, private readonly adapter: TaskRunnerAdapter) {}
 
-  async run(names: string[], cwd: string = process.cwd()): Promise<TaskJobResult[]> {
+  async run(
+    names: string[],
+    cwd: string = process.cwd(),
+    env: NodeJS.ProcessEnv = { ...process.env },
+  ): Promise<TaskJobResult[]> {
     this.log.debug('task-runner', names)
 
-    const jobs = this.createTaskJobs(cwd, names)
+    env.FORCE_COLOR = 'true'
+    env.PATH = `./node_modules/.bin:${env.PATH}`
+
+    const jobs = this.createTaskJobs(cwd, env, names)
     const results = await Promise.all(jobs.map(job => this.adapter.execute(job)))
     return results.reduce<TaskJobResult[]>((result, current) => result.concat(...current), [])
   }
 
-  protected createTaskJobs(cwd: string, names: string[]): TaskJob[] {
+  protected createTaskJobs(cwd: string, env: NodeJS.ProcessEnv, names: string[]): TaskJob[] {
     return names.map(name => ({
       cwd,
+      env,
       name,
       task: Is.array(this.config.tasks[name])
         ? ({ entries: this.config.tasks[name] } as Task)

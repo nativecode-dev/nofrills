@@ -94,4 +94,18 @@ describe('when using TaskRunner', () => {
     const results = await runner.run(['echo'])
     expect(results[0].messages).to.contain('/bin/bash')
   })
+
+  it.skip('should set environment variable', async () => {
+    const EnvTask: TaskConfig = {
+      tasks: {
+        env: ['$SIMPLE test'],
+      },
+    }
+
+    const env: NodeJS.ProcessEnv = { PATH: '' }
+    const runner = new TaskRunner(EnvTask, new TestAdapter())
+    await runner.run(['env'], undefined, env)
+    console.log(env)
+    expect(env.SIMPLE).to.equal('test')
+  })
 })

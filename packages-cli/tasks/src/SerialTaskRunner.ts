@@ -1,19 +1,20 @@
 import { ExecOptions, SpawnOptions, exec, spawn } from 'child_process'
 
-import { ErrorCode } from './errors'
+import { ConsoleLog, Lincoln, Logger } from './Logging'
+
+import { ErrorCode } from './errors/ErrorCode'
+import { TaskResultError } from './errors/TaskResultError'
+
 import { TaskJob } from './TaskJob'
 import { TaskEntry } from './TaskEntry'
 import { TaskEntryType } from './TaskEntryType'
-import { ConsoleLog, Lincoln, Logger } from './Logging'
 import { TaskRunnerAdapter } from './TaskRunnerAdapter'
-import { TaskResultError } from './errors/TaskResultError'
 import { TaskJobResult, EmptyTaskJobResult } from './TaskJobResult'
 
 export interface TaskContext {
   entry: TaskEntry
   env: NodeJS.ProcessEnv
   job: TaskJob
-  results: TaskJobResult[]
 }
 
 export class SerialTaskRunner implements TaskRunnerAdapter {
@@ -23,75 +24,73 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
 
   private readonly log: Lincoln = Logger.extend('serial')
 
-  async execute(job: TaskJob): Promise<TaskJobResult[]> {
-    return job.task.entries.reduce((results, current) => {
-      const ctx: TaskContext = {
-        entry: current,
-        env: {},
+  execute(job: TaskJob): Promise<TaskJobResult[]> {
+    ConsoleLog.info('[task]', job.name)
+
+    return job.task.entries.reduce(async (results, entry) => {
+      const context: TaskContext = {
+        entry,
+        env: job.env,
         job,
-        results: [],
       }
-      return results.then(() => this.run(ctx)).then(async (result: TaskJobResult) => [...(await results), result])
-    }, Promise.resolve([] as TaskJobResult[]))
+
+      const result = await this.run(context)
+      const previous = await results
+
+      return previous.concat(result)
+    }, Promise.resolve<TaskJobResult[]>([]))
   }
 
   protected run(context: TaskContext): Promise<TaskJobResult> {
     const entry = context.entry
 
-    ConsoleLog.info(`<${entry.command}>`, entry.arguments ? entry.arguments.join(' ') : entry.arguments)
+    ConsoleLog.info(`<${entry.type}${entry.command}>`, entry.arguments ? entry.arguments.join(' ') : entry.arguments)
 
-    this.log.debug('execute', context.job.cwd, context.entry)
+    this.log.debug('execute', context.job.cwd, entry)
 
-    switch (context.entry.type) {
+    switch (entry.type) {
       case TaskEntryType.bail:
-        return Promise.resolve(EmptyTaskJobResult(context.entry))
+        return Promise.resolve(EmptyTaskJobResult(entry))
 
       case TaskEntryType.env:
-        const env = EmptyTaskJobResult(context.entry)
-        context.env[context.entry.command] = context.entry.arguments ? context.entry.arguments[0] : undefined
-        return Promise.resolve(env)
+        const result = EmptyTaskJobResult(entry)
+        context.env[entry.command] = entry.arguments ? entry.arguments[0] : undefined
+        return Promise.resolve(result)
 
       case TaskEntryType.exec:
         return this.execContext(context)
 
       case TaskEntryType.skip:
-        return Promise.resolve(EmptyTaskJobResult(context.entry))
+        return Promise.resolve(EmptyTaskJobResult(entry))
 
       default:
         return this.spawnContext(context)
     }
   }
 
-  protected createEnv(context: TaskContext) {
-    return {
-      ...process.env,
-      FORCE_COLOR: 'true',
-      PATH: `./node_modules/.bin:./node_modules/@nofrills/tasks/bin:${process.env.PATH}`,
-      ...context.env,
-    }
-  }
-
   protected execContext(context: TaskContext): Promise<TaskJobResult> {
+    const entry = context.entry
+
     const options: ExecOptions = {
       cwd: context.job.cwd,
-      env: this.createEnv(context),
+      env: context.env,
       windowsHide: true,
     }
 
-    const command = [context.entry.command, ...(context.entry.arguments || [])].join(' ')
+    const command = [entry.command, ...(entry.arguments || [])].join(' ')
 
     return new Promise<TaskJobResult>((resolve, reject) => {
       exec(command, options, (error, stdout, stderr) => {
         if (error) {
           const result: TaskJobResult = {
             code: error.code || ErrorCode.UncaughtException,
-            entry: context.entry,
+            entry,
             errors: [...this.multiline(error.message), ...this.multiline(stderr)],
             messages: [],
             signal: error.signal || null,
           }
 
-          if (context.entry.type === TaskEntryType.bail) {
+          if (entry.type === TaskEntryType.bail) {
             reject(new TaskResultError(result))
           } else {
             resolve(result)
@@ -99,7 +98,7 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
         } else {
           const result: TaskJobResult = {
             code: 0,
-            entry: context.entry,
+            entry,
             errors: [],
             messages: this.multiline(stdout),
             signal: null,
@@ -111,15 +110,17 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
   }
 
   protected spawnContext(context: TaskContext): Promise<TaskJobResult> {
+    const entry = context.entry
+
     const options: SpawnOptions = {
       cwd: context.job.cwd,
-      env: this.createEnv(context),
+      env: context.env,
       shell: context.job.task.shell || true,
-      stdio: context.entry.type === TaskEntryType.capture ? [this.stdin, 'pipe', 'pipe'] : 'inherit',
+      stdio: entry.type === TaskEntryType.capture ? [this.stdin, 'pipe', 'pipe'] : 'inherit',
       windowsHide: true,
     }
 
-    const proc = spawn(context.entry.command, context.entry.arguments, options)
+    const proc = spawn(entry.command, entry.arguments, options)
 
     return new Promise<TaskJobResult>((resolve, reject) => {
       const errors: string[] = []
@@ -132,8 +133,8 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
           reject(error)
         })
         .on('exit', (code, signal) => {
-          const result: TaskJobResult = { code, errors, entry: context.entry, messages, signal }
-          if (code !== 0 && context.entry.type === TaskEntryType.bail) {
+          const result: TaskJobResult = { code, errors, entry, messages, signal }
+          if (code !== 0 && entry.type === TaskEntryType.bail) {
             this.log.error('bail', result)
             reject(new TaskResultError(result))
           } else {
