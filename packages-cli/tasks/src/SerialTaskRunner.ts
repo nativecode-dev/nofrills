@@ -1,9 +1,6 @@
-import { ExecOptions, SpawnOptions, exec, spawn } from 'child_process'
+import * as execa from 'execa'
 
 import { ConsoleLog, Lincoln, Logger } from './Logging'
-
-import { ErrorCode } from './errors/ErrorCode'
-import { TaskResultError } from './errors/TaskResultError'
 
 import { TaskJob } from './TaskJob'
 import { TaskEntry } from './TaskEntry'
@@ -57,9 +54,6 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
         context.env[entry.command] = entry.arguments ? entry.arguments[0] : undefined
         return Promise.resolve(result)
 
-      case TaskEntryType.exec:
-        return this.execContext(context)
-
       case TaskEntryType.skip:
         return Promise.resolve(EmptyTaskJobResult(entry))
 
@@ -68,108 +62,25 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
     }
   }
 
-  protected execContext(context: TaskContext): Promise<TaskJobResult> {
+  protected async spawnContext(context: TaskContext): Promise<TaskJobResult> {
     const entry = context.entry
 
-    const options: ExecOptions = {
-      cwd: context.job.cwd,
-      env: context.env,
-      windowsHide: true,
-    }
-
-    const command = [entry.command, ...(entry.arguments || [])].join(' ')
-
-    return new Promise<TaskJobResult>((resolve, reject) => {
-      exec(command, options, (error, stdout, stderr) => {
-        if (error) {
-          const result: TaskJobResult = {
-            code: error.code || ErrorCode.UncaughtException,
-            entry,
-            errors: [...this.multiline(error.message), ...this.multiline(stderr)],
-            messages: [],
-            signal: error.signal || null,
-          }
-
-          if (entry.type === TaskEntryType.bail) {
-            reject(new TaskResultError(result))
-          } else {
-            resolve(result)
-          }
-        } else {
-          const result: TaskJobResult = {
-            code: 0,
-            entry,
-            errors: [],
-            messages: this.multiline(stdout),
-            signal: null,
-          }
-          resolve(result)
-        }
-      })
+    const proc = execa(entry.command, entry.arguments, {
+      shell: context.job.task.shell,
     })
-  }
 
-  protected spawnContext(context: TaskContext): Promise<TaskJobResult> {
-    const entry = context.entry
+    proc.stdin.pipe(this.stdin)
+    proc.stdout.pipe(this.stdout)
+    proc.stderr.pipe(this.stderr)
 
-    const options: SpawnOptions = {
-      cwd: context.job.cwd,
-      env: context.env,
-      shell: context.job.task.shell || true,
-      stdio: entry.type === TaskEntryType.capture ? [this.stdin, 'pipe', 'pipe'] : 'inherit',
-      windowsHide: true,
+    const { code, stdout } = await proc
+
+    return {
+      code,
+      entry,
+      errors: [],
+      messages: [stdout],
+      signal: null,
     }
-
-    const proc = spawn(entry.command, entry.arguments, options)
-
-    return new Promise<TaskJobResult>((resolve, reject) => {
-      const errors: string[] = []
-      const messages: string[] = []
-
-      proc
-        .on('uncaughtException', (error: Error) => {
-          this.log.error('uncaught-exception', context.job.name, error)
-          ConsoleLog.error(error)
-          reject(error)
-        })
-        .on('exit', (code, signal) => {
-          const result: TaskJobResult = { code, errors, entry, messages, signal }
-          if (code !== 0 && entry.type === TaskEntryType.bail) {
-            this.log.error('bail', result)
-            reject(new TaskResultError(result))
-          } else {
-            this.log.debug(context.job.name, result)
-            resolve(result)
-          }
-        })
-
-      if (proc.stderr) {
-        proc.stderr
-          .on('error', (error: Error) => {
-            errors.push(...this.multiline(error.message))
-            errors.push(...(error.stack ? this.multiline(error.stack) : [error.name]))
-          })
-          .pipe(this.stderr)
-      }
-
-      if (proc.stdout) {
-        proc.stdout
-          .on('data', (data: Buffer) => {
-            const message = this.multiline(data.toString())
-
-            if (message.length > 0) {
-              messages.push(...message)
-            }
-          })
-          .pipe(this.stdout)
-      }
-    })
-  }
-
-  protected multiline(value: string): string[] {
-    return value
-      .replace('\r', '')
-      .split('\n')
-      .filter(line => line.length > 0)
   }
 }
