@@ -17,7 +17,6 @@
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^5.4.2",
     "@types/isomorphic-fetch": "^0.0.34"
   },
   "publishConfig": {

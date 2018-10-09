@@ -19,8 +19,7 @@
     "shortid": "^2.2.12"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^5.4.2",
-    "@types/deepmerge": "^2.1.0",
+    "@types/deepmerge": "^2.2.0",
     "@types/node": "*",
     "@types/shortid": "0.0.29"
   },

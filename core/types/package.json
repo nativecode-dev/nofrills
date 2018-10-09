@@ -17,7 +17,7 @@
     "zipcodes-regex": "^1.0.2"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.1.0",
+    "@types/deepmerge": "^2.2.0",
     "@types/validator": "^9.4.2"
   },
   "publishConfig": {

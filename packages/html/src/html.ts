@@ -10,7 +10,11 @@ export type ValueProvider<T> = () => T
 export type VoidCallback<T> = (value: T) => void
 
 export const $also = <T>(value: T, ...callbacks: VoidCallback<T>[]): T =>
-  callbacks.reduce((result, callback) => callback(result) || result, value)
+  callbacks.reduce((result, callback) => {
+    // TODO: Need to fix because we mutate here.
+    callback(result)
+    return result
+  }, value)
 
 export class Html {
   private readonly cache: Dictionary<HTMLElement[]>

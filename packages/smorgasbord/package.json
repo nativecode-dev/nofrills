@@ -15,9 +15,7 @@
     "@nofrills/lincoln-debug": "^3.6.0",
     "moment": "^2.18.1"
   },
-  "devDependencies": {
-    "@nofrills/tasks": "^5.4.2"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public",
     "tag": "latest"

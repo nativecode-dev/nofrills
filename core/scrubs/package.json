@@ -17,7 +17,7 @@
     "deepmerge": "^2.2.1"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.1.0"
+    "@types/deepmerge": "^2.2.0"
   },
   "publishConfig": {
     "access": "public",
