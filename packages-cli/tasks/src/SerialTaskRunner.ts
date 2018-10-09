@@ -1,5 +1,4 @@
 import * as execa from 'execa'
-import * as getstream from 'get-stream'
 
 import { Returns } from '@nofrills/patterns'
 
@@ -66,6 +65,7 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
       default:
         return () => {
           const args = entry.arguments ? entry.arguments.join(' ') : entry.arguments
+
           ConsoleLog.info(`<${entry.type}${entry.command}>`, args)
 
           return this.exec(context)
@@ -77,28 +77,35 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
     const entry = context.entry
 
     const command = execa(entry.command, entry.arguments, {
+      cwd: context.job.cwd,
       env: context.env,
       extendEnv: true,
-      localDir: context.job.cwd,
       shell: context.job.task.shell,
     })
 
+    command.stderr.pipe(process.stderr)
     command.stdout.pipe(process.stdout)
 
-    const stdout = await getstream(command.stdout)
-
-    const { code } = await command
+    const { code, signal, stderr, stdout } = await command
 
     const result: TaskJobResult = {
       code,
       entry,
-      errors: [],
-      messages: [stdout],
-      signal: null,
+      errors: this.convertString(stderr),
+      messages: this.convertString(stdout),
+      signal,
     }
 
     this.log.debug(entry.command, result)
 
     return result
+  }
+
+  private convertString(value: string): string[] {
+    if (value && value !== '') {
+      return [value]
+    }
+
+    return []
   }
 }

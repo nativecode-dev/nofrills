@@ -8,7 +8,6 @@ import { TaskConfig } from './TaskConfig'
 import { TaskBuilder } from './TaskBuilder'
 import { ErrorCode } from './errors/ErrorCode'
 import { Logger, ConsoleLog } from './Logging'
-import { TaskEntryType } from './TaskEntryType'
 
 const pargs = ProcessArgs.from(process.argv)
 
@@ -24,24 +23,16 @@ async function execute(builder: TaskBuilder, config: TaskConfig) {
   const results = await builder.run(args, config)
   Logger.debug(results)
 
-  const resultCodes: number[] = results
+  const codes: number[] = results
     .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.entry }))
     .map(result =>
       Returns(result).after(() => (result.errors.length > 0 ? ConsoleLog.error(...result.errors) : void 0)),
     )
-    .map(result =>
-      Returns(result).after(
-        () =>
-          result.job.type === TaskEntryType.exec && result.messages.length > 0
-            ? ConsoleLog.error(...result.errors)
-            : void 0,
-      ),
-    )
     .map(result => result.code)
 
-  const exitCode = Math.max(...resultCodes)
-  Logger.debug(exitCode)
-  return exitCode
+  const code = Math.max(...codes)
+  Logger.debug(code)
+  return code
 }
 
 const options: ConsoleOptions = {
