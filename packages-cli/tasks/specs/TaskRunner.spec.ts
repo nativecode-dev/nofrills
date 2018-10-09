@@ -3,7 +3,13 @@ import 'mocha'
 import { fs } from '@nofrills/fs'
 
 import expect from './expect'
-import { TaskConfig, TaskBuilder, TaskRunner, TaskJob, TaskJobResult, TaskRunnerAdapter } from '../src/index'
+
+import { TaskJob } from '../src/TaskJob'
+import { TaskRunner } from '../src/TaskRunner'
+import { TaskConfig } from '../src/TaskConfig'
+import { TaskBuilder } from '../src/TaskBuilder'
+import { TaskJobResult } from '../src/TaskJobResult'
+import { TaskRunnerAdapter } from '../src/TaskRunnerAdapter'
 
 const assets = fs.join(__dirname, 'assets')
 

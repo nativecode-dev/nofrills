@@ -65,6 +65,10 @@
     "test": "cli-tasks test"
   },
   "workspaces": {
+    "nohoist": [
+      "packages-cli/tasks",
+      "packages-cli/tasks/*"
+    ],
     "packages": [
       "core/*",
       "packages/*",
