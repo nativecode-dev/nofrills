@@ -14,7 +14,7 @@ before_install:
   - yarn global add @nofrills/tasks@5.6.2
   - yarn install
   - cli-tasks configure:git
-  - cli-tasks configure:ssh
+  - yarn run ssh
 stages:
   - test
   - name: coverage
