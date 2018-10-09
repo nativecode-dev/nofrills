@@ -12,11 +12,7 @@ export class TaskRunner {
 
   constructor(private readonly config: TaskConfig, private readonly adapter: TaskRunnerAdapter) {}
 
-  async run(
-    names: string[],
-    cwd: string = process.cwd(),
-    env: NodeJS.ProcessEnv = { ...process.env },
-  ): Promise<TaskJobResult[]> {
+  async run(names: string[], cwd: string = process.cwd(), env: NodeJS.ProcessEnv = {}): Promise<TaskJobResult[]> {
     this.log.debug('task-runner', names)
 
     env.FORCE_COLOR = 'true'

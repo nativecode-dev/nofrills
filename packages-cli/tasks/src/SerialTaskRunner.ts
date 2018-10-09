@@ -1,4 +1,7 @@
 import * as execa from 'execa'
+import * as getstream from 'get-stream'
+
+import { Returns } from '@nofrills/patterns'
 
 import { ConsoleLog, Lincoln, Logger } from './Logging'
 
@@ -16,22 +19,12 @@ export interface TaskContext {
   job: TaskJob
 }
 
-function sequence(tasks: TaskJobExec[]) {
-  return Promise.all([]).then((args: any[]) => {
-    let current = Promise.resolve.call(Promise)
-    const result: TaskJobResult[] = []
-
-    tasks.forEach((task: TaskJobExec) => {
-      if (task && task.apply) {
-        result.push(
-          (current = current.then(() => {
-            return task()
-          })),
-        )
-      }
-    })
-    return Promise.all(result)
-  })
+function sequence(tasks: TaskJobExec[]): Promise<TaskJobResult[]> {
+  return tasks.reduce<Promise<TaskJobResult[]>>(
+    (previous, task) =>
+      previous.then(results => task().then(value => Returns(results).after(() => results.push(value)))),
+    Promise.resolve([]),
+  )
 }
 
 export class SerialTaskRunner implements TaskRunnerAdapter {
@@ -60,12 +53,9 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
   protected run(context: TaskContext): TaskJobExec {
     const entry = context.entry
 
-    ConsoleLog.info(`<${entry.type}${entry.command}>`, entry.arguments ? entry.arguments.join(' ') : entry.arguments)
-
     this.log.debug('execute', context.job.cwd, entry)
 
     switch (entry.type) {
-      case TaskEntryType.bail:
       case TaskEntryType.skip:
         return () => Promise.resolve(EmptyTaskJobResult(entry))
 
@@ -74,7 +64,12 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
         return () => Promise.resolve(EmptyTaskJobResult(entry))
 
       default:
-        return () => this.exec(context)
+        return () => {
+          const args = entry.arguments ? entry.arguments.join(' ') : entry.arguments
+          ConsoleLog.info(`<${entry.type}${entry.command}>`, args)
+
+          return this.exec(context)
+        }
     }
   }
 
@@ -82,21 +77,28 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
     const entry = context.entry
 
     const command = execa(entry.command, entry.arguments, {
+      env: context.env,
+      extendEnv: true,
+      localDir: context.job.cwd,
       shell: context.job.task.shell,
     })
 
-    command.stdin.pipe(this.stdin)
-    command.stdout.pipe(this.stdout)
-    command.stderr.pipe(this.stderr)
+    command.stdout.pipe(process.stdout)
 
-    const { code, stdout } = await command
+    const stdout = await getstream(command.stdout)
 
-    return {
+    const { code } = await command
+
+    const result: TaskJobResult = {
       code,
       entry,
       errors: [],
       messages: [stdout],
       signal: null,
     }
+
+    this.log.debug(entry.command, result)
+
+    return result
   }
 }
