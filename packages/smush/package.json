@@ -15,7 +15,7 @@
     "@nofrills/fs": "^3.5.1",
     "@nofrills/lincoln-debug": "^3.6.0",
     "@nofrills/scrubs": "^3.5.0",
-    "deepmerge": "^2.1.1",
+    "deepmerge": "^2.2.1",
     "shortid": "^2.2.12"
   },
   "devDependencies": {

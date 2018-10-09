@@ -103,7 +103,6 @@ export class TaskBuilder {
         task: this.expand(config, config.tasks[name]),
       }
 
-      this.log.debug('task->entry', name, context.task)
       return this.fromArray(context.config, context.task.entries).map(entry =>
         Returns(entry).after(() => (entry.origin = name)),
       )

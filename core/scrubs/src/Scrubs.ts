@@ -23,7 +23,7 @@ export class Scrubs {
 
   constructor(options: Partial<ScrubsOptions> = {}) {
     this.log = Logger
-    this.options = merge.all<ScrubsOptions>([defaults, options])
+    this.options = merge.all([defaults, options]) as ScrubsOptions
     this.registry = new Map<string, Scrubbers>()
   }
 

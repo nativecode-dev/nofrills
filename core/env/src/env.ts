@@ -41,11 +41,11 @@ export class Env {
 
   constructor(config: object, options?: Partial<EnvOptions>) {
     this.navigator = ObjectNavigator.from(config)
-    this.options = all<EnvOptions>([Defaults, options || {}])
+    this.options = all([Defaults, options || {}]) as EnvOptions
   }
 
   static from(options: Partial<EnvOptions> = {}, filter?: EnvFilter, transform?: EnvTransform): Env {
-    const opts = all<EnvOptions>([Defaults, options])
+    const opts = all([Defaults, options]) as EnvOptions
     const root = ObjectNavigator.from({})
 
     const _filter = filter ? filter : () => true
@@ -68,7 +68,7 @@ export class Env {
   }
 
   static merge(configs: object[], options?: Partial<EnvOptions>): Env {
-    const config = all<EnvOptions>(configs)
+    const config = all(configs) as EnvOptions
     return new Env(config, options)
   }
 
