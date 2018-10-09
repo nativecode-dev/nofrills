@@ -22,7 +22,6 @@
     "ts-pegjs": "^0.2.2"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^5.4.2",
     "@types/node": "*",
     "@types/pegjs": "^0.10.1"
   },

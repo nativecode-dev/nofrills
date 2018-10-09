@@ -12,6 +12,7 @@
       "rimraf bin"
     ],
     "shabang": [
+      "#ts-node ./src/cli-shabang.ts",
       "cli-shabang"
     ]
   }

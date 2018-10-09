@@ -44,7 +44,7 @@ export class TypeRegistry {
 
   register(type: Partial<Type>): TypeRegistry {
     const baseType: Type = this.resolve(type.typebase || 'any')
-    const merged: Type = merge.all([baseType, type])
+    const merged: Type = merge.all([baseType, type]) as Type
     this.registry.set(merged.type, merged)
     return this
   }

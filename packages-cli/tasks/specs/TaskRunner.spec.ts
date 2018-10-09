@@ -10,13 +10,27 @@ const assets = fs.join(__dirname, 'assets')
 describe('when using TaskRunner', () => {
   const builder = TaskBuilder.file(assets)
 
-  const adapter: TaskRunnerAdapter = (task: TaskJob): Promise<TaskJobResult[]> => {
-    return Promise.all(task.task.entries.map(job => ({ code: 0, errors: [], job, messages: [], signal: null })))
+  class TestAdapter implements TaskRunnerAdapter {
+    readonly stdin: NodeJS.ReadStream = process.stdin
+    readonly stdout: NodeJS.WriteStream = process.stdout
+    readonly stderr: NodeJS.WriteStream = process.stderr
+
+    execute(job: TaskJob): Promise<TaskJobResult[]> {
+      return Promise.resolve(
+        job.task.entries.map(entry => ({
+          code: 0,
+          entry,
+          errors: [],
+          messages: [],
+          signal: null,
+        })),
+      )
+    }
   }
 
   it('should execute tasks', async () => {
     const config = await builder.build()
-    const runner = new TaskRunner(config, adapter)
+    const runner = new TaskRunner(config, new TestAdapter())
     const results = await runner.run(['test'])
     await fs.save(fs.join(__dirname, 'assets/tasks-expanded.json'), config)
     expect(results).to.be.lengthOf(6)
@@ -35,7 +49,7 @@ describe('when using TaskRunner', () => {
       },
     }
 
-    const runner = new TaskRunner(TestTask)
+    const runner = new TaskRunner(TestTask, new TestAdapter())
     const results = await runner.run(['which'])
     expect(results).to.be.lengthOf(1)
   })
@@ -55,7 +69,7 @@ describe('when using TaskRunner', () => {
       },
     }
 
-    const runner = new TaskRunner(ShTask)
+    const runner = new TaskRunner(ShTask, new TestAdapter())
     const results = await runner.run(['echo'])
     expect(results[0].messages).to.contain('/bin/sh')
   })
@@ -76,8 +90,22 @@ describe('when using TaskRunner', () => {
       },
     }
 
-    const runner = new TaskRunner(BashTask)
+    const runner = new TaskRunner(BashTask, new TestAdapter())
     const results = await runner.run(['echo'])
     expect(results[0].messages).to.contain('/bin/bash')
+  })
+
+  it.skip('should set environment variable', async () => {
+    const EnvTask: TaskConfig = {
+      tasks: {
+        env: ['$SIMPLE test'],
+      },
+    }
+
+    const env: NodeJS.ProcessEnv = { PATH: '' }
+    const runner = new TaskRunner(EnvTask, new TestAdapter())
+    await runner.run(['env'], undefined, env)
+    console.log(env)
+    expect(env.SIMPLE).to.equal('test')
   })
 })

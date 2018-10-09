@@ -14,9 +14,7 @@
   "dependencies": {
     "@nofrills/fs": "^3.5.1"
   },
-  "devDependencies": {
-    "@nofrills/tasks": "^5.4.2"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public",
     "tag": "latest"

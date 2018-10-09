@@ -11,9 +11,7 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "devDependencies": {
-    "@nofrills/tasks": "^5.4.2"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public",
     "tag": "latest"

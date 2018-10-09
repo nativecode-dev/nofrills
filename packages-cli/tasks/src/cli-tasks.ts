@@ -25,7 +25,7 @@ async function execute(builder: TaskBuilder, config: TaskConfig) {
   Logger.debug(results)
 
   const resultCodes: number[] = results
-    .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.job }))
+    .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.entry }))
     .map(result =>
       Returns(result).after(() => (result.errors.length > 0 ? ConsoleLog.error(...result.errors) : void 0)),
     )
@@ -48,13 +48,12 @@ const options: ConsoleOptions = {
   initializer: async () => {
     try {
       const npm = await fs.json<NPM>(fs.join(__dirname, '..', 'package.json'))
-      ConsoleLog.silly(npm.name, `[${npm.version}]`, '\u00A9 2018 NativeCode')
-
       const builder = TaskBuilder.file(process.cwd())
       const config = await builder.build()
       Logger.debug(config.tasks)
 
       if (pargs.has('help') || pargs.has('h')) {
+        ConsoleLog.silly(npm.name, `[${npm.version}]`, '\u00A9 2018 NativeCode')
         console.log('-h, --help')
         console.log('-ls, --list')
         console.log('-v, -viz, --visualize')
@@ -70,9 +69,9 @@ const options: ConsoleOptions = {
             (results, name) => Returns(results).after(() => (results[name] = config.tasks[name] as Task)),
             {},
           )
-          ConsoleLog.trace(JSON.stringify(collected, null, 2))
+          console.log(JSON.stringify(collected, null, 2))
         } else {
-          ConsoleLog.trace(JSON.stringify(config, null, 2))
+          console.log(JSON.stringify(config, null, 2))
         }
       } else {
         process.exitCode = await execute(builder, config)

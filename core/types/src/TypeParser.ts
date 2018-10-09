@@ -37,7 +37,7 @@ export class TypeParser {
 
   private static materialize(type: Partial<Type>): Type {
     const typedef: Type = Types.resolve(type.typebase || 'any')
-    return merge.all([typedef, type])
+    return merge.all([typedef, type]) as Type
   }
 
   private static parse(typestr: string): Type {

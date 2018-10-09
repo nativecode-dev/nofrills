@@ -12,12 +12,12 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "deepmerge": "^2.1.1",
-    "validator": "^10.7.1",
+    "deepmerge": "^2.2.1",
+    "validator": "^10.8.0",
     "zipcodes-regex": "^1.0.2"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.1.0",
+    "@types/deepmerge": "^2.2.0",
     "@types/validator": "^9.4.2"
   },
   "publishConfig": {

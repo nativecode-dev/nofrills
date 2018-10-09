@@ -12,6 +12,7 @@ import { TaskJobResult } from './TaskJobResult'
 import { TaskConfigError } from './errors/TaskConfigError'
 import { TaskEntry } from './TaskEntry'
 import { TaskEntryType } from './TaskEntryType'
+import { SerialTaskRunner } from './SerialTaskRunner'
 
 export interface TaskContext {
   config: TaskConfig
@@ -62,7 +63,7 @@ export class TaskBuilder {
 
   async run(names: string[], config?: TaskConfig): Promise<TaskJobResult[]> {
     config = config || (await this.build())
-    const runner = new TaskRunner(config)
+    const runner = new TaskRunner(config, new SerialTaskRunner())
     this.log.debug('run', names, config)
     return runner.run(names, this.cwd)
   }
@@ -102,7 +103,6 @@ export class TaskBuilder {
         task: this.expand(config, config.tasks[name]),
       }
 
-      this.log.debug('task->entry', name, context.task)
       return this.fromArray(context.config, context.task.entries).map(entry =>
         Returns(entry).after(() => (entry.origin = name)),
       )
@@ -132,6 +132,9 @@ export class TaskBuilder {
 
       case TaskEntryType.capture:
         return TaskEntryType.capture
+
+      case TaskEntryType.env:
+        return TaskEntryType.env
 
       case TaskEntryType.exec:
         return TaskEntryType.exec
