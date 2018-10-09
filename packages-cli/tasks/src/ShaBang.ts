@@ -29,8 +29,9 @@ export class ShaBang {
         Object.keys(hash).map(async key => {
           this.log.debug('bin', key)
           const bin = hash[key]
+
           try {
-            return await ShaBang.shabangify(bin)
+            return await ShaBang.shabangify(fs.join(process.cwd(), bin))
           } catch (error) {
             ConsoleLog.info(bin, error)
             return Promise.resolve()

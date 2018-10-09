@@ -54,7 +54,7 @@ function colorize(log: Log): string[] {
   }
 }
 
-const namespace = '⚙'
+const namespace = ''
 const ConsoleLogOptions: Options = CreateOptions(
   namespace,
   [['task-filter', (log: Log) => Promise.resolve(log.namespace === namespace)]],
