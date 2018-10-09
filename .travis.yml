@@ -11,9 +11,9 @@ os:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
   - export PATH="$HOME/.yarn/bin:./node_modules/.bin:$PATH"
-  - yarn global add lerna@2.11.0 @nofrills/tasks@5.6.1
+  - yarn global add lerna@2.11.0 @nofrills/tasks@5.6.2 @alrra/travis-scripts@^3.0.1
   - cli-tasks configure:git
-  - yarn run ssh
+  - cli-tasks configure:ssh
 stages:
   - test
   - name: coverage
