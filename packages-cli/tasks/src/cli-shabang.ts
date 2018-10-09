@@ -2,7 +2,7 @@ import { CreateResolver } from '@nofrills/fs'
 import { CLI, ConsoleOptions, ProcessArgs } from '@nofrills/console'
 
 import { ShaBang } from './ShaBang'
-import { Logger, ConsoleLog } from './Logging'
+import { ConsoleLog, Logger } from './Logging'
 
 const args = ProcessArgs.from(process.argv)
 

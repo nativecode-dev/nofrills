@@ -8,10 +8,30 @@ import { TaskEntryType } from './TaskEntryType'
 import { TaskRunnerAdapter } from './TaskRunnerAdapter'
 import { TaskJobResult, EmptyTaskJobResult } from './TaskJobResult'
 
+export type TaskJobExec = () => Promise<TaskJobResult>
+
 export interface TaskContext {
   entry: TaskEntry
   env: NodeJS.ProcessEnv
   job: TaskJob
+}
+
+function sequence(tasks: TaskJobExec[]) {
+  return Promise.all([]).then((args: any[]) => {
+    let current = Promise.resolve.call(Promise)
+    const result: TaskJobResult[] = []
+
+    tasks.forEach((task: TaskJobExec) => {
+      if (task && task.apply) {
+        result.push(
+          (current = current.then(() => {
+            return task()
+          })),
+        )
+      }
+    })
+    return Promise.all(result)
+  })
 }
 
 export class SerialTaskRunner implements TaskRunnerAdapter {
@@ -24,21 +44,20 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
   execute(job: TaskJob): Promise<TaskJobResult[]> {
     ConsoleLog.info('[task]', job.name)
 
-    return job.task.entries.reduce(async (results, entry) => {
-      const context: TaskContext = {
-        entry,
-        env: job.env,
-        job,
-      }
+    return sequence(
+      job.task.entries.map(entry => {
+        const context: TaskContext = {
+          entry,
+          env: job.env,
+          job,
+        }
 
-      const result = await this.run(context)
-      const previous = await results
-
-      return previous.concat(result)
-    }, Promise.resolve<TaskJobResult[]>([]))
+        return this.run(context)
+      }),
+    )
   }
 
-  protected run(context: TaskContext): Promise<TaskJobResult> {
+  protected run(context: TaskContext): TaskJobExec {
     const entry = context.entry
 
     ConsoleLog.info(`<${entry.type}${entry.command}>`, entry.arguments ? entry.arguments.join(' ') : entry.arguments)
@@ -47,33 +66,30 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
 
     switch (entry.type) {
       case TaskEntryType.bail:
-        return Promise.resolve(EmptyTaskJobResult(entry))
+      case TaskEntryType.skip:
+        return () => Promise.resolve(EmptyTaskJobResult(entry))
 
       case TaskEntryType.env:
-        const result = EmptyTaskJobResult(entry)
         context.env[entry.command] = entry.arguments ? entry.arguments[0] : undefined
-        return Promise.resolve(result)
-
-      case TaskEntryType.skip:
-        return Promise.resolve(EmptyTaskJobResult(entry))
+        return () => Promise.resolve(EmptyTaskJobResult(entry))
 
       default:
-        return this.spawnContext(context)
+        return () => this.exec(context)
     }
   }
 
-  protected async spawnContext(context: TaskContext): Promise<TaskJobResult> {
+  protected async exec(context: TaskContext): Promise<TaskJobResult> {
     const entry = context.entry
 
-    const proc = execa(entry.command, entry.arguments, {
+    const command = execa(entry.command, entry.arguments, {
       shell: context.job.task.shell,
     })
 
-    proc.stdin.pipe(this.stdin)
-    proc.stdout.pipe(this.stdout)
-    proc.stderr.pipe(this.stderr)
+    command.stdin.pipe(this.stdin)
+    command.stdout.pipe(this.stdout)
+    command.stderr.pipe(this.stderr)
 
-    const { code, stdout } = await proc
+    const { code, stdout } = await command
 
     return {
       code,
