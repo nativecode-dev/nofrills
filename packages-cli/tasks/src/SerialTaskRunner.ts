@@ -85,10 +85,6 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
   }
 
   private convertString(value: string): string[] {
-    if (value && value !== '') {
-      return [value]
-    }
-
-    return []
+    return value && value !== '' ? [value] : []
   }
 }
