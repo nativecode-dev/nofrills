@@ -18,20 +18,21 @@ interface NPM {
 
 async function execute(builder: TaskBuilder, config: TaskConfig) {
   const args = pargs.argsOnly
-  ConsoleLog.info('[tasks]', ...args)
-
   const results = await builder.run(args, config)
+
   Logger.debug(results)
 
-  const codes: number[] = results
-    .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.entry }))
-    .map(result =>
-      Returns(result).after(() => (result.errors.length > 0 ? ConsoleLog.error(...result.errors) : void 0)),
-    )
-    .map(result => result.code)
+  const code: number = Math.max(
+    ...results
+      .map(result => ({ code: result.code, errors: result.errors, messages: result.messages, job: result.entry }))
+      .map(result =>
+        Returns(result).after(() => (result.errors.length > 0 ? ConsoleLog.error(...result.errors) : void 0)),
+      )
+      .map(result => result.code),
+  )
 
-  const code = Math.max(...codes)
   Logger.debug(code)
+
   return code
 }
 
@@ -45,9 +46,9 @@ const options: ConsoleOptions = {
 
       if (pargs.has('help') || pargs.has('h')) {
         ConsoleLog.silly(npm.name, `[${npm.version}]`, '\u00A9 2018 NativeCode')
-        console.log('-h, --help')
-        console.log('-ls, --list')
-        console.log('-v, -viz, --visualize')
+        ConsoleLog.info('-h, --help')
+        ConsoleLog.info('-ls, --list')
+        ConsoleLog.info('-v, -viz, --visualize')
       } else if (pargs.has('list') || pargs.has('ls')) {
         ConsoleLog.info('[list]')
         Object.keys(config.tasks)
@@ -60,9 +61,9 @@ const options: ConsoleOptions = {
             (results, name) => Returns(results).after(() => (results[name] = config.tasks[name] as Task)),
             {},
           )
-          console.log(JSON.stringify(collected, null, 2))
+          ConsoleLog.info(JSON.stringify(collected, null, 2))
         } else {
-          console.log(JSON.stringify(config, null, 2))
+          ConsoleLog.info(JSON.stringify(config, null, 2))
         }
       } else {
         process.exitCode = await execute(builder, config)

@@ -19,7 +19,8 @@ export class TaskRunner {
     env.PATH = `./node_modules/.bin:${env.PATH}`
 
     const jobs = this.createTaskJobs(cwd, env, names)
-    const results = await Promise.all(jobs.map(job => this.adapter.execute(job)))
+    const tasks = jobs.map(job => this.adapter.execute(job))
+    const results = await Promise.all(tasks)
     return results.reduce<TaskJobResult[]>((result, current) => result.concat(...current), [])
   }
 

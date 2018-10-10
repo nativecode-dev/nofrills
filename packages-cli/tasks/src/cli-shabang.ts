@@ -17,7 +17,7 @@ const options: ConsoleOptions = {
 
       if (resolved.length > 0) {
         const filename = resolved[0]
-        ConsoleLog.trace('package-json', filename)
+        ConsoleLog.trace('package-json', 'bin', filename)
 
         const shabang = ShaBang.from(filename)
         await shabang.shabang()
