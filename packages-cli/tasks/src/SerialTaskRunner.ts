@@ -1,6 +1,6 @@
 import * as execa from 'execa'
 
-import { Returns } from '@nofrills/patterns'
+import { serial } from '@nofrills/patterns'
 
 import { ConsoleLog, Lincoln, Logger } from './Logging'
 
@@ -18,16 +18,6 @@ export interface TaskContext {
   job: TaskJob
 }
 
-function sequence(tasks: TaskJobExec[]): Promise<TaskJobResult[]> {
-  const reducer = (results: TaskJobResult[]) => (result: TaskJobResult): TaskJobResult[] =>
-    Returns(results).after(() => results.push(result))
-
-  return tasks.reduce<Promise<TaskJobResult[]>>(
-    (previous, task) => previous.then(results => task().then(reducer(results))),
-    Promise.resolve([]),
-  )
-}
-
 export class SerialTaskRunner implements TaskRunnerAdapter {
   readonly stdin: NodeJS.ReadStream = process.stdin
   readonly stdout: NodeJS.WriteStream = process.stdout
@@ -38,17 +28,10 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
   execute(job: TaskJob): Promise<TaskJobResult[]> {
     ConsoleLog.info('[task]', job.name)
 
-    return sequence(
-      job.task.entries.map(entry => {
-        const context: TaskContext = {
-          entry,
-          env: job.env,
-          job,
-        }
+    const createTask = (entry: TaskEntry) => this.run({ entry, env: job.env, job })
+    const initiator = () => Promise.resolve([])
 
-        return this.run(context)
-      }),
-    )
+    return serial(job.task.entries.map(createTask), initiator)
   }
 
   protected run(context: TaskContext): TaskJobExec {
@@ -58,18 +41,18 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
 
     switch (entry.type) {
       case TaskEntryType.skip:
-        return () => Promise.resolve(EmptyTaskJobResult(entry))
+        return async () => EmptyTaskJobResult(entry)
 
       case TaskEntryType.env:
-        context.env[entry.command] = entry.arguments ? entry.arguments[0] : undefined
-        return () => Promise.resolve(EmptyTaskJobResult(entry))
+        return async () => {
+          context.env[entry.command] = entry.arguments ? entry.arguments[0] : undefined
+          return EmptyTaskJobResult(entry)
+        }
 
       default:
         return () => {
           const args = entry.arguments ? entry.arguments.join(' ') : entry.arguments
-
           ConsoleLog.info(`<${entry.type}${entry.command}>`, args)
-
           return this.exec(context)
         }
     }
