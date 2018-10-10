@@ -19,9 +19,11 @@ export interface TaskContext {
 }
 
 function sequence(tasks: TaskJobExec[]): Promise<TaskJobResult[]> {
+  const reducer = (results: TaskJobResult[]) => (result: TaskJobResult): TaskJobResult[] =>
+    Returns(results).after(() => results.push(result))
+
   return tasks.reduce<Promise<TaskJobResult[]>>(
-    (previous, task) =>
-      previous.then(results => task().then(value => Returns(results).after(() => results.push(value)))),
+    (previous, task) => previous.then(results => task().then(reducer(results))),
     Promise.resolve([]),
   )
 }
