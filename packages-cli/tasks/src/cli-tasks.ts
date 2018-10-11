@@ -77,5 +77,6 @@ const options: ConsoleOptions = {
   },
 }
 
-Logger.debug(process.argv)
+Logger.debug(...process.argv)
+Logger.debug(...Object.keys(process.env).map(key => ({ name: key, value: process.env[key] })))
 CLI.run(options, pargs).catch(ConsoleLog.info)

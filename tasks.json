@@ -2,7 +2,7 @@
   "tasks": {
     "build": [
       "[clean]",
-      "[format]",
+      "#[format]",
       "[lint]",
       "lerna run build"
     ],
@@ -26,7 +26,8 @@
     ],
     "commit": [
       "[test]",
-      "git add -A . && git-cz"
+      "git add -A .",
+      "git-cz"
     ],
     "coverage": [
       "[test]",
@@ -39,10 +40,13 @@
     "lint": [
       "tslint --project tsconfig.json --config tslint.json"
     ],
+    "prerelease": [
+      "[build]",
+      "lerna publish --npm-tag next --yes"
+    ],
     "release": [
       "[build]",
-      "lerna-semantic-release pre",
-      "lerna-semantic-release perform"
+      "lerna publish --npm-tag latest --yes"
     ],
     "start": [
       "[build]",

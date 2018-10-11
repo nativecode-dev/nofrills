@@ -15,12 +15,11 @@
     "@types/node": "*",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "commitizen": "^2.10.1",
+    "commitizen": "^3.0.2",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
-    "cz-lerna-changelog": "^1.2.1",
-    "lerna": "^2.11.0",
-    "lerna-semantic-release": "^9.1.0",
+    "cz-lerna-changelog": "^2.0.0",
+    "lerna": "^3.4.3",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "prettier": "^1.14.3",
@@ -30,8 +29,8 @@
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-no-unused-expression-chai": "^0.1.4",
-    "typedoc": "^0.12.0",
-    "typescript": "^3.1.1"
+    "typedoc": "^0.13.0",
+    "typescript": "^3.1.2"
   },
   "nyc": {
     "all": true,

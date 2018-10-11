@@ -64,6 +64,7 @@ export class SerialTaskRunner implements TaskRunnerAdapter {
     const command = execa(entry.command, entry.arguments, {
       cwd: context.job.cwd,
       env: context.env,
+      stdio: ['inherit', 'pipe', 'pipe']
     })
 
     command.stderr.pipe(process.stderr)

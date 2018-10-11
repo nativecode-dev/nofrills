@@ -21,7 +21,6 @@
     "@nofrills/lincoln-debug": "^3.6.0",
     "@nofrills/patterns": "^1.5.0",
     "@nofrills/types": "^3.4.3",
-    "@types/get-stream": "^3.0.1",
     "chalk": "^2.4.1",
     "execa": "^1.0.0",
     "get-stream": "^4.1.0"

@@ -18,9 +18,11 @@ before_install:
 stages:
   - test
   - name: coverage
-    if: branch = "master" OR branch = "develop"
+    if: (branch = "master" OR branch = "develop") AND type != pull_request
   - name: release
     if: branch = "master" AND type != pull_request
+  - name: prerelease
+    if: branch = "develop" AND type != pull_request
 jobs:
   include:
     - stage: coverage
@@ -28,6 +30,14 @@ jobs:
       os: linux
       script:
         - cli-tasks coverage
+    - stage: prerelease
+      node_js: '8'
+      os: linux
+      script:
+        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
+        - git checkout $TRAVIS_BRANCH
+        - npm whoami
+        - cli-tasks prerelease
     - stage: release
       node_js: '8'
       os: linux
