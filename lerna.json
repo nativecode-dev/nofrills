@@ -5,6 +5,7 @@
     },
     "publish": {
       "allowBranch": [
+        "develop",
         "master"
       ],
       "ignoreChanges": [
