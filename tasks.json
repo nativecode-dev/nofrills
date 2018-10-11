@@ -41,7 +41,6 @@
     ],
     "release": [
       "[build]",
-      "yarn workspace @nofrills/tasks cli-shabang",
       "lerna-semantic-release pre",
       "lerna-semantic-release perform"
     ],
