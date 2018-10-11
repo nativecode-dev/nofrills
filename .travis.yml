@@ -37,6 +37,7 @@ jobs:
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
         - npm whoami
+        - git status
         - cli-tasks prerelease
     - stage: release
       node_js: '8'
@@ -45,6 +46,7 @@ jobs:
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
         - npm whoami
+        - git status
         - cli-tasks release
 after_failure:
   - cat lerna-debug.log
