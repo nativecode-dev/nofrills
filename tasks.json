@@ -42,7 +42,7 @@
     ],
     "prerelease": [
       "[build]",
-      "lerna publish --npm-tag next --yes"
+      "lerna publish preminor --npm-tag next --yes"
     ],
     "release": [
       "[build]",
