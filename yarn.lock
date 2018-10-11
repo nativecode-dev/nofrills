@@ -716,6 +716,10 @@
   version "10.7.1"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
+"@types/node@10.11.7", "@types/node@^10.11.7":
+  version "10.11.7"
+  resolved "https://registry.npmjs.org/@types/node/-/node-10.11.7.tgz#0e75ca9357d646ca754016ca1d68a127ad7e7300"
+
 "@types/pegjs@^0.10.1":
   version "0.10.1"
   resolved "https://registry.npmjs.org/@types/pegjs/-/pegjs-0.10.1.tgz#9a2f3961dc62430fdb21061eb0ddbd890f9e3b94"

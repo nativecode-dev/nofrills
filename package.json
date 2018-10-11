@@ -12,7 +12,7 @@
     "@types/chai": "^4.1.6",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.5",
-    "@types/node": "*",
+    "@types/node": "^10.11.7",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "commitizen": "^3.0.2",

@@ -22,7 +22,7 @@
     "ts-pegjs": "^0.2.2"
   },
   "devDependencies": {
-    "@types/node": "*",
+    "@types/node": "^10.11.7",
     "@types/pegjs": "^0.10.1"
   },
   "publishConfig": {
