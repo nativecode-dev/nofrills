@@ -10,6 +10,9 @@
     ],
     "clean": [
       "rimraf bin"
+    ],
+    "shabang": [
+      "cli-shabang"
     ]
   }
 }
