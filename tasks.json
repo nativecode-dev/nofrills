@@ -42,10 +42,12 @@
     ],
     "prerelease": [
       "[build]",
+      "lerna run shabang",
       "lerna publish preminor --npm-tag next --yes"
     ],
     "release": [
       "[build]",
+      "lerna run shabang",
       "lerna publish --npm-tag latest --yes"
     ],
     "start": [

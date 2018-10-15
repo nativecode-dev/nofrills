@@ -3,7 +3,7 @@
     "build": [
       "[clean]",
       "[build:ts]",
-      "[shabang]"
+      "yarn list --pattern @nofrills"
     ],
     "build:ts": [
       "tsc --project tsconfig.build.json"

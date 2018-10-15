@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/execa": "^0.9.0",
-    "@types/node": "^10.11.7",
+    "@types/node": "*",
     "ts-node": "^7.0.0"
   },
   "publishConfig": {
@@ -41,6 +41,7 @@
   "scripts": {
     "build": "ts-node src/cli-tasks build",
     "clean": "ts-node src/cli-tasks clean",
+    "shabang": "ts-node src/cli-tasks shabang",
     "viz": "ts-node src/cli-tasks -v"
   }
 }
