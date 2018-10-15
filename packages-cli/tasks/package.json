@@ -41,7 +41,7 @@
   "scripts": {
     "build": "ts-node src/cli-tasks build",
     "clean": "ts-node src/cli-tasks clean",
-    "shabang": "ts-node src/cli-tasks shabang",
+    "shabang": "cli-tasks shabang",
     "viz": "ts-node src/cli-tasks -v"
   }
 }
