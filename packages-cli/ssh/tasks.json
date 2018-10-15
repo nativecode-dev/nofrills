@@ -7,9 +7,6 @@
     ],
     "clean": [
       "rimraf bin"
-    ],
-    "shabang": [
-      "cli-tasks shabang"
     ]
   }
 }

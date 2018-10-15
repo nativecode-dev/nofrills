@@ -36,6 +36,6 @@
   "scripts": {
     "build": "cli-tasks build",
     "clean": "cli-tasks clean",
-    "shabang": "cli-tasks shabang"
+    "shabang": "cli-shabang"
   }
 }
