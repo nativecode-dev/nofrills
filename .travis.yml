@@ -21,9 +21,9 @@ stages:
 - name: coverage
   if: (branch = "master" OR branch = "develop") AND tag is empty
 - name: release
-  if: branch = "master" AND type != pull_request AND tag is empty
+  if: branch = "master" AND type != pull_request
 - name: prerelease
-  if: branch = "develop" AND type != pull_request AND tag is empty
+  if: branch = "develop" AND type != pull_request
 jobs:
   include:
   - stage: coverage
