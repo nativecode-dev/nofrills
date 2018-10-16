@@ -48,7 +48,7 @@
     "release": [
       "[build]",
       "lerna run shabang",
-      "lerna publish --npm-tag latest --yes"
+      "lerna publish minor --npm-tag latest --yes"
     ],
     "start": [
       "[build]",
