@@ -19,7 +19,7 @@ before_install:
 stages:
 - test
 - name: coverage
-  if: (branch = "master" OR branch = "develop") AND tag is empty
+  if: (branch = "master" OR branch = "develop")
 - name: release
   if: branch = "master" AND type != pull_request
 - name: prerelease
