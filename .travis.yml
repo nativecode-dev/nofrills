@@ -19,11 +19,11 @@ before_install:
 stages:
 - test
 - name: coverage
-  if: (branch = "master" OR branch = "develop")
+  if: (branch = "master" OR branch = "develop") AND tag IS blank
 - name: release
-  if: branch = "master" AND type != pull_request
+  if: branch = "master" AND type != pull_request AND tag IS blank
 - name: prerelease
-  if: branch = "develop" AND type != pull_request
+  if: branch = "develop" AND type != pull_request AND tag IS blank
 jobs:
   include:
   - stage: coverage
