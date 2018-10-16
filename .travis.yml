@@ -4,15 +4,16 @@ cache:
   yarn: true
 language: node_js
 node_js:
-  - 'node'
+  - node
   - '6'
 os:
   - linux
 before_install:
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - yarn global add @nofrills/tasks@5.6.2
-  - yarn install
+  - yarn global add @nofrills/tasks@5.6.2 --non-interactive --silent
+  - yarn install --pure-lockfile --non-interactive --silent
   - cli-tasks configure:git
   - yarn run ssh
 stages:
@@ -21,13 +22,25 @@ stages:
     if: branch = "master" OR branch = "develop"
   - name: release
     if: branch = "master" AND type != pull_request
+  - name: prerelease
+    if: branch = "develop" AND type != pull_request
 jobs:
   include:
     - stage: coverage
       node_js: '8'
       os: linux
       script:
-        - cli-tasks coverage
+      - cli-tasks coverage
+    - stage: prerelease
+      node_js: '8'
+      os: linux
+      script:
+        - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
+        - git checkout $TRAVIS_BRANCH
+        - npm whoami
+        - git checkout yarn.lock
+        - git status
+        - cli-tasks prerelease
     - stage: release
       node_js: '8'
       os: linux
@@ -35,6 +48,11 @@ jobs:
         - git remote set-url origin git@github.com:nativecode-dev/nofrills.git
         - git checkout $TRAVIS_BRANCH
         - npm whoami
+        - git checkout yarn.lock
+        - git status
         - cli-tasks release
 after_failure:
   - cat lerna-debug.log
+notifications:
+  slack:
+    secure: GUDjVlg3i5TwFKkCZhWaEUtBe+I8GNpf7grzlEk0Tdvlp5HJ9BKki1zjnFHr9loxpQcWQGtcxza00k9D6/Pq4nB4w94vPsr6w0r9SgZzcqJSwbkuKZ5a/2hk2rycGvYndTrcyKNa0300+r3YhlVRP4d+5G8zUTxLOcuu3JAADq+x3t3XPlpWbVsgoGKhyuJKuxHi0H1k0cOP5EIGX5dFUlAMosbFee8u0hSLu1Vwzxdyry2tqgrgbVYV5EkIV5+ePTG+jk0BtkHmdeZmefViKJXXfA6OTeI9ERRxoaU1g4Ywjd7jgqIRezKBvQqPeUJXS6Bwek0a3X6vs+pQcyJKu/PYJUtrkHMzYHrrmwNuFjhETjNzeSHHzP00mUbt4AXET6ZFk2p7v5j9BJgX8aXaNT0y511rFAeufni2cKZ3bpf8EPJqBXAV+483YzeTeQuq1ZcHtosg4Ewq2xMppwVv1zd5scl8FKAnNHe7l88eGd1YQCksyt0q84En52V74+KWM5xlpoI2vOiR1+lRE+0Cza2SoRwkHizMWR7RJKqXWRoyDMIxbJQ8MSLaufnr1DUvzv9NM02nYIisZ9fZ0GLvPjTl2hbgJXyZLgQcIBT1uAQfyB92FlatA757n9xintS5fOQay5+TNAKMV4+bJvXpBadK3H8ANinKbjiwpKoUbVU=

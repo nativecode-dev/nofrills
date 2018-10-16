@@ -9,7 +9,7 @@ import { TaskBuilder } from './TaskBuilder'
 import { ErrorCode } from './errors/ErrorCode'
 import { Logger, ConsoleLog } from './Logging'
 
-const pargs = ProcessArgs.from(process.argv)
+const processed = ProcessArgs.from(process.argv)
 
 interface NPM {
   name: string
@@ -17,7 +17,7 @@ interface NPM {
 }
 
 async function execute(builder: TaskBuilder, config: TaskConfig) {
-  const args = pargs.argsOnly
+  const args = processed.argsOnly
   const results = await builder.run(args, config)
 
   Logger.debug(results)
@@ -44,20 +44,20 @@ const options: ConsoleOptions = {
       const config = await builder.build()
       Logger.debug(config.tasks)
 
-      if (pargs.has('help') || pargs.has('h')) {
+      if (processed.has('help') || processed.has('h')) {
         ConsoleLog.silly(npm.name, `[${npm.version}]`, '\u00A9 2018 NativeCode')
         ConsoleLog.info('-h, --help')
         ConsoleLog.info('-ls, --list')
         ConsoleLog.info('-v, -viz, --visualize')
-      } else if (pargs.has('list') || pargs.has('ls')) {
+      } else if (processed.has('list') || processed.has('ls')) {
         ConsoleLog.info('[list]')
         Object.keys(config.tasks)
           .sort()
           .map(name => ConsoleLog.trace(' :', name))
-      } else if (pargs.has('visualize') || pargs.has('viz') || pargs.has('v')) {
+      } else if (processed.has('visualize') || processed.has('viz') || processed.has('v')) {
         ConsoleLog.info('[visualize]')
-        if (pargs.argsOnly.length > 0) {
-          const collected = pargs.argsOnly.reduce<DictionaryOf<Task>>(
+        if (processed.argsOnly.length > 0) {
+          const collected = processed.argsOnly.reduce<DictionaryOf<Task>>(
             (results, name) => Returns(results).after(() => (results[name] = config.tasks[name] as Task)),
             {},
           )
@@ -77,5 +77,6 @@ const options: ConsoleOptions = {
   },
 }
 
-Logger.debug(process.argv)
-CLI.run(options, pargs).catch(ConsoleLog.info)
+Logger.debug(...process.argv)
+Logger.debug(...Object.keys(process.env).map(key => ({ name: key, value: process.env[key] })))
+CLI.run(options, processed).catch(ConsoleLog.info)

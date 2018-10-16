@@ -20,8 +20,7 @@
     "@types/mustache": "^0.8.31"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",

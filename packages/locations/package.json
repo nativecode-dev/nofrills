@@ -16,8 +16,7 @@
   },
   "devDependencies": {},
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",
