@@ -16,8 +16,7 @@
     "uuidjs": "^4.0.3"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",

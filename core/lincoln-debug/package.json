@@ -20,8 +20,7 @@
     "@types/debug": "0.0.31"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",

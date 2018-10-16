@@ -21,8 +21,7 @@
     "@types/validator": "^9.4.2"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",

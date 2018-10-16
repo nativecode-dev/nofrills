@@ -17,8 +17,7 @@
     "@nofrills/scrubs": "^3.5.2"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",

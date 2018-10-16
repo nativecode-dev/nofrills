@@ -15,8 +15,7 @@
     "@nofrills/lincoln": "^3.5.0"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+    "access": "public"
   },
   "repository": {
     "type": "git",
