@@ -20,14 +20,13 @@
       "yes": true
     },
     "run": {
-      "stream": true
+      "stream": false
     }
   },
-  "lerna": "2.11.0",
   "loglevel": "error",
-  "npmClient": "yarn",
+  "npmClient": "npm",
   "npmClientArgs": [
-    "--silent"
+    "--quiet"
   ],
   "packages": [
     "core/*",
@@ -36,6 +35,6 @@
     "packages-typings/*"
   ],
   "sort": true,
-  "useWorkspaces": true,
+  "useWorkspaces": false,
   "version": "independent"
 }

@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
+    "prebuild": "npm run clean",
     "clean": "rimraf .cache && rimraf docs && rimraf lib"
   }
 }
