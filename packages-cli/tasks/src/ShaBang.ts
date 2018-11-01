@@ -44,10 +44,13 @@ export class ShaBang {
   static async shabangify(filename: string): Promise<Buffer> {
     try {
       ConsoleLog.info('<cli-shabang>', filename)
+
       const shabang = Buffer.from('#!/usr/bin/env node\n')
       const original = await fs.readFile(filename)
       const combined = Buffer.concat([shabang, original])
+
       await fs.writeFile(filename, combined)
+
       return combined
     } catch (e) {
       ConsoleLog.error(`failed to write file: ${filename}`)
