@@ -17,7 +17,7 @@
     "mustache": "^3.0.0"
   },
   "devDependencies": {
-    "@types/mustache": "^0.8.31"
+    "@types/mustache": "^0.8.32"
   },
   "publishConfig": {
     "access": "public"
