@@ -36,7 +36,7 @@ function colorize(log: Log): string[] {
       ]
     case 'silly':
       return [
-        chalk.bold.blue('🆃'),
+        chalk.bold.blue('☃'),
         chalk.dim.blue(...log.parameters.slice(0, 1)),
         chalk.dim.white(...log.parameters.slice(1)),
       ]
