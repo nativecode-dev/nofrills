@@ -5879,9 +5879,9 @@ uuid@^3.0.1, uuid@^3.3.2:
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
 uuidjs@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.npmjs.org/uuidjs/-/uuidjs-4.0.3.tgz#4b4113a98e70507643a9a55a0493ff95b1d2538d"
-  integrity sha512-xG2pb5orynGRMwR3MtiJDKrMQ7rl4+IVchTjKBlddBJy9sIDw336u3quWdWiu81XhM5ckgQuWtFzxdqXTec4uA==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/uuidjs/-/uuidjs-4.2.1.tgz#078e259320cc96a1c6bcd5fa9053f1656ef3c6e5"
+  integrity sha512-LNl5tqW081cMcn3+e1BqPDZIDNOooxrPHs7JN1j8pK7wFx0H/ziVUGVlALn+pNJ2jwT9RBHHQsKEnvgkOuYSDw==
 
 validate-npm-package-license@^3.0.1, validate-npm-package-license@^3.0.3:
   version "3.0.4"
