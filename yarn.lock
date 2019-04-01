@@ -795,9 +795,9 @@
   integrity sha512-72flCZJkEJHPwhmpHgg4a0ZBLssMhg5NB0yltRblRlZMo4py3B/u/d7icevc4EeN9MPQUo/dPtuVOoVy9ih6cQ==
 
 "@types/node@*":
-  version "10.7.1"
-  resolved "https://registry.npmjs.org/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
-  integrity sha512-EGoI4ylB/lPOaqXqtzAyL8HcgOuCtH2hkEaLmkueOYufsTFWBn4VCvlCDC2HW8Q+9iF+QVC3sxjDKQYjHQeZ9w==
+  version "11.12.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.12.2.tgz#d7f302e74b10e9801d52852137f652d9ee235da8"
+  integrity sha512-c82MtnqWB/CqqK7/zit74Ob8H1dBdV7bK+BcErwtXbe0+nUGkgzq5NTDmRW/pAv2lFtmeNmW95b0zK2hxpeklg==
 
 "@types/pegjs@^0.10.1":
   version "0.10.1"
