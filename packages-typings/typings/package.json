@@ -17,7 +17,9 @@
     "mustache": "^3.0.0"
   },
   "devDependencies": {
-    "@types/mustache": "^0.8.31"
+    "@nofrills/tasks": "^5.20.5",
+    "@types/mustache": "^0.8.31",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -27,7 +29,8 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks build",
-    "clean": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks clean"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

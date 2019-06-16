@@ -17,8 +17,10 @@
     "zipcodes-regex": "^1.0.2"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^5.20.5",
     "@types/deepmerge": "^2.2.0",
-    "@types/validator": "^9.4.2"
+    "@types/validator": "^9.4.2",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -28,8 +30,8 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "npm run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

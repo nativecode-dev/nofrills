@@ -57,6 +57,9 @@
     "test": [
       "[build]",
       "cross-env DEBUG= nyc mocha --opts mocha.opts"
+    ],
+    "upgrade": [
+      "npm-check-updates --upgrade"
     ]
   }
 }

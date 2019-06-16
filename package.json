@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
+    "@nofrills/tasks": "^5.20.5",
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.7",
@@ -21,7 +22,6 @@
     "cz-lerna-changelog": "^2.0.2",
     "lerna": "^3.15.0",
     "mocha": "^6.1.4",
-    "npm-upgrade": "^1.4.1",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
@@ -57,11 +57,12 @@
     "temp-directory": ".cache/nyc"
   },
   "scripts": {
-    "bootstrap": "npm lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "commit": "git add -A . && npx git cz",
     "ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\"",
-    "start": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks start",
-    "test": "lerna run test"
+    "start": "cli-tasks start",
+    "test": "lerna run test",
+    "upgrade": "lerna run upgrade"
   }
 }

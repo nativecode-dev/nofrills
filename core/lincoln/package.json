@@ -15,6 +15,10 @@
     "@nofrills/collections": "^3.8.0",
     "uuidjs": "^4.0.3"
   },
+  "devDependencies": {
+    "@nofrills/tasks": "^5.20.5",
+    "npm-check-updates": "^3.1.10"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -23,7 +27,8 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks build",
-    "clean": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks clean"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

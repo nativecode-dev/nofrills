@@ -21,8 +21,10 @@
     "promise-parallel-throttle": "^3.2.0"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^5.20.5",
     "@types/cheerio": "^0.22.8",
-    "@types/isomorphic-fetch": "^0.0.34"
+    "@types/isomorphic-fetch": "^0.0.34",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -32,7 +34,8 @@
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
   "scripts": {
-    "build": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks build",
-    "clean": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks clean"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

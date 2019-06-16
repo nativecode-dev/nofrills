@@ -17,7 +17,9 @@
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
-    "@types/isomorphic-fetch": "^0.0.34"
+    "@nofrills/tasks": "^5.20.5",
+    "@types/isomorphic-fetch": "^0.0.34",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -27,7 +29,8 @@
     "url": "https://github.com/nativecode-dev/nofrills"
   },
   "scripts": {
-    "build": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks build",
-    "clean": "npx -q -p @nofrills/tasks@5.6.2 cli-tasks clean"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

@@ -32,7 +32,7 @@
       "yes": true
     }
   },
-  "loglevel": "silent",
+  "loglevel": "error",
   "packages": [
     "core/*",
     "packages/*",
