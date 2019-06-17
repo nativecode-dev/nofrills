@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@nofrills/collections": "^3.8.0",
-    "deepmerge": "^2.2.1"
+    "deepmerge": "^3.2.1"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0"
