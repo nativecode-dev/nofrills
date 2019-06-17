@@ -23,7 +23,7 @@
     "@nofrills/types": "^3.4.3",
     "chalk": "^2.4.1",
     "execa": "^1.0.0",
-    "get-stream": "^4.1.0"
+    "get-stream": "^5.1.0"
   },
   "devDependencies": {
     "@types/execa": "^0.9.0",
