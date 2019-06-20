@@ -39,7 +39,7 @@
       "tslint --project tsconfig.json --config tslint.json"
     ],
     "prerelease": [
-      ".citools/lerna-publisrelease"
+      ".citools/lerna-publis prerelease"
     ],
     "release": [
       ".citools/lerna-publis release"
