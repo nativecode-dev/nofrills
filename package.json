@@ -21,6 +21,7 @@
     "cross-env": "^5.2.0",
     "cz-lerna-changelog": "^2.0.2",
     "lerna": "^3.15.0",
+    "lerna-update-wizard": "^0.14.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
@@ -58,6 +59,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "prebootstrap": "npm install",
     "build": "lerna run build",
     "commit": "git add -A . && npx git cz",
     "ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\"",
