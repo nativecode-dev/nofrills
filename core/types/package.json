@@ -1,18 +1,27 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Library for runtime type helpers.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/types",
-  "license": "MIT",
-  "main": "./lib/index.js",
-  "name": "@nofrills/types",
   "private": false,
-  "types": "./lib/index.d.ts",
-  "version": "3.5.0",
+  "name": "@nofrills/types",
+  "description": "Library for runtime type helpers.",
+  "license": "MIT",
+  "author": "opensource@nativecode.com",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/types",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nativecode-dev/nofrills.git"
+  },
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
+  "version": "3.5.0",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
   "dependencies": {
-    "deepmerge": "^2.2.1",
+    "deepmerge": "3.2.1",
     "validator": "^10.8.0",
     "zipcodes-regex": "^1.0.2"
   },
@@ -24,14 +33,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nativecode-dev/nofrills.git"
-  },
-  "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean",
-    "upgrade": "cli-tasks upgrade"
   }
 }
