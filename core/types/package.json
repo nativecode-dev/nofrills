@@ -17,7 +17,7 @@
     "zipcodes-regex": "^1.0.2"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^5.20.5",
+    "@nofrills/tasks": "^6.2.0",
     "@types/deepmerge": "^2.2.0",
     "@types/validator": "^9.4.2",
     "npm-check-updates": "^3.1.10"
