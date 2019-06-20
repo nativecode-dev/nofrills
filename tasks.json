@@ -17,12 +17,10 @@
       "typedoc --mode modules --out ./docs ./packages/*/src/"
     ],
     "configure:git": [
-      "git config --global user.email automaton+nofrills@nativecode.com",
-      "git config --global user.name automaton",
-      "git config --global push.default simple"
+      ".citools/setup-git git.nativecode.net git@git.nativecode.net:nativecode/nofrills.git automaton+nofrills@nativecode.com"
     ],
     "configure:ssh": [
-      "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+      ".citools/setup-ssh git.nativecode.net"
     ],
     "commit": [
       "[test]",
@@ -41,14 +39,13 @@
       "tslint --project tsconfig.json --config tslint.json"
     ],
     "prerelease": [
-      "[build]",
-      "lerna run shabang",
-      "lerna publish from-git --npm-tag next --yes"
+      ".citools/lerna-publisrelease"
     ],
     "release": [
-      "[build]",
-      "lerna run shabang",
-      "lerna publish from-git --npm-tag latest --yes"
+      ".citools/lerna-publis release"
+    ],
+    "release-canary": [
+      ".citools/lerna-publis canary"
     ],
     "start": [
       "[build]",

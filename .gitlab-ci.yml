@@ -1,0 +1,49 @@
+image: node:latest
+
+stages:
+- test
+- publish
+
+before_script:
+- git submodule sync --recursive
+- git submodule update --init --recursive
+- npm ci
+- npm run bootstrap
+- npm run setup-ssh
+
+cache:
+  paths:
+  - node_modules
+
+continuous:
+  stage: test
+  except:
+  - develop
+  - master
+  - tags
+  script:
+  - npm run test
+  - npm run canary
+
+prerelease:
+  stage: publish
+  except:
+  - tags
+  only:
+  - develop
+  script:
+  - npm run setup-git
+  - npm run test
+  - npm run pre-release
+
+release:
+  stage: publish
+  except:
+  - tags
+  - triggers
+  only:
+  - master
+  script:
+  - npm run setup-git
+  - npm run test
+  - npm run release

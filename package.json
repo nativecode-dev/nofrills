@@ -59,10 +59,13 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "prebootstrap": "npm install",
     "build": "lerna run build",
-    "commit": "git add -A . && npx git cz",
-    "ssh": "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\"",
+    "canary": "cli-tasks release-canary",
+    "commit": "cli-tasks commit",
+    "pre-release": "cli-tasks prerelease",
+    "release": "cli-tasks release",
+    "setup-git": "cli-tasks configure:bit",
+    "setup-ssh": "cli-tasks configure:ssh",
     "start": "cli-tasks start",
     "test": "cli-tasks test",
     "upgrade": "lerna run upgrade"
