@@ -14,7 +14,7 @@
   "dependencies": {
     "@nofrills/fs": "^3.5.1",
     "@nofrills/lincoln-debug": "^3.6.6",
-    "@nofrills/scrubs": "^3.5.0",
+    "@nofrills/scrubs": "^3.6.0",
     "@nofrills/typings": "^3.2.0",
     "cheerio": "^1.0.0-rc.2",
     "isomorphic-fetch": "^2.2.1",
