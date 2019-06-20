@@ -17,7 +17,7 @@
       "typedoc --mode modules --out ./docs ./packages/*/src/"
     ],
     "configure:git": [
-      ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton+nofrills@nativecode.com"
+      ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com",
     ],
     "configure:ssh": [
       ".citools/setup-ssh git.nativecode.net"
