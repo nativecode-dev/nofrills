@@ -12,6 +12,6 @@ describe('when deriving from HTTP', () => {
 
   it('should successfully make GET call', () => {
     const client = new HttpClient()
-    expect(() => client.get<{}>('https://guessit.nativecode.com/?filename=test.mkv')).to.not.throw()
+    expect(() => client.get<{}>('https://jsonplaceholder.typicode.com/todos/1')).to.not.throw()
   })
 })
