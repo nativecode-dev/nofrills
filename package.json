@@ -64,7 +64,7 @@
     "commit": "cli-tasks commit",
     "pre-release": "cli-tasks prerelease",
     "release": "cli-tasks release",
-    "setup-git": "cli-tasks configure:bit",
+    "setup-git": "cli-tasks configure:git",
     "setup-ssh": "cli-tasks configure:ssh",
     "start": "cli-tasks start",
     "test": "cli-tasks test",
