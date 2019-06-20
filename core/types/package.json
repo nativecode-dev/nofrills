@@ -28,7 +28,7 @@
   "devDependencies": {
     "@nofrills/tasks": "^6.2.0",
     "@types/deepmerge": "^2.2.0",
-    "@types/validator": "^9.4.2",
+    "@types/validator": "^10.11.1",
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
