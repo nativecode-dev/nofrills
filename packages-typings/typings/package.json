@@ -17,7 +17,7 @@
     "mustache": "^3.0.0"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^6.2.0",
+    "@nofrills/tasks": "^6.8.2",
     "@types/mustache": "^0.8.31",
     "npm-check-updates": "^3.1.10"
   },

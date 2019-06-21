@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
-    "@nofrills/tasks": "^6.2.0",
+    "@nofrills/tasks": "^6.8.2",
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.7",
@@ -28,7 +28,7 @@
     "rimraf": "^2.6.3",
     "source-map-support": "^0.5.12",
     "ts-node": "^8.2.0",
-    "tslint": "^5.17.0",
+    "tslint": "^5.18.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-no-unused-expression-chai": "^0.1.4",
     "typedoc": "^0.14.2",

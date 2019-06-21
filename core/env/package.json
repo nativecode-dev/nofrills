@@ -25,7 +25,7 @@
     "deepmerge": "3.2.1"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^6.2.0",
+    "@nofrills/tasks": "^6.8.2",
     "@types/deepmerge": "^2.2.0",
     "npm-check-updates": "^3.1.10"
   },
