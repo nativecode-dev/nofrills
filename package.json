@@ -64,7 +64,7 @@
     "commit": "cli-tasks commit",
     "pre-release": "cli-tasks prerelease",
     "release": "cli-tasks release",
-    "setup-git": ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com",
+    "setup-git": "cli-tasks configure:git",
     "setup-ssh": "cli-tasks configure:ssh",
     "start": "cli-tasks start",
     "test": "cli-tasks test",
