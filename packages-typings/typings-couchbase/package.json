@@ -13,16 +13,18 @@
   },
   "dependencies": {
     "@nofrills/fs": "^3.5.1",
-    "@nofrills/lincoln-debug": "^3.6.0",
-    "@nofrills/scrubs": "^3.5.0",
+    "@nofrills/lincoln-debug": "^3.6.6",
+    "@nofrills/scrubs": "^3.6.0",
     "@nofrills/typings": "^3.2.0",
     "cheerio": "^1.0.0-rc.2",
     "isomorphic-fetch": "^2.2.1",
     "promise-parallel-throttle": "^3.2.0"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
     "@types/cheerio": "^0.22.8",
-    "@types/isomorphic-fetch": "^0.0.34"
+    "@types/isomorphic-fetch": "^0.0.34",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -33,6 +35,7 @@
   },
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

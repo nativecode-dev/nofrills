@@ -17,12 +17,10 @@
       "typedoc --mode modules --out ./docs ./packages/*/src/"
     ],
     "configure:git": [
-      "git config --global user.email \"opensource+nofrills@nativecode.com\"",
-      "git config --global user.name \"Native Open Source\"",
-      "git config --global push.default simple"
+      ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com",
     ],
     "configure:ssh": [
-      "set-up-ssh --key \"$encrypted_fa989ae4fdf1_key\" --iv \"$encrypted_fa989ae4fdf1_iv\" --path-encrypted-key \"deploy.enc\""
+      ".citools/setup-ssh git.nativecode.net"
     ],
     "commit": [
       "[test]",
@@ -41,14 +39,13 @@
       "tslint --project tsconfig.json --config tslint.json"
     ],
     "prerelease": [
-      "[build]",
-      "lerna run shabang",
-      "lerna publish from-git --npm-tag next --yes"
+      ".citools/lerna-publis prerelease"
     ],
     "release": [
-      "[build]",
-      "lerna run shabang",
-      "lerna publish from-git --npm-tag latest --yes"
+      ".citools/lerna-publis release"
+    ],
+    "release-canary": [
+      ".citools/lerna-publis canary"
     ],
     "start": [
       "[build]",
@@ -57,6 +54,9 @@
     "test": [
       "[build]",
       "cross-env DEBUG= nyc mocha --opts mocha.opts"
+    ],
+    "upgrade": [
+      "npm-check-updates --upgrade"
     ]
   }
 }

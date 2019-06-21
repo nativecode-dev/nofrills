@@ -1,33 +1,36 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Scrubs an object of sensitive data.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/scrubs",
-  "license": "MIT",
-  "main": "./lib/index.js",
-  "name": "@nofrills/scrubs",
   "private": false,
-  "types": "./lib/index.d.ts",
-  "version": "3.6.0",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/lincoln-debug": "^3.6.0",
-    "@nofrills/types": "^3.4.2",
-    "deepmerge": "^2.2.1"
-  },
-  "devDependencies": {
-    "@types/deepmerge": "^2.2.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "@nofrills/scrubs",
+  "description": "Scrubs an object of sensitive data.",
+  "license": "MIT",
+  "author": "opensource@nativecode.com",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/scrubs",
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "version": "3.6.0",
+  "main": "./lib/index.js",
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@nofrills/lincoln-debug": "^3.6.6",
+    "@nofrills/types": "^3.4.2",
+    "deepmerge": "3.2.1"
+  },
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "@types/deepmerge": "^2.2.0",
+    "npm-check-updates": "^3.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

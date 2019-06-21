@@ -12,10 +12,13 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.6.0",
+    "@nofrills/lincoln-debug": "^3.6.6",
     "moment": "^2.18.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "npm-check-updates": "^3.1.10"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -25,6 +28,7 @@
   },
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

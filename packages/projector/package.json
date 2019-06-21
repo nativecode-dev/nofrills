@@ -15,11 +15,14 @@
     "@nofrills/collections": "^3.8.0",
     "@nofrills/console": "^3.5.0",
     "@nofrills/fs": "^3.5.1",
-    "@nofrills/lincoln-debug": "^3.6.0",
+    "@nofrills/lincoln-debug": "^3.6.6",
     "@nofrills/patterns": "^1.3.1",
-    "@nofrills/scrubs": "^3.5.0"
+    "@nofrills/scrubs": "^3.6.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "npm-check-updates": "^3.1.10"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -29,6 +32,7 @@
   },
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

@@ -1,41 +1,42 @@
 {
   "command": {
-    "exec": {
-      "bail": true
+    "run": {
+      "stream": false
     },
     "publish": {
       "allowBranch": [
         "develop",
-        "master"
+        "master",
+        "feature/"
       ],
+      "conventionalCommits": true,
       "ignoreChanges": [
         "*.md",
         "LICENSE"
       ],
-      "npmClient": "npm",
-      "npmClientArgs": [
-        "--quiet"
-      ],
-      "skipGit": false,
+      "message": "chore(release): publish",
       "yes": true
     },
-    "run": {
-      "stream": true
+    "version": {
+      "allowBranch": [
+        "develop",
+        "master",
+        "feature/"
+      ],
+      "conventionalCommits": true,
+      "ignoreChanges": [
+        "*.md",
+        "LICENSE"
+      ],
+      "message": "chore(release): publish",
+      "yes": true
     }
   },
-  "lerna": "2.11.0",
   "loglevel": "error",
-  "npmClient": "yarn",
-  "npmClientArgs": [
-    "--silent"
-  ],
   "packages": [
     "core/*",
     "packages/*",
-    "packages-cli/*",
     "packages-typings/*"
   ],
-  "sort": true,
-  "useWorkspaces": true,
   "version": "independent"
 }

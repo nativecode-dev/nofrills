@@ -1,35 +1,37 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Library for runtime type helpers.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/types",
-  "license": "MIT",
-  "main": "./lib/index.js",
-  "name": "@nofrills/types",
   "private": false,
-  "types": "./lib/index.d.ts",
-  "version": "3.5.0",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "deepmerge": "^2.2.1",
-    "validator": "^10.8.0",
-    "zipcodes-regex": "^1.0.2"
-  },
-  "devDependencies": {
-    "@types/deepmerge": "^2.2.0",
-    "@types/validator": "^9.4.2"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "@nofrills/types",
+  "description": "Library for runtime type helpers.",
+  "license": "MIT",
+  "author": "opensource@nativecode.com",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/types",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "version": "3.5.0",
+  "main": "./lib/index.js",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prebuild": "yarn run clean",
-    "clean": "rimraf .cache && rimraf docs && rimraf lib"
+    "build": "cli-tasks build",
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "deepmerge": "3.2.1",
+    "validator": "^11.0.0",
+    "zipcodes-regex": "^1.0.2"
+  },
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "@types/deepmerge": "^2.2.0",
+    "@types/validator": "^9.4.2",
+    "npm-check-updates": "^3.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

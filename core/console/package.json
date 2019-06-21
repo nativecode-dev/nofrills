@@ -13,8 +13,12 @@
   },
   "dependencies": {
     "@nofrills/fs": "^3.5.1",
-    "@nofrills/lincoln-debug": "^3.6.2",
-    "@nofrills/scrubs": "^3.5.2"
+    "@nofrills/lincoln-debug": "^3.6.6",
+    "@nofrills/scrubs": "^3.6.0"
+  },
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -25,6 +29,7 @@
   },
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }

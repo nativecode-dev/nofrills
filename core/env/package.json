@@ -1,32 +1,35 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides a simple conversion from config object to environment variable.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/env",
-  "license": "MIT",
-  "main": "./lib/env.js",
-  "name": "@nofrills/env",
   "private": false,
-  "types": "./lib/env.d.ts",
-  "version": "1.4.0",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/collections": "^3.8.0",
-    "deepmerge": "^2.2.1"
-  },
-  "devDependencies": {
-    "@types/deepmerge": "^2.2.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "@nofrills/env",
+  "description": "Provides a simple conversion from config object to environment variable.",
+  "license": "MIT",
+  "author": "opensource@nativecode.com",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/env",
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "version": "1.4.0",
+  "main": "./lib/env.js",
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/env.d.ts",
+  "dependencies": {
+    "@nofrills/collections": "^3.8.0",
+    "deepmerge": "3.2.1"
+  },
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "@types/deepmerge": "^2.2.0",
+    "npm-check-updates": "^3.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,37 +1,40 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Smushes things together.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush",
-  "license": "MIT",
-  "main": "./lib/index.js",
-  "name": "@nofrills/smush",
   "private": false,
-  "types": "./lib/index.d.ts",
-  "version": "4.3.0",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/fs": "^3.5.1",
-    "@nofrills/lincoln-debug": "^3.6.0",
-    "@nofrills/scrubs": "^3.5.0",
-    "deepmerge": "^2.2.1",
-    "shortid": "^2.2.12"
-  },
-  "devDependencies": {
-    "@types/deepmerge": "^2.2.0",
-    "@types/node": "*",
-    "@types/shortid": "0.0.29"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "@nofrills/smush",
+  "description": "Smushes things together.",
+  "license": "MIT",
+  "author": "opensource@nativecode.com",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush",
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "version": "4.3.0",
+  "main": "./lib/index.js",
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@nofrills/fs": "^3.5.1",
+    "@nofrills/lincoln-debug": "^3.6.6",
+    "@nofrills/scrubs": "^3.6.0",
+    "deepmerge": "3.2.1",
+    "shortid": "^2.2.12"
+  },
+  "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
+    "@types/deepmerge": "^2.2.0",
+    "@types/node": "*",
+    "@types/shortid": "0.0.29",
+    "npm-check-updates": "^3.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

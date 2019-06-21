@@ -6,6 +6,9 @@
     ],
     "clean": [
       "rimraf lib"
+    ],
+    "upgrade": [
+      "npm-check-updates --upgrade"
     ]
   }
 }

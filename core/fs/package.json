@@ -12,15 +12,17 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.6.0",
+    "@nofrills/lincoln-debug": "^3.6.6",
     "glob": "^7.1.2",
     "mkdirp": "^0.5.1",
     "rxjs": "^6.3.3"
   },
   "devDependencies": {
+    "@nofrills/tasks": "^6.2.0",
     "@types/glob": "^7.1.1",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "*"
+    "@types/node": "*",
+    "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
@@ -31,6 +33,7 @@
   },
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean"
+    "clean": "cli-tasks clean",
+    "upgrade": "cli-tasks upgrade"
   }
 }
