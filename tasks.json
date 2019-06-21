@@ -7,7 +7,14 @@
       "lerna run build"
     ],
     "clean": [
-      "rimraf .cache"
+      "rimraf .cache",
+      "rimraf core/*/dist",
+      "rimraf core/*/lib",
+      "rimraf packages/*/dist",
+      "rimraf packages/*/lib",
+      "rimraf packages-typings/*/dist",
+      "rimraf packages-typings/*/lib",
+      "rimraf **/*.tsbuildinfo"
     ],
     "configure": [
       "[configure:git]",
