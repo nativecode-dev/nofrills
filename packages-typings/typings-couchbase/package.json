@@ -23,7 +23,7 @@
   "devDependencies": {
     "@nofrills/tasks": "^6.2.0",
     "@types/cheerio": "^0.22.8",
-    "@types/isomorphic-fetch": "^0.0.34",
+    "@types/isomorphic-fetch": "^0.0.35",
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
