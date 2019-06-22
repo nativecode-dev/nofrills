@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.6](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings@3.6.5...@nofrills/typings@3.6.6) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/typings
+
+
+
+
+
 ## [3.6.5](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings@3.6.4...@nofrills/typings@3.6.5) (2019-06-22)
 
 
