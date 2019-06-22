@@ -1,6 +1,6 @@
 export { Filter, Interceptor, Lincoln, LincolnRegistry, Log, LogMessageType, Options } from '@nofrills/lincoln'
 
-import * as debug from 'debug'
+import debug from 'debug'
 
 import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 import { RegistryEntries } from '@nofrills/collections'

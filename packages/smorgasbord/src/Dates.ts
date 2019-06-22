@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import moment from 'moment'
 
 export const Dates: any = {
   $: (date?: Date): moment.Moment => moment.utc(date),

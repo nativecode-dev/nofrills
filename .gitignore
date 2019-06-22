@@ -1,5 +1,6 @@
-core/*/src/**/*.js
-core/*/src/**/*.map
+**/src/**/*.d.ts
+
+*.tsbuildinfo
 
 **/.artifacts/
 **/.cache/

@@ -1,6 +1,22 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
-    "outDir": "lib"
-  }
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "exclude": [
+    "node_modules",
+    "specs"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../../core/lincoln-debug"
+    },
+    {
+      "path": "../../core/scrubs"
+    }
+  ]
 }

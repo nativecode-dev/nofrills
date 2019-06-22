@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nofrills/lincoln-debug": "^3.6.7",
+    "@nofrills/types": "^3.5.1",
     "moment": "^2.18.1"
   },
   "devDependencies": {
