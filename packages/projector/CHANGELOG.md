@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.12](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@4.8.11...@nofrills/projector@4.8.12) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/projector
+
+
+
+
+
 ## [4.8.11](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@4.8.10...@nofrills/projector@4.8.11) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/projector
