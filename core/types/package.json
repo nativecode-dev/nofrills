@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "version": "3.5.7",
+  "version": "4.0.0",
   "main": "./lib/index.js",
   "scripts": {
     "build": "cli-tasks build",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@3.6.13...@nofrills/lincoln-debug@4.0.0) (2019-06-22)
+
+
+### Features
+
+* **lincoln:** debug and console no longer re-exports their dependency ([0101a8e](https://github.com/nativecode-dev/nofrills-debug/commit/0101a8e))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** must now have an explicit dependency on @nofrills/lincoln
+
+
+
+
+
 ## [3.6.13](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@3.6.12...@nofrills/lincoln-debug@3.6.13) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/lincoln-debug

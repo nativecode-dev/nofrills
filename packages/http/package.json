@@ -7,13 +7,13 @@
   "name": "@nofrills/http",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.5.12",
+  "version": "4.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^3.6.13",
-    "@nofrills/scrubs": "^3.6.7",
+    "@nofrills/lincoln-debug": "^4.0.0",
+    "@nofrills/scrubs": "^4.0.0",
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
