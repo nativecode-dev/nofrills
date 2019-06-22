@@ -12,7 +12,7 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^7.0.2",
+
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
