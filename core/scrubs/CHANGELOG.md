@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.4](https://github.com/nativecode-dev/nofrills/compare/@nofrills/scrubs@3.6.3...@nofrills/scrubs@3.6.4) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/scrubs
+
+
+
+
+
 ## [3.6.3](https://github.com/nativecode-dev/nofrills/compare/@nofrills/scrubs@3.6.2...@nofrills/scrubs@3.6.3) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/scrubs

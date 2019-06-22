@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "version": "1.4.3",
+  "version": "1.4.4",
   "main": "./lib/env.js",
   "scripts": {
     "build": "cli-tasks build",
@@ -21,8 +21,8 @@
   },
   "types": "./lib/env.d.ts",
   "dependencies": {
-    "@nofrills/collections": "^3.8.3",
-    "@nofrills/types": "^3.5.3",
+    "@nofrills/collections": "^3.8.4",
+    "@nofrills/types": "^3.5.4",
     "deepmerge": "^3.3.0"
   },
   "devDependencies": {
