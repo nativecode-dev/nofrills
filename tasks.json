@@ -7,6 +7,9 @@
       "[clean]",
       "[format]",
       "[lint]",
+      "[build:compile]"
+    ],
+    "build:compile": [
       "lerna run build"
     ],
     "clean": [
@@ -53,9 +56,13 @@
     ],
     "test": [
       "[build]",
-      "[test-only]"
+      "[test:only]"
     ],
-    "test-only": [
+    "test:ci": [
+      "[build:compile]",
+      "[test:only]"
+    ],
+    "test:only": [
       "nyc mocha --opts mocha.opts"
     ],
     "install": [

@@ -58,14 +58,14 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "canary": "cli-tasks release-canary",
-    "cli-tasks": "cli-tasks",
     "commit": "cli-tasks commit",
-    "pre-release": "cli-tasks prerelease",
     "release": "cli-tasks release",
-    "setup-git": "cli-tasks setup-git",
-    "setup-ssh": "cli-tasks setup-ssh",
+    "release:pre": "cli-tasks prerelease",
+    "setup:git": "cli-tasks setup-git",
+    "setup:ssh": "cli-tasks setup-ssh",
     "start": "cli-tasks start",
     "test": "cli-tasks test",
+    "test:ci": "cli-tasks test:ci",
     "upgrade": "lerna run upgrade"
   }
 }
