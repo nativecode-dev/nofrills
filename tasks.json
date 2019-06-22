@@ -1,6 +1,8 @@
 {
   "tasks": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": [
+      "lerna bootstrap"
+    ],
     "build": [
       "[clean]",
       "[format]",
@@ -17,17 +19,10 @@
       "rimraf packages-typings/*/lib",
       "rimraf **/*.tsbuildinfo"
     ],
-    "configure": [
-      "[configure:git]",
-      "[configure:ssh]"
-    ],
-    "configure:docs": [
-      "typedoc --mode modules --out ./docs ./packages/*/src/"
-    ],
-    "configure:git": [
+    "setup-git": [
       ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com",
     ],
-    "configure:ssh": [
+    "setup-ssh": [
       ".citools/setup-ssh git.nativecode.net"
     ],
     "commit": [
@@ -36,7 +31,6 @@
       "git-cz"
     ],
     "coverage": [
-      "[test]",
       "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"
     ],
     "format": [
@@ -47,24 +41,21 @@
       "tslint --project tsconfig.json --config tslint.json"
     ],
     "prerelease": [
-      ".citools/lerna-publis prerelease"
+      ".citools/lerna-publish prerelease"
     ],
     "release": [
-      ".citools/lerna-publis release"
+      ".citools/lerna-publish release"
     ],
     "release-canary": [
-      ".citools/lerna-publis canary"
-    ],
-    "start": [
-      "[build]",
-      "lerna run start"
+      ".citools/lerna-publish canary"
     ],
     "test": [
       "[build]",
       "cross-env DEBUG= nyc mocha --opts mocha.opts"
     ],
     "upgrade": [
-      "npm-check-updates --upgrade"
+      "npm-check-updates --upgrade",
+      "lerna run upgrade"
     ]
   }
 }

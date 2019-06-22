@@ -1,7 +1,10 @@
 #!/bin/bash
 
+[[ ${CI} ]] && NPM_COMMAND="ci" || NPM_COMMAND="install"
+PATH=${PATH}:./node_modules/.bin
+
 if [ ! -d node_modules ]; then
-    npm install
+    npm ${NPM_COMMAND}
 fi
 
-./node_modules/.bin/cli-tasks
+cli-tasks "$@"

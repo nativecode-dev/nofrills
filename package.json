@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
-    "@nofrills/tasks": "^7.0.2",
+    "@nofrills/tasks": "^7.1.1",
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.7",
@@ -66,8 +66,8 @@
     "commit": "cli-tasks commit",
     "pre-release": "cli-tasks prerelease",
     "release": "cli-tasks release",
-    "setup-git": "cli-tasks configure:git",
-    "setup-ssh": "cli-tasks configure:ssh",
+    "setup-git": "cli-tasks setup-git",
+    "setup-ssh": "cli-tasks setup-ssh",
     "start": "cli-tasks start",
     "test": "cli-tasks test",
     "upgrade": "lerna run upgrade"
