@@ -17,7 +17,8 @@
       "rimraf packages/*/lib",
       "rimraf typings/*/dist",
       "rimraf typings/*/lib",
-      "rimraf **/*.tsbuildinfo"
+      "rimraf **/*.tsbuildinfo",
+      "lerna run clean"
     ],
     "setup-git": [
       ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com"
@@ -52,6 +53,9 @@
     ],
     "test": [
       "[build]",
+      "[test-only]"
+    ],
+    "test-only": [
       "nyc mocha --opts mocha.opts"
     ],
     "install": [

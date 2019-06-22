@@ -3,8 +3,9 @@ import 'mocha'
 import fs from 'fs'
 import path from 'path'
 
-import { expect } from 'chai'
-import { Smush, SmushError } from '../src/index'
+import expect from './expect'
+
+import { Smush } from '../src/index'
 
 describe('smush', () => {
   let $S: Smush
@@ -21,32 +22,14 @@ describe('smush', () => {
   describe('when smushing', () => {
     const KEY: string = 'smushit'
 
-    it('should throw SmushError when file not found.', done => {
-      $S.json(KEY, 'fake.file.json').catch((error: SmushError) => {
-        expect(error).to.be.instanceof(Error)
-        done()
-      })
+    it('should throw SmushError when file not found.', () => {
+      expect($S.json(KEY, 'fake.file.json')).to.eventually.be.rejected
     })
 
-    it('should convert string to json and smush', done => {
-      $S.string(KEY, JSON.stringify({}))
-        .then((config: any) => {
-          expect(config).to.be.instanceof(Object)
-          done()
-        })
-        .catch((error: SmushError) => done(error))
-    })
-
-    it('should throw error if transformer throws', () => {
-      const transformer = () => {
-        throw new Error()
-      }
-
-      expect($S.string(KEY, JSON.stringify({}))).to.eventually.be.rejected
-    })
-
-    it('should throw error for invalid JSON string', () => {
-      expect($S.string(KEY, 'invalid')).to.eventually.be.rejected
+    it('should convert string to json and smush', async () => {
+      const json = JSON.stringify({})
+      const config = await $S.string(KEY, json)
+      expect(config).to.be.instanceof(Object)
     })
   })
 
@@ -140,44 +123,36 @@ describe('smush', () => {
       })
 
       describe('should load .json files', () => {
-        it('contents', done => {
-          $S.json('config', path.join(__dirname, '../artifacts/test.simple.base.json'))
-            .then((smush: Smush) => smush.toObject().config)
-            .then((config: any) => {
-              const simpleBase: any = readjson(path.join(__dirname, '../artifacts/test.simple.base.json'))
-              expect(config).to.deep.equal(simpleBase)
-              done()
-            })
-            .catch(done)
+        const base = path.join(__dirname, '../artifacts/test.simple.base.json')
+        const derived = path.join(__dirname, '../artifacts/test.simple.derived.json')
+        const merged = path.join(__dirname, '../artifacts/test.simple.merged.json')
+
+        it('contents', async () => {
+          const smush = await $S.json('config', base)
+          const config = smush.toObject().config
+          const simpleBase: any = readjson(base)
+          expect(config).to.deep.equal(simpleBase)
         })
 
-        it('multiple instances', done => {
-          $S.json('config', path.join(__dirname, '../artifacts/test.simple.base.json'))
-            .then((smush: Smush) => smush.json('config', path.join(__dirname, '../artifacts/test.simple.derived.json')))
-            .then((smush: Smush) => smush.toObject().config)
-            .then((config: any) => {
-              const simpleMerged: any = readjson(path.join(__dirname, '../artifacts/test.simple.merged.json'))
-              expect(config).to.deep.equal(simpleMerged)
-              done()
-            })
-            .catch(done)
+        it('multiple instances', async () => {
+          const smush = await $S.json('config', base)
+          const json = await smush.json('config', derived)
+          const config = json.toObject().config
+          const simpleMerged: any = readjson(merged)
+          expect(config).to.deep.equal(simpleMerged)
         })
 
-        it('transforms properties', done => {
+        it('transforms properties', async () => {
           const transformer = (object: any) => {
             object.id = 'transformed'
             object.schema.name = 'transformed'
             return object
           }
 
-          $S.json('config', path.join(__dirname, '../artifacts/test.simple.merged.json'), transformer)
-            .then((smush: Smush) => smush.toObject().config)
-            .then((config: any) => {
-              expect(config.id).to.equal('transformed')
-              expect(config.schema.name).to.equal('transformed')
-              done()
-            })
-            .catch(done)
+          const smush = await $S.json('config', merged, transformer)
+          const config = smush.toObject().config
+          expect(config.id).to.equal('transformed')
+          expect(config.schema.name).to.equal('transformed')
         })
       })
     })

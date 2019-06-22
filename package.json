@@ -39,7 +39,7 @@
     "all": true,
     "exclude": [
       "node_modules",
-      "packages/*/src/**/*.spec.ts"
+      "**/src/**/*.spec.ts"
     ],
     "extension": [
       ".ts"

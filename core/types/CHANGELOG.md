@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.4](https://github.com/nativecode-dev/nofrills/compare/@nofrills/types@3.5.3...@nofrills/types@3.5.4) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/types
+
+
+
+
+
+## [3.5.3](https://github.com/nativecode-dev/nofrills/compare/@nofrills/types@3.5.2...@nofrills/types@3.5.3) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/types
+
+
+
+
+
 ## [3.5.2](https://github.com/nativecode-dev/nofrills/compare/@nofrills/types@3.5.1...@nofrills/types@3.5.2) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/types
