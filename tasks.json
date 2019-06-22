@@ -1,8 +1,9 @@
 {
   "tasks": {
+    "bootstrap": "lerna bootstrap",
     "build": [
       "[clean]",
-      "#[format]",
+      "[format]",
       "[lint]",
       "lerna run build"
     ],
