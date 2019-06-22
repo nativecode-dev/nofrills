@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.11](https://github.com/nativecode-dev/nofrills-console/compare/@nofrills/lincoln-console@3.6.10...@nofrills/lincoln-console@3.6.11) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/lincoln-console
+
+
+
+
+
 ## [3.6.10](https://github.com/nativecode-dev/nofrills-console/compare/@nofrills/lincoln-console@3.6.7...@nofrills/lincoln-console@3.6.10) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/lincoln-console
