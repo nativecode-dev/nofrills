@@ -11,7 +11,7 @@ const TIMEOUT = 60000
 describe('when importing couchbase documentation', () => {
   const artifacts = fs.join(process.cwd(), '.cache', '.artifacts')
   const output = fs.join(artifacts, 'couchbase')
-  const templates = fs.join(process.cwd(), 'packages-typings', 'typings', 'src', 'Templates')
+  const templates = fs.join(process.cwd(), 'typings', 'typings', 'src', 'Templates')
 
   it.skip('should import all references', async () => {
     const provider = new CouchbaseProvider()

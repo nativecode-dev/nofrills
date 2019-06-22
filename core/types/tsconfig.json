@@ -1,8 +1,18 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.settings",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ],
+    "paths": {
+      "zipcodes-regex": [
+        "types/zipcodes-regex"
+      ]
+    }
   },
   "exclude": [
     "node_modules",

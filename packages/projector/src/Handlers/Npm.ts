@@ -1,8 +1,7 @@
 import { fs } from '@nofrills/fs'
-import { Lincoln } from '@nofrills/lincoln'
 import { DictionaryOf } from '@nofrills/collections'
 
-import { Logger } from '../Logger'
+import Logger from '../Logger'
 import { Project } from '../Project'
 import { PluginHost } from '../PluginHost'
 import { ProjectConfig } from '../ProjectConfig'
@@ -34,7 +33,7 @@ export interface Npm {
 
 export const NpmFile = 'package.json'
 
-const logger: Lincoln = Logger.extend('npm')
+const logger = Logger.extend('npm')
 
 export async function NpmConfig(host: PluginHost, project: Project, filepath: string): Promise<ProjectConfig | null> {
   const filename = fs.basename(filepath).toLowerCase()
@@ -59,24 +58,24 @@ export async function NpmConfig(host: PluginHost, project: Project, filepath: st
   if (hasWorkspaces) {
     /* istanbul ignore next */
     const workspaces = data.workspaces || []
-    const promises = workspaces.map(workspace => materialize(host, project, workspace, log))
+    const promises = workspaces.map(workspace => materialize(host, project, workspace))
     await Promise.all(promises)
   }
 
   return config
 }
 
-async function materialize(host: PluginHost, project: Project, workspace: string, log: Lincoln): Promise<void> {
+async function materialize(host: PluginHost, project: Project, workspace: string): Promise<void> {
   const pattern = fs.join(project.path, workspace)
   const packages = await fs.glob(pattern)
 
-  log.debug('resolve', pattern, ...packages)
+  logger.debug('resolve', pattern, ...packages)
 
   const promises = packages.map(async path => {
     const projpath = fs.join(path, NpmFile)
     const child = await Project.load(host, projpath)
     project.add(child)
-    log.debug('child', child.name, child.path)
+    logger.debug('child', child.name, child.path)
   })
 
   await Promise.all(promises)

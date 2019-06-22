@@ -1,9 +1,10 @@
 import { fs } from '@nofrills/fs'
 import { Registry } from '@nofrills/collections'
 
+import Logger from './Logger'
+
 import { Project } from './Project'
 import { PluginHost } from './PluginHost'
-import { Lincoln, Logger } from './Logger'
 import { ProjectSupport } from './ProjectSupport'
 
 export type ProjectConfigHandler = (
@@ -15,7 +16,7 @@ export type ProjectConfigHandler = (
 export const ConfigHandlerRegistry: Registry<ProjectConfigHandler> = new Registry<ProjectConfigHandler>()
 
 export class ProjectConfig {
-  protected readonly log: Lincoln
+  protected readonly log = Logger.extend('config').extend(fs.basename(this.path))
 
   constructor(
     private readonly parent: Project,
@@ -23,7 +24,6 @@ export class ProjectConfig {
     private readonly config: any,
     private readonly caps: ProjectSupport[] = [],
   ) {
-    this.log = Logger.extend('config').extend(fs.basename(this.path))
     this.log.debug('filepath', fs.relativeFrom(filepath))
     this.log.debug('caps', ...caps)
   }

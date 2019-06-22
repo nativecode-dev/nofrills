@@ -50,7 +50,7 @@
     "include": [
       "core/*/src/**/*.ts",
       "packages/*/src/**/*.ts",
-      "packages-typings/*/src/**/*.ts"
+      "typings/*/src/**/*.ts"
     ],
     "instrument": true,
     "report-dir": ".cache/coverage",

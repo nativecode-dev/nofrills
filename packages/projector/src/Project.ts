@@ -1,10 +1,11 @@
 import { fs } from '@nofrills/fs'
 import { EventEmitter } from 'events'
 
+import Logger from './Logger'
+
 import { NotFound } from './Errors'
 import { Pipeline } from './Pipeline'
 import { PluginHost } from './PluginHost'
-import { Lincoln, Logger } from './Logger'
 import { Registry } from './ProjectRegistry'
 import { ProjectFiles } from './ProjectFiles'
 import { ConfigHandlerRegistry, ProjectConfig } from './ProjectConfig'
@@ -20,11 +21,10 @@ export class Project extends EventEmitter {
   private readonly configmap: { [key: string]: ProjectConfig } = {}
   private readonly referenceMap: Map<string, ProjectFiles> = new Map<string, ProjectFiles>()
 
-  protected readonly log: Lincoln
+  protected readonly log = Logger.extend('project').extend(this.name)
 
   private constructor(private readonly root: string, private readonly host: PluginHost) {
     super()
-    this.log = Logger.extend('project').extend(this.name)
     this.emit(ProjectEvents.Create, this)
   }
 

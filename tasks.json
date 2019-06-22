@@ -15,8 +15,8 @@
       "rimraf core/*/lib",
       "rimraf packages/*/dist",
       "rimraf packages/*/lib",
-      "rimraf packages-typings/*/dist",
-      "rimraf packages-typings/*/lib",
+      "rimraf typings/*/dist",
+      "rimraf typings/*/lib",
       "rimraf **/*.tsbuildinfo"
     ],
     "setup-git": [

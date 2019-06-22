@@ -35,8 +35,7 @@
   "loglevel": "error",
   "packages": [
     "core/*",
-    "packages/*",
-    "packages-typings/*"
+    "packages/*"
   ],
   "version": "independent"
 }

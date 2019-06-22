@@ -1,8 +1,7 @@
 import { fs } from '@nofrills/fs'
 import { CompilerOptions } from 'typescript'
-import { Lincoln } from '@nofrills/lincoln'
 
-import { Logger } from '../Logger'
+import Logger from '../Logger'
 import { Project } from '../Project'
 import { ProjectConfig } from '../ProjectConfig'
 import { ObjectNavigator } from '@nofrills/types'
@@ -17,7 +16,7 @@ export interface TypeScript {
 
 export const TypeScriptFile = 'tsconfig.json'
 
-const logger: Lincoln = Logger.extend('npm')
+const logger = Logger.extend('npm')
 
 export async function TypeScriptConfig(project: Project, filepath: string): Promise<ProjectConfig | null> {
   const filename = fs.basename(filepath).toLowerCase()
