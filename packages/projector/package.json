@@ -20,7 +20,6 @@
     "@nofrills/scrubs": "^3.6.0"
   },
   "devDependencies": {
-
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {

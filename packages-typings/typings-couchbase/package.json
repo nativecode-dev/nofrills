@@ -21,7 +21,6 @@
     "promise-parallel-throttle": "^3.2.0"
   },
   "devDependencies": {
-
     "@types/cheerio": "^0.22.8",
     "@types/isomorphic-fetch": "^0.0.34",
     "npm-check-updates": "^3.1.10"

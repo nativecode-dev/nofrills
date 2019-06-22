@@ -25,12 +25,10 @@ export class TypeParser {
       return typedef.type
     }
 
-    const properties: string[] = keys.map<string>(
-      (key: string): string => {
-        const value: any = props[key]
-        return `${key}=${value}`
-      },
-    )
+    const properties: string[] = keys.map<string>((key: string): string => {
+      const value: any = props[key]
+      return `${key}=${value}`
+    })
 
     return `${typedef.type}:${properties.join(',')}`
   }

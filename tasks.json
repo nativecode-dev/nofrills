@@ -20,7 +20,7 @@
       "rimraf **/*.tsbuildinfo"
     ],
     "setup-git": [
-      ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com",
+      ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com"
     ],
     "setup-ssh": [
       ".citools/setup-ssh git.nativecode.net"
@@ -31,11 +31,11 @@
       "git-cz"
     ],
     "coverage": [
-      "cross-env DEBUG= nyc report --reporter=text-lcov | coveralls"
+      "nyc report --reporter=text-lcov | coveralls"
     ],
     "format": [
-      "prettier --loglevel silent --write \"**/specs/**/*.ts\"",
-      "prettier --loglevel silent --write \"**/src/**/*.ts\""
+      "prettier --loglevel silent --write \"*/*/specs/**/*.ts\"",
+      "prettier --loglevel silent --write \"*/*/src/**/*.ts\""
     ],
     "lint": [
       "tslint --project tsconfig.json --config tslint.json"
@@ -51,7 +51,7 @@
     ],
     "test": [
       "[build]",
-      "cross-env DEBUG= nyc mocha --opts mocha.opts"
+      "nyc mocha --opts mocha.opts"
     ],
     "upgrade": [
       "npm-check-updates --upgrade",

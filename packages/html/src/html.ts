@@ -71,17 +71,16 @@ export class Html {
 
   public select(id: string | HTMLSelectElement, value: string): HTMLOptionElement {
     const options = Array.from(this.convert(id).querySelectorAll('option'))
-    return options.reduce(
-      (previous, current) =>
-        current.value === value
-          ? $also(current, x => x.setAttribute('selected', ''))
-          : $also(previous, x => x.removeAttribute('selected')),
+    return options.reduce((previous, current) =>
+      current.value === value
+        ? $also(current, x => x.setAttribute('selected', ''))
+        : $also(previous, x => x.removeAttribute('selected')),
     )
   }
 
   public selected(id: string, selector?: string): HTMLOptionElement {
-    return this.options(id, selector).reduce(
-      (previous, current) => (current.hasAttribute('selected') ? current : previous),
+    return this.options(id, selector).reduce((previous, current) =>
+      current.hasAttribute('selected') ? current : previous,
     )
   }
 

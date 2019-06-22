@@ -12,7 +12,6 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "devDependencies": {
-
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {

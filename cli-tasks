@@ -5,6 +5,7 @@ PATH=${PATH}:./node_modules/.bin
 
 if [ ! -d node_modules ]; then
     npm ${NPM_COMMAND}
+    npm run bootstrap
 fi
 
 cli-tasks "$@"

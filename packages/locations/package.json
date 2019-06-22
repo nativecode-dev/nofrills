@@ -15,7 +15,6 @@
     "@nofrills/fs": "^3.5.1"
   },
   "devDependencies": {
-
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
