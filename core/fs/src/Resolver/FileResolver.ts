@@ -1,11 +1,11 @@
-import { Lincoln, Logger } from '../Logger'
+import Logger from '../Logging'
 
 export interface FileResolverStrategy {
-  (filename: string, cwd: string, logger: Lincoln): Promise<string[] | null>
+  (filename: string, cwd: string): Promise<string[] | null>
 }
 
 export class FileResolver {
-  private readonly log: Lincoln = Logger.extend('file-resolver')
+  private readonly log = Logger.extend('file-resolver')
 
   constructor(public readonly cwd: string, private readonly strategies: FileResolverStrategy[]) {}
 
@@ -16,7 +16,7 @@ export class FileResolver {
   async find(filename: string): Promise<string[]> {
     this.log.debug('find', filename)
 
-    const strats = await Promise.all(this.strategies.map(strategy => strategy(filename, this.cwd, this.log)))
+    const strats = await Promise.all(this.strategies.map(strategy => strategy(filename, this.cwd)))
 
     const filtered: string[][] = strats.filter(strat => strat !== null).map<string[]>(strat => strat as string[])
 

@@ -12,7 +12,9 @@
       "conventionalCommits": true,
       "ignoreChanges": [
         "*.md",
-        "LICENSE"
+        "LICENSE",
+        "lib/",
+        "specs/"
       ],
       "loglevel": "verbose",
       "message": "chore(release): publish",
@@ -27,7 +29,9 @@
       "conventionalCommits": true,
       "ignoreChanges": [
         "*.md",
-        "LICENSE"
+        "LICENSE",
+        "lib/",
+        "specs/"
       ],
       "loglevel": "verbose",
       "message": "chore(release): publish",

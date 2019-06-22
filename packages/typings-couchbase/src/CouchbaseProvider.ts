@@ -2,7 +2,6 @@ import 'isomorphic-fetch'
 
 import { URL } from 'url'
 import { Package, Provider } from '@nofrills/typings'
-import { Lincoln } from './Logger'
 
 import { PackageParser } from './PackageParser'
 
@@ -27,11 +26,10 @@ function Create(version: string): Couchbase {
 }
 
 export class CouchbaseProvider extends Provider {
-  private readonly log: Lincoln
+  private readonly log = this.baselog.extend('couchbase')
 
   constructor(version: string = CouchbaseVersion.latest) {
     super(version)
-    this.log = this.baselog.extend('couchbase')
   }
 
   import(): Promise<Package> {

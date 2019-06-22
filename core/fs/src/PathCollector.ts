@@ -1,6 +1,8 @@
 import { EventEmitter } from 'events'
+
+import Logger from './Logging'
+
 import { fs, Descriptor } from './FileSystem'
-import { Logger } from './Logger'
 
 export class PathCollector extends EventEmitter {
   private readonly log = Logger.extend('path-collector')

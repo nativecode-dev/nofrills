@@ -1,5 +1,5 @@
-export { Lincoln } from '@nofrills/lincoln-debug'
+import { CreateLogger } from '@nofrills/lincoln-debug'
 
-import { CreateLogger, Lincoln } from '@nofrills/lincoln-debug'
+const Logger = CreateLogger('nofrills:smorgasbord')
 
-export const Logger: Lincoln = CreateLogger('nofrills:smorgasbord')
+export default Logger

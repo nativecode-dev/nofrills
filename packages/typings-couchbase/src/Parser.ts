@@ -2,7 +2,7 @@ import { URL } from 'url'
 import { fs } from '@nofrills/fs'
 import { load } from 'cheerio'
 
-import { Logger } from './Logger'
+import Logger from './Logger'
 
 export abstract class Parser<T> {
   protected baselog = Logger.extend('parser')

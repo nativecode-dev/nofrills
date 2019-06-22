@@ -1,16 +1,14 @@
 import { Namespaces, Package } from '@nofrills/typings'
 
-import { Lincoln } from './Logger'
 import { Parser } from './Parser'
 import { Couchbase } from './CouchbaseProvider'
 import { NamespaceParser } from './NamespaceParser'
 
 export class PackageParser extends Parser<Package> {
-  private readonly log: Lincoln
+  private readonly log = this.baselog.extend('package')
 
   constructor(private readonly couchbase: Couchbase, private readonly name: string) {
     super(couchbase.version, couchbase.url())
-    this.log = this.baselog.extend('package')
   }
 
   protected async exec(): Promise<Package> {

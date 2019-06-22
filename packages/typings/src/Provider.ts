@@ -1,5 +1,6 @@
 import { Package } from './Packages'
-import { Logger } from './Logger'
+
+import Logger from './Logger'
 
 export abstract class Provider {
   protected readonly package: Package

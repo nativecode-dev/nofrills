@@ -5,10 +5,6 @@ export class HttpClient extends HTTP {
     super('http-client')
   }
 
-  protected get name(): string {
-    return 'http-client'
-  }
-
   protected request<TRequest>(body?: TRequest): Promise<RequestInit> {
     const req = {
       body: JSON.stringify(body),

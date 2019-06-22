@@ -1,4 +1,4 @@
-import * as cluster from 'cluster'
+import cluster from 'cluster'
 
 import { fs } from '@nofrills/fs'
 

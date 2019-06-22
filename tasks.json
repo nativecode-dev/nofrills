@@ -14,14 +14,10 @@
     ],
     "clean": [
       "rimraf .cache",
-      "rimraf core/*/dist",
       "rimraf core/*/lib",
-      "rimraf packages/*/dist",
       "rimraf packages/*/lib",
-      "rimraf typings/*/dist",
       "rimraf typings/*/lib",
-      "rimraf **/*.tsbuildinfo",
-      "lerna run clean"
+      "rimraf **/*.tsbuildinfo"
     ],
     "setup-git": [
       ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com"
@@ -31,7 +27,6 @@
       ".citools/setup-ssh git.nativecode.net /tmp/repo-key gitssh.nativecode.net"
     ],
     "commit": [
-      "[test]",
       "git add -A .",
       "git-cz"
     ],
@@ -45,14 +40,14 @@
     "lint": [
       "tslint --project tsconfig.json --config tslint.json"
     ],
-    "prerelease": [
-      ".citools/lerna-publish prerelease"
-    ],
     "release": [
       ".citools/lerna-publish release"
     ],
-    "release-canary": [
+    "release:canary": [
       ".citools/lerna-publish canary"
+    ],
+    "release:pre": [
+      ".citools/lerna-publish prerelease"
     ],
     "test": [
       "[build]",
