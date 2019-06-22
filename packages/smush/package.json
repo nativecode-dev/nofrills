@@ -28,7 +28,7 @@
     "shortid": "^2.2.12"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^6.8.2",
+    "@nofrills/tasks": "^7.0.2",
     "@types/deepmerge": "^2.2.0",
     "@types/node": "*",
     "@types/shortid": "0.0.29",
