@@ -7,18 +7,18 @@
   "name": "@nofrills/projector",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "4.8.7",
+  "version": "4.8.8",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^3.8.2",
-    "@nofrills/console": "^3.6.2",
-    "@nofrills/fs": "^3.7.1",
-    "@nofrills/lincoln-debug": "^3.6.8",
-    "@nofrills/patterns": "^1.5.2",
-    "@nofrills/scrubs": "^3.6.2",
-    "@nofrills/typings": "^3.6.6"
+    "@nofrills/collections": "^3.8.3",
+    "@nofrills/console": "^3.6.3",
+    "@nofrills/fs": "^3.7.2",
+    "@nofrills/lincoln-debug": "^3.6.9",
+    "@nofrills/patterns": "^1.5.3",
+    "@nofrills/scrubs": "^3.6.3",
+    "@nofrills/typings": "^3.6.7"
   },
   "devDependencies": {
     "npm-check-updates": "^3.1.10"

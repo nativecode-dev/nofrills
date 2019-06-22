@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.3](https://github.com/nativecode-dev/nofrills/compare/@nofrills/console@3.6.2...@nofrills/console@3.6.3) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/console
+
+
+
+
+
 ## [3.6.2](https://github.com/nativecode-dev/nofrills/compare/@nofrills/console@3.6.1...@nofrills/console@3.6.2) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/console
