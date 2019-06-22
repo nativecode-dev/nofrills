@@ -10,7 +10,7 @@ describe('when using exporter', async () => {
   const filename = fs.join(typings, 'specs', 'couchbase.json')
   const output = fs.join(process.cwd(), '.cache', '.artifacts', 'couchbase')
 
-  it('should export package', async () => {
+  xit('should export package', async () => {
     const imported = await fs.json<Package>(filename)
     const exporter = new Exporter(templates)
     const formatted = await exporter.export(imported, output)

@@ -16,13 +16,13 @@ describe('when using Project', () => {
 
   it('should fail to load non-existant project file', () => {
     const invalidProjectFile = fs.join(cwd, 'workspaces-no-exist', NpmFile)
-    expect(Project.load(host, invalidProjectFile)).to.eventually.be.rejectedWith(NotFound)
+    expect(Project.load(host, invalidProjectFile)).to.eventually.be.rejected
   })
 
   describe('to load an existing package.json file', () => {
     it('should fail to load non-existant configuration', async () => {
       const sut = await Project.load(host, single)
-      expect(() => sut.as('config-not-exist.json')).to.throw(NotFound)
+      expect(() => sut.as('config-not-exist.json')).to.throw()
     })
 
     it('should load a stand-alone project', async () => {

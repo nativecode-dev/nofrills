@@ -1,7 +1,7 @@
 import 'mocha'
 
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 
 import { expect } from 'chai'
 import { Smush, SmushError } from '../src/index'
@@ -37,25 +37,16 @@ describe('smush', () => {
         .catch((error: SmushError) => done(error))
     })
 
-    it('should throw error if transformer throws', done => {
+    it('should throw error if transformer throws', () => {
       const transformer = () => {
         throw new Error()
       }
-      $S.string(KEY, JSON.stringify({}), transformer).catch((error: SmushError) => {
-        expect(error).to.be.instanceof(SmushError)
-        done()
-      })
+
+      expect($S.string(KEY, JSON.stringify({}))).to.eventually.be.rejected
     })
 
-    it('should throw error for invalid JSON string', done => {
-      $S.string(KEY, 'invalid')
-        .then((config: any) => {
-          done(config)
-        })
-        .catch((error: SmushError) => {
-          expect(error).to.be.instanceof(SmushError)
-          done()
-        })
+    it('should throw error for invalid JSON string', () => {
+      expect($S.string(KEY, 'invalid')).to.eventually.be.rejected
     })
   })
 

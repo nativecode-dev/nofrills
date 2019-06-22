@@ -39,18 +39,14 @@
     "all": true,
     "exclude": [
       "node_modules",
-      "packages/*/src/**/*.spec.ts",
-      "packages/*/src/Logger.ts",
-      "packages/*/src/Logging.ts",
-      "packages/*/src/cli-*.ts"
+      "packages/*/src/**/*.spec.ts"
     ],
     "extension": [
       ".ts"
     ],
     "include": [
       "core/*/src/**/*.ts",
-      "packages/*/src/**/*.ts",
-      "typings/*/src/**/*.ts"
+      "packages/*/src/**/*.ts"
     ],
     "instrument": true,
     "report-dir": ".cache/coverage",

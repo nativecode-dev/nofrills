@@ -1,7 +1,5 @@
-import 'mocha'
-
-import * as chai from 'chai'
-import * as chaiAsPromised from 'chai-as-promised'
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised'
 
 const expect = chai.use(chaiAsPromised).expect
 

@@ -101,7 +101,7 @@ describe('when using ObjectNavigator', () => {
 
     it('should throw when trying to get non-existent property', () => {
       const sut = ObjectNavigator.from(person)
-      expect(() => sut.get('profile2')).to.throw(PropertyNotFound)
+      expect(() => sut.get('profile2')).to.throw()
     })
 
     it('should not throw when trying to get non-existent property', () => {

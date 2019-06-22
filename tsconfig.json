@@ -1,11 +1,14 @@
 {
   "extends": "./tsconfig.settings",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "zipcodes-regex": [
         "core/types/types/zipcodes-regex"
       ]
-    }
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   }
 }
