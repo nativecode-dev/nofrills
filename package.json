@@ -62,7 +62,7 @@
     "commit": "cli-tasks commit",
     "release": "cli-tasks release",
     "release:canary": "cli-tasks release:canary",
-    "release:pre": "cli-tasks prerelease",
+    "release:pre": "cli-tasks release:pre",
     "setup:git": "cli-tasks setup-git",
     "setup:ssh": "cli-tasks setup-ssh",
     "start": "cli-tasks start",
