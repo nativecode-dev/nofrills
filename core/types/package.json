@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "version": "3.5.0",
+  "version": "3.5.1",
   "main": "./lib/index.js",
   "scripts": {
     "build": "cli-tasks build",
@@ -26,7 +26,6 @@
     "zipcodes-regex": "^1.0.2"
   },
   "devDependencies": {
-
     "@types/deepmerge": "^2.2.0",
     "@types/validator": "^9.4.2",
     "npm-check-updates": "^3.1.10"

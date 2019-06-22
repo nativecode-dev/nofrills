@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "version": "4.3.0",
+  "version": "4.4.0",
   "main": "./lib/index.js",
   "scripts": {
     "build": "cli-tasks build",
@@ -21,9 +21,9 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/fs": "^3.5.1",
-    "@nofrills/lincoln-debug": "^3.6.6",
-    "@nofrills/scrubs": "^3.6.0",
+    "@nofrills/fs": "^3.7.0",
+    "@nofrills/lincoln-debug": "^3.6.7",
+    "@nofrills/scrubs": "^3.6.1",
     "deepmerge": "3.2.1",
     "shortid": "^2.2.12"
   },
