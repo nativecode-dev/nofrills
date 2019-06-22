@@ -58,7 +58,6 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "build:ci": "cli-tasks build:ci",
-    "canary": "cli-tasks release-canary",
     "commit": "cli-tasks commit",
     "release": "cli-tasks release",
     "release:canary": "cli-tasks release:canary",
