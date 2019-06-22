@@ -6,8 +6,6 @@ import { PluginHost } from './PluginHost'
 import { Lincoln, Logger } from './Logger'
 import { ProjectSupport } from './ProjectSupport'
 
-const logger = Logger.extend('config')
-
 export type ProjectConfigHandler = (
   host: PluginHost,
   project: Project,
@@ -25,7 +23,7 @@ export class ProjectConfig {
     private readonly config: any,
     private readonly caps: ProjectSupport[] = [],
   ) {
-    this.log = logger.extend(fs.basename(this.path))
+    this.log = Logger.extend('config').extend(fs.basename(this.path))
     this.log.debug('filepath', fs.relativeFrom(filepath))
     this.log.debug('caps', ...caps)
   }

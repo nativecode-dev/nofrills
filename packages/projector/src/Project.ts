@@ -9,8 +9,6 @@ import { Registry } from './ProjectRegistry'
 import { ProjectFiles } from './ProjectFiles'
 import { ConfigHandlerRegistry, ProjectConfig } from './ProjectConfig'
 
-const logger = Logger.extend('project')
-
 export enum ProjectEvents {
   Config = 'CONFIG',
   Create = 'CREATE',
@@ -26,7 +24,7 @@ export class Project extends EventEmitter {
 
   private constructor(private readonly root: string, private readonly host: PluginHost) {
     super()
-    this.log = logger.extend(this.name)
+    this.log = Logger.extend('project').extend(this.name)
     this.emit(ProjectEvents.Create, this)
   }
 
@@ -69,8 +67,6 @@ export class Project extends EventEmitter {
     if ((await fs.exists(filepath)) === false) {
       throw new NotFound(filepath)
     }
-
-    logger.debug('load-attempt', fs.relativeFrom(filepath))
 
     const root = fs.dirname(filepath)
     const filename = fs.basename(filepath)
