@@ -1,4 +1,3 @@
-artifacts
 src/**/*.d.ts
 
 *.tsbuildinfo

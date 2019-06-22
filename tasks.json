@@ -52,6 +52,9 @@
     ],
     "test": [
       "[build]",
+      "[test-only]"
+    ],
+    "test-only": [
       "nyc mocha --opts mocha.opts"
     ],
     "install": [
