@@ -1,15 +1,16 @@
 import { EventEmitter } from 'events'
 
+import Logger from './Logger'
+
 import { IConsole } from './IConsole'
 import { ConsoleOptions } from './ConsoleOptions'
-import { Lincoln, Logger } from './Logger'
 import { ProcessArgs } from './ProcessArgs'
 
 type Rejector = (reason?: any) => void
 type Resolver = (value?: void | PromiseLike<void> | undefined) => void
 
 export class Console<T extends ConsoleOptions> extends EventEmitter implements IConsole {
-  private readonly logger: Lincoln = Logger
+  private readonly logger = Logger
 
   private instance: Promise<void> | undefined
 

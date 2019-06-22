@@ -1,14 +1,13 @@
-import { Lincoln } from '../Logger'
-
 import { fs } from '../FileSystem'
 import { FileResolverStrategy } from './FileResolver'
+
+import Logger from '../Logging'
 
 export const RecursiveStrategy: FileResolverStrategy = async (
   filename: string,
   cwd: string,
-  logger: Lincoln,
 ): Promise<string[] | null> => {
-  const log = logger.extend('recursive')
+  const log = Logger.extend('recursive')
 
   let results: string[] = []
 
@@ -22,7 +21,7 @@ export const RecursiveStrategy: FileResolverStrategy = async (
   const parent = fs.resolve(cwd, '..')
 
   if (parent !== '/') {
-    const found = await RecursiveStrategy(filename, parent, logger)
+    const found = await RecursiveStrategy(filename, parent)
     if (found) {
       log.debug('found', ...found)
       return results.concat(...found)

@@ -1,7 +1,9 @@
 import 'mocha'
 
 import { expect } from 'chai'
-import { CreateLogger, Options } from '../src/index'
+import { Options } from '@nofrills/lincoln'
+
+import { CreateLogger } from '../src/index'
 
 describe('when using debug lincoln interceptor', () => {
   const debug = console.debug

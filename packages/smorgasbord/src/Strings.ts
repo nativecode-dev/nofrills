@@ -1,8 +1,8 @@
 import { Dictionary } from '@nofrills/collections'
 
-import { Lincoln, Logger } from './Logging'
+import Logger from './Logging'
 
-const logger: Lincoln = Logger.extend('strings')
+const logger = Logger.extend('strings')
 
 export const Strings: Dictionary<any> = {
   format: (message: string, ...args: any[]): string => {

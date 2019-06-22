@@ -1,11 +1,12 @@
 import { Class, Constructor, Method, Methods, Namespace, Parameters, Properties, Type } from '@nofrills/typings'
 
+import Logger from './Logger'
+
 import { Parser } from './Parser'
-import { Lincoln } from './Logger'
 import { Couchbase } from './CouchbaseProvider'
 
 export class ClassParser extends Parser<Class> {
-  private readonly log: Lincoln
+  private readonly log = Logger.extend('class-parser')
 
   constructor(
     protected readonly couchbase: Couchbase,

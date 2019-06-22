@@ -11,11 +11,11 @@
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-console/issues"
   },
-  "dependencies": {
-    "@nofrills/lincoln": "^3.5.9"
-  },
   "devDependencies": {
     "npm-check-updates": "^3.1.10"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^3.5.9"
   },
   "publishConfig": {
     "access": "public"

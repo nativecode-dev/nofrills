@@ -1,6 +1,6 @@
 import 'isomorphic-fetch'
 
-import { Lincoln, Logger } from './Logger'
+import Logger from './Logger'
 
 export enum HttpMethods {
   Delete = 'DELETE',
@@ -12,11 +12,9 @@ export enum HttpMethods {
 }
 
 export abstract class HTTP {
-  protected readonly log: Lincoln
+  protected readonly log = Logger.extend(this.name)
 
-  constructor(name: string = 'http') {
-    this.log = Logger.extend(name)
-  }
+  constructor(readonly name: string = 'http') {}
 
   public async delete<TResponse>(url: string): Promise<TResponse> {
     const request = await this.request<void>()
@@ -54,7 +52,6 @@ export abstract class HTTP {
     return this.send<TResponse>(url, request, HttpMethods.Put)
   }
 
-  protected abstract get name(): string
   protected abstract request<TRequest>(body?: TRequest): Promise<RequestInit>
 
   protected async send<T>(url: string, init?: RequestInit, method: string = 'GET'): Promise<T> {

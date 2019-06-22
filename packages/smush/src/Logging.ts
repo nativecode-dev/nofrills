@@ -1,5 +1,5 @@
-import { Lincoln } from '@nofrills/lincoln-debug'
+import { CreateLogger } from '@nofrills/lincoln-debug'
 
-const Logger = new Lincoln('nofrills:smush')
+const Logger = CreateLogger('nofrills:smush')
 
 export default Logger

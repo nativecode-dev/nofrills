@@ -1,8 +1,8 @@
 import 'mocha'
 
-import { Log } from '@nofrills/lincoln-debug'
-import { LogMessageType } from '@nofrills/lincoln'
 import { expect } from 'chai'
+import { Log, LogMessageType } from '@nofrills/lincoln'
+
 import { data } from './data'
 
 import { ScrubsInterceptor } from '../src/ScrubsInterceptor'

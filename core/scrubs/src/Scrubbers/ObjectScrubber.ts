@@ -1,6 +1,7 @@
 import { ObjectNavigator } from '@nofrills/types'
 
-import { Logger } from '../Logger'
+import Logger from '../Logger'
+
 import { Scrubs, ScrubsOptions } from '../Scrubs'
 
 const Key = 'object-scrubber'

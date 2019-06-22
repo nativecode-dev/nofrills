@@ -29,6 +29,9 @@
     "@types/deepmerge": "^2.2.0",
     "npm-check-updates": "^3.1.10"
   },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^3.5.9"
+  },
   "publishConfig": {
     "access": "public"
   }

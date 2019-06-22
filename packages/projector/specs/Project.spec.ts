@@ -45,12 +45,7 @@ describe('when using Project', () => {
     })
 
     it('should get child configuration', () => {
-      const expected = ['simple-package', 'simple-project']
-      const children = project.projects().map((child, index) => {
-        const npm = child.as<Npm>(NpmFile)
-        expect(npm.name).to.equal(expected[index])
-        return child
-      })
+      const children = project.projects()
       expect(children).to.be.length(2)
     })
   })
