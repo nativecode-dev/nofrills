@@ -24,12 +24,12 @@
     "@nofrills/fs": "^3.7.0",
     "@nofrills/lincoln-debug": "^3.6.7",
     "@nofrills/scrubs": "^3.6.1",
-    "deepmerge": "3.2.1",
+    "deepmerge": "^3.3.0",
     "shortid": "^2.2.12"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/node": "*",
+    "@types/node": "^12.0.10",
     "@types/shortid": "0.0.29",
     "npm-check-updates": "^3.1.10"
   },

@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "*",
+    "@types/node": "^12.0.10",
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {

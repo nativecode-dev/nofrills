@@ -1,51 +1,49 @@
-import * as merge from 'deepmerge'
-import * as shortid from 'shortid'
-
+import merge from 'deepmerge'
+import shortid from 'shortid'
 import { fs } from '@nofrills/fs'
-import { Lincoln } from '@nofrills/lincoln'
 
-import { Logger } from './Logging'
+import Logger from './Logging'
 import { SmushError } from './SmushError'
 
 export class Smush {
   readonly identifier: string = shortid.generate()
 
-  private log: Lincoln
+  private log = Logger.extend('smush')
   private root: any = {}
 
-  constructor() {
-    this.log = Logger.extend('smush')
+  constructor() {}
+
+  async json(key: string, filename: string, transform?: (object: any) => any): Promise<Smush> {
+    await this.schema<any>(key, filename, transform)
+    return this
   }
 
-  json(key: string, filename: string, transform?: (object: any) => any): Promise<Smush> {
-    return this.schema<any>(key, filename, transform).then(() => this)
-  }
-
-  string(key: string, value: string, transform?: (object: any) => any): Promise<Smush> {
+  async string(key: string, value: string, transform?: (object: any) => any): Promise<Smush> {
     try {
       const callback = transform ? transform : (obj: any) => obj
       const json: string = JSON.parse(value)
-      return this.transform<any>(key, json, callback)
-        .catch((error: Error) => {
-          throw new SmushError(error)
-        })
-        .then(() => this)
+      try {
+        await this.transform<any>(key, json, callback)
+      } catch (error) {
+        throw new SmushError(error)
+      }
+      return this
     } catch (error) {
       return Promise.reject(new SmushError(error))
     }
   }
 
-  schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
+  async schema<T>(key: string, filename: string, transform?: (object: T) => T): Promise<Smush> {
     const transformer = transform ? transform : (obj: T) => obj
 
-    return fs
-      .readFile(filename)
-      .then((buffer: Buffer) => JSON.parse(buffer.toString('utf-8')))
-      .then((object: T) => this.transform<T>(key, object, transformer))
-      .catch((error: Error) => {
-        throw new SmushError(error)
-      })
-      .then(() => this)
+    try {
+      const buffer = await fs.readFile(filename)
+      const instance = JSON.parse(buffer.toString('utf-8'))
+      await this.transform<T>(key, instance, transformer)
+    } catch (error) {
+      throw new SmushError(error)
+    }
+    return this
   }
 
   get<T>(key: string): T {

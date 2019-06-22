@@ -22,7 +22,7 @@
   "types": "./lib/env.d.ts",
   "dependencies": {
     "@nofrills/collections": "^3.8.1",
-    "deepmerge": "3.2.1"
+    "deepmerge": "^3.3.0"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",

@@ -1,3 +1,6 @@
+core/*/src/**/*.js
+core/*/src/**/*.map
+
 **/.artifacts/
 **/.cache/
 **/bin/*

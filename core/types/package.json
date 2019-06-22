@@ -21,13 +21,13 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "deepmerge": "3.2.1",
+    "deepmerge": "^3.3.0",
     "validator": "^11.0.0",
     "zipcodes-regex": "^1.0.2"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/validator": "^9.4.2",
+    "@types/validator": "^10.11.1",
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {

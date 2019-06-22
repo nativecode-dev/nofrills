@@ -1,3 +1,5 @@
 import { Lincoln } from '@nofrills/lincoln-debug'
 
-export const Logger: Lincoln = new Lincoln('nofrills:smush')
+const Logger = new Lincoln('nofrills:smush')
+
+export default Logger
