@@ -23,7 +23,7 @@
       ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com"
     ],
     "setup-ssh": [
-      ".citools/setup-ssh git.nativecode.net"
+      ".citools/setup-ssh git.nativecode.net gitssh.nativecode.net"
     ],
     "commit": [
       "[test]",
