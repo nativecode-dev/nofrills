@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@3.8.5...@nofrills/collections@4.0.1) (2019-06-23)
+
+**Note:** Version bump only for package @nofrills/collections
+
+
+
+
+
 # [4.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@3.8.7...@nofrills/collections@4.0.0) (2019-06-22)
 
 
