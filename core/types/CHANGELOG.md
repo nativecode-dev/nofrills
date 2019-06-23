@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/types@3.5.5...@nofrills/types@4.0.1) (2019-06-23)
+
+**Note:** Version bump only for package @nofrills/types
+
+
+
+
+
 # [4.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/types@3.5.7...@nofrills/types@4.0.0) (2019-06-22)
 
 
