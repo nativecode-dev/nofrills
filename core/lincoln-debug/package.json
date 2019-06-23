@@ -7,18 +7,21 @@
   "name": "@nofrills/lincoln-debug",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "3.6.11",
+  "version": "4.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-debug/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^3.8.5",
-    "@nofrills/lincoln": "^3.5.7",
+    "@nofrills/collections": "^4.0.0",
     "debug": "^4.1.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.4",
     "npm-check-updates": "^3.1.10"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^3.5.9",
+    "debug": "^4.1.0"
   },
   "publishConfig": {
     "access": "public"

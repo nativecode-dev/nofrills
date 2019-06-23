@@ -1,4 +1,4 @@
-import { Lincoln, Logger } from './Logger'
+import Logger from './Logger'
 
 export interface ProcessArgsFilter {
   (argument: string, index: number): boolean
@@ -6,7 +6,7 @@ export interface ProcessArgsFilter {
 
 export class ProcessArgs {
   private readonly filtered: string[]
-  private readonly log: Lincoln = Logger.extend('args')
+  private readonly log = Logger.extend('args')
 
   protected constructor(args: string[], node: boolean) {
     this.log.debug(node, ...args)

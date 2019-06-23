@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@3.4.9...@nofrills/html@4.0.0) (2019-06-22)
+
+
+### Features
+
+* **lincoln:** debug and console no longer re-exports their dependency ([0101a8e](https://github.com/nativecode-dev/nofrills/commit/0101a8e))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** must now have an explicit dependency on @nofrills/lincoln
+
+
+
+
+
+## [3.4.9](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@3.4.8...@nofrills/html@3.4.9) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/html
+
+
+
+
+
+## [3.4.8](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@3.4.7...@nofrills/html@3.4.8) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/html
+
+
+
+
+
 ## [3.4.7](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@3.4.4...@nofrills/html@3.4.7) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/html

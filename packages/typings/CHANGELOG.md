@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings@3.6.11...@nofrills/typings@4.0.0) (2019-06-22)
+
+
+### Features
+
+* **lincoln:** debug and console no longer re-exports their dependency ([0101a8e](https://github.com/nativecode-dev/nofrills/commit/0101a8e))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** must now have an explicit dependency on @nofrills/lincoln
+
+
+
+
+
+## [3.6.11](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings@3.6.10...@nofrills/typings@3.6.11) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/typings
+
+
+
+
+
+## [3.6.10](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings@3.6.9...@nofrills/typings@3.6.10) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/typings
+
+
+
+
+
 ## [3.6.9](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings@3.6.6...@nofrills/typings@3.6.9) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/typings

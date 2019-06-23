@@ -1,6 +1,6 @@
 import { ChildProcess, ExecOptions, SpawnOptions, exec, spawn } from 'child_process'
 
-import { Lincoln, Logger } from './Logger'
+import Logger from './Logger'
 
 export interface CommandOptions {
   args: string[]
@@ -23,7 +23,7 @@ const DefaultOptions: Partial<CommandOptions> = {
 }
 
 export class Command {
-  private readonly log: Lincoln = Logger.extend('command')
+  private readonly log = Logger.extend('command')
   private readonly options: CommandOptions
 
   protected constructor(options: Partial<CommandOptions>) {

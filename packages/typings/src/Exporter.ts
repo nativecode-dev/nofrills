@@ -2,7 +2,8 @@ import { fs } from '@nofrills/fs'
 import { render } from 'mustache'
 import { Is, ObjectNavigator } from '@nofrills/types'
 
-import { Logger } from './Logger'
+import Logger from './Logger'
+
 import { Package } from './Packages'
 import { PackageError } from './Errors'
 

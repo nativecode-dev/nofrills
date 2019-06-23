@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/scrubs@3.6.7...@nofrills/scrubs@4.0.0) (2019-06-22)
+
+
+### Features
+
+* **lincoln:** debug and console no longer re-exports their dependency ([0101a8e](https://github.com/nativecode-dev/nofrills/commit/0101a8e))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** must now have an explicit dependency on @nofrills/lincoln
+
+
+
+
+
+## [3.6.7](https://github.com/nativecode-dev/nofrills/compare/@nofrills/scrubs@3.6.6...@nofrills/scrubs@3.6.7) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/scrubs
+
+
+
+
+
+## [3.6.6](https://github.com/nativecode-dev/nofrills/compare/@nofrills/scrubs@3.6.5...@nofrills/scrubs@3.6.6) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/scrubs
+
+
+
+
+
 ## [3.6.5](https://github.com/nativecode-dev/nofrills/compare/@nofrills/scrubs@3.6.2...@nofrills/scrubs@3.6.5) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/scrubs

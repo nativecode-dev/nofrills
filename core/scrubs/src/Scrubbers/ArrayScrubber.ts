@@ -1,4 +1,5 @@
-import { Logger } from '../Logger'
+import Logger from '../Logger'
+
 import { Scrubs, ScrubsOptions } from '../Scrubs'
 
 const log = Logger.extend('array-scrubber')

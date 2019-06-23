@@ -48,7 +48,6 @@ describe('when using ProcessArgs', () => {
 
     it('should parse short switches when called from node', () => {
       const sut = ProcessArgs.from(argsNodeWithSwitches)
-      console.log(sut.switches)
       expect(sut.has('s')).to.be.true
     })
 
