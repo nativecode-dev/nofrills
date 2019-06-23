@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nativecode-dev/nofrills-console/compare/@nofrills/lincoln-console@3.6.12...@nofrills/lincoln-console@4.0.0) (2019-06-22)
+
+
+### Features
+
+* **lincoln:** debug and console no longer re-exports their dependency ([0101a8e](https://github.com/nativecode-dev/nofrills-console/commit/0101a8e))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** must now have an explicit dependency on @nofrills/lincoln
+
+
+
+
+
+## [3.6.12](https://github.com/nativecode-dev/nofrills-console/compare/@nofrills/lincoln-console@3.6.11...@nofrills/lincoln-console@3.6.12) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/lincoln-console
+
+
+
+
+
+## [3.6.11](https://github.com/nativecode-dev/nofrills-console/compare/@nofrills/lincoln-console@3.6.10...@nofrills/lincoln-console@3.6.11) (2019-06-22)
+
+**Note:** Version bump only for package @nofrills/lincoln-console
+
+
+
+
+
 ## [3.6.10](https://github.com/nativecode-dev/nofrills-console/compare/@nofrills/lincoln-console@3.6.7...@nofrills/lincoln-console@3.6.10) (2019-06-22)
 
 **Note:** Version bump only for package @nofrills/lincoln-console

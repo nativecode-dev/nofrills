@@ -1,8 +1,8 @@
 import { Is } from '@nofrills/types'
 
-import { Lincoln, Logger } from './Logging'
+import Logger from './Logging'
 
-const logger: Lincoln = Logger.extend('walk')
+const logger = Logger.extend('walk')
 
 export enum WalkType {
   Array,

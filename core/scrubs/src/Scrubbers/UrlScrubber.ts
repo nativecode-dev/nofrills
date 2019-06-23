@@ -1,4 +1,5 @@
-import { Logger } from '../Logger'
+import Logger from '../Logger'
+
 import { ScrubsOptions } from '../Scrubs'
 
 const log = Logger.extend('url-scrubber')

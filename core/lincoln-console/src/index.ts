@@ -1,5 +1,3 @@
-export { Filter, Interceptor, Lincoln, LincolnRegistry, Log, LogMessageType, Options } from '@nofrills/lincoln'
-
 import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 
 export const ConsoleInterceptor: Interceptor = (log: Log): Promise<Log> => {

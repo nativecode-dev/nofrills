@@ -1,7 +1,8 @@
-import * as merge from 'deepmerge'
+import merge from 'deepmerge'
 
 import { Types } from '@nofrills/types'
-import { Lincoln, Logger } from './Logger'
+
+import Logger from './Logger'
 
 export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => Promise<T>
 export type Scrubbers = Array<Scrubber<any>>
@@ -17,12 +18,11 @@ const defaults: Partial<ScrubsOptions> = {
 }
 
 export class Scrubs {
-  private readonly log: Lincoln
+  private readonly log = Logger
   private readonly options: ScrubsOptions
   private readonly registry: Map<string, Scrubbers>
 
   constructor(options: Partial<ScrubsOptions> = {}) {
-    this.log = Logger
     this.options = merge.all([defaults, options]) as ScrubsOptions
     this.registry = new Map<string, Scrubbers>()
   }

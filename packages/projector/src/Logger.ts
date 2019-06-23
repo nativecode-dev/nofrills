@@ -1,9 +1,9 @@
-import { CreateLogger, CreateOptions, Lincoln, Options } from '@nofrills/lincoln-debug'
+import { CreateLogger, CreateOptions } from '@nofrills/lincoln-debug'
 import { ScrubsInterceptor } from '@nofrills/scrubs'
 
-const options: Options = CreateOptions('nofrills:projector')
+const options = CreateOptions('nofrills:projector')
 options.interceptors.register('scrubs', ScrubsInterceptor)
 
-const Logger: Lincoln = CreateLogger(options)
+const Logger = CreateLogger(options)
 
 export default Logger

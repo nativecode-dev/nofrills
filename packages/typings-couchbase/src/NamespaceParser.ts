@@ -2,16 +2,14 @@ import { all as throttle } from 'promise-parallel-throttle'
 import { Classes, Namespace } from '@nofrills/typings'
 
 import { Parser } from './Parser'
-import { Lincoln } from './Logger'
 import { ClassParser } from './ClassParser'
 import { Couchbase } from './CouchbaseProvider'
 
 export class NamespaceParser extends Parser<Namespace> {
-  private readonly log: Lincoln
+  private readonly log = this.baselog.extend('namespace')
 
   constructor(private readonly couchbase: Couchbase, protected readonly name: string) {
     super(name, couchbase.url('classes.list.html'))
-    this.log = this.baselog.extend('namespace')
   }
 
   protected async exec(): Promise<Namespace> {

@@ -1,7 +1,9 @@
 import 'mocha'
 
+import { Log, Options } from '@nofrills/lincoln'
+
 import { expect } from 'chai'
-import { CreateLogger, CreateOptions, Log, Options } from '../src/index'
+import { CreateLogger, CreateOptions } from '../src/index'
 
 describe('when using debug lincoln interceptor', () => {
   const NAMESPACE = 'nativecode:test'

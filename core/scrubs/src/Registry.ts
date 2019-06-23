@@ -1,4 +1,5 @@
-import { Logger } from './Logger'
+import Logger from './Logger'
+
 import { Scrubs, ScrubsOptions } from './Scrubs'
 import { ArrayScrubber, KeyValueScrubber, ObjectScrubber, UrlScrubber } from './Scrubbers/index'
 
