@@ -27,7 +27,6 @@
   },
   "scripts": {
     "build": "cli-tasks build",
-    "clean": "cli-tasks clean",
     "upgrade": "cli-tasks upgrade"
   }
 }

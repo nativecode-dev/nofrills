@@ -5,48 +5,39 @@ stages:
 - publish
 
 before_script:
-- git submodule sync --recursive
+- source .ci-env
 - git submodule update --init --recursive
-- npm ci
-- npm run bootstrap
-- npm run setup:ssh
+- npm install -g @nofrills/tasks@7.1.7
+- cli-tasks ci:install
 
 cache:
   paths:
   - node_modules
 
-continuous:
+feature:
   stage: test
-  except:
-  - develop
-  - master
-  - tags
+  only:
+  - /feature\/.*/
   script:
-  - npm run build:ci
-  - npm run test:ci
-  - npm run release:canary
+  - cli-tasks ci:test
+
+fixes:
+  stage: publish
+  only:
+  - /fix\/.*/
+  script:
+  - cli-tasks ci:publish:canary
 
 prerelease:
   stage: publish
-  except:
-  - tags
   only:
   - develop
   script:
-  - npm run setup:git
-  - npm run build:ci
-  - npm run test:ci
-  - npm run release:pre
+  - cli-tasks ci:publish:prerelease
 
 release:
   stage: publish
-  except:
-  - tags
-  - triggers
   only:
   - master
   script:
-  - npm run setup:git
-  - npm run build:ci
-  - npm run test:ci
-  - npm run release
+  - cli-tasks ci:publish:release

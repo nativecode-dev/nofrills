@@ -1,24 +1,11 @@
-import { all } from 'deepmerge'
+import deepmerge from 'deepmerge'
 
-import { DictionaryOf } from '@nofrills/collections'
 import { Is, ObjectNavigator } from '@nofrills/types'
 
-export enum EnvOverride {
-  ConfigFirst = 'config-first',
-  EnvironmentFirst = 'environment-first',
-}
-
-/**
- * @deprecated Use EnvOverride, will be removed in a future version.
- */
-export type EnvOverrideType = EnvOverride
-
-export interface EnvOptions {
-  env: DictionaryOf<string | undefined>
-  override?: EnvOverride
-  prefix: string
-  sync: boolean
-}
+import { EnvFilter } from './EnvFilter'
+import { EnvOptions } from './EnvOptions'
+import { EnvOverride } from './EnvOverride'
+import { EnvTransform } from './EnvTransform'
 
 const Defaults: Partial<EnvOptions> = {
   env: process.env,
@@ -27,25 +14,17 @@ const Defaults: Partial<EnvOptions> = {
   sync: false,
 }
 
-export interface EnvFilter {
-  (path: string): boolean
-}
-
-export interface EnvTransform {
-  (path: string): string
-}
-
 export class Env {
   private readonly navigator: ObjectNavigator
   private readonly options: EnvOptions
 
   constructor(config: object, options?: Partial<EnvOptions>) {
     this.navigator = ObjectNavigator.from(config)
-    this.options = all([Defaults, options || {}]) as EnvOptions
+    this.options = deepmerge.all([Defaults, options || {}]) as EnvOptions
   }
 
   static from(options: Partial<EnvOptions> = {}, filter?: EnvFilter, transform?: EnvTransform): Env {
-    const opts = all([Defaults, options]) as EnvOptions
+    const opts = deepmerge.all([Defaults, options]) as EnvOptions
     const root = ObjectNavigator.from({})
 
     const _filter = filter ? filter : () => true
@@ -68,7 +47,7 @@ export class Env {
   }
 
   static merge(configs: object[], options?: Partial<EnvOptions>): Env {
-    const config = all(configs) as EnvOptions
+    const config = deepmerge.all(configs) as EnvOptions
     return new Env(config, options)
   }
 
