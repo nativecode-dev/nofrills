@@ -1,25 +1,16 @@
 {
-  "private": false,
-  "name": "@nofrills/scrubs",
-  "description": "Scrubs an object of sensitive data.",
-  "license": "MIT",
   "author": "opensource@nativecode.com",
+  "description": "Scrubs an object of sensitive data.",
   "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/scrubs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nativecode-dev/nofrills"
-  },
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@nofrills/scrubs",
+  "private": false,
+  "types": "./lib/index.d.ts",
+  "version": "4.0.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
-  "version": "4.0.2",
-  "main": "./lib/index.js",
-  "scripts": {
-    "build": "cli-tasks build",
-    "clean": "cli-tasks clean",
-    "upgrade": "cli-tasks upgrade"
-  },
-  "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/lincoln-debug": "^4.0.2",
     "@nofrills/types": "^4.0.2",
@@ -34,5 +25,13 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
+  "scripts": {
+    "build": "cli-tasks build",
+    "upgrade": "cli-tasks upgrade"
   }
 }
