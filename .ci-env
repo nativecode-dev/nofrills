@@ -1,22 +1,13 @@
 #!/bin/bash
 
-DOMAIN="nativecode.net"
+export BRANCH=${CI_COMMIT_REF_NAME}
+export DOMAIN="nativecode.net"
+export PROJECT="cli-tools"
+export ORGANIZATION="nativecode"
+export SSH_KEY=${SSH_PRIVATE_KEY}
 
-export BUILD_REPO="nativecode/nofrills"
-export BUILD_REPO_BRANCH=${CI_COMMIT_REF_NAME}
-export BUILD_REPO_DOMAIN="git.${DOMAIN}"
-export BUILD_REPO_DOMAIN_SSH="gitssh.${DOMAIN}"
-export BUILD_REPO_EMAIL="automaton+nofrills@nativecode.com"
-export BUILD_REPO_SSHKEY_PATH="/file-not-found"
+export EMAIL="automaton+${PROJECT}@nativecode.com"
+export GIT_HOST="git.${DOMAIN}"
+export SSH_HOST="gitssh.${DOMAIN}"
 
-#-------------------------------------------------------------------------------
-# DO NOT EDIT: Sets common access urls                                         #
-#-------------------------------------------------------------------------------
-export BUILD_REPO_GIT="git@${BUILD_REPO_DOMAIN}:${BUILD_REPO}.git"
-export BUILD_REPO_URL="https://${BUILD_REPO_DOMAIN}/${BUILD_REPO}.git"
-export BUILD_REPO_URL_SSH="ssh://${BUILD_REPO_GIT}"
-
-#-------------------------------------------------------------------------------
-# DO NOT EDIT: Sets the path to include node_modules                           #
-#-------------------------------------------------------------------------------
-export PATH=./node_modules/.bin:${PATH}
+source .citools/ci-export
