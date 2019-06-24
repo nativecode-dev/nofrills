@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@4.0.1...@nofrills/html@4.0.4) (2019-06-24)
+
+**Note:** Version bump only for package @nofrills/html
+
+
+
+
+
 ## [4.0.3](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@4.0.2...@nofrills/html@4.0.3) (2019-06-24)
 
 **Note:** Version bump only for package @nofrills/html
