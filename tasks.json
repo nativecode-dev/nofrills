@@ -5,26 +5,47 @@
     ],
     "build": [
       "[clean]",
-      "[format]",
-      "[lint]",
+      "[source]",
       "[build:compile]"
     ],
     "build:compile": [
       "lerna run build"
     ],
+    "ci:configure": [
+      ".citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}",
+      ".citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}"
+    ],
+    "ci:build": [
+      "[build:compile]"
+    ],
+    "ci:test": [
+      "[ci:build]",
+      "nyc mocha --opts .citools/mocha.opts"
+    ],
+    "ci:install": [
+      "npm ci",
+      "[bootstrap]"
+    ],
+    "ci:publish:canary": [
+      "[ci:configure]",
+      "[ci:test]",
+      ".citools/lerna-publish canary"
+    ],
+    "ci:publish:prerelease": [
+      "[ci:configure]",
+      "[ci:test]",
+      ".citools/lerna-publish prerelease"
+    ],
+    "ci:publish:release": [
+      "[ci:configure]",
+      "[ci:test]",
+      ".citools/lerna-publish release"
+    ],
     "clean": [
       "rimraf .cache",
       "rimraf core/*/lib",
       "rimraf packages/*/lib",
-      "rimraf typings/*/lib",
       "rimraf **/*.tsbuildinfo"
-    ],
-    "setup-git": [
-      ".citools/setup-git ${CI_COMMIT_REF_NAME} git@git.nativecode.net:nativecode/nofrills.git automaton@nativecode.com"
-    ],
-    "setup-ssh": [
-      "echo ${GIT_SSH_KEY_GITLAB} | base64 --decode > /tmp/repo-key",
-      ".citools/setup-ssh git.nativecode.net /tmp/repo-key gitssh.nativecode.net"
     ],
     "commit": [
       "git add -A .",
@@ -33,37 +54,24 @@
     "coverage": [
       "nyc report --reporter=text-lcov | coveralls"
     ],
-    "format": [
+    "source": [
+      "[source:format]",
+      "[source:lint]"
+    ],
+    "source:format": [
       "prettier --loglevel silent --write \"*/*/specs/**/*.ts\"",
       "prettier --loglevel silent --write \"*/*/src/**/*.ts\""
     ],
-    "lint": [
+    "source:lint": [
       "tslint --project tsconfig.json --config tslint.json"
-    ],
-    "release": [
-      ".citools/lerna-publish release"
-    ],
-    "release:canary": [
-      ".citools/lerna-publish canary"
-    ],
-    "release:pre": [
-      ".citools/lerna-publish prerelease"
     ],
     "test": [
       "[build]",
-      "[test:only]"
-    ],
-    "test:ci": [
-      "[build:compile]",
-      "[test:only]"
-    ],
-    "test:only": [
       "nyc mocha --opts mocha.opts"
     ],
     "install": [
       "npm install",
-      "[bootstrap]",
-      "[build]"
+      "[bootstrap]"
     ],
     "upgrade": [
       "npm-check -y",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.3](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@4.0.2...@nofrills/lincoln-debug@4.0.3) (2019-06-24)
+
+**Note:** Version bump only for package @nofrills/lincoln-debug
+
+
+
+
+
+## [4.0.2](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@4.0.1...@nofrills/lincoln-debug@4.0.2) (2019-06-23)
+
+**Note:** Version bump only for package @nofrills/lincoln-debug
+
+
+
+
+
 ## [4.0.1](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@3.6.11...@nofrills/lincoln-debug@4.0.1) (2019-06-23)
 
 **Note:** Version bump only for package @nofrills/lincoln-debug

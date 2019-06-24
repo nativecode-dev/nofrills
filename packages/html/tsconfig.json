@@ -7,10 +7,6 @@
       "dom"
     ]
   },
-  "exclude": [
-    "node_modules",
-    "specs"
-  ],
   "include": [
     "src/**/*.ts"
   ]

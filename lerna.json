@@ -39,6 +39,10 @@
     }
   },
   "loglevel": "error",
+  "npmClientArgs": [
+    "--no-progress",
+    "--silent"
+  ],
   "packages": [
     "core/*",
     "packages/*"

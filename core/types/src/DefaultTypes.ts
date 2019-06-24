@@ -1,5 +1,5 @@
-import * as validator from 'validator'
-import * as zipcodes from 'zipcodes-regex'
+import validator from 'validator'
+import zipcodes from 'zipcodes-regex'
 
 import { Is } from './Is'
 import { Types } from './Types'
