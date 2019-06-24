@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
-    "@nofrills/tasks": "^6.2.0",
+    "@nofrills/tasks": "^7.1.7",
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.7",

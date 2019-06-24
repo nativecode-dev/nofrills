@@ -17,7 +17,7 @@
     "@nofrills/scrubs": "^3.6.0"
   },
   "devDependencies": {
-    "@nofrills/tasks": "^6.2.0",
+    "@nofrills/tasks": "^7.1.7",
     "npm-check-updates": "^3.1.10"
   },
   "publishConfig": {
