@@ -7,13 +7,13 @@
   "name": "@nofrills/smorgasbord",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^4.0.4",
-    "@nofrills/types": "^4.0.4",
+    "@nofrills/lincoln-debug": "^4.0.5",
+    "@nofrills/types": "^4.0.5",
     "moment": "^2.18.1"
   },
   "devDependencies": {
