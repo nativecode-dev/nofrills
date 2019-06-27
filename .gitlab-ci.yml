@@ -1,29 +1,22 @@
 image: node:latest
 
 stages:
-- test
 - publish
 
 before_script:
 - git submodule update --init --recursive
 - source .ci-env
-- npm install -g @nofrills/tasks@7.1.7
+- npm install -g @nofrills/tasks@7.1.10
 - cli-tasks ci:install
 
 cache:
   paths:
   - node_modules
 
-feature:
-  stage: test
-  only:
-  - /feature\/.*/
-  script:
-  - cli-tasks ci:test
-
-fixes:
+continuous:
   stage: publish
   only:
+  - /feature\/.*/
   - /fix\/.*/
   script:
   - cli-tasks ci:publish:canary
