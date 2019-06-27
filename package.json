@@ -8,7 +8,7 @@
     }
   },
   "devDependencies": {
-    "@nofrills/tasks": "^7.1.10",
+    "@nofrills/tasks": "^7.1.12",
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.7",
@@ -56,7 +56,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
+    "build": "cli-tasks build",
     "build:ci": "cli-tasks build:ci",
     "commit": "cli-tasks commit",
     "release": "cli-tasks release",
@@ -67,6 +67,6 @@
     "start": "cli-tasks start",
     "test": "cli-tasks test",
     "test:ci": "cli-tasks test:ci",
-    "upgrade": "lerna run upgrade"
+    "upgrade": "cli-tasks upgrade"
   }
 }
