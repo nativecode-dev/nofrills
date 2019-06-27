@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.6](https://github.com/nativecode-dev/nofrills/compare/@nofrills/smush@5.0.5...@nofrills/smush@5.0.6) (2019-06-27)
+
+**Note:** Version bump only for package @nofrills/smush
+
+
+
+
+
+## [5.0.5](https://github.com/nativecode-dev/nofrills/compare/@nofrills/smush@5.0.4...@nofrills/smush@5.0.5) (2019-06-24)
+
+**Note:** Version bump only for package @nofrills/smush
+
+
+
+
+
 ## [5.0.4](https://github.com/nativecode-dev/nofrills/compare/@nofrills/smush@5.0.1...@nofrills/smush@5.0.4) (2019-06-24)
 
 **Note:** Version bump only for package @nofrills/smush
