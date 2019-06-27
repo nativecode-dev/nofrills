@@ -7,13 +7,13 @@
   "main": "./lib/env.js",
   "name": "@nofrills/env",
   "types": "./lib/env.d.ts",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/collections": "^4.0.7",
-    "@nofrills/types": "^4.0.7",
+    "@nofrills/collections": "^4.0.8",
+    "@nofrills/types": "^4.0.8",
     "deepmerge": "^3.3.0"
   },
   "devDependencies": {
