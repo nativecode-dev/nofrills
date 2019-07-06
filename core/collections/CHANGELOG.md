@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@4.0.8...@nofrills/collections@5.0.0) (2019-07-06)
+
+
+### Features
+
+* **collections:** removed dictionary interface ([e4250f2](https://github.com/nativecode-dev/nofrills/commit/e4250f2))
+
+
+### BREAKING CHANGES
+
+* **collections:** removed dictionary interface
+
+
+
+
+
+## [4.0.8](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@4.0.7...@nofrills/collections@4.0.8) (2019-06-27)
+
+**Note:** Version bump only for package @nofrills/collections
+
+
+
+
+
 ## [4.0.7](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@4.0.4...@nofrills/collections@4.0.7) (2019-06-27)
 
 **Note:** Version bump only for package @nofrills/collections

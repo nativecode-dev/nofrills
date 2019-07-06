@@ -6,7 +6,7 @@ stages:
 before_script:
 - git submodule update --init --recursive
 - source .ci-env
-- npm install -g @nofrills/tasks@7.1.10
+- npm install -g @nofrills/tasks@7.1.12
 - cli-tasks ci:install
 
 cache:
