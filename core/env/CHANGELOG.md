@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@2.0.7...@nofrills/env@3.0.1) (2019-07-06)
+
+**Note:** Version bump only for package @nofrills/env
+
+
+
+
+
 # [3.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@2.0.8...@nofrills/env@3.0.0) (2019-07-06)
 
 

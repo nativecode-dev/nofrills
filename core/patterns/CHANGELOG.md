@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/patterns@2.0.7...@nofrills/patterns@2.1.1) (2019-07-06)
+
+**Note:** Version bump only for package @nofrills/patterns
+
+
+
+
+
 # [2.1.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/patterns@2.0.8...@nofrills/patterns@2.1.0) (2019-07-06)
 
 
