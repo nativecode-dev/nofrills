@@ -15,9 +15,7 @@
     "@nofrills/collections": "^4.0.7",
     "uuidjs": "^4.0.3"
   },
-  "devDependencies": {
-    "npm-check-updates": "^3.1.15"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },

@@ -17,9 +17,7 @@
     "@nofrills/lincoln-debug": "^4.0.7",
     "@nofrills/scrubs": "^4.0.7"
   },
-  "devDependencies": {
-    "npm-check-updates": "^3.1.15"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },

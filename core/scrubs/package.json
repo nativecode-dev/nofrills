@@ -17,8 +17,7 @@
     "deepmerge": "^3.3.0"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.2.0",
-    "npm-check-updates": "^3.1.15"
+    "@types/deepmerge": "^2.2.0"
   },
   "peerDependencies": {
     "@nofrills/lincoln": "^4.0.5"
