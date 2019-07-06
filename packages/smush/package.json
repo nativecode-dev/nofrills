@@ -12,17 +12,17 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^4.0.8",
-    "@nofrills/lincoln-debug": "^4.0.8",
-    "@nofrills/scrubs": "^4.0.8",
+    "@nofrills/fs": "^4.0.7",
+    "@nofrills/lincoln-debug": "^4.0.7",
+    "@nofrills/scrubs": "^4.0.7",
     "deepmerge": "^3.3.0",
-    "shortid": "^2.2.12"
+    "shortid": "^2.2.14"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
     "@types/node": "^12.0.10",
     "@types/shortid": "0.0.29",
-    "npm-check-updates": "^3.1.10"
+    "npm-check-updates": "^3.1.15"
   },
   "publishConfig": {
     "access": "public"

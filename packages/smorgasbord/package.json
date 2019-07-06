@@ -12,12 +12,12 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^4.0.8",
-    "@nofrills/types": "^4.0.8",
-    "moment": "^2.18.1"
+    "@nofrills/lincoln-debug": "^4.0.7",
+    "@nofrills/types": "^4.0.7",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
-    "npm-check-updates": "^3.1.10"
+    "npm-check-updates": "^3.1.15"
   },
   "publishConfig": {
     "access": "public"

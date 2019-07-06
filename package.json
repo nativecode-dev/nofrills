@@ -12,7 +12,7 @@
     "@types/chai": "^4.1.7",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.0.10",
+    "@types/node": "^12.0.12",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "commitizen": "^3.1.1",
@@ -20,10 +20,8 @@
     "cross-env": "^5.2.0",
     "cz-lerna-changelog": "^2.0.2",
     "lerna": "^3.15.0",
-    "lerna-update-wizard": "^0.14.0",
     "mocha": "^6.1.4",
     "npm-check": "^5.9.0",
-    "npm-check-updates": "^3.1.11",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
@@ -32,7 +30,6 @@
     "tslint": "^5.18.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-no-unused-expression-chai": "^0.1.4",
-    "typedoc": "^0.14.2",
     "typescript": "^3.5.2"
   },
   "nyc": {
