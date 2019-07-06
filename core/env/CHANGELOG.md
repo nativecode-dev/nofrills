@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@2.0.8...@nofrills/env@3.0.0) (2019-07-06)
+
+
+### Features
+
+* **lincoln:** removing uuidjs and replacing with uuid ([7bc9c06](https://github.com/nativecode-dev/nofrills/commit/7bc9c06))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** lincoln now uses uuid package
+
+
+
+
+
+## [2.0.8](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@2.0.7...@nofrills/env@2.0.8) (2019-06-27)
+
+**Note:** Version bump only for package @nofrills/env
+
+
+
+
+
 ## [2.0.7](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@2.0.4...@nofrills/env@2.0.7) (2019-06-27)
 
 **Note:** Version bump only for package @nofrills/env
