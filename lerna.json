@@ -13,8 +13,7 @@
       "ignoreChanges": [
         "*.md",
         "LICENSE",
-        "lib/",
-        "specs/"
+        "lib/"
       ],
       "loglevel": "verbose",
       "message": "chore(release): publish",
@@ -30,8 +29,7 @@
       "ignoreChanges": [
         "*.md",
         "LICENSE",
-        "lib/",
-        "specs/"
+        "lib/"
       ],
       "loglevel": "verbose",
       "message": "chore(release): publish",
