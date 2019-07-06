@@ -1,5 +1,5 @@
+import { v4 as uuid } from 'uuid'
 import { EventEmitter } from 'events'
-import { generate as uuid } from 'uuidjs'
 import { Registry } from '@nofrills/collections'
 
 import { Log } from './Log'

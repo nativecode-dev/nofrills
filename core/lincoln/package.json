@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@nofrills/collections": "^4.0.7",
-    "uuidjs": "^4.0.3"
+    "uuid": "^3.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/uuid": "^3.4.5"
+  },
   "publishConfig": {
     "access": "public"
   },
