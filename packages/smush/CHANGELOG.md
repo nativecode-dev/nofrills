@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/smush@5.0.8...@nofrills/smush@6.0.0) (2019-07-06)
+
+
+### Features
+
+* **lincoln:** removing uuidjs and replacing with uuid ([7bc9c06](https://github.com/nativecode-dev/nofrills/commit/7bc9c06))
+
+
+### BREAKING CHANGES
+
+* **lincoln:** lincoln now uses uuid package
+
+
+
+
+
 ## [5.0.8](https://github.com/nativecode-dev/nofrills/compare/@nofrills/smush@5.0.7...@nofrills/smush@5.0.8) (2019-06-27)
 
 **Note:** Version bump only for package @nofrills/smush

@@ -7,14 +7,13 @@
   "name": "@nofrills/locations",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^4.0.7"
+    "@nofrills/fs": "^5.0.0"
   },
-  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },

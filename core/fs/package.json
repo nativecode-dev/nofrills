@@ -7,12 +7,12 @@
   "name": "@nofrills/fs",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "4.0.8",
+  "version": "5.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^4.0.7",
+    "@nofrills/lincoln-debug": "^5.0.0",
     "glob": "^7.1.4",
     "mkdirp": "^0.5.1",
     "rxjs": "^6.3.3"
