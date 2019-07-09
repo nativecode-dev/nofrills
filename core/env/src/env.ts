@@ -1,13 +1,16 @@
+import camelcase from 'camelcase'
 import deepmerge from 'deepmerge'
+import uppercamelcase from 'uppercamelcase'
 
 import { Is, ObjectNavigator } from '@nofrills/types'
 
 import { EnvFilter } from './EnvFilter'
-import { EnvOptions } from './EnvOptions'
+import { EnvOptions, EnvCaseOptions } from './EnvOptions'
 import { EnvOverride } from './EnvOverride'
 import { EnvTransform } from './EnvTransform'
 
 const Defaults: Partial<EnvOptions> = {
+  casing: EnvCaseOptions.Default,
   env: process.env,
   override: EnvOverride.ConfigFirst,
   prefix: 'app',
@@ -30,14 +33,28 @@ export class Env {
     const _filter = filter ? filter : () => true
     const _transform = transform ? transform : (path: string) => path
 
+    const casing = (key: string[]): string => {
+      switch (opts.casing) {
+        case EnvCaseOptions.CamelCase:
+          return camelcase(key)
+        case EnvCaseOptions.LowerCase:
+          return key.join('.').toLowerCase()
+        case EnvCaseOptions.PascalCase:
+          return uppercamelcase(...key)
+        case EnvCaseOptions.UpperCase:
+          return key.join('.').toUpperCase()
+        default:
+          return key.join('.')
+      }
+    }
+
+    const path = (key: string) => casing(key.split('_').slice(1))
+
     Object.keys(opts.env)
-      .filter(key => key.toLowerCase().startsWith(`${opts.prefix}_`))
+      .filter(key => key.toLowerCase().startsWith(`${opts.prefix}_`.toLowerCase()))
       .map(key => ({
         env: key,
-        path: key
-          .split('_')
-          .slice(1)
-          .join('.'),
+        path: path(key),
       }))
       .filter(ctx => _filter(ctx.path))
       .map(ctx => ({ env: ctx.env, path: _transform(ctx.path) }))

@@ -4,6 +4,7 @@ import expect from './expect'
 
 import { Env } from '../src/env'
 import { EnvOverride } from '../src/EnvOverride'
+import { EnvCaseOptions } from '../src/EnvOptions'
 
 interface ConfigOptions {
   runtime: {
@@ -124,5 +125,23 @@ describe('when using env', () => {
     const env = Env.from({ env: ENV }, undefined, name => name.toLowerCase())
     const config = env.toObject()
     expect(config.version).to.equal('2.0.0')
+  })
+
+  it('should lowercase path', () => {
+    const env = Env.from({ casing: EnvCaseOptions.LowerCase, env: ENV })
+    const config = env.toObject()
+    expect(config.config.project).to.equal('package.json')
+  })
+
+  it('should camelize key names', () => {
+    const env = Env.from({ casing: EnvCaseOptions.CamelCase, env: ENV })
+    const config = env.toObject()
+    expect(config.configProject).to.equal('package.json')
+  })
+
+  it('should pascalize key names', () => {
+    const env = Env.from({ casing: EnvCaseOptions.PascalCase, env: ENV })
+    const config = env.toObject()
+    expect(config.ConfigProject).to.equal('package.json')
   })
 })
