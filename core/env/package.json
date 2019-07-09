@@ -14,10 +14,14 @@
   "dependencies": {
     "@nofrills/collections": "^5.0.1",
     "@nofrills/types": "^4.0.7",
-    "deepmerge": "^3.3.0"
+    "camelcase": "^5.3.1",
+    "deepmerge": "^3.3.0",
+    "titleize": "^2.1.0",
+    "uppercamelcase": "^3.0.0"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.2.0"
+    "@types/deepmerge": "^2.2.0",
+    "@types/uppercamelcase": "^3.0.0"
   },
   "publishConfig": {
     "access": "public"
