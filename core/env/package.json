@@ -7,17 +7,21 @@
   "main": "./lib/env.js",
   "name": "@nofrills/env",
   "types": "./lib/env.d.ts",
-  "version": "3.0.1",
+  "version": "3.1.0-next.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
     "@nofrills/collections": "^5.0.1",
     "@nofrills/types": "^4.0.7",
-    "deepmerge": "^3.3.0"
+    "camelcase": "^5.3.1",
+    "deepmerge": "^3.3.0",
+    "titleize": "^2.1.0",
+    "uppercamelcase": "^3.0.0"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.2.0"
+    "@types/deepmerge": "^2.2.0",
+    "@types/uppercamelcase": "^3.0.0"
   },
   "publishConfig": {
     "access": "public"
