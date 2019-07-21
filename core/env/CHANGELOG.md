@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@3.1.0...@nofrills/env@4.0.0) (2019-07-21)
+
+
+### Features
+
+* **all:** fixes lincoln peer dependencies ([a20cdc5](https://github.com/nativecode-dev/nofrills/commit/a20cdc5))
+
+
+### BREAKING CHANGES
+
+* **all:** packages that required lincoln-X packages now have peer dependencies on lincoln
+
+
+
+
+
 # [3.1.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/env@3.1.0-next.0...@nofrills/env@3.1.0) (2019-07-09)
 
 **Note:** Version bump only for package @nofrills/env
