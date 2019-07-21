@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings-couchbase@5.0.1...@nofrills/typings-couchbase@6.0.0) (2019-07-21)
+
+
+### Features
+
+* **all:** fixes lincoln peer dependencies ([a20cdc5](https://github.com/nativecode-dev/nofrills/commit/a20cdc5))
+
+
+### BREAKING CHANGES
+
+* **all:** packages that required lincoln-X packages now have peer dependencies on lincoln
+
+
+
+
+
 ## [5.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/typings-couchbase@4.0.7...@nofrills/typings-couchbase@5.0.1) (2019-07-06)
 
 **Note:** Version bump only for package @nofrills/typings-couchbase
