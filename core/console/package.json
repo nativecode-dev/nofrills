@@ -17,6 +17,9 @@
     "@nofrills/lincoln-debug": "^5.0.1",
     "@nofrills/scrubs": "^5.0.1"
   },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
+  },
   "publishConfig": {
     "access": "public"
   },

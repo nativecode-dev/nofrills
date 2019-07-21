@@ -16,6 +16,9 @@
     "@nofrills/types": "^4.0.7",
     "moment": "^2.24.0"
   },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
+  },
   "publishConfig": {
     "access": "public"
   },

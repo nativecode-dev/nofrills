@@ -15,13 +15,16 @@
     "@nofrills/fs": "^5.0.1",
     "@nofrills/lincoln-debug": "^5.0.1",
     "@nofrills/scrubs": "^5.0.1",
-    "deepmerge": "^3.3.0",
+    "deepmerge": "^4.0.0",
     "shortid": "^2.2.14"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/node": "^12.0.10",
+    "@types/node": "^12.6.8",
     "@types/shortid": "0.0.29"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
   },
   "publishConfig": {
     "access": "public"

@@ -20,6 +20,9 @@
   "devDependencies": {
     "@types/mustache": "^0.8.32"
   },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
+  },
   "publishConfig": {
     "access": "public"
   },

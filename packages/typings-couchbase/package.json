@@ -24,6 +24,9 @@
     "@types/cheerio": "^0.22.12",
     "@types/isomorphic-fetch": "0.0.35"
   },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
+  },
   "publishConfig": {
     "access": "public"
   },

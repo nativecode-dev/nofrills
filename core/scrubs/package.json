@@ -14,7 +14,7 @@
   "dependencies": {
     "@nofrills/lincoln-debug": "^5.0.1",
     "@nofrills/types": "^4.0.7",
-    "deepmerge": "^3.3.0"
+    "deepmerge": "^4.0.0"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0"
