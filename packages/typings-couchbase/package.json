@@ -7,15 +7,15 @@
   "name": "@nofrills/typings-couchbase",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "6.0.1-next.0",
+  "version": "6.0.1-next.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
     "@nofrills/fs": "^6.0.1-next.0",
     "@nofrills/lincoln-debug": "^5.0.1",
-    "@nofrills/scrubs": "^6.0.1-next.0",
-    "@nofrills/typings": "^6.0.1-next.0",
+    "@nofrills/scrubs": "^6.0.1-next.1",
+    "@nofrills/typings": "^6.0.1-next.1",
     "cheerio": "^0.22.0",
     "isomorphic-fetch": "^2.2.1",
     "promise-parallel-throttle": "^3.3.0"
