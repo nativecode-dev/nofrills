@@ -19,7 +19,7 @@
     "coveralls": "^3.0.5",
     "cross-env": "^5.2.0",
     "cz-lerna-changelog": "^2.0.2",
-    "lerna": "^3.16.1",
+    "lerna": "^3.16.4",
     "mocha": "^6.2.0",
     "npm-check": "^5.9.0",
     "nyc": "^14.1.1",

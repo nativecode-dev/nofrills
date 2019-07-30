@@ -18,6 +18,7 @@
     "@nofrills/lincoln-debug": "^5.0.1",
     "@nofrills/patterns": "^2.1.1",
     "@nofrills/scrubs": "^6.0.1-next.0",
+    "@nofrills/types": "^5.0.0",
     "@nofrills/typings": "^6.0.1-next.0"
   },
   "peerDependencies": {
