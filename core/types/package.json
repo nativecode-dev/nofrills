@@ -7,7 +7,7 @@
   "name": "@nofrills/types",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "5.0.0",
+  "version": "5.0.1-next.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/validator": "^10.11.1"
+    "@types/validator": "^10.11.2"
   },
   "publishConfig": {
     "access": "public"
