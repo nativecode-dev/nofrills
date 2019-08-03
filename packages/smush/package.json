@@ -14,13 +14,13 @@
   "dependencies": {
     "@nofrills/fs": "^6.0.1-next.0",
     "@nofrills/lincoln-debug": "^5.0.1",
-    "@nofrills/scrubs": "^6.0.1-next.0",
+    "@nofrills/scrubs": "^6.0.1-next.1",
     "deepmerge": "^4.0.0",
     "shortid": "^2.2.14"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.6.9",
     "@types/shortid": "0.0.29"
   },
   "peerDependencies": {

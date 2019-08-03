@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "^12.6.8"
+    "@types/node": "^12.6.9"
   },
   "peerDependencies": {
     "@nofrills/lincoln": "^5.0.1"
