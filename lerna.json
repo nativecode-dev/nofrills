@@ -1,7 +1,7 @@
 {
   "command": {
     "run": {
-      "stream": false
+      "stream": true
     },
     "publish": {
       "allowBranch": [

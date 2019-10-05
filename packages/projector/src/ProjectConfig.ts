@@ -22,7 +22,7 @@ export class ProjectConfig {
     private readonly parent: Project,
     private readonly filepath: string,
     private readonly config: any,
-    private readonly caps: ProjectSupport[] = [],
+    private readonly caps: string[] = [],
   ) {
     this.log.debug('filepath', fs.relativeFrom(filepath))
     this.log.debug('caps', ...caps)
@@ -40,13 +40,13 @@ export class ProjectConfig {
     return this.parent
   }
 
-  static caps(config: any): ProjectSupport[] {
-    const caps: ProjectSupport[] = []
+  static caps(config: any): string[] {
+    const caps: string[] = []
 
     for (const key in ProjectSupport) {
       const value = ProjectSupport[key]
       if (config[value]) {
-        caps.push(ProjectSupport[key] as ProjectSupport)
+        caps.push(ProjectSupport[key])
       }
     }
 
@@ -65,7 +65,7 @@ export class ProjectConfig {
     return false
   }
 
-  supports(support: ProjectSupport): boolean {
+  supports(support: string): boolean {
     return this.caps.indexOf(support) > -1
   }
 }
