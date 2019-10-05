@@ -52,7 +52,7 @@
     "temp-directory": ".cache/nyc"
   },
   "scripts": {
-    "@lerna": "lerna",
+    "lerna": "lerna",
     "bootstrap": "lerna bootstrap",
     "build": "cli-tasks build",
     "build:ci": "cli-tasks build:ci",
