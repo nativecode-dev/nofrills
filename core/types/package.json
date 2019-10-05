@@ -14,11 +14,11 @@
   "dependencies": {
     "deepmerge": "^4.0.0",
     "validator": "^11.1.0",
-    "zipcodes-regex": "^1.0.2"
+    "zipcodes-regex": "^1.0.3"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/validator": "^10.11.2"
+    "@types/validator": "^10.11.3"
   },
   "publishConfig": {
     "access": "public"

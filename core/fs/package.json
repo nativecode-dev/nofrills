@@ -15,12 +15,12 @@
     "@nofrills/lincoln-debug": "^5.0.1",
     "glob": "^7.1.4",
     "mkdirp": "^0.5.1",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.5.3"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "^12.6.9"
+    "@types/node": "^12.7.11"
   },
   "peerDependencies": {
     "@nofrills/lincoln": "^5.0.1"

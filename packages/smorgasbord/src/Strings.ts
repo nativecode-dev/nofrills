@@ -1,10 +1,10 @@
-import { Dictionary } from '@nofrills/collections'
+import { DictionaryOf } from '@nofrills/collections'
 
 import Logger from './Logging'
 
 const logger = Logger.extend('strings')
 
-export const Strings: Dictionary<any> = {
+export const Strings: DictionaryOf<any> = {
   format: (message: string, ...args: any[]): string => {
     logger.debug('format', message, args)
 
@@ -14,7 +14,7 @@ export const Strings: Dictionary<any> = {
     }, message)
   },
 
-  formatObject: (message: string, object: Dictionary<string>): string => {
+  formatObject: (message: string, object: DictionaryOf<string>): string => {
     const keys = Object.keys(object)
     logger.debug('formatObject', message, keys)
 

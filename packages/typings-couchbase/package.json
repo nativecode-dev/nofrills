@@ -21,7 +21,7 @@
     "promise-parallel-throttle": "^3.3.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.12",
+    "@types/cheerio": "^0.22.13",
     "@types/isomorphic-fetch": "0.0.35"
   },
   "peerDependencies": {

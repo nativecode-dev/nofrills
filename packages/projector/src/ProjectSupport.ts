@@ -1,10 +1,12 @@
 export enum ProjectSupport {
-  Istanbul = 'nyc',
-  Lerna = 'lerna',
-  Main = 'main',
-  Release = 'release',
-  Scripts = 'scripts',
-  Typings = 'typings',
-  Workspaces = 'workspaces',
-  Version = 'version',
+  nyc,
+  lerna,
+  main,
+  release,
+  scripts,
+  typings,
+  workspaces,
+  version,
 }
+
+export type ProjectSupportStrings = keyof typeof ProjectSupport

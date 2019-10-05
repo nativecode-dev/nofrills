@@ -15,7 +15,7 @@
     "@nofrills/fs": "^6.0.1",
     "@nofrills/lincoln-debug": "^5.0.1",
     "@nofrills/types": "^5.0.1",
-    "mustache": "^3.0.1"
+    "mustache": "^3.1.0"
   },
   "devDependencies": {
     "@types/mustache": "^0.8.32"
