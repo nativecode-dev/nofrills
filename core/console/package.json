@@ -7,15 +7,15 @@
   "name": "@nofrills/console",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "5.0.2-next.0",
+  "version": "5.0.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
     "@nofrills/collections": "^5.0.1",
-    "@nofrills/fs": "^7.0.0-next.0",
-    "@nofrills/lincoln-debug": "^6.0.0-next.0",
-    "@nofrills/scrubs": "^6.0.2-next.0"
+    "@nofrills/fs": "^7.0.0",
+    "@nofrills/lincoln-debug": "^6.0.0",
+    "@nofrills/scrubs": "^6.0.2"
   },
   "peerDependencies": {
     "@nofrills/lincoln": "^5.0.1"

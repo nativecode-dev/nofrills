@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/fs@7.0.0-next.0...@nofrills/fs@7.0.0) (2019-10-05)
+
+**Note:** Version bump only for package @nofrills/fs
+
+
+
+
+
 ## [6.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/fs@6.0.1-next.1...@nofrills/fs@6.0.1) (2019-08-03)
 
 **Note:** Version bump only for package @nofrills/fs
