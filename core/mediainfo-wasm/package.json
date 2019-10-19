@@ -1,0 +1,25 @@
+{
+  "author": "opensource@nativecode.com",
+  "description": "MediaInfo WASM",
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/mediainfo-wasm",
+  "license": "MIT",
+  "main": "./lib/MediaInfoWasm.js",
+  "name": "@nofrills/mediainfo-wasm",
+  "private": false,
+  "version": "6.0.0-next.0",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nativecode-dev/nofrills.git"
+  },
+  "scripts": {
+    "build": "cli-tasks build"
+  }
+}

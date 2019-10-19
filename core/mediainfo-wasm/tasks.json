@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "build": [
+      "[download]"
+    ],
+    "download": [
+      "curl -sS https://mediaarea.net/download/binary/libmediainfo0/19.09/MediaInfo_DLL_19.09_JavaScript.zip > mediainfo.zip",
+      "unzip -p mediainfo.zip MediaInfo_DLL_JavaScript/MediaInfoWasm.js > lib/MediaInfoWasm.js",
+      "unzip -p mediainfo.zip MediaInfo_DLL_JavaScript/MediaInfoWasm.wasm > lib/MediaInfoWasm.wasm",
+      "rm mediainfo.zip"
+    ]
+  }
+}

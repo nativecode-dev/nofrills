@@ -13,13 +13,13 @@
   },
   "dependencies": {
     "@nofrills/collections": "^5.0.1",
-    "@nofrills/console": "^5.0.2-next.0",
-    "@nofrills/fs": "^7.0.0-next.0",
-    "@nofrills/lincoln-debug": "^6.0.0-next.0",
+    "@nofrills/console": "^5.0.2",
+    "@nofrills/fs": "^7.0.0",
+    "@nofrills/lincoln-debug": "^6.0.0",
     "@nofrills/patterns": "^2.1.1",
-    "@nofrills/scrubs": "^6.0.2-next.0",
-    "@nofrills/types": "^6.0.0-next.0",
-    "@nofrills/typings": "^7.0.0-next.0"
+    "@nofrills/scrubs": "^6.0.2",
+    "@nofrills/types": "^6.0.0",
+    "@nofrills/typings": "^7.0.0"
   },
   "peerDependencies": {
     "@nofrills/lincoln": "^5.0.1"

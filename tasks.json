@@ -64,6 +64,7 @@
       "prettier --loglevel silent --write \"*/*/src/**/*.ts\""
     ],
     "source:lint": [
+      "jsonsort *.json",
       "tslint --project tsconfig.json --config tslint.json"
     ],
     "test": [
