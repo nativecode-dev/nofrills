@@ -23,6 +23,7 @@
         "lerna",
         "mocha.opts",
         "nofrills.png",
+        "package-lock.json",
         "tasks.json",
         "tsconfig.json",
         "tsconfig.settings.json",
