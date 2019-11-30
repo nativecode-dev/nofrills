@@ -7,7 +7,7 @@
   "name": "@nofrills/projector",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "7.0.0-next.1",
+  "version": "7.0.0-next.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
@@ -15,7 +15,7 @@
     "@nofrills/collections": "^5.0.1",
     "@nofrills/console": "^5.0.2",
     "@nofrills/fs": "^7.0.0",
-    "@nofrills/lincoln-debug": "^6.0.0",
+    "@nofrills/lincoln-debug": "^6.1.0-next.0",
     "@nofrills/patterns": "^2.1.1",
     "@nofrills/scrubs": "^6.0.2",
     "@nofrills/types": "^6.0.0",
