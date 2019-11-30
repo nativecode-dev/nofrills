@@ -1,5 +1,5 @@
-import * as merge from 'deepmerge'
-import * as validator from 'validator'
+import merge from 'deepmerge'
+import validator from 'validator'
 
 import { Type } from './Type'
 import { TypeProperties } from './TypeProperties'
@@ -68,9 +68,11 @@ export class TypeParser {
     if (validator.isBoolean(value)) {
       return Boolean(value)
     }
+
     if (validator.isNumeric(value)) {
       return Number(value)
     }
+
     throw new TypeError(`${value} is not a supported deserialization type.`)
   }
 }
