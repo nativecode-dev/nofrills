@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.1](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@6.1.0-next.1...@nofrills/lincoln-debug@10.0.1) (2019-11-30)
+
+
+### Bug Fixes
+
+* **all:** updating all versions to 10.x ([e489f60](https://github.com/nativecode-dev/nofrills-debug/commit/e489f60))
+
+
+
+
+
 # [6.0.0](https://github.com/nativecode-dev/nofrills-debug/compare/@nofrills/lincoln-debug@6.0.0-next.0...@nofrills/lincoln-debug@6.0.0) (2019-10-05)
 
 **Note:** Version bump only for package @nofrills/lincoln-debug

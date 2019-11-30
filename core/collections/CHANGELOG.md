@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@5.0.1...@nofrills/collections@10.0.1) (2019-11-30)
+
+
+### Bug Fixes
+
+* **all:** updating all versions to 10.x ([e489f60](https://github.com/nativecode-dev/nofrills/commit/e489f60))
+
+
+
+
+
 ## [5.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/collections@4.0.7...@nofrills/collections@5.0.1) (2019-07-06)
 
 **Note:** Version bump only for package @nofrills/collections
