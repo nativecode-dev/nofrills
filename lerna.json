@@ -65,7 +65,7 @@
         "lib/"
       ],
       "loglevel": "verbose",
-      "message": "chore(release): publish",
+      "message": "[skip ci]: publish",
       "yes": true
     }
   },
