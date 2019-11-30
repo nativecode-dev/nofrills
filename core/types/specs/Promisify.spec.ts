@@ -20,7 +20,10 @@ describe('when turning node callback into promises', () => {
   })
 
   it('should fulfill callback with resolver', () => {
-    const promise = Promisify<boolean>(handler => NodeLikeFunction(true, handler), resolve => resolve(true))
+    const promise = Promisify<boolean>(
+      handler => NodeLikeFunction(true, handler),
+      resolve => resolve(true),
+    )
     expect(promise).to.eventually.be.fulfilled
   })
 

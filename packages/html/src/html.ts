@@ -33,7 +33,11 @@ export class Html {
   }
 
   public click(id: string | HTMLButtonElement, callback?: ElementCallback): HTMLButtonElement {
-    return $also(this.convert(id), x => x.click(), x => (callback ? callback(x) : void 0))
+    return $also(
+      this.convert(id),
+      x => x.click(),
+      x => (callback ? callback(x) : void 0),
+    )
   }
 
   public element<T extends HTMLElement>(id: string, selector?: string, callback?: ElementCallback): T {

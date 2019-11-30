@@ -154,18 +154,15 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
   }
 
   set<T>(keypath: string, value: T): ObjectNavigator {
-    const last = keypath.split('.').reduce(
-      (navigator, key) => {
-        const child = navigator.get(key, true)
-        if (child) {
-          return child
-        }
-        const property = ObjectNavigator.from({})
-        navigator.properties.set(key, property)
-        return property
-      },
-      this as ObjectNavigator,
-    )
+    const last = keypath.split('.').reduce((navigator, key) => {
+      const child = navigator.get(key, true)
+      if (child) {
+        return child
+      }
+      const property = ObjectNavigator.from({})
+      navigator.properties.set(key, property)
+      return property
+    }, this as ObjectNavigator)
 
     last.value = value
 

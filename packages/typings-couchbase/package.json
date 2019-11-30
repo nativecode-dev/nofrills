@@ -12,16 +12,16 @@
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/fs": "^7.0.0-next.0",
-    "@nofrills/lincoln-debug": "^6.0.0-next.0",
-    "@nofrills/scrubs": "^6.0.2-next.0",
-    "@nofrills/typings": "^7.0.0-next.0",
+    "@nofrills/fs": "^7.0.0",
+    "@nofrills/lincoln-debug": "^6.0.0",
+    "@nofrills/scrubs": "^6.0.2",
+    "@nofrills/typings": "^7.0.0",
     "cheerio": "^0.22.0",
     "isomorphic-fetch": "^2.2.1",
     "promise-parallel-throttle": "^3.3.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.13",
+    "@types/cheerio": "^0.22.14",
     "@types/isomorphic-fetch": "0.0.35"
   },
   "peerDependencies": {
