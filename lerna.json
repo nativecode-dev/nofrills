@@ -23,7 +23,6 @@
         "lerna",
         "mocha.opts",
         "nofrills.png",
-        "package-lock.json",
         "tasks.json",
         "tsconfig.json",
         "tsconfig.settings.json",
@@ -33,7 +32,7 @@
         "lib/"
       ],
       "loglevel": "verbose",
-      "message": "chore(release): publish",
+      "message": "[skip ci]: publish",
       "yes": true
     },
     "version": {
