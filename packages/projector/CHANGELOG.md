@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.2](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@10.0.1...@nofrills/projector@10.0.2) (2019-12-01)
+
+**Note:** Version bump only for package @nofrills/projector
+
+
+
+
+
+## [10.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@7.0.0-next.3...@nofrills/projector@10.0.1) (2019-11-30)
+
+
+### Bug Fixes
+
+* **all:** updating all versions to 10.x ([e489f60](https://github.com/nativecode-dev/nofrills/commit/e489f60))
+
+
+
+
+
+# [7.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@7.0.0-next.0...@nofrills/projector@7.0.0) (2019-10-05)
+
+**Note:** Version bump only for package @nofrills/projector
+
+
+
+
+
 ## [6.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@6.0.1-next.2...@nofrills/projector@6.0.1) (2019-08-03)
 
 **Note:** Version bump only for package @nofrills/projector

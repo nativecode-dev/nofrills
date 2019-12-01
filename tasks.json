@@ -9,6 +9,7 @@
       "[build:compile]"
     ],
     "build:compile": [
+      "[bootstrap]",
       "lerna run build"
     ],
     "ci:configure": [

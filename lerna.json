@@ -1,7 +1,7 @@
 {
   "command": {
     "run": {
-      "stream": false
+      "stream": true
     },
     "publish": {
       "allowBranch": [
@@ -24,6 +24,7 @@
         "mocha.opts",
         "nofrills.png",
         "package-lock.json",
+        "package.json",
         "tasks.json",
         "tsconfig.json",
         "tsconfig.settings.json",
@@ -33,7 +34,7 @@
         "lib/"
       ],
       "loglevel": "verbose",
-      "message": "chore(release): publish",
+      "message": "[skip ci]: publish",
       "yes": true
     },
     "version": {
@@ -57,6 +58,7 @@
         "mocha.opts",
         "nofrills.png",
         "package-lock.json",
+        "package.json",
         "tasks.json",
         "tsconfig.json",
         "tsconfig.settings.json",
@@ -66,7 +68,7 @@
         "lib/"
       ],
       "loglevel": "verbose",
-      "message": "chore(release): publish",
+      "message": "[skip ci]: publish",
       "yes": true
     }
   },

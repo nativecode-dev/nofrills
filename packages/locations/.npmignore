@@ -8,6 +8,7 @@ mocha.opts
 tasks.json
 tsconfig.build.json
 tsconfig.json
+*.tsbuildinfo
 
 *.map
 *.log

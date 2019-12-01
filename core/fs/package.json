@@ -7,20 +7,20 @@
   "name": "@nofrills/fs",
   "private": false,
   "types": "./lib/index.d.ts",
-  "version": "6.0.1",
+  "version": "10.0.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln-debug": "^5.0.1",
-    "glob": "^7.1.4",
+    "@nofrills/lincoln-debug": "^6.1.0-next.1",
+    "glob": "^7.1.6",
     "mkdirp": "^0.5.1",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.5.3"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "^12.6.9"
+    "@types/node": "^12.12.14"
   },
   "peerDependencies": {
     "@nofrills/lincoln": "^5.0.1"
