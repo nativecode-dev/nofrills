@@ -1,25 +1,25 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides some common pattern abstractions.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/patterns",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/patterns",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Provides some common pattern abstractions.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills.git"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/patterns",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
-  }
+  },
+  "types": "./lib/index.d.ts"
 }

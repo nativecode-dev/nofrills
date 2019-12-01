@@ -1,36 +1,36 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides a simple, Fetch-based HTTP client.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/http",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/http",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/lincoln-debug": "^6.1.0-next.1",
-    "@nofrills/scrubs": "^6.0.2",
-    "isomorphic-fetch": "^2.2.1"
-  },
-  "devDependencies": {
-    "@types/isomorphic-fetch": "0.0.35"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Provides a simple, Fetch-based HTTP client.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/http",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@nofrills/lincoln-debug": "^10.0.1",
+    "@nofrills/scrubs": "^10.0.1",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/isomorphic-fetch": "0.0.35"
   }
 }

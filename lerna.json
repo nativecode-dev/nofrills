@@ -1,8 +1,5 @@
 {
   "command": {
-    "run": {
-      "stream": true
-    },
     "publish": {
       "allowBranch": [
         "develop",
@@ -36,6 +33,9 @@
       "loglevel": "verbose",
       "message": "[skip ci]: publish",
       "yes": true
+    },
+    "run": {
+      "stream": true
     },
     "version": {
       "allowBranch": [

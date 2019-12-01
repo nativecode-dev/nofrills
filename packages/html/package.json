@@ -1,25 +1,25 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides some HTML utility functions.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/html",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/html",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.2",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Provides some HTML utility functions.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/html",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
-  }
+  },
+  "types": "./lib/index.d.ts"
 }

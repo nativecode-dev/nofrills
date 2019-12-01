@@ -1,34 +1,34 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides a simple abstraction for console application lifecycle management.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/console",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/console",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/collections": "^5.0.1",
-    "@nofrills/fs": "^7.0.0",
-    "@nofrills/lincoln-debug": "^6.1.0-next.1",
-    "@nofrills/scrubs": "^6.0.2"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Provides a simple abstraction for console application lifecycle management.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/console",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@nofrills/collections": "^10.0.1",
+    "@nofrills/fs": "^10.0.1",
+    "@nofrills/lincoln-debug": "^10.0.1",
+    "@nofrills/scrubs": "^10.0.1"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "^5.0.1"
   }
 }
