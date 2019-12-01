@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.2](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@10.0.1...@nofrills/projector@10.0.2) (2019-12-01)
+
+**Note:** Version bump only for package @nofrills/projector
+
+
+
+
+
 ## [10.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/projector@7.0.0-next.3...@nofrills/projector@10.0.1) (2019-11-30)
 
 
