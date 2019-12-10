@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/env",
-  "version": "10.1.0-next.0",
+  "version": "10.1.0-next.1",
   "description": "Provides a simple conversion from config object to environment variable.",
   "license": "MIT",
   "private": false,
