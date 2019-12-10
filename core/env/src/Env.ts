@@ -5,7 +5,8 @@ import uppercamelcase from 'uppercamelcase'
 import { Is, ObjectNavigator } from '@nofrills/types'
 
 import { EnvFilter } from './EnvFilter'
-import { EnvOptions, EnvCaseOptions } from './EnvOptions'
+import { EnvOptions } from './EnvOptions'
+import { EnvCaseOptions } from './EnvCaseOptions'
 import { EnvOverride } from './EnvOverride'
 import { EnvTransform } from './EnvTransform'
 

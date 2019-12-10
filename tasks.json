@@ -76,10 +76,6 @@
     "test": [
       "[build]",
       "nyc mocha --opts mocha.opts"
-    ],
-    "upgrade": [
-      "npm-check -y",
-      "lerna run upgrade"
     ]
   }
 }

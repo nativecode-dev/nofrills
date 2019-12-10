@@ -21,7 +21,7 @@
     "start": "cli-tasks start",
     "test": "cli-tasks test",
     "test:ci": "cli-tasks test:ci",
-    "upgrade": "cli-tasks upgrade"
+    "upgrade": "lernaupdate"
   },
   "nyc": {
     "all": true,
@@ -56,8 +56,8 @@
     "cz-lerna-changelog": "^2.0.2",
     "json-sort-cli": "^1.15.2",
     "lerna": "^3.19.0",
+    "lerna-update-wizard": "^0.17.5",
     "mocha": "^6.2.2",
-    "npm-check": "^5.9.0",
     "nyc": "^14.1.1",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
