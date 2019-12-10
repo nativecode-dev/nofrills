@@ -1,7 +1,7 @@
 export enum EnvCaseOptions {
   Default = 0,
-  CamelCase = 1,
+  CamelCase = Default,
   LowerCase = 2,
   PascalCase = 3,
-  UpperCase = Default,
+  UpperCase = 4,
 }
