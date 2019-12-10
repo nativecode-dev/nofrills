@@ -29,7 +29,7 @@
     "rxjs": "^6.5.3"
   },
   "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
+    "@nofrills/lincoln": "10.0.1"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",

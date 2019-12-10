@@ -29,7 +29,7 @@
     "mustache": "^3.1.0"
   },
   "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
+    "@nofrills/lincoln": "10.0.1"
   },
   "devDependencies": {
     "@types/mustache": "^0.8.32"

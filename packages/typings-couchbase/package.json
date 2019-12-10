@@ -32,7 +32,7 @@
     "promise-parallel-throttle": "^3.3.0"
   },
   "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
+    "@nofrills/lincoln": "10.0.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.14",

@@ -28,7 +28,7 @@
     "deepmerge": "^4.2.2"
   },
   "peerDependencies": {
-    "@nofrills/lincoln": "^4.0.5"
+    "@nofrills/lincoln": "10.0.1"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0"

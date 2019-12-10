@@ -23,6 +23,6 @@
   },
   "types": "./lib/index.d.ts",
   "peerDependencies": {
-    "@nofrills/lincoln": "^4.0.5"
+    "@nofrills/lincoln": "10.0.1"
   }
 }
