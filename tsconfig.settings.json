@@ -6,6 +6,8 @@
     "declarationMap": true,
     "diagnostics": false,
     "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "pretty": true,
     "sourceMap": true,
     "strict": true,
@@ -16,8 +18,6 @@
     ],
     "types": [
       "node"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node"
+    ]
   }
 }

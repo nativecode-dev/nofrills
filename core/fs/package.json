@@ -1,39 +1,39 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides a simple, Promise-based interface to the file system.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/fs",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/fs",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
+  "description": "Provides a simple, Promise-based interface to the file system.",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/fs",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "cli-tasks build",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/lincoln-debug": "^6.1.0-next.1",
+    "@nofrills/lincoln-debug": "^10.0.1",
     "glob": "^7.1.6",
     "mkdirp": "^0.5.1",
     "rxjs": "^6.5.3"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "10.0.1"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^12.12.14"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nativecode-dev/nofrills"
-  },
-  "scripts": {
-    "build": "cli-tasks build",
-    "upgrade": "cli-tasks upgrade"
   }
 }

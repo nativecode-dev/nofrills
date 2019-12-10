@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.settings",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -11,6 +10,7 @@
       "node_modules/@types"
     ]
   },
+  "extends": "./tsconfig.settings",
   "include": [
     "core/*/src/**/*.ts",
     "packages/*/src/**/*.ts"

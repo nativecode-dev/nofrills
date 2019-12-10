@@ -1,33 +1,33 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Smattering of useful (sometimes) code.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smorgasbord",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/smorgasbord",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/lincoln-debug": "^6.1.0-next.1",
-    "@nofrills/types": "^6.0.0",
-    "moment": "^2.24.0"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Smattering of useful (sometimes) code.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smorgasbord",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@nofrills/lincoln-debug": "^10.0.1",
+    "@nofrills/types": "^10.0.2",
+    "moment": "^2.24.0"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "10.0.1"
   }
 }

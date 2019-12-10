@@ -1,41 +1,41 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Implements an importer to convert Couchbase documentation into TypeScript declarations.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/typings/typings-couchbase",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/typings-couchbase",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills/issues"
-  },
-  "dependencies": {
-    "@nofrills/fs": "^7.0.0",
-    "@nofrills/lincoln-debug": "^6.1.0-next.1",
-    "@nofrills/scrubs": "^6.0.2",
-    "@nofrills/typings": "^7.0.0",
-    "cheerio": "^0.22.0",
-    "isomorphic-fetch": "^2.2.1",
-    "promise-parallel-throttle": "^3.3.0"
-  },
-  "devDependencies": {
-    "@types/cheerio": "^0.22.14",
-    "@types/isomorphic-fetch": "0.0.35"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Implements an importer to convert Couchbase documentation into TypeScript declarations.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nativecode-dev/nofrills.git"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/typings/typings-couchbase",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@nofrills/fs": "^10.0.1",
+    "@nofrills/lincoln-debug": "^10.0.1",
+    "@nofrills/scrubs": "^10.0.1",
+    "@nofrills/typings": "^10.0.1",
+    "cheerio": "^0.22.0",
+    "isomorphic-fetch": "^2.2.1",
+    "promise-parallel-throttle": "^3.3.0"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "10.0.1"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.14",
+    "@types/isomorphic-fetch": "0.0.35"
   }
 }

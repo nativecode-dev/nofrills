@@ -1,28 +1,28 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Provides a simple logger to the console.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/lincoln-console",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/lincoln-console",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
-  "bugs": {
-    "url": "https://github.com/nativecode-dev/nofrills-console/issues"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^4.0.5"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Provides a simple logger to the console.",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/nativecode-dev/nofrills-console"
   },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/nofrills-console/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/lincoln-console",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
+  "peerDependencies": {
+    "@nofrills/lincoln": "10.0.1"
   }
 }

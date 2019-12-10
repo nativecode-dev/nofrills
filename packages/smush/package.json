@@ -1,40 +1,40 @@
 {
-  "author": "opensource@nativecode.com",
-  "description": "Smushes things together.",
-  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush",
-  "license": "MIT",
-  "main": "./lib/index.js",
   "name": "@nofrills/smush",
-  "private": false,
-  "types": "./lib/index.d.ts",
   "version": "10.0.1",
+  "description": "Smushes things together.",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nativecode-dev/nofrills"
+  },
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills/issues"
   },
+  "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/packages/smush",
+  "author": "opensource@nativecode.com",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "cli-tasks build",
+    "upgrade": "cli-tasks upgrade"
+  },
+  "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/fs": "^7.0.0",
-    "@nofrills/lincoln-debug": "^6.1.0-next.1",
-    "@nofrills/scrubs": "^6.0.2",
+    "@nofrills/fs": "^10.0.1",
+    "@nofrills/lincoln-debug": "^10.0.1",
+    "@nofrills/scrubs": "^10.0.1",
     "deepmerge": "^4.2.2",
     "shortid": "^2.2.15"
+  },
+  "peerDependencies": {
+    "@nofrills/lincoln": "10.0.1"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
     "@types/node": "^12.12.14",
     "@types/shortid": "0.0.29"
-  },
-  "peerDependencies": {
-    "@nofrills/lincoln": "^5.0.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nativecode-dev/nofrills"
-  },
-  "scripts": {
-    "build": "cli-tasks build",
-    "upgrade": "cli-tasks upgrade"
   }
 }
