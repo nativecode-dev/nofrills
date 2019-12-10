@@ -18,8 +18,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "upgrade": "cli-tasks upgrade"
+    "build": "cli-tasks build"
   },
   "types": "./lib/index.d.ts"
 }
