@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/env",
-  "version": "10.1.0",
+  "version": "10.1.0-next.2",
   "description": "Provides a simple conversion from config object to environment variable.",
   "license": "MIT",
   "private": false,
@@ -13,15 +13,14 @@
   },
   "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/env",
   "author": "opensource@nativecode.com",
-  "main": "./lib/env.js",
+  "main": "./lib/index.js",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build",
-    "upgrade": "cli-tasks upgrade"
+    "build": "cli-tasks build"
   },
-  "types": "./lib/env.d.ts",
+  "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/collections": "^10.0.1",
     "@nofrills/types": "^10.0.2",
