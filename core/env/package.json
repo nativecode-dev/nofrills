@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/nativecode-dev/nofrills/tree/master/core/env",
   "author": "opensource@nativecode.com",
-  "main": "./lib/env.js",
+  "main": "./lib/index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -21,7 +21,7 @@
     "build": "cli-tasks build",
     "upgrade": "cli-tasks upgrade"
   },
-  "types": "./lib/env.d.ts",
+  "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/collections": "^10.0.1",
     "@nofrills/types": "^10.0.2",
