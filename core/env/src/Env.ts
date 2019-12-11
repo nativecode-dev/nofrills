@@ -24,11 +24,11 @@ export class Env {
 
   constructor(config: object, options?: Partial<EnvOptions>) {
     this.navigator = ObjectNavigator.from(config)
-    this.options = deepmerge.all([Defaults, options || {}]) as EnvOptions
+    this.options = deepmerge.all<EnvOptions>([Defaults, options || {}])
   }
 
   static from(options: Partial<EnvOptions> = {}, filter?: EnvFilter, transform?: EnvTransform): Env {
-    const opts = deepmerge.all([Defaults, options]) as EnvOptions
+    const opts = deepmerge.all<EnvOptions>([Defaults, options])
     const root = ObjectNavigator.from({})
 
     const _filter = filter ? filter : () => true
@@ -65,7 +65,7 @@ export class Env {
   }
 
   static merge(configs: object[], options?: Partial<EnvOptions>): Env {
-    const config = deepmerge.all(configs) as EnvOptions
+    const config = deepmerge.all<EnvOptions>(configs)
     return new Env(config, options)
   }
 
