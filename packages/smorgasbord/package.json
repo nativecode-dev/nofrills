@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/smorgasbord",
-  "version": "11.0.0-next.0",
+  "version": "11.0.0-next.1",
   "description": "Smattering of useful (sometimes) code.",
   "license": "MIT",
   "private": false,
@@ -22,7 +22,7 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/lincoln-debug": "^11.0.0-next.0",
+    "@nofrills/lincoln-debug": "^11.0.0-next.1",
     "@nofrills/types": "^10.0.2",
     "moment": "^2.24.0"
   }

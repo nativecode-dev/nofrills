@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/scrubs",
-  "version": "11.0.0-next.0",
+  "version": "11.0.0-next.1",
   "description": "Scrubs an object of sensitive data.",
   "license": "MIT",
   "private": false,
@@ -22,8 +22,8 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/lincoln": "^11.0.0-next.0",
-    "@nofrills/lincoln-debug": "^11.0.0-next.0",
+    "@nofrills/lincoln": "^11.0.0-next.1",
+    "@nofrills/lincoln-debug": "^11.0.0-next.1",
     "@nofrills/types": "^10.0.2",
     "deepmerge": "^4.2.2"
   },
