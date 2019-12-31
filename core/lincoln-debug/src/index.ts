@@ -1,7 +1,9 @@
+export * from '@nofrills/lincoln'
+
 import debug from 'debug'
 
-import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 import { RegistryEntries } from '@nofrills/collections'
+import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 
 interface DebugCache {
   [key: string]: debug.IDebugger
@@ -9,7 +11,7 @@ interface DebugCache {
 
 const Cache: DebugCache = {}
 
-export const DebugInterceptor: Interceptor = (log: Log): Promise<Log> => {
+export const DebugInterceptor: Interceptor = (log: Log): Log => {
   const logger: debug.IDebugger = Cache[log.namespace]
     ? Cache[log.namespace]
     : (Cache[log.namespace] = debug(log.namespace))
@@ -19,7 +21,7 @@ export const DebugInterceptor: Interceptor = (log: Log): Promise<Log> => {
   } else {
     logger(log.parameters)
   }
-  return Promise.resolve(log)
+  return log
 }
 
 export const CreateOptions = (

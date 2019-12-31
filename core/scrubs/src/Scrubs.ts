@@ -4,7 +4,7 @@ import { Types } from '@nofrills/types'
 
 import Logger from './Logger'
 
-export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => Promise<T>
+export type Scrubber<T> = (value: T, options: ScrubsOptions, instance: Scrubs) => T
 export type Scrubbers = Array<Scrubber<any>>
 
 export interface ScrubsOptions {
@@ -23,7 +23,7 @@ export class Scrubs {
   private readonly registry: Map<string, Scrubbers>
 
   constructor(options: Partial<ScrubsOptions> = {}) {
-    this.options = merge.all([defaults, options]) as ScrubsOptions
+    this.options = merge.all<ScrubsOptions>([defaults, options])
     this.registry = new Map<string, Scrubbers>()
   }
 
@@ -53,14 +53,14 @@ export class Scrubs {
     return this
   }
 
-  async scrub<T>(value: T, type?: string): Promise<T> {
+  scrub<T>(value: T, type?: string): T {
     if (value) {
       const typedef: string = type || Types.from(value)
       this.log.debug(`scrub.pre:${typedef}`, value)
 
       return (this.registry.get(typedef) || [])
         .reverse()
-        .reduce(async (previous, scrubber) => scrubber(await previous, this.options, this), Promise.resolve(value))
+        .reduce((previous, scrubber) => scrubber(previous, this.options, this), value)
     }
     return value
   }

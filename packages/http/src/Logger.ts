@@ -1,5 +1,4 @@
-import { CreateLogger, CreateOptions } from '@nofrills/lincoln-debug'
-import { ScrubsInterceptor } from '@nofrills/scrubs'
+import { CreateLogger, CreateOptions, ScrubsInterceptor } from '@nofrills/scrubs'
 
 const options = CreateOptions('nofrills:http')
 options.interceptors.register('scrubs', ScrubsInterceptor)

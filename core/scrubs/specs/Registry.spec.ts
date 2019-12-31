@@ -16,17 +16,17 @@ describe('when using scrubs registry', () => {
       expect(scrubbers.length).to.equal(1)
       expect(value).to.equal(message)
       done()
-      return Promise.resolve(value)
+      return value
     })
 
-    scrubs.scrub(message).catch(console.error)
+    scrubs.scrub(message)
   })
 
-  it('should register multiple type handlers', async () => {
-    const dateHandler: Scrubber<Date> = (value: Date) => Promise.resolve(value)
-    const stringHandler: Scrubber<string> = (value: string) => Promise.resolve(`${value}-test`)
+  it('should register multiple type handlers', () => {
+    const dateHandler: Scrubber<Date> = (value: Date) => value
+    const stringHandler: Scrubber<string> = (value: string) => `${value}-test`
     const scrubs = new Scrubs()
-    const result = await scrubs
+    const result = scrubs
       .register('string', stringHandler)
       .register('date', dateHandler)
       .scrub(data.apikey, 'string')
@@ -42,9 +42,9 @@ describe('when using scrubs registry', () => {
       const scrubbers = scrubs.get('string') || []
       expect(scrubbers.length).to.equal(0)
       done()
-      return Promise.resolve(value)
+      return value
     })
 
-    scrubs.scrub(message).catch(console.error)
+    scrubs.scrub(message)
   })
 })

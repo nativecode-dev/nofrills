@@ -14,8 +14,8 @@ export function CreateScrubs(options?: Partial<ScrubsOptions>): Scrubs {
 
 export const Registry: Scrubs = CreateScrubs()
 
-export const scrub = async (value: any): Promise<any> => {
-  const result: any = await Registry.scrub<any>(value)
+export const scrub = <T extends any>(value: any): T => {
+  const result: T = Registry.scrub<T>(value)
   Logger.debug('scrub', value, result)
   return result
 }
