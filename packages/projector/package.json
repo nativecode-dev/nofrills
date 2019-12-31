@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/projector",
-  "version": "10.0.2",
+  "version": "11.0.0-next.0",
   "description": "Provides a library for managing code projects.",
   "license": "MIT",
   "private": false,
@@ -23,13 +23,12 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/collections": "^10.0.1",
-    "@nofrills/console": "^10.0.1",
-    "@nofrills/fs": "^10.0.1",
-    "@nofrills/lincoln-debug": "^10.0.1",
+    "@nofrills/console": "^11.0.0-next.0",
+    "@nofrills/fs": "^11.0.0-next.0",
+    "@nofrills/lincoln-debug": "^11.0.0-next.0",
     "@nofrills/patterns": "^10.0.1",
-    "@nofrills/scrubs": "^10.0.1",
+    "@nofrills/scrubs": "^11.0.0-next.0",
     "@nofrills/types": "^10.0.2",
-    "@nofrills/typings": "^10.0.1"
-  },
-  "peerDependencies": {}
+    "@nofrills/typings": "^11.0.0-next.0"
+  }
 }
