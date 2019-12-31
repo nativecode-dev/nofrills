@@ -1,13 +1,15 @@
+export * from '@nofrills/lincoln'
+
 import { Filter, Interceptor, Lincoln, LincolnRegistry, Log, Options } from '@nofrills/lincoln'
 
-export const ConsoleInterceptor: Interceptor = (log: Log): Promise<Log> => {
+export const ConsoleInterceptor: Interceptor = (log: Log): Log => {
   const logger = console.log
   if (log.parameters.length && typeof log.parameters[0] === 'string') {
     logger(`${log.namespace} -> ${log.parameters[0]}`, log.parameters.slice(1))
   } else {
     logger(log.namespace, log.parameters)
   }
-  return Promise.resolve(log)
+  return log
 }
 
 export const CreateOptions = (namespace: string): Options => {

@@ -30,9 +30,7 @@
     "isomorphic-fetch": "^2.2.1",
     "promise-parallel-throttle": "^3.3.0"
   },
-  "peerDependencies": {
-    "@nofrills/lincoln": "10.0.1"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@types/cheerio": "^0.22.14",
     "@types/isomorphic-fetch": "0.0.35"

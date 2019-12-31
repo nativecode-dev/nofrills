@@ -19,7 +19,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should create log object', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
         expect(log.parameters[0]).to.equal(MESSAGE)
         done()
@@ -38,7 +38,7 @@ describe('when using Lincoln', () => {
     it('should create log with no namespace', done => {
       const sut: Lincoln = new Lincoln(
         Context.intercept(
-          async (log: Log) => {
+          (log: Log) => {
             expect(log.namespace).to.equal('debug')
             done()
             return log
@@ -52,7 +52,7 @@ describe('when using Lincoln', () => {
     it('should create log with no tag', done => {
       const sut: Lincoln = new Lincoln(
         Context.intercept(
-          async (log: Log) => {
+          (log: Log) => {
             expect(log.namespace).to.equal('nativecode:lincoln:test')
             done()
             return log
@@ -74,7 +74,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should extend instance', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:${EXTENSION}:debug`)
         expect(log.parameters[0]).to.equal(MESSAGE)
         done()
@@ -87,7 +87,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should log object', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.parameters[0].message).to.equal(MESSAGE)
         done()
         return log
@@ -97,7 +97,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should log object with no namespace', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.parameters[0].message).to.equal(MESSAGE)
         done()
         return log
@@ -107,7 +107,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should log empty parameters', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.parameters.length).to.equal(0)
         done()
         return log
@@ -119,7 +119,7 @@ describe('when using Lincoln', () => {
 
   describe('to log different types of messages', () => {
     it('should call debug', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:debug`)
         done()
         return log
@@ -129,7 +129,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should call error', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:error`)
         done()
         return log
@@ -139,7 +139,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should call fatal', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:fatal`)
         done()
         return log
@@ -149,7 +149,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should call info', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:info`)
         done()
         return log
@@ -159,7 +159,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should call silly', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:silly`)
         done()
         return log
@@ -169,7 +169,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should call trace', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:trace`)
         done()
         return log
@@ -179,7 +179,7 @@ describe('when using Lincoln', () => {
     })
 
     it('should call warn', done => {
-      const options: Options = Context.intercept(async (log: Log) => {
+      const options: Options = Context.intercept((log: Log) => {
         expect(log.namespace).to.equal(`${NAMESPACE}:warn`)
         done()
         return log
@@ -196,7 +196,7 @@ describe('when using Lincoln', () => {
         if (filtered) {
           done()
         }
-        return Promise.resolve(filtered)
+        return filtered
       }
 
       const options: Options = Context.filter(filter)
@@ -210,7 +210,7 @@ describe('when using Lincoln', () => {
         if (log.type === LogMessageType.warn) {
           done()
         }
-        return Promise.resolve(false)
+        return false
       }
 
       const options: Options = Context.filter(filter)
@@ -222,7 +222,7 @@ describe('when using Lincoln', () => {
 
   describe('to intercept messages', () => {
     it('should intercept message', done => {
-      const interceptor = async (log: Log) => {
+      const interceptor = (log: Log) => {
         done()
         return log
       }

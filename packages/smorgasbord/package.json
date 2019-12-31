@@ -26,7 +26,5 @@
     "@nofrills/types": "^10.0.2",
     "moment": "^2.24.0"
   },
-  "peerDependencies": {
-    "@nofrills/lincoln": "10.0.1"
-  }
+  "peerDependencies": {}
 }

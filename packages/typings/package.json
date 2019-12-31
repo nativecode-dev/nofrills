@@ -27,9 +27,7 @@
     "@nofrills/types": "^10.0.2",
     "mustache": "^3.1.0"
   },
-  "peerDependencies": {
-    "@nofrills/lincoln": "10.0.1"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@types/mustache": "^0.8.32"
   }

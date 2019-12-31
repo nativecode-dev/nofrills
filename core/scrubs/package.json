@@ -22,13 +22,12 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
+    "@nofrills/lincoln": "^10.0.1",
     "@nofrills/lincoln-debug": "^10.0.1",
     "@nofrills/types": "^10.0.2",
     "deepmerge": "^4.2.2"
   },
-  "peerDependencies": {
-    "@nofrills/lincoln": "10.0.1"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@types/deepmerge": "^2.2.0"
   }

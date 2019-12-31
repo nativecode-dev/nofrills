@@ -21,7 +21,8 @@
     "build": "cli-tasks build"
   },
   "types": "./lib/index.d.ts",
-  "peerDependencies": {
+  "dependencies": {
     "@nofrills/lincoln": "10.0.1"
-  }
+  },
+  "peerDependencies": {}
 }

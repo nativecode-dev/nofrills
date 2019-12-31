@@ -10,9 +10,9 @@ describe('when working with multiple log writers', () => {
   const options = 'test'
 
   const CreateLogger = (): LincolnLog => ({
-    write: (log: Log): Promise<boolean> => {
+    write: (log: Log): boolean => {
       logs.push(log)
-      return Promise.resolve(true)
+      return true
     },
   })
 

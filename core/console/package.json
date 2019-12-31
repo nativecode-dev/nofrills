@@ -27,7 +27,5 @@
     "@nofrills/lincoln-debug": "^10.0.1",
     "@nofrills/scrubs": "^10.0.1"
   },
-  "peerDependencies": {
-    "@nofrills/lincoln": "10.0.1"
-  }
+  "peerDependencies": {}
 }
