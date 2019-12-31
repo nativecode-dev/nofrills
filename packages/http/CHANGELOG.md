@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/http@11.0.0-next.1...@nofrills/http@11.0.0) (2019-12-31)
+
+**Note:** Version bump only for package @nofrills/http
+
+
+
+
+
 ## [10.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/http@6.1.0-next.2...@nofrills/http@10.0.1) (2019-11-30)
 
 

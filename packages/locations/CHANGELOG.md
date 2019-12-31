@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://github.com/nativecode-dev/nofrills/compare/@nofrills/locations@10.1.0-next.1...@nofrills/locations@10.1.0) (2019-12-31)
+
+**Note:** Version bump only for package @nofrills/locations
+
+
+
+
+
 ## [10.0.1](https://github.com/nativecode-dev/nofrills/compare/@nofrills/locations@3.1.0-next.0...@nofrills/locations@10.0.1) (2019-11-30)
 
 

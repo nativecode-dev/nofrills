@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/lincoln-console",
-  "version": "11.0.0-next.1",
+  "version": "11.0.0",
   "description": "Provides a simple logger to the console.",
   "license": "MIT",
   "private": false,
@@ -22,6 +22,6 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/lincoln": "^11.0.0-next.1"
+    "@nofrills/lincoln": "^11.0.0"
   }
 }
