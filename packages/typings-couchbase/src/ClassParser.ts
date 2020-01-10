@@ -86,7 +86,7 @@ export class ClassParser extends Parser<Class> {
           .text()
           .trim(),
       )
-      const method: Method = { name: id, parameters: {}, return: returns }
+      const method: Method = { name: id!, parameters: {}, return: returns }
 
       $method
         .next()
@@ -140,7 +140,7 @@ export class ClassParser extends Parser<Class> {
         ),
       )
 
-      properties[name] = { name, readonly: false, type: this.resolve(...types) }
+      properties[name!] = { name: name!, readonly: false, type: this.resolve(...types) }
     })
   }
 
