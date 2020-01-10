@@ -13,6 +13,7 @@
     "build:ci": "cli-tasks build:ci",
     "commit": "cli-tasks commit",
     "lerna": "lerna",
+    "prepare": "lerna bootstrap",
     "release": "cli-tasks release",
     "release:canary": "cli-tasks release:canary",
     "release:pre": "cli-tasks release:pre",
@@ -41,6 +42,79 @@
     "reporter": "text",
     "sourceMap": true,
     "temp-directory": ".cache/nyc"
+  },
+  "tasks": {
+    "build": [
+      "[clean]",
+      "[source]",
+      "[build:compile]"
+    ],
+    "build:compile": [
+      "lerna run build"
+    ],
+    "ci:build": [
+      "[build:compile]"
+    ],
+    "ci:configure": [
+      ".citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}",
+      ".citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}"
+    ],
+    "ci:install": [
+      "npm ci"
+    ],
+    "ci:publish:canary": [
+      "[ci:configure]",
+      "[ci:test]",
+      ".citools/lerna-publish canary"
+    ],
+    "ci:publish:prerelease": [
+      "[ci:configure]",
+      "[ci:test]",
+      ".citools/lerna-publish prerelease"
+    ],
+    "ci:publish:release": [
+      "[ci:configure]",
+      "[ci:test]",
+      ".citools/lerna-publish release"
+    ],
+    "ci:test": [
+      "[ci:build]",
+      "nyc mocha --opts .citools/mocha.opts"
+    ],
+    "clean": [
+      "rimraf .cache",
+      "rimraf core/*/lib",
+      "rimraf packages/*/lib",
+      "rimraf **/*.tsbuildinfo"
+    ],
+    "commit": [
+      "git add -A .",
+      "git-cz"
+    ],
+    "coverage": [
+      "nyc report --reporter=text-lcov | coveralls"
+    ],
+    "install": [
+      "npm install"
+    ],
+    "source": [
+      "[source:format]",
+      "[source:lint]"
+    ],
+    "source:format": [
+      "jsonsort *.json",
+      "jsonsort core/*/*.json",
+      "jsonsort packages/*/*.json",
+      "prettier --loglevel silent --write \"*/*/specs/**/*.ts\"",
+      "prettier --loglevel silent --write \"*/*/src/**/*.ts\""
+    ],
+    "source:lint": [
+      "tslint --project tsconfig.json --config tslint.json"
+    ],
+    "test": [
+      "[build]",
+      "nyc mocha --opts mocha.opts"
+    ]
   },
   "devDependencies": {
     "@nofrills/tasks": "^9.0.2",
