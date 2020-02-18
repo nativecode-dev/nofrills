@@ -79,7 +79,7 @@
     ],
     "ci:test": [
       "[ci:build]",
-      "nyc mocha --opts .mocharc.json"
+      "nyc mocha"
     ],
     "clean": [
       "rimraf .cache",
@@ -113,7 +113,7 @@
     ],
     "test": [
       "[build]",
-      "nyc mocha --opts .mocharc.json"
+      "nyc mocha"
     ],
     "upgrade": [
       "npx npm-check -y",
