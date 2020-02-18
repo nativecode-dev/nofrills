@@ -1,8 +1,6 @@
 import { fs } from '@nofrills/fs'
 import { Registry } from '@nofrills/collections'
 
-import Logger from './Logger'
-
 import { Project } from './Project'
 import { PluginHost } from './PluginHost'
 import { ProjectSupport } from './ProjectSupport'
@@ -16,17 +14,12 @@ export type ProjectConfigHandler = (
 export const ConfigHandlerRegistry: Registry<ProjectConfigHandler> = new Registry<ProjectConfigHandler>()
 
 export class ProjectConfig {
-  protected readonly log = Logger.extend('config').extend(fs.basename(this.path))
-
   constructor(
     private readonly parent: Project,
     private readonly filepath: string,
     private readonly config: any,
     private readonly caps: string[] = [],
-  ) {
-    this.log.debug('filepath', fs.relativeFrom(filepath))
-    this.log.debug('caps', ...caps)
-  }
+  ) {}
 
   get name(): string {
     return this.config['name'] ? this.config['name'] : undefined
@@ -59,7 +52,6 @@ export class ProjectConfig {
 
   async save(): Promise<boolean> {
     if (await fs.save(this.filepath, this.config)) {
-      this.log.debug(`${this.name}:save`, this.filepath)
       return true
     }
     return false

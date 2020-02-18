@@ -1,7 +1,5 @@
 import { EventEmitter } from 'events'
 
-import Logger from './Logger'
-
 import { IConsole } from './IConsole'
 import { ConsoleOptions } from './ConsoleOptions'
 import { ProcessArgs } from './ProcessArgs'
@@ -10,8 +8,6 @@ type Rejector = (reason?: any) => void
 type Resolver = (value?: void | PromiseLike<void> | undefined) => void
 
 export class Console<T extends ConsoleOptions> extends EventEmitter implements IConsole {
-  private readonly logger = Logger
-
   private instance: Promise<void> | undefined
 
   protected constructor(protected readonly options: T, public readonly args: ProcessArgs) {
@@ -28,7 +24,6 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
 
   async start(): Promise<void> {
     if (this.instance === undefined) {
-      this.logger.info(`starting "${this.args.exe}":`, ...this.args.normalized)
       return (this.instance = new Promise<void>(async (resolve, reject) => {
         process.on('uncaughtException', () => this.shutdown(resolve, reject, 'uncaught-exception'))
 
@@ -48,8 +43,6 @@ export class Console<T extends ConsoleOptions> extends EventEmitter implements I
   }
 
   private shutdown = async (resolve: Resolver, reject: Rejector, reason: string) => {
-    this.logger.info('[SHUTDOWN]', process.pid, process.exitCode, reason)
-
     if (process.exitCode && process.exitCode !== 0) {
       reject(new Error(`${process.exitCode}: ${reason}`))
     } else {

@@ -23,8 +23,6 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/fs": "^11.0.0",
-    "@nofrills/lincoln-debug": "^11.0.0",
-    "@nofrills/scrubs": "^11.0.0",
     "deepmerge": "^4.2.2",
     "shortid": "^2.2.15"
   },

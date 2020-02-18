@@ -1,7 +1,5 @@
 import { ChildProcess, ExecOptions, SpawnOptions, exec, spawn } from 'child_process'
 
-import Logger from './Logger'
-
 export interface CommandOptions {
   args: string[]
   cwd?: string
@@ -23,7 +21,6 @@ const DefaultOptions: Partial<CommandOptions> = {
 }
 
 export class Command {
-  private readonly log = Logger.extend('command')
   private readonly options: CommandOptions
 
   protected constructor(options: Partial<CommandOptions>) {
@@ -52,7 +49,6 @@ export class Command {
       })
 
       child.on('uncaughtException', (error: Error) => {
-        this.log.error('uncaught-exception', error)
         if (collectResult === false) {
           reject(error)
         }
@@ -67,9 +63,6 @@ export class Command {
     }
 
     const child = spawn(this.options.exe, this.options.args, options)
-
-    child.on('uncaughtException', (error: Error) => this.log.error(error))
-
     return Promise.resolve(child)
   }
 

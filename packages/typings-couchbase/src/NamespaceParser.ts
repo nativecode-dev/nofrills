@@ -6,8 +6,6 @@ import { ClassParser } from './ClassParser'
 import { Couchbase } from './CouchbaseProvider'
 
 export class NamespaceParser extends Parser<Namespace> {
-  private readonly log = this.baselog.extend('namespace')
-
   constructor(private readonly couchbase: Couchbase, protected readonly name: string) {
     super(name, couchbase.url('classes.list.html'))
   }
@@ -29,7 +27,6 @@ export class NamespaceParser extends Parser<Namespace> {
 
   private async classes(namespace: Namespace): Promise<Classes> {
     const $ = await this.html(this.url)
-    this.log.debug('classes', this.url.toString())
 
     const dl = $('div#main section article dl:not([class])')
     const list = Array.from($('dt a', dl[0]))
@@ -40,8 +37,6 @@ export class NamespaceParser extends Parser<Namespace> {
         const name = $(a)
           .text()
           .trim()
-
-        this.log.debug('class', name, page)
 
         const parser = new ClassParser(this.couchbase, namespace, name, page)
         return () => parser.parse()

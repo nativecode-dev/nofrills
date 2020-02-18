@@ -1,13 +1,9 @@
 import { Class, Constructor, Method, Methods, Namespace, Parameters, Properties, Type } from '@nofrills/typings'
 
-import Logger from './Logger'
-
 import { Parser } from './Parser'
 import { Couchbase } from './CouchbaseProvider'
 
 export class ClassParser extends Parser<Class> {
-  private readonly log = Logger.extend('class-parser')
-
   constructor(
     protected readonly couchbase: Couchbase,
     private readonly namespace: Namespace,
@@ -15,13 +11,10 @@ export class ClassParser extends Parser<Class> {
     page: string,
   ) {
     super(name, couchbase.url(page))
-    this.log = this.baselog.extend('class')
   }
 
   protected async exec(): Promise<Class> {
     const $ = await this.html(this.url)
-
-    this.log.debug('parse', this.url.toString())
 
     const $class: Class = {
       constructors: [],
@@ -58,8 +51,6 @@ export class ClassParser extends Parser<Class> {
         case 'Type Definitions':
           break
       }
-
-      this.log.trace(`${this.name}:${section}`)
     })
 
     return $class

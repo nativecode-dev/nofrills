@@ -1,17 +1,12 @@
-import Logger from './Logger'
-
 export interface ProcessArgsFilter {
   (argument: string, index: number): boolean
 }
 
 export class ProcessArgs {
   private readonly filtered: string[]
-  private readonly log = Logger.extend('args')
 
   protected constructor(args: string[], node: boolean) {
-    this.log.debug(node, ...args)
     this.filtered = this.filter(args, node)
-    this.log.debug(this.exe, this.args, this.normalized)
   }
 
   static from(args: string[], node: boolean = true): ProcessArgs {

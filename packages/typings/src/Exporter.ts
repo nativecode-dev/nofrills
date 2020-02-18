@@ -2,22 +2,15 @@ import { fs } from '@nofrills/fs'
 import { render } from 'mustache'
 import { Is, ObjectNavigator } from '@nofrills/types'
 
-import Logger from './Logger'
-
 import { Package } from './Packages'
 import { PackageError } from './Errors'
 
 const Properties: string[] = ['constructors', 'enums', 'functions', 'methods', 'namespaces', 'properties', 'types']
 
 export class Exporter {
-  private readonly log = Logger.extend('exporter')
-
   constructor(private readonly templates: string) {}
 
   async export(source: Package, outpath: string, separate: boolean = false): Promise<any> {
-    this.log.debug('templates', this.templates)
-    this.log.debug('outpath', outpath)
-
     const navigator = ObjectNavigator.from(source)
     navigator.recurse(this.onPropertyConverter)
     const context = navigator.toObject()
@@ -47,7 +40,6 @@ export class Exporter {
     const output = fs.join(outpath, `${context.name}.d.ts`)
 
     await fs.file(output, rendered)
-    this.log.info('exported', output)
   }
 
   private onPropertyConverter = (name: string, navigator: ObjectNavigator): void => {

@@ -23,8 +23,6 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/collections": "^10.0.1",
-    "@nofrills/fs": "^11.0.0",
-    "@nofrills/lincoln-debug": "^11.0.0",
-    "@nofrills/scrubs": "^11.0.0"
+    "@nofrills/fs": "^11.0.0"
   }
 }

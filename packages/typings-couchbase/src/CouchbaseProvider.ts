@@ -26,8 +26,6 @@ function Create(version: string): Couchbase {
 }
 
 export class CouchbaseProvider extends Provider {
-  private readonly log = this.baselog.extend('couchbase')
-
   constructor(version: string = CouchbaseVersion.latest) {
     super(version)
   }
@@ -35,7 +33,6 @@ export class CouchbaseProvider extends Provider {
   import(): Promise<Package> {
     const couchbase = Create(CouchbaseVersion.latest)
     const parser = new PackageParser(couchbase, 'couchbase')
-    this.log.debug('import', couchbase.version)
     return parser.parse()
   }
 }

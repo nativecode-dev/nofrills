@@ -1,5 +1,5 @@
-import { Log } from './Log'
+import { Lincoln } from './Lincoln'
 
-export interface LincolnLog {
-  write(log: Log): boolean
+export abstract class LincolnLog {
+  constructor(private readonly lincoln: Lincoln) {}
 }

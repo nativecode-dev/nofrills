@@ -2,11 +2,7 @@ import { URL } from 'url'
 import { fs } from '@nofrills/fs'
 import { load } from 'cheerio'
 
-import Logger from './Logger'
-
 export abstract class Parser<T> {
-  protected baselog = Logger.extend('parser')
-
   private readonly cachefile: string
 
   private cache: { [key: string]: string } = {}
@@ -20,14 +16,12 @@ export abstract class Parser<T> {
 
     if (cached) {
       this.cache = await fs.json<{ [key: string]: string }>(this.cachefile)
-      this.baselog.debug('cache.load', this.cachefile)
     }
 
     const parsed = await this.exec()
 
     if (cached === false) {
       const saved = await fs.save(this.cachefile, this.cache)
-      this.baselog.debug('cache.save', this.cachefile, saved)
     }
 
     return parsed
@@ -43,8 +37,6 @@ export abstract class Parser<T> {
     }
 
     const response = await fetch(urlstring)
-    this.baselog.debug('html', urlstring)
-
     const text = await response.text()
     const html = (this.cache[urlstring] = text)
 

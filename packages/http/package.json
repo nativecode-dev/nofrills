@@ -22,7 +22,6 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/scrubs": "^11.0.0",
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {

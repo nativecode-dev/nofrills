@@ -2,13 +2,11 @@ import merge from 'deepmerge'
 import shortid from 'shortid'
 import { fs } from '@nofrills/fs'
 
-import Logger from './Logging'
 import { SmushError } from './SmushError'
 
 export class Smush {
   readonly identifier: string = shortid.generate()
 
-  private log = Logger.extend('smush')
   private root: any = {}
 
   constructor() {}
@@ -67,8 +65,6 @@ export class Smush {
   private async transform<T>(key: string, object: T, transform: (object: T) => T): Promise<T> {
     const transformed = transform(object)
     this.set<T>(key, transformed)
-    this.log.debug(transformed)
-
     return transformed
   }
 

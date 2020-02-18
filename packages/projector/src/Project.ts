@@ -1,8 +1,6 @@
 import { fs } from '@nofrills/fs'
 import { EventEmitter } from 'events'
 
-import Logger from './Logger'
-
 import { NotFound } from './Errors'
 import { Pipeline } from './Pipeline'
 import { PluginHost } from './PluginHost'
@@ -20,8 +18,6 @@ export class Project extends EventEmitter {
   private readonly children: Project[] = []
   private readonly configmap: { [key: string]: ProjectConfig } = {}
   private readonly referenceMap: Map<string, ProjectFiles> = new Map<string, ProjectFiles>()
-
-  protected readonly log = Logger.extend('project').extend(this.name)
 
   private constructor(private readonly root: string, private readonly host: PluginHost) {
     super()
@@ -76,27 +72,21 @@ export class Project extends EventEmitter {
     const filename = fs.basename(filepath)
 
     const project = new Project(root, host)
-    project.log.debug('load-project', fs.relativeFrom(filepath))
 
     const handler = ConfigHandlerRegistry.resolve(filename)
-    project.log.debug('load-handler', filename, !!handler)
 
     if (handler) {
       const config = await handler(host, project, filepath)
-      project.log.debug('load-config', !!config)
 
       if (config) {
         project.set(config)
       }
     }
 
-    project.log.debug('load-done', project.name)
-
     return project
   }
 
   add(project: Project): number {
-    this.log.debug('add-project', this.children.length, project.name)
     return this.children.push(project)
   }
 
@@ -106,10 +96,11 @@ export class Project extends EventEmitter {
 
   config(filename: string): ProjectConfig {
     const key = this.configKey(filename)
-    this.log.debug('get-config', key)
+
     if (this.configmap[key]) {
       return this.configmap[key]
     }
+
     throw new NotFound(filename)
   }
 
@@ -117,7 +108,6 @@ export class Project extends EventEmitter {
     const key = this.configKey(config.path)
     this.configmap[key] = config
     this.emit(ProjectEvents.Config, config)
-    this.log.debug('set-config', key, fs.relativeFrom(config.path))
     return this
   }
 

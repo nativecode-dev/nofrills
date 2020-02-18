@@ -23,8 +23,6 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/fs": "^11.0.0",
-    "@nofrills/lincoln-debug": "^11.0.0",
-    "@nofrills/scrubs": "^11.0.0",
     "@nofrills/typings": "^11.0.0",
     "cheerio": "^0.22.0",
     "isomorphic-fetch": "^2.2.1",
