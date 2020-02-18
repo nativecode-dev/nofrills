@@ -18,7 +18,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build"
+    "build": "cli-tasks build",
+    "upgrade": "npx npm-check -y"
   },
-  "types": "./lib/index.d.ts"
+  "types": "./lib/index.d.ts",
+  "devDependencies": {
+    "@types/node": "^13.7.1"
+  }
 }

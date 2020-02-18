@@ -179,20 +179,12 @@ export class FileSystem {
     )
   }
 
-  mkdirp(path: string, throws?: boolean): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      $mkdirp(path, error => {
-        if (error && throws) {
-          reject(error)
-        } else {
-          resolve(error ? false : true)
-        }
-      })
-    })
+  async mkdirp(path: string): Promise<boolean> {
+    return (await $mkdirp(path)) !== undefined
   }
 
   mkdirps(paths: string[], throws?: boolean): Promise<boolean> {
-    return Promise.all(paths.map(path => this.mkdirp(path, throws))).then(promises =>
+    return Promise.all(paths.map(path => this.mkdirp(path))).then(promises =>
       promises.reduce((result, current) => (result ? result : current), false),
     )
   }

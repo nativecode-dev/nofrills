@@ -18,16 +18,18 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build"
+    "build": "cli-tasks build",
+    "upgrade": "npx npm-check -y"
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
     "deepmerge": "^4.2.2",
-    "validator": "^12.1.0",
+    "validator": "^12.2.0",
     "zipcodes-regex": "^1.0.3"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
+    "@types/node": "^13.7.1",
     "@types/validator": "^12.0.1"
   }
 }

@@ -18,7 +18,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build"
+    "build": "cli-tasks build",
+    "upgrade": "npx npm-check -y"
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
+    "@types/node": "^13.7.1",
     "@types/uppercamelcase": "^3.0.0"
   }
 }
