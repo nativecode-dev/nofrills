@@ -1,3 +1,4 @@
+.npmrc
 src/**/*.d.ts
 
 *.tsbuildinfo
