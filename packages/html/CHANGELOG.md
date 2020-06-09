@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.3](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@10.0.3-next.1...@nofrills/html@10.0.3) (2020-06-09)
+
+**Note:** Version bump only for package @nofrills/html
+
+
+
+
+
 ## [10.0.2](https://github.com/nativecode-dev/nofrills/compare/@nofrills/html@10.0.1...@nofrills/html@10.0.2) (2019-12-01)
 
 **Note:** Version bump only for package @nofrills/html

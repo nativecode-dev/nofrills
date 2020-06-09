@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/patterns",
-  "version": "10.0.2-next.1",
+  "version": "10.0.2",
   "description": "Provides some common pattern abstractions.",
   "license": "MIT",
   "private": false,

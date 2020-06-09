@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/typings-couchbase",
-  "version": "11.0.1",
+  "version": "11.0.2",
   "description": "Implements an importer to convert Couchbase documentation into TypeScript declarations.",
   "license": "MIT",
   "private": false,
@@ -23,10 +23,10 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/fs": "^12.0.0-next.1",
-    "@nofrills/lincoln-debug": "^11.0.1-next.1",
-    "@nofrills/scrubs": "^11.0.1-next.1",
-    "@nofrills/typings": "^11.0.1-next.1",
+    "@nofrills/fs": "^12.0.0",
+    "@nofrills/lincoln-debug": "^11.0.1",
+    "@nofrills/scrubs": "^11.0.1",
+    "@nofrills/typings": "^11.0.1",
     "cheerio": "^0.22.0",
     "isomorphic-fetch": "^2.2.1",
     "promise-parallel-throttle": "^3.3.0"

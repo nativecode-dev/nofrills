@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/http",
-  "version": "11.0.1-next.1",
+  "version": "11.0.1",
   "description": "Provides a simple, Fetch-based HTTP client.",
   "license": "MIT",
   "private": false,
@@ -23,7 +23,7 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/scrubs": "^11.0.1-next.1",
+    "@nofrills/scrubs": "^11.0.1",
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
