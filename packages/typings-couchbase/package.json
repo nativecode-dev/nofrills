@@ -18,7 +18,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build"
+    "build": "cli-tasks build",
+    "upgrade": "npx npm-check -y"
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
@@ -31,7 +32,7 @@
     "promise-parallel-throttle": "^3.3.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.14",
+    "@types/cheerio": "^0.22.18",
     "@types/isomorphic-fetch": "0.0.35"
   }
 }

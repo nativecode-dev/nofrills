@@ -25,7 +25,7 @@ export class ChainAsync<T, R> {
     const handlers = reverse ? this.handlers.reverse() : this.handlers
 
     const proxy = handlers.reduce(
-      (previous, current) => (value, next): Promise<R> => current(value, outerValue => previous(outerValue, next)),
+      (previous, current) => (value, next): Promise<R> => current(value, (outerValue) => previous(outerValue, next)),
       initiator,
     )
 

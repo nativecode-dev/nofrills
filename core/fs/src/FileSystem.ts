@@ -38,7 +38,7 @@ export class FileSystem {
 
   chmod(path: PathLike, mode: number | string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      $fs.chmod(path, mode, error => {
+      $fs.chmod(path, mode, (error) => {
         if (error) {
           reject(error)
         } else {
@@ -125,7 +125,7 @@ export class FileSystem {
   }
 
   async globs(patterns: string[], cwd?: string): Promise<string[]> {
-    const resolved = await Promise.all(patterns.map(pattern => this.glob(pattern, cwd)))
+    const resolved = await Promise.all(patterns.map((pattern) => this.glob(pattern, cwd)))
 
     return resolved.reduce((results, current) => results.concat(current), [])
   }
@@ -174,27 +174,17 @@ export class FileSystem {
   }
 
   mkdirs(paths: string[], mode?: number | string, throws?: boolean): Promise<boolean> {
-    return Promise.all(paths.map(path => this.mkdir(path, mode, throws))).then(promises =>
+    return Promise.all(paths.map((path) => this.mkdir(path, mode, throws))).then((promises) =>
       promises.reduce((result, current) => (result ? result : current), false),
     )
   }
 
-  mkdirp(path: string, throws?: boolean): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      $mkdirp(path, error => {
-        if (error && throws) {
-          reject(error)
-        } else {
-          resolve(error ? false : true)
-        }
-      })
-    })
+  mkdirp(path: string, throws?: boolean): Promise<string | undefined> {
+    return $mkdirp(path)
   }
 
-  mkdirps(paths: string[], throws?: boolean): Promise<boolean> {
-    return Promise.all(paths.map(path => this.mkdirp(path, throws))).then(promises =>
-      promises.reduce((result, current) => (result ? result : current), false),
-    )
+  mkdirps(paths: string[], throws?: boolean): Promise<Array<string | undefined>> {
+    return Promise.all(paths.map((path) => this.mkdirp(path, throws)))
   }
 
   open(path: PathLike, flags: string | number, mode?: string | number): Promise<number> {
@@ -293,7 +283,7 @@ export class FileSystem {
   }
 
   stats(...paths: PathLike[]): Promise<Descriptor[]> {
-    return Promise.all(paths.map(path => this.stat(path)))
+    return Promise.all(paths.map((path) => this.stat(path)))
   }
 
   text(path: string | number | Buffer | URL): Promise<string> {

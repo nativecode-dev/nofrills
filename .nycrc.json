@@ -1,0 +1,23 @@
+{
+  "all": true,
+  "exclude": [
+    "node_modules"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "include": [
+    "core/*/src/**/*.ts",
+    "packages/*/src/**/*.ts"
+  ],
+  "instrument": true,
+  "instrumentation": {
+    "excludes": [
+      "**/node_modules/**"
+    ]
+  },
+  "report-dir": ".cache/coverage",
+  "reporter": "text",
+  "sourceMap": true,
+  "temp-directory": ".cache/nyc"
+}

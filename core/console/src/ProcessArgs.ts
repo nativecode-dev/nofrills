@@ -23,7 +23,7 @@ export class ProcessArgs {
   }
 
   get argsOnly(): string[] {
-    return this.normalized.filter(arg => !arg.startsWith('-'))
+    return this.normalized.filter((arg) => !arg.startsWith('-'))
   }
 
   get exe(): string {
@@ -35,15 +35,15 @@ export class ProcessArgs {
   }
 
   get switches(): string[] {
-    return this.normalized.filter(arg => arg.startsWith('-'))
+    return this.normalized.filter((arg) => arg.startsWith('-'))
   }
 
   has(...names: string[]): boolean {
-    return names.some(name => this.hasOne(name))
+    return names.some((name) => this.hasOne(name))
   }
 
   hasOne(name: string): boolean {
-    return this.switches.some(x => this.normalize(x) === this.normalize(name))
+    return this.switches.some((x) => this.normalize(x) === this.normalize(name))
   }
 
   private filter(args: string[], node: boolean): string[] {

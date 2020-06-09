@@ -18,18 +18,19 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build"
+    "build": "cli-tasks build",
+    "upgrade": "npx npm-check -y"
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/lincoln-debug": "^11.0.0",
     "glob": "^7.1.6",
-    "mkdirp": "^0.5.1",
-    "rxjs": "^6.5.3"
+    "mkdirp": "^1.0.4",
+    "rxjs": "^6.5.5"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mkdirp": "^0.5.2",
-    "@types/node": "^12.12.14"
+    "@types/glob": "^7.1.2",
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.0.12"
   }
 }

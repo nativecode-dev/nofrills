@@ -17,6 +17,6 @@ export class PipelineAsync<T> {
   }
 
   private pipeline(initiator: PipelineAsyncHandler<T>): PipelineAsyncHandler<T> {
-    return this.handlers.reduce((previous, current) => async value => current(await previous(value)), initiator)
+    return this.handlers.reduce((previous, current) => async (value) => current(await previous(value)), initiator)
   }
 }

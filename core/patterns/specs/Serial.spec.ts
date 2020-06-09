@@ -4,7 +4,7 @@ import { serial, PromiseFactory } from '../src/Serial'
 
 function createTimerPromise(time: number): PromiseFactory<number> {
   return () =>
-    new Promise<number>(resolve => {
+    new Promise<number>((resolve) => {
       setTimeout(() => resolve(time), time)
     })
 }

@@ -11,15 +11,15 @@ export class Pipeline {
 
   async execute(project: Project, stages: string[], plugins: Plugin[]): Promise<void> {
     const promises = stages
-      .map(stage => stage.toLowerCase())
-      .map<PluginContext>(stage => ({ data: {}, project, stage }))
-      .map(context => this.delegate(context, plugins))
+      .map((stage) => stage.toLowerCase())
+      .map<PluginContext>((stage) => ({ data: {}, project, stage }))
+      .map((context) => this.delegate(context, plugins))
 
     await Promise.all(promises)
   }
 
   private delegate(context: PluginContext, plugins: Plugin[]): Promise<PluginContext> {
-    const delegates = plugins.map(plugin => plugin.execute)
+    const delegates = plugins.map((plugin) => plugin.execute)
     const chains = ChainAsync.from<PluginContext, PluginContext>(delegates)
 
     return chains.execute(context, () => Promise.resolve(context))

@@ -20,7 +20,7 @@ export class ProjectFiles {
   async files(filter?: ProjectFilesFilter): Promise<string[]> {
     if (filter) {
       const list = await fs.glob(this.pattern)
-      return list.filter(value => filter(value))
+      return list.filter((value) => filter(value))
     }
     return fs.glob(this.pattern)
   }

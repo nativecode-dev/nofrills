@@ -52,14 +52,14 @@ export class Env {
     const path = (key: string) => casing(key.split('_').slice(1))
 
     Object.keys(opts.env)
-      .filter(key => key.toLowerCase().startsWith(`${opts.prefix}_`.toLowerCase()))
-      .map(key => ({
+      .filter((key) => key.toLowerCase().startsWith(`${opts.prefix}_`.toLowerCase()))
+      .map((key) => ({
         env: key,
         path: path(key),
       }))
-      .filter(ctx => _filter(ctx.path))
-      .map(ctx => ({ env: ctx.env, path: _transform(ctx.path) }))
-      .forEach(ctx => root.set(ctx.path, opts.env[ctx.env]))
+      .filter((ctx) => _filter(ctx.path))
+      .map((ctx) => ({ env: ctx.env, path: _transform(ctx.path) }))
+      .forEach((ctx) => root.set(ctx.path, opts.env[ctx.env]))
 
     return Env.merge([root.toObject()], options)
   }

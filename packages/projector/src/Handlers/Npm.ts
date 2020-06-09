@@ -58,7 +58,7 @@ export async function NpmConfig(host: PluginHost, project: Project, filepath: st
   if (hasWorkspaces) {
     /* istanbul ignore next */
     const workspaces = data.workspaces || []
-    const promises = workspaces.map(workspace => materialize(host, project, workspace))
+    const promises = workspaces.map((workspace) => materialize(host, project, workspace))
     await Promise.all(promises)
   }
 
@@ -71,7 +71,7 @@ async function materialize(host: PluginHost, project: Project, workspace: string
 
   logger.debug('resolve', pattern, ...packages)
 
-  const promises = packages.map(async path => {
+  const promises = packages.map(async (path) => {
     const projpath = fs.join(path, NpmFile)
     const child = await Project.load(host, projpath)
     project.add(child)

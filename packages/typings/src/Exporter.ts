@@ -52,7 +52,7 @@ export class Exporter {
 
   private onPropertyConverter = (name: string, navigator: ObjectNavigator): void => {
     if (Properties.indexOf(name) >= 0 && Is.object(navigator.value)) {
-      const value = Object.keys(navigator.value).map(key => navigator.value[key])
+      const value = Object.keys(navigator.value).map((key) => navigator.value[key])
       navigator.set(name, value)
     }
   }

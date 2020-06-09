@@ -20,7 +20,7 @@ describe('when working with multiple log writers', () => {
 
   beforeEach(() => (logs = []))
 
-  it('should write to all debug loggers', done => {
+  it('should write to all debug loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)
@@ -29,7 +29,7 @@ describe('when working with multiple log writers', () => {
     sut.debug('test')
   })
 
-  it('should write to all error loggers', done => {
+  it('should write to all error loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)
@@ -38,7 +38,7 @@ describe('when working with multiple log writers', () => {
     sut.error('test')
   })
 
-  it('should write to all fatal loggers', done => {
+  it('should write to all fatal loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)
@@ -47,7 +47,7 @@ describe('when working with multiple log writers', () => {
     sut.fatal('test')
   })
 
-  it('should write to all info loggers', done => {
+  it('should write to all info loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)
@@ -56,7 +56,7 @@ describe('when working with multiple log writers', () => {
     sut.info('test')
   })
 
-  it('should write to all silly loggers', done => {
+  it('should write to all silly loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)
@@ -65,7 +65,7 @@ describe('when working with multiple log writers', () => {
     sut.silly('test')
   })
 
-  it('should write to all trace loggers', done => {
+  it('should write to all trace loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)
@@ -74,7 +74,7 @@ describe('when working with multiple log writers', () => {
     sut.trace('test')
   })
 
-  it('should write to all warn loggers', done => {
+  it('should write to all warn loggers', (done) => {
     const sut = new Lincoln(options, Loggers)
     sut.on(LincolnEvents.Log, (_, count) => {
       expect(count).equals(Loggers.length)

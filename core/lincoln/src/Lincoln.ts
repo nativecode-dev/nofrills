@@ -103,7 +103,7 @@ export class Lincoln extends EventEmitter {
     )
 
     const filtered: boolean = Array.from(this.options.filters.values)
-      .map(filter => filter(log))
+      .map((filter) => filter(log))
       .reduce((result, current) => (result ? result : current), false)
 
     if (filtered === true) {
@@ -111,7 +111,7 @@ export class Lincoln extends EventEmitter {
       return
     }
 
-    this.loggers.map(logger => this.writer(logger, log))
+    this.loggers.map((logger) => this.writer(logger, log))
     this.emit(LincolnEvents.Log, log, this.loggers.length)
   }
 

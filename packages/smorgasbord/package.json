@@ -18,12 +18,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "cli-tasks build"
+    "build": "cli-tasks build",
+    "upgrade": "npx npm-check -y"
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/lincoln-debug": "^11.0.0",
     "@nofrills/types": "^10.0.2",
-    "moment": "^2.24.0"
+    "moment": "^2.26.0"
   }
 }

@@ -134,13 +134,13 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
 
   pathstr(): string {
     return this.parents()
-      .map(parent => parent.property)
+      .map((parent) => parent.property)
       .join('.')
   }
 
   recurse(onProperty?: OnProperty): ObjectNavigator[] {
     return Array.from(this.properties)
-      .map(kvp => {
+      .map((kvp) => {
         const name = kvp[0]
         const navigator = kvp[1]
         if (onProperty) {
@@ -149,7 +149,7 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
         this.emit(ObjectNavigatorEvents.Property, name, navigator)
         return navigator
       })
-      .map(navigator => navigator.recurse(onProperty))
+      .map((navigator) => navigator.recurse(onProperty))
       .reduce((result, children) => [...result, ...children], [])
   }
 
@@ -190,8 +190,8 @@ export class ObjectNavigator extends EventEmitter implements ObjectValue, Iterab
   private inspect(ov: ObjectValue) {
     if (ov.type === 'object' && ov.value) {
       Object.keys(ov.value)
-        .map(key => ObjectNavigator.create(key, ov.value[key], this))
-        .map(navigator => this.properties.set(navigator.property, navigator))
+        .map((key) => ObjectNavigator.create(key, ov.value[key], this))
+        .map((navigator) => this.properties.set(navigator.property, navigator))
     }
   }
 

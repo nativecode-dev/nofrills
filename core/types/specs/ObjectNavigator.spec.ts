@@ -65,7 +65,7 @@ describe('when using ObjectNavigator', () => {
   describe('to inspect an object', () => {
     it('should create instance over an object', () => {
       const sut = ObjectNavigator.from(person)
-      const properties = Array.from(sut).map(x => x.property)
+      const properties = Array.from(sut).map((x) => x.property)
       expect(properties).to.deep.equal(['address', 'contacts', 'name', 'profile'])
     })
 

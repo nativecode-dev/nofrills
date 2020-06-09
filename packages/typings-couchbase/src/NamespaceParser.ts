@@ -35,11 +35,9 @@ export class NamespaceParser extends Parser<Namespace> {
     const list = Array.from($('dt a', dl[0]))
 
     const classes = await throttle(
-      list.map(a => {
+      list.map((a) => {
         const page = a.attribs['href']
-        const name = $(a)
-          .text()
-          .trim()
+        const name = $(a).text().trim()
 
         this.log.debug('class', name, page)
 

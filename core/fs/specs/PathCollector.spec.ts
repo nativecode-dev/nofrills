@@ -27,7 +27,7 @@ describe('when using PathCollector', () => {
     const patterns = ['core/html/src', 'core/types/src']
     const collector = PathCollector.from(process.cwd())
     const results = await collector.collect(patterns, true)
-    const listing = await fs.globs(patterns.map(pattern => `${pattern}/**`))
+    const listing = await fs.globs(patterns.map((pattern) => `${pattern}/**`))
     expect(results.length).to.equal(listing.length)
   })
 })

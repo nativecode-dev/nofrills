@@ -44,7 +44,7 @@ export class Project extends EventEmitter {
     return Pipeline.instance.execute(
       this,
       stages,
-      Array.from(Registry.plugins).map(plugin => new plugin(this.host)),
+      Array.from(Registry.plugins).map((plugin) => new plugin(this.host)),
     )
   }
 

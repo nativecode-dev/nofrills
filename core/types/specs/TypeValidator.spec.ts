@@ -13,7 +13,7 @@ describe('when using types library for validation', () => {
     },
     type: 'test',
     typebase: 'string',
-    validator: value => Types.resolve('string').validator(value, testtype.properties),
+    validator: (value) => Types.resolve('string').validator(value, testtype.properties),
   }
 
   Types.register(testtype)

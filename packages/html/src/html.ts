@@ -35,8 +35,8 @@ export class Html {
   public click(id: string | HTMLButtonElement, callback?: ElementCallback): HTMLButtonElement {
     return $also(
       this.convert(id),
-      x => x.click(),
-      x => (callback ? callback(x) : void 0),
+      (x) => x.click(),
+      (x) => (callback ? callback(x) : void 0),
     )
   }
 
@@ -77,8 +77,8 @@ export class Html {
     const options = Array.from(this.convert(id).querySelectorAll('option'))
     return options.reduce((previous, current) =>
       current.value === value
-        ? $also(current, x => x.setAttribute('selected', ''))
-        : $also(previous, x => x.removeAttribute('selected')),
+        ? $also(current, (x) => x.setAttribute('selected', ''))
+        : $also(previous, (x) => x.removeAttribute('selected')),
     )
   }
 

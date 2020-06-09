@@ -17,13 +17,13 @@ describe('when using CommandGroup', () => {
     it('should execute in parallel', async () => {
       const sut = CommandGroup.from(sleep_long, sleep_medium, sleep_short)
       const results = await sut.parallel()
-      expect(results.map(result => result.args[0])).to.deep.equal(['3', '2', '1'])
+      expect(results.map((result) => result.args[0])).to.deep.equal(['3', '2', '1'])
     }).timeout(5000)
 
     it('should execute serially', async () => {
       const sut = CommandGroup.from(sleep_long, sleep_medium, sleep_short)
       const results = await sut.serial()
-      expect(results.map(result => result.args[0])).to.include.ordered.members(['3', '2', '1'])
+      expect(results.map((result) => result.args[0])).to.include.ordered.members(['3', '2', '1'])
     }).timeout(10000)
   })
 })

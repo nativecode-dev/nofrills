@@ -1,0 +1,17 @@
+{
+  "colors": true,
+  "diff": true,
+  "extension": [
+    "ts"
+  ],
+  "recursive": true,
+  "reporter": "spec",
+  "require": [
+    "source-map-support/register",
+    "ts-node/register"
+  ],
+  "spec": [
+    "*/*/specs/**/*.spec.ts"
+  ],
+  "timeout": 3000
+}

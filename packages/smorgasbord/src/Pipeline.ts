@@ -17,6 +17,6 @@ export class Pipeline<T> {
   }
 
   private pipeline(initiator: PipelineHandler<T>): PipelineHandler<T> {
-    return this.handlers.reduce((previous, current) => value => current(previous(value)), initiator)
+    return this.handlers.reduce((previous, current) => (value) => current(previous(value)), initiator)
   }
 }

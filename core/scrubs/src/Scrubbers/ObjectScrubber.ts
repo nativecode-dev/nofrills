@@ -10,7 +10,7 @@ const log = Logger.extend(Key)
 
 function transform(property: ObjectNavigator, options: ScrubsOptions, scrubs: Scrubs): any {
   log.debug('transform', property.property, property.type, property.value)
-  if (property.type === 'string' && options.properties.some(p => p === property.property)) {
+  if (property.type === 'string' && options.properties.some((p) => p === property.property)) {
     log.debug(`replacing property`, property.property, options.text)
     return (property.value = options.text)
   }
@@ -21,7 +21,7 @@ function transform(property: ObjectNavigator, options: ScrubsOptions, scrubs: Sc
 
 export function ObjectScrubber(value: any, options: ScrubsOptions, scrubs: Scrubs): any {
   const navigator = ObjectNavigator.from(value)
-  Array.from(navigator).map(property => transform(property, options, scrubs))
+  Array.from(navigator).map((property) => transform(property, options, scrubs))
 
   const transformed = navigator.toObject()
   log.debug('transformed', value, transformed)

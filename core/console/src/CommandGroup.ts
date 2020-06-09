@@ -11,11 +11,11 @@ export class CommandGroup {
     return new CommandGroup(commands)
   }
 
-  parallel(exec: CommandExec = cmd => cmd.exec()): Promise<CommandResult[]> {
-    return Promise.all(this.commands.map(command => exec(command)))
+  parallel(exec: CommandExec = (cmd) => cmd.exec()): Promise<CommandResult[]> {
+    return Promise.all(this.commands.map((command) => exec(command)))
   }
 
-  serial(exec: CommandExec = cmd => cmd.exec()): Promise<CommandResult[]> {
+  serial(exec: CommandExec = (cmd) => cmd.exec()): Promise<CommandResult[]> {
     return this.commands.reduce(async (previous: Promise<CommandResult[]>, command: Command) => {
       const results = await previous
       const result = await exec(command)

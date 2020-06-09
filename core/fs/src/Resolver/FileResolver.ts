@@ -16,9 +16,9 @@ export class FileResolver {
   async find(filename: string): Promise<string[]> {
     this.log.debug('find', filename)
 
-    const strats = await Promise.all(this.strategies.map(strategy => strategy(filename, this.cwd)))
+    const strats = await Promise.all(this.strategies.map((strategy) => strategy(filename, this.cwd)))
 
-    const filtered: string[][] = strats.filter(strat => strat !== null).map<string[]>(strat => strat as string[])
+    const filtered: string[][] = strats.filter((strat) => strat !== null).map<string[]>((strat) => strat as string[])
 
     const reduced = filtered.reduce<string[]>((result, value) => [...result, ...value], [])
 
