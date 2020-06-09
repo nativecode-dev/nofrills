@@ -1,37 +1,37 @@
 image: node:latest
 
 stages:
-- publish
+  - publish
 
 before_script:
-- git submodule update --init --recursive
-- source .ci-env
-- npm install -g @nofrills/tasks@7.1.12
-- cli-tasks ci:install
-- echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /npmrc
+  - git submodule update --init --recursive
+  - source .ci-env
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+  - npm install -g @nofrills/tasks@7.1.12
+  - cli-tasks ci:install
 
 cache:
   paths:
-  - node_modules
+    - node_modules
 
 continuous:
   stage: publish
   only:
-  - /feature\/.*/
-  - /fix\/.*/
+    - /feature\/.*/
+    - /fix\/.*/
   script:
-  - cli-tasks ci:publish:canary
+    - cli-tasks ci:publish:canary
 
 prerelease:
   stage: publish
   only:
-  - develop
+    - develop
   script:
-  - cli-tasks ci:publish:prerelease
+    - cli-tasks ci:publish:prerelease
 
 release:
   stage: publish
   only:
-  - master
+    - master
   script:
-  - cli-tasks ci:publish:release
+    - cli-tasks ci:publish:release
