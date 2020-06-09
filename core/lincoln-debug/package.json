@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/lincoln-debug",
-  "version": "11.0.1-next.0",
+  "version": "11.0.1-next.1",
   "description": "Provides a simple logger using the debug package.",
   "license": "MIT",
   "private": false,
@@ -24,7 +24,7 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/collections": "^10.0.1",
-    "@nofrills/lincoln": "^11.0.1-next.0",
+    "@nofrills/lincoln": "^11.0.1-next.1",
     "debug": "^4.1.1"
   },
   "devDependencies": {
