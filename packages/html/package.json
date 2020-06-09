@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/html",
-  "version": "10.0.2",
+  "version": "10.0.3-next.0",
   "description": "Provides some HTML utility functions.",
   "license": "MIT",
   "private": false,

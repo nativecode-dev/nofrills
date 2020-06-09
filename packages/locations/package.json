@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/locations",
-  "version": "10.1.0",
+  "version": "10.1.1-next.0",
   "description": "Provides some common pattern abstractions.",
   "license": "MIT",
   "private": false,
@@ -23,6 +23,6 @@
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@nofrills/fs": "^11.0.0"
+    "@nofrills/fs": "^12.0.0-next.0"
   }
 }

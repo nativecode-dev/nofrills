@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/lincoln",
-  "version": "11.0.0",
+  "version": "11.0.1-next.0",
   "description": "Provides a slim abstraction for logging.",
   "license": "MIT",
   "private": false,
