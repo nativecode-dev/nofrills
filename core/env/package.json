@@ -1,6 +1,6 @@
 {
   "name": "@nofrills/env",
-  "version": "11.0.0",
+  "version": "11.0.1-next.0",
   "description": "Provides a simple conversion from config object to environment variable.",
   "license": "MIT",
   "private": false,
@@ -24,7 +24,7 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@nofrills/collections": "^10.0.1",
-    "@nofrills/types": "^10.0.2",
+    "@nofrills/types": "^10.0.3-next.0",
     "camelcase": "^6.0.0",
     "deepmerge": "^4.2.2",
     "titleize": "^2.1.0",
