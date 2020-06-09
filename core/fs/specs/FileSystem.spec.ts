@@ -147,8 +147,8 @@ describe('when working with Files', () => {
 
   it('should create deeply nested directory', async () => {
     const path = fs.join(artifacts, 'level-1/level-2/level-3')
-    const result = await fs.mkdirps([path])
-    expect(result).to.be.true
+    const created = await fs.mkdirps([path])
+    expect(created).to.not.be.empty
   })
 
   it('should stat multiple paths', async () => {
